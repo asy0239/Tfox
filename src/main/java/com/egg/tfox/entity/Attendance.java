@@ -1,4 +1,4 @@
-package com.egg.tfox.entity.attendance;
+package com.egg.tfox.entity;
 
 public class Attendance {
 
