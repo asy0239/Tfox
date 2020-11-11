@@ -29,7 +29,7 @@ pageEncoding="UTF-8"/>
                 <li class="menu">
                     <div>
                          <img src="${pageContext.request.contextPath }/resources/img/common/G1.png" >
-                        <a href="#">일정표</a>
+                        <a href="#">근태관리</a>
                     </div>
                     <ul class="hideShow side">
                         <li><a href="">1</a></li>
@@ -43,7 +43,7 @@ pageEncoding="UTF-8"/>
                 <li class="menu">
                     <div>
                          <img src="${pageContext.request.contextPath }/resources/img/common/G2.png" >
-                        <a href="#">일정표</a>
+                        <a href="#">전자결제</a>
                     </div>
                     <ul class="hideShow side">
                         <li><a href="">1</a></li>
@@ -56,7 +56,7 @@ pageEncoding="UTF-8"/>
                 <li class="menu">
                     <div>
                           <img src="${pageContext.request.contextPath }/resources/img/common/G3.png" >
-                        <a href="#">전자결재</a>
+                        <a href="#">유저관리</a>
                     </div>
                     <ul class="hideShow side "> 
                         <li><a href="">1</a></li>
@@ -71,7 +71,7 @@ pageEncoding="UTF-8"/>
                 <li class="menu">
                     <div>
                           <img src="${pageContext.request.contextPath }/resources/img/common/G4.png" >
-                        <a href="#">주문관리</a>
+                        <a href="#">게시판 관리</a>
                     </div>  
                     <ul class="hideShow side ">   
                    		<li><a href="">1</a></li>
@@ -83,7 +83,7 @@ pageEncoding="UTF-8"/>
                 <li class="menu">
                     <div>
                         <img src="${pageContext.request.contextPath }/resources/img/common/G5.png" >
-                        <a href="#">유저관리</a>
+                        <a href="#">상품관리</a>
                     </div>
                     <ul class="hideShow side">
                         <li><a href="">1</a></li>
@@ -96,7 +96,7 @@ pageEncoding="UTF-8"/>
                 <li class="menu">
                     <div>
                         <img src="${pageContext.request.contextPath }/resources/img/common/G5.png" >
-                        <a href="#">게시판 관리</a>
+                        <a href="#">재고 관리</a>
                     </div>
                     <ul class="hideShow side">
                         <li><a href="">1</a></li>
