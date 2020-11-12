@@ -19,7 +19,7 @@ pageEncoding="UTF-8"/>
     <%-- 고정되는 부분입니다.아래 메뉴에 자기부분 채워넣어주세요.^^  --%>
         <!--header -->
         <header>
-            <h1 onclick="location.href='${pageContext.request.contextPath }/views/home.jsp'">
+            <h1 onclick="location.href='${pageContext.request.contextPath }/member'">
                 <img src="${pageContext.request.contextPath }/resources/img/common/logo1.png" alt="logo">
            
             </h1>
@@ -82,7 +82,7 @@ pageEncoding="UTF-8"/>
                 	 </ul>
                 <li class="menu">
                     <div>
-                        <img src="${pageContext.request.contextPath }/resources/img/common/G5.png" >
+                        <img src="${pageContext.request.contextPath }/resources/img/common/G6.png" >
                         <a href="#">상품관리</a>
                     </div>
                     <ul class="hideShow side">
