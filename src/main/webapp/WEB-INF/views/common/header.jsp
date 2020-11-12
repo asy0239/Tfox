@@ -43,14 +43,16 @@ pageEncoding="UTF-8"/>
                 <li class="menu">
                     <div>
                          <img src="${pageContext.request.contextPath }/resources/img/common/G2.png" >
-                        <a href="#">전자결제</a>
+                        <a href="#">전자결재</a>
                     </div>
                     <ul class="hideShow side">
-                        <li><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
+                        <li><a href="${pageContext.request.contextPath }/approval/approval_Main">전자 결재 메인</a></li>
+                        <li><a href="${pageContext.request.contextPath }/approval/approval_edit">새 결재문서 작성</a></li>
+                        <li><a href="">결재 상신함</a></li>
+                        <li><a href="">결재 수신함</a></li>
+                        <li><a href="">임시 저장함</a></li>
+                        <li><a href="">참조 수신함</a></li>
+                        <li><a href="">문서 관리</a></li>
                     </ul>
                 </li>
                 <li class="menu">
