@@ -34,13 +34,15 @@
 <body>
 	<h1>결제 문서 확인</h1>
 	<div id="editor"></div>
+	
+	<div>${docType }</div>
 </body>
 
 	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://uicdn.toast.com/editor/latest/toastui-jquery-editor.min.js"></script>
-    <script src="${pageContext.request.contextPath  }/resources/js/signPad.js"></script>
+    <script src="${pageContext.request.contextPath  }/resources/js/approval/signPad.js"></script>
 	<script>
 			
 		var signTd1 = $("#signTd1");
@@ -57,6 +59,11 @@
 		});
 		
 		editor.setHtml('${template}');
+		
+		$("input").remove();
+		$(".editor_label").remove();
+		
+		$(".editor_label").append("${docType}")
 		
 /* 		
 		$(document).ready(function () {			

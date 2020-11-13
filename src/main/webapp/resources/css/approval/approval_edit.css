@@ -3,3 +3,31 @@
 #editor {
 	margin: 40px;
 }
+
+#doc_table {
+	border: none;
+	margin: 40px;
+	width: -webkit-fill-available;
+	height: 300px;
+}
+
+#table_th {
+	background-color: #303841;
+	color: white;
+	
+}
+
+#table_input {
+	width:95%;
+	height:25px;
+}
+
+#none_td {
+	border : none;
+	wi
+}
+
+img {
+	height:25px;
+}
+

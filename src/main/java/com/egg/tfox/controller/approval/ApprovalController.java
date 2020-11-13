@@ -29,11 +29,17 @@ public class ApprovalController {
 
 	// 입력한 결재 문서 확인 페이지, test임
 	@PostMapping("/approval/readTemplate")
-	public String readTemplate(@RequestParam String htmlcontent, HttpServletRequest request, Model model) {
+	public String readTemplate(
+			@RequestParam String htmlcontent,
+			@RequestParam String doc_type,
+			HttpServletRequest request,
+			Model model) {
 		String template = htmlcontent;
+		String docType = doc_type;
 		System.out.println("request :"+ request.getParameter("htmlcontent"));
 //		System.out.println(template);
 		model.addAttribute("template", template);
+		model.addAttribute("docType", docType);
 		return "/approval/readTemplate";
 	}
 	
