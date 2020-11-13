@@ -1,203 +1,197 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<jsp:directive.page language="java"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
-	a { text-decoration:none } 
+* {
+	box-sizing: border-box
+}
 
-	.header{
-		width:1200px;
-	}
-	.header_top_wrap{
-		width: 1200px;
-		height: 45px;
-		margin:0 auto;
-		border-bottom: 1px solid;
-		border-bottom-color: #a0a0a0;
-	}
-	.header_top_left{
-		width: 50%;
-		height: 45px;
-		float: left;
-	}
-	.header_top_right{
-		width:50%;
-		height: 45px;
-		float: right;
-	}
-	.header_top_rightbar{
-		margin-left: 150px;
-	}
-	.header_top_leftbar li{
-		list-style-type: none;
-		float: left; 
-		margin-right: 20px;
-	}
+/* 슬라이드쇼 컨테이너의 디자인 */
+.slideshow-container {
+	max-width: 1200px;
+	position: relative;
+	margin: 10px auto;
+}
 
-	.header_top_rightbar li{
-		list-style-type: none;
-		float: left;
-		margin-left: 20px;
-	} 
-	
-	.header_mid{
-		width: 1200px;
-		margin:0 auto;
-	}
-	.mid_img{
-		margin:0 auto;
-		width: 340px;
-		height: 340px;
-	}
-	
-	.header_main {
-		width: 1200px;
-		height: 50px;
-		margin:0 auto;
-		border-top: 1px solid;
-		border-bottom: 1px solid;
-		border-bottom-color: #a0a0a0;
-		
-	}
-	.header_mainMenu{
-		float: left;
-	}
-	
-	.menu1{
-		list-style-type: none;
-		float: left;
-		margin-right: 60px;
-		position: relative;
-	}
-	.menu2{
-		list-style-type: none;
-		display: none;
-    	margin-block-start: 0px;
-    	margin-block-end: 0px;
-	}
+/* 이미지를 숨기는데 사용 */
+.mySlides {
+	display: none;
+}
 
-	
-	
+/* 다음, 이전 버튼 */
+.prev, .next {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	margin-top: -22px;
+	padding: 16px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+}
+
+/* "다음 버튼"을 오른쪽에 위치 */
+.next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+/* 마우스를 올리면 배경색을 변경 */
+.prev:hover, .next:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* 캡션 부분 */
+.text {
+	color: #f2f2f2;
+	font-size: 15px;
+	padding: 8px 12px;
+	position: absolute;
+	bottom: 8px;
+	width: 100%;
+	text-align: center;
+}
+
+/* 숫자 부분 위에 적은 (1/3) <-- 이런거 */
+.numbertext {
+	color: #f2f2f2;
+	font-size: 12px;
+	padding: 8px 12px;
+	position: absolute;
+	top: 0;
+}
+
+/* 하단의 점들 */
+.dot {
+	cursor: pointer;
+	height: 10px;
+	width: 10px;
+	margin: 0 2px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease; 
+}
+
+.active, .dot:hover {
+	background-color: #717171;
+}
+
+/* 페이드 효과 */
+.fade {
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 1.5s;
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+	from {opacity: .4
+}
+
+to {
+	opacity: 1
+}
+
+}
+@keyframes fade {
+	from {opacity: .4
+}
+
+to {
+	opacity: 1
+}
+}
 </style>
 </head>
-<body>	
-	<!-- 상단바  -->
-	<div id="header">
-		<!-- 상단바 _ top 메뉴 -->
-		<div class="header_top_wrap">
-			<div class="header_top_left">
-				<ul class="header_top_leftbar">
-					<li><a href="">CENTER</a></li>
-					<li><a href="">REVIEW</a></li>
-				</ul>
-			</div>
-			<div class="header_top_right">
-				<ul class="header_top_rightbar">
-					<li><a href="">LOGIN</a></li>
-					<li><a href="">JOIN</a></li>
-					<li><a href="">MY PAGE</a></li>
-					<li><a href="">ORDER</a></li>
-					<li><a href=""><img src="" alt="장바구니"/></a></li>
-				</ul>
-			</div>
-	
-		</div>
-		<!-- 로고 이미지  -->
-		<div class="header_mid">
-			<div class="mid_img">
-				<a>
-					<img src="${pageContext.request.contextPath }/resources/img/webFront/webLogo.png"/>
-				</a>
-			</div>
-		</div>
-		<!-- 쇼핑몰 메뉴 -->
-		<div class="header_main">
-			<div class="header_mainMenu">
-				<ul class="header_mainMenubar">
-					<li class="menu1">
-						<a href="">BEST</a>
-					</li>
-					<li class="menu1">
-						<a href="">TOP</a>
-						<ul class="menu2">
-							<li><a href="">맨투맨 & 후드티</a></li>
-							<li><a href="">니트</a></li>
-							<li><a href="">긴팔티</a></li>
-							<li><a href="">반팔티</a></li>
-							<li><a href="">나시</a></li>
-						</ul>
-					</li>
-					<li class="menu1">
-						<a href="">PANTS</a>
-						<ul class="menu2">
-							<li><a href="">슬랙스</a></li>
-							<li><a href="">면바지</a></li>
-							<li><a href="">청바지</a></li>
-							<li><a href="">반바지</a></li>
-						</ul>
-					</li>
-					<li class="menu1">
-						<a href="">SHIRTS</a>
-						<ul class="menu2">
-							<li><a href="">베이직</a></li>
-							<li><a href="">청남방</a></li>
-							<li><a href="">체크&남방</a></li>
-							<li><a href="">스트라이프</a></li>
-						</ul>
-					</li>
-					<li class="menu1">
-						<a href="">OUTER</a>
-						<ul class="menu2">
-							<li><a href="">패딩</a></li>
-							<li><a href="">코트</a></li>
-							<li><a href="">자켓</a></li>
-							<li><a href="">가디건&조끼</a></li>
-							<li><a href="">후드&집업</a></li>
-						</ul>
-					</li>
-					<li class="menu1">
-						<a href="">SHOES</a>
-						<ul class="menu2">
-							<li><a href="">스니커즈</a></li>
-							<li><a href="">로퍼&구두</a></li>
-							<li><a href="">슬리퍼&샌들</a></li>
-						</ul>
-					</li>
-					<li class="menu1">
-						<a href="">BAG</a>
-						<ul class="menu2">
-							<li><a href="">백팩</a></li>
-							<li><a href="">토트&숄더백</a></li>
-							<li><a href="">클러치</a></li>
-						</ul>
-					</li>
-					<li class="menu1"><input type="text"/></li>					
-					<li class="menu1">
-						<div>
-							<a><img src="" alt="검색이미지"/></a>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	
-	</div>
-<script type="text/javascript">
+<body>
+	<div>
+		<%@ include file="/WEB-INF/views/webFront/header.jsp"%>
+		<div class="slideshow-container">
 
-	jQuery('.menu1').hover(
-						function() {
-		   	 				jQuery('.menu2', this).stop().slideDown(200);
-		 				},
-		 				function() {
-		    				jQuery('.menu2', this).stop().slideUp(200);
-		 				}
-	);
- 
-</script>
+			<!-- 숫자와 캡션이 있는 이미지 -->
+			<div class="mySlides fade" align="center">
+				<div class="numbertext">1 / 3</div>
+				<img src="${pageContext.request.contextPath }/resources/img/webFront/main1.PNG" style="width: 100%; height: 600px;">
+				<div class="text">첫 번째 사진</div>
+			</div>
+
+			<div class="mySlides fade">
+				<div class="numbertext">2 / 3</div>
+				<img src="${pageContext.request.contextPath }/resources/img/webFront/main2.PNG" style="width: 100%; height: 600px;">
+				<div class="text">두 번째 사진</div>
+			</div>
+
+			<div class="mySlides fade">
+				<div class="numbertext">3 / 3</div>
+				<img src="${pageContext.request.contextPath }/resources/img/webFront/main3.PNG" style="width: 100%; height: 600px;">
+				<div class="text">세 번째 사진</div>
+			</div>
+
+			<!-- 다음, 이전 이미지 버튼 -->
+			<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next"
+				onclick="plusSlides(1)">&#10095;</a>
+		</div>
+
+		<!-- 현재 이미지를 알려주는 하단의 점 -->
+		<div style="text-align: center">
+			<span class="dot" onclick="currentSlide(1)"></span> <span class="dot"
+				onclick="currentSlide(2)"></span> <span class="dot"
+				onclick="currentSlide(3)"></span>
+		</div>
+	</div>
+	<br>
+	<h1 align="center"> BEST </h1>
+	
+	<div> </div>
+	<script type="text/javascript">
+		var slideIndex = 1;
+		showSlides(slideIndex);
+
+		// 다음, 이전 제어
+		function plusSlides(n) {
+			showSlides(slideIndex += n);
+		}
+
+		// 사진 제어
+		function currentSlide(n) {
+			showSlides(slideIndex = n);
+		}
+
+		function showSlides(n) {
+			var i;
+			var slides = document.getElementsByClassName("mySlides");
+			var dots = document.getElementsByClassName("dot");
+			if (n > slides.length) {
+				slideIndex = 1
+			}
+			if (n < 1) {
+				slideIndex = slides.length
+			}
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			for (i = 0; i < dots.length; i++) {
+				dots[i].className = dots[i].className.replace(" active", "");
+			}
+			slides[slideIndex - 1].style.display = "block";
+			dots[slideIndex - 1].className += " active";
+		}
+	</script>
+
+
+
+
 
 </body>
 </html>
