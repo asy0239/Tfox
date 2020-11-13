@@ -94,7 +94,7 @@
 		<div class="header_top_wrap">
 			<div class="header_top_left">
 				<ul class="header_top_leftbar">
-					<li><a href="">CENTER</a></li>
+					<li><a href="center">CENTER</a></li>
 					<li><a href="">REVIEW</a></li>
 				</ul>
 			</div>
