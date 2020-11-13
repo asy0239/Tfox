@@ -32,7 +32,7 @@ pageEncoding="UTF-8"/>
                         <a href="#">근태관리</a>
                     </div>
                     <ul class="hideShow side">
-                        <li><a href="">1</a></li>
+                        <li><a href="${pageContext.request.contextPath }/appendance/appendance">1</a></li>
                         <li><a href="">2</a></li>
                         <li><a href="">3</a></li>
                         <li><a href="">4</a></li>
