@@ -152,7 +152,7 @@ header h1 img{
     /* 임의로 지정해두었습니다. */
     height: 700px;
     background: #fff;
-    box-shadow: 0 0 9px #0000003d;
+    
     margin: 0 auto;
     margin-top: 30px;
     border-radius: 18px;
