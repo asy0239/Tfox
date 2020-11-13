@@ -59,7 +59,7 @@
 					<option value="이름">이름</option>
 					<option value="아이디">아이디</option>
 					<option value="이메일">이메일</option>
-				</select><input type="text"></td>
+				</select><input type="text" placeholder="입력하세요"></td>
 			</tr>
 			<tr>
 				<td>구매건수/건수</td>
