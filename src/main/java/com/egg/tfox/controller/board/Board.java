@@ -21,4 +21,13 @@ public class Board {
 		return "webFront/login";
 	}
 
+	@GetMapping("/webFront/slide")
+	public String slide() {
+		return "webFront/slide";
+	}
+	
+	@GetMapping("/webFront/center")
+	public String center() {
+		return "webFront/center";
+	}
 }

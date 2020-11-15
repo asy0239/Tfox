@@ -8,14 +8,9 @@
 </head>
 <body>
 	<div>
-	<%@ include file="/WEB-INF/views/webFront/slide.jsp" %>
-		<br>
-		<h1 align="center"> BEST </h1>
-		<div class="">
-			<div></div>	
-		</div>	
+	<%@ include file="/WEB-INF/views/webFront/header.jsp" %>
+		<h1 align="center">Q&A</h1>
 	</div>
-	
 
 </body>
 </html>
