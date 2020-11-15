@@ -42,8 +42,28 @@
 						<i class="fas fa-file-contract fa-10x" id="doc_img"></i>
 						<div id="doc_name">회계장부</div>
 					</div>
-					
 				</div>
+				</div>
+				<div id="sec_area">
+					<div id="sec_area_fs">
+						<div id="sec_box">
+							<div>
+								<span>0 건</span>
+								<span>7일 이상 지연된 결재요청</span>
+							</div>
+						</div>
+						<div  id="sec_box">
+							2
+						</div>
+						<div id="sec_box">
+							3
+						</div>
+					</div>
+					<div>
+						<div id="sec_box_lg">
+							4
+						</div>
+					</div>
 				</div>
 				
 			</article>

@@ -24,7 +24,7 @@
 	cursor:Pointer;
 }
 
-#doc_box:hover {
+#doc_box:hover , #sec_box:hover , #sec_box_lg:hover {
 	box-shadow:1px 2px 2px 3px #999;
 	
 }
@@ -42,3 +42,34 @@
 	text-align:center;
 	margin:-15px;
 }
+
+#sec_area {
+	margin:auto;
+	margin-top:40px;
+	background-color:#f3f3f3;
+	width: 90%;
+}
+
+#sec_area_fs {
+	width:90%;
+	margin:10px auto;
+	display:flex;
+}
+#sec_box {
+	flex:1;
+	text-align:center;
+	width:300px;
+	height:100px;
+	background-color:#fff;
+	margin: 40px;
+	box-shadow:1px 1px 1px 1px #999; 
+}
+
+#sec_box_lg {
+	margin:10px auto;
+	width:83%;
+	height:100px;
+	background-color:#fff;
+	box-shadow:1px 1px 1px 1px #999; 
+}
+
