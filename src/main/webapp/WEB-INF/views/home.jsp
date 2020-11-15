@@ -109,7 +109,7 @@ span{
 			<div class="clear">
 				<img src="resources/img/login/main.png">
 			</div>
-			<div id="mid"></div>
+				<div id="mid"></div>
 			<div>
 			
 			

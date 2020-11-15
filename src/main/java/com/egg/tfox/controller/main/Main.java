@@ -1,10 +1,10 @@
-package com.egg.tfox.controller.user;
+package com.egg.tfox.controller.main;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class User {
+public class Main {
   
 	@GetMapping("/member")
 	public String member() {

@@ -88,11 +88,9 @@ pageEncoding="UTF-8"/>
                         <a href="#">상품관리</a>
                     </div>
                     <ul class="hideShow side">
-                        <li><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
+                        <li><a  href="${pageContext.request.contextPath }/product/insert">상품등록</a></li>
+                        <li><a href="">상품목록</a></li>
+                        <li><a href="">메인 진열 관리</a></li>
                     </ul>
                 </li>
                 <li class="menu">
