@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class Main {
   
-	@GetMapping("/member")
+	@GetMapping("/memberTest")
 	public String member() {
 		
 		return "mainAdmin/mainView";

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/approval/approvalTemplate.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/approval/approval_edit.css">
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
 <title>Insert title here</title>
 <style>
 	#test {
@@ -68,60 +70,62 @@
 							<tr>
 								<th id="table_th">수신참조</th>
 								<td>
-									<a href="#">
-										<input id="table_input" type="text" placeholder="참조자를 선택해주세요">
-									</a>
+										<input class="susin" id="table_input" type="text" placeholder="참조자를 선택해주세요">
 								</td>
 								<td id="none_td">
-									<a href="#">
+									<div id="1" onclick="modal(this);">									
 										<img src="${pageContext.request.contextPath }/resources/img/approval/user-solid.svg">
-									</a>
+									</div>
 								</td>
 							</tr>
 							<tr>
 								<th id="table_th">참조문서</th>
-								<td><input id="table_input" type="text" placeholder="참조문서를 선택해주세요"></td>
+								<td><input id="table_input" type="file" placeholder="참조문서를 선택해주세요"></td>
 								<td id="none_td">
-									<a href="#">
+									<a>
 										<img src="${pageContext.request.contextPath }/resources/img/approval/file-powerpoint-solid.svg">
 									</a>
 								</td>
 							</tr>
 							<tr>
 								<th id="table_th">시행자</th>
-								<td><input id="table_input" type="text" placeholder="시행자를 선택해주세요"></td>
+								<td><input class="player" id="table_input" type="text" placeholder="시행자를 선택해주세요"></td>
 								<td id="none_td">
-									<a href="#">
-										<img src="${pageContext.request.contextPath }/resources/img/approval/book-reader-solid.svg">
-									</a>
+									<div id="2" onclick="modal(this);">
+										<a href="#">
+											<img src="${pageContext.request.contextPath }/resources/img/approval/book-reader-solid.svg">
+										</a>
+									</div>
 								</td>
 							</tr>
 							<tr>
 								<th id="table_th">결재자</th>
-								<td><input id="table_input" type="text" placeholder="결재자를 선택해주세요"></td>
+								<td><input class="finalApp" id="table_input" type="text" placeholder="결재자를 선택해주세요"></td>
 								<td id="none_td">
+									<div id="3" onclick="modal(this);">
 									<a href="#">
 										<img src="${pageContext.request.contextPath }/resources/img/approval/user-check-solid.svg">
 									</a>
+									</div>
 								</td>
 							</tr>
 						</table>
 					</form>
 					
 					<div id="editor"></div>
-					<button id="btn">확인</button>
-					<input type="hidden" id="test">
 					<form id="htmlpass" method="post" action="readTemplate">
 						<input type="hidden" id="hd" name="htmlcontent"> 
 						<input type="hidden" id="hd2" name="doc_type"> 
-						
-						<input type="submit" id="submit">
+						<input type="submit" id="submit" value="기안">
 					</form>
+					<div>
+						<button id="cancle_btn" onclick="cancle();">취소</button>	
+					</div>
 				</div>
 			</article>
 		</section>
 	</div>
-
+	<%@ include file="organization_modal.jsp" %>
 </body>
 
 	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
@@ -191,7 +195,7 @@
         	  
           });
 		
-			
+		  
 		  $("#doc").on("click", function(){
 		     var label = $("#doc_label");
 		     var select = $("#doc option:selected").val();
@@ -201,6 +205,21 @@
 		  });
 		  
 		  
-		  
+		  // 취소버튼 클릭시 main으로 이동
+		 function cancle(){
+			 location.replace("approval_Main");
+		 }
+		 
+		 
+		 // 모달창 띄우기
+		 var selectId;
+		 function modal(e){
+			 $("#my_modal").show();
+			 selectId = $(e).attr("id");
+		 }
+		 
+		 function closeModal(){
+			 $("#my_modal").hide();
+		 }
 	</script>	
 </html>
