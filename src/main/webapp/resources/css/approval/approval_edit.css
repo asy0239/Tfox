@@ -31,3 +31,8 @@ img {
 	height:25px;
 }
 
+#cancle_btn, #submit  {
+	float:right;
+	width:100px;
+	height:50px;
+}

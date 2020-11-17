@@ -27,7 +27,7 @@
 					<div id="app_subTitle">
 						<span id="subMain"> 자주쓰는 결재 </span> 
 						<span id="app_subsub"> 사용자가 가장 많이 사용하는 결재 양식입니다. </span> 
-						<button id="approval_btn"> 결재 작성 버튼 </button>
+						<button id="approval_btn" onclick="edit();"> 결재 작성 버튼 </button>
 					</div>
 				<div id="doc_box_area">
 					<div id="doc_box">	
@@ -45,30 +45,55 @@
 				</div>
 				</div>
 				<div id="sec_area">
-					<div id="sec_area_fs">
-						<div id="sec_box">
-							<div>
-								<span>0 건</span>
-								<span>7일 이상 지연된 결재요청</span>
-							</div>
-						</div>
-						<div  id="sec_box">
-							2
-						</div>
-						<div id="sec_box">
-							3
+					<div id="sec_box">
+						<div>
+							<span>0건</span>
+							<span>7일 이상 지연된 결재요청</span>
 						</div>
 					</div>
-					<div>
-						<div id="sec_box_lg">
-							4
+					<div id="sec_box">
+						<div>
+							<span>0건</span>
+							<span>확인하지 않은 결재요청</span>
 						</div>
 					</div>
-				</div>
+					<div id="sec_box">
+						<div>
+							<span style="color:purple">2건</span>
+							<span>전체 결재 내역 보기</span>
+						</div>
+					</div>
+					<div id="sec_box_lg">
+						<div>
+							<img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg">
+						</div>
+						<div>
+							양식명
+						</div>
+						<div>
+							문서 제목
+						</div>
+						<div>
+							<img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg">
+						</div>
+						<div>
+							<p>사원이름</p>
+							<p>부서</p>
+						</div>
+						<div>
+							날짜
+						</div>
+					</div>
+				</div> 
 				
 			</article>
 		</section>
 	</div>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		function edit() {
+			location.href = "approval_edit";
+		}
+	</script>
 </body>
 </html>
