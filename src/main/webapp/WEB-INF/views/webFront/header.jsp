@@ -78,6 +78,7 @@
 	}
 	.menu2{
 		list-style-type: none;
+		padding-left:0px;
 		display: none;
     	margin-block-start: 0px;
     	margin-block-end: 0px;
@@ -189,7 +190,7 @@
 		</div>
 	
 	</div>
-<script type="text/javascript">
+ <script type="text/javascript">
 
 	jQuery('.menu1').hover(
 						function() {
@@ -200,7 +201,7 @@
 		 				}
 	);
  
-</script>
+</script> 
 
 </body>
 </html>
