@@ -62,6 +62,10 @@
 	#calendar {
 		width:100%;
 		height:600px;
+	}
+	
+	.checktool{
+	padding-top:20px;
 	} 
 </style>
 </head>
@@ -76,11 +80,13 @@
                 		<p>잘 나옵니까?</p>
                 		<div class="checktool">
                 			<button>출근</button>
-                			<input type="text">
+                			<input id="go" type="text">
+                			<br>
                 			<br>
                 			<button>퇴근</button>
-                			<input type="text">
+                			<input id="exit" type="text">
                 		</div>
+                		
      				   <div id='calendar'></div>
                 </div>
                 

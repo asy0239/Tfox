@@ -39,23 +39,30 @@
 								</tr>
 								<tr>
 									<td>부서</td>
-									<td>Ipsum</td>
+									<td><input type="text" value="인사과"></td>
 								</tr>
 								<tr>
 									<td>휴가현황</td>
-									<td>Ipsum</td>
+									<td><p>0일(계산수식 여기다 작성)</p></td>
 								</tr>
 								<tr>
 									<td>종류</td>
-									<td>Ipsum</td>
+									<td>
+										<select name="category">
+											<option value="category">연차</option>
+											<option value="category">병가</option>
+											<option value="category">교육</option>
+											<option value="category">여름휴가</option>
+										</select>
+									</td>
 								</tr>
 								<tr>
 									<td>휴가기간</td>
-									<td>Ipsum</td>
+									<td><input type="date"> - <input type="date"></td>
 								</tr>
 								<tr>
 									<td>사유</td>
-									<td>Ipsum</td>
+									<td><textarea style="width:80%;text-align:center;"  rows="10"></textarea></td>
 								</tr>
 							</tbody>
 						</table>
