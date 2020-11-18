@@ -24,15 +24,29 @@
 
 #none_td {
 	border : none;
-	wi
+	
 }
 
 img {
 	height:25px;
 }
 
-#cancle_btn, #submit  {
+#cancle_btn, #submit {
 	float:right;
+	margin-right:50px;
+	margin-bottom:100px;
 	width:100px;
 	height:50px;
+	border-radius: 10px;
+}
+
+#submit {
+	background-color: #30A9DE;
+	color:#fff;
+	border:none;
+}
+
+#cancle_btn:hover , #submit:hover {
+	cursor:Pointer;
+	box-shadow:1px 2px 2px 3px #999;
 }

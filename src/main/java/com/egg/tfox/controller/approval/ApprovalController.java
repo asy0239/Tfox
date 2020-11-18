@@ -49,8 +49,18 @@ public class ApprovalController {
 		return "/approval/approval_Main";
 	}
 	
-	@GetMapping("/approval/approval_keep")
-	public String approvalKeep() {
-		return "/approval/approval_keep";
+	@GetMapping("/approval/approval_send")
+	public String approvalSend() {
+		return "/approval/approval_send";
+	}
+	
+	@GetMapping("/approval/approval_get")
+	public String approvalGet() {
+		return "/approval/approval_get";
+	}
+	
+	@GetMapping("/approval/approval_get_detail")
+	public String approvalGetDetail() {
+		return "/approval/approval_get_detail";
 	}
 }

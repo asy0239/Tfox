@@ -124,6 +124,7 @@
 }
 
 #sec_box_lg div > p {
+	width:max-content;
 	margin-bottom: 25px;
     height: 27px;
     margin-top: -15px;
