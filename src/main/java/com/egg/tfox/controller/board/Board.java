@@ -30,4 +30,8 @@ public class Board {
 	public String center() {
 		return "webFront/center";
 	}
+	@GetMapping("/webFront/hood-item")
+	public String hoodItem(){
+		return "webFront/hood-item";
+	}
 }
