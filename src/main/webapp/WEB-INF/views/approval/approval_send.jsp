@@ -23,7 +23,7 @@
 				<div id="app_title">전자결재</div>
 					<div id="app_subTitle">
 						<span id="subMain">결재 상신함</span> 
-						<span id="app_subsub"> 결재 내역을 확인하고 관리할 수 있습니다 </span> 
+						<span id="app_subsub"> 결재 상신 내역을 확인하고 관리할 수 있습니다 </span> 
 					</div>
 				</div>
 				

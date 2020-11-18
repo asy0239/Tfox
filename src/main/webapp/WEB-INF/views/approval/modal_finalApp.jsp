@@ -12,14 +12,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="modal" id="my_modal">
+	<div class="modal" id="my_modal3">
 		<div class="modal-content">
 			<div id="orga_title">
 				조직도
 			</div>
-			<div class="transfer">
+			<div class="transfer3">
 			</div>
-			<div id="close_btn" onclick="closeModal();">닫기</div>
+			<div id="close_btn" onclick="closeModal3();">닫기</div>
 			<div id="save_btn" onclick="saveModal();"></div>
 		</div>
 		
@@ -123,58 +123,49 @@
 		        ]
 		    }
 		];
-		var susin = $(".susin");
-		var settings = {
-			    // data item name
-			    itemName: "employeeName",
-			    // group data item name
-			    groupItemName: "groupName",
-			    // group data array name
-			    groupArrayName: "groupData",
-			    // data value name
-			    valueName: "value",
-			    // tab text
-			    tabNameText: "items",
-			    // right tab text
-			    rightTabNameText: "selected items",
-			    // search placeholder text
-			    searchPlaceholderText: "search",
-			    // items data array
-			    dataArray: employeeName,
-			    // group data array
-			    groupDataArray: groupData,
-			    callable: function (items) {
-			      // your code
-			      var choiceValue = "";
-			      for(var i = 0; i < items.length; i++) {
-			    	  if(i==0) {
-			    		  choiceValue += items[i].employeeName;		    		  
-			    	  } else {
-			    		  choiceValue += ", ";
-				    	  choiceValue += items[i].employeeName;		 	    		  
-			    	  }
-			    	  console.log(choiceValue);
-			      }
-			      if(selectId == 1) {
-			    	  var susin = choiceValue;
-			    	  $(".susin").attr('value' , susin);
-			      }
-			      if(selectId == 2) {
-			    	  var player = choiceValue;
-			    	  $(".player").attr('value', player);
-			      } 
-				  if(selectId == 3) {
-					  var finalApp = choiceValue;
-			    	  $(".finalApp").attr('value', finalApp);
-			      }
-				  
-				  choiceValue = "";
-			    }
-			};
+			var settings3 = {
+				    // data item name
+				    itemName: "employeeName",
+				    // group data item name
+				    groupItemName: "groupName",
+				    // group data array name
+				    groupArrayName: "groupData",
+				    // data value name
+				    valueName: "value",
+				    // tab text
+				    tabNameText: "items",
+				    // right tab text
+				    rightTabNameText: "selected items",
+				    // search placeholder text
+				    searchPlaceholderText: "search",
+				    // items data array
+				    dataArray: employeeName,
+				    // group data array
+				    groupDataArray: groupData,
+				    callable: function (items) {
+				      // your code
+				      var choiceValue = "";
+				      for(var i = 0; i < items.length; i++) {
+				    	  if(i==0) {
+				    		  choiceValue += items[i].employeeName;		    		  
+				    	  } else {
+				    		  choiceValue += ", ";
+					    	  choiceValue += items[i].employeeName;		 	    		  
+				    	  }
+				      }
+			    	  var finalApp = choiceValue;
+			    	  $(".finalApp").attr('value' , finalApp);
+			    	  
+					  choiceValue = "";
+					  
+				    }
+				};
 
-			var myTransfer = $(".transfer").transfer(settings);
+				var myTransfer3 = $(".transfer3").transfer(settings3);
+				
+				myTransfer3.getSelectedItems();
+		
 			
-			myTransfer.getSelectedItems();
 
 
 	</script>
