@@ -41,6 +41,7 @@
 	}
 	
 	#mid-3{
+		
 		width: 1000px;
 		height: 380px;
 		margin-top: 100px;
@@ -51,7 +52,7 @@
 	.mid > div:nth-child(2){
 	    margin-left: 50px;
 	    margin-top: 10px;
-		border: 1px solid black;
+		
 		width:900px;
 		
 	}
@@ -79,10 +80,50 @@
 	}
 	table  tr:nth-child(7){
 
-		
-		height:250px;
-		
+		height:290px;
+	}
+		table  tr:nth-child(6){
+
+		height:280px;
 	}	
+	input {
+		height: 20px;
+		width: 300px;
+	}
+	#mid-2 table td:nth-child(2) {
+		height: 50px;
+		width: 700px;
+	}
+		#mid-3 table td:nth-child(2) {
+		height: 50px;
+		width: 700px;
+	}
+	
+	.m2 {
+		height: 50px;
+	}
+	
+	#buttom{
+		height: 200px;
+	}
+	button{
+		height:30px;
+		width:50px;
+		background:white;
+		 
+		border: 2px solid #555555;
+	}
+	.bt{
+		border: 1px solid black;
+	
+	}
+	#date{
+		height: 30px; 
+		width: 100px;
+	}
+	
+	
+	
 	
 </style>
 </head>
@@ -106,29 +147,30 @@
 						<div>
 							<table>
 								<tr>
-									<td> &nbsp; 상품명</td>
-									<td colspan="2"><input type="text" >
+									<td> &nbsp;  상품명</td>
+									<td colspan="2"> &nbsp; &nbsp;<input type="text" >
 								</td>
 								</tr>
 								<tr>
 									<td> &nbsp; 판매가</td>
-									<td colspan="2"><input type="text"></td>
+									<td colspan="2"> &nbsp; &nbsp;<input type="text"></td>
 									
 								</tr>
 								<tr>
 									<td> &nbsp; 자체 상품코드</td>
-									<td colspan="2"><input type="text"></td>
+									<td colspan="2"> &nbsp; &nbsp;<input type="text"></td>
 									
 								</tr>
 								<tr>
 									<td> &nbsp; 상품 요약설명</td>
-									<td colspan="2"><input type="text"></td>
+									<td colspan="2"> &nbsp; &nbsp;<input type="text"></td>
 									
 								</tr>
 								<tr>
 									<td> &nbsp; 상품 분류</td>
 									<td colspan="2">
-										<select name="product" id="product">
+										 &nbsp; &nbsp;
+										 <select name="product" id="product">
 											<option value="hot">모자</option>
 											<option value="dress">원피스</option>
 											<option value="shirt">반팔</option>
@@ -144,7 +186,7 @@
 									
 								</tr>
 								<tr>
-									<td> 이미지</td>
+									<td> &nbsp;이미지</td>
 									<td></td>
 									<td></td>
 								</tr>
@@ -159,13 +201,74 @@
 					<div id="mid-2" class="mid">
 					<img src="${pageContext.request.contextPath }/resources/img/product/mid-2.png">	
 						<div>
-							
+							<div class="m2"></div>
+							<table>
+								<tr>
+									<td>&nbsp;공급가</td>
+									<td>&nbsp;&nbsp;<input type="text"></td>
+								</tr>
+								<tr>
+									<td>&nbsp;소비자가</td>
+									<td>&nbsp;&nbsp;<input type="text"></td>
+								</tr>
+								
+							</table>
 						</div>
 					</div>
 					<div id="mid-3" class="mid">
 					<img src="${pageContext.request.contextPath }/resources/img/product/mid-3.png">	
 						<div>
+						<div class="m2"></div>
+						
+							<table>
+								<tr>
+									<td>&nbsp;공급사</td>
+									<td>
+									&nbsp;
+										<select name="supply" id="supply">
+											<option id="ownsu">자체공급</option>
+										</select>
+										&nbsp;
+										<button class="bt">등록</button>
+									</td>
+								</tr>
+								
+								<tr>
+									<td>&nbsp;제조사</td>
+									<td>
+									&nbsp;
+										<select name="made" id="made">
+											<option id="ownmd">자체제작</option>
+										</select>
+										&nbsp;
+										<button class="bt">등록</button>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;제조일자</td>
+									<td> &nbsp;&nbsp;<input type="date" id="date"></td>
+								</tr>
+								<tr>
+									<td>&nbsp;원산지</td>
+									<td>
+									&nbsp;
+										<select name="" id="">
+											<option id="">국내</option>
+											<option id="">국외</option>
+											<option id="">실내</option>
+										</select>
+										&nbsp;
+										<select name="" id="">
+											<option id="">국내선택</option>
+										</select>
+									</td>
+								</tr>
+							</table>
+						
 						</div>
+					
+					
+					
 					
 					</div>
 					<div id="buttom">
