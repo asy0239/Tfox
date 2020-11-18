@@ -230,7 +230,7 @@
 										</select>
 										&nbsp;
 										<button class="bt">등록</button>
-									</td>
+					 				</td>
 								</tr>
 								
 								
