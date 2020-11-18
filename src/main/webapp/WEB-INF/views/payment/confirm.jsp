@@ -24,12 +24,19 @@
 		width:1200px;
 		height:30px;
  }
+ 
+ #homeInfo {
+ 	width:1000px;
+ 	height:500px;
+ 	border:1px solid black;
+ }
 
 </style>
 </head>
 <body>
 <div class="confirm">
 <h2>주문/결제</h2>
+	<from action="confirm" method="post">
 <!-- 상품정보 테이블 -->
 <div id="item-table">
 	<table align="center">
@@ -50,23 +57,48 @@
 		</tr>
 	</table>
 </div>
-<!-- 배송지 정보 -->
+<!-- 배송지 정보 테이블 -->
 <h2>배송지정보</h2>
 <div id="homeInfo">
-	<div>배송지 선택
-	<input type="radio">기본 배송지
-	<input type="radio">신규 배송지
-	</div>
 	<table>
-		<tr>이름</tr><br>
-		<tr>번호</tr><br>
-		<tr>주소</tr>
+	<div>배송지 선택
+	<input type="radio" name="배송지">기본 배송지
+	<input type="radio" name="배송지">신규 배송지
+	</div>
+		<tr>
+			<td width="200px">이름 </td>
+			<td><input type="text" maxlength="13" name="userId" id="userId"></td>
+		</tr>
+		<tr>
+			<td width="200px">번호 </td>
+			<td><input type="text" maxlength="13" name="userId" id="userId"></td>
+		</tr>
+		<tr>
+					<td>우편번호</td>
+					<td><input type="text" name="zipCode"></td>
+					<td><div id="ckZip">검색</div></td>
+				</tr>
+				<tr>
+					<td>주소</td>
+					<td><input type="text" name="address1"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>상세주소</td>
+					<td><input type="text" name="address2"></td>
+					<td></td>
+				</tr>
 	</table>
 </div>
 <!-- 결제 수단 -->
 <div>카카오페이
-	<button>주문하기</button>
+	<input type="submit" value="주문하기">
 </div>
+				</from>
 </div>
+
+<script>
+
+</script>
 </body>
 </html>
