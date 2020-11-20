@@ -5,12 +5,103 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+body {
+	background:lightgray;
+}
+	#wrap {
+		background:white;
+		width:1500px;
+		heigth:1500px;
+		margin:0 auto;
+		padding:0 auto;
+		
+	}
+	
+	.header{
+		width:1200px;
+	}
+	.header_top_wrap{
+		width: 1200px;
+		height: 45px;
+		margin:0 auto;
+		border-bottom: 1px solid;
+		border-bottom-color: #a0a0a0;
+	}
+	.header_top_left{
+		width: 50%;
+		height: 45px;
+		float: left;
+	}
+	.header_top_right{
+		width:50%;
+		height: 45px;
+		float: right;
+	}
+	.header_top_rightbar{
+		margin-left: 150px;
+	}
+	.header_top_leftbar li{
+		list-style-type: none;
+		float: left; 
+		margin-right: 20px;
+	}
+
+	.header_top_rightbar li{
+		list-style-type: none;
+		float: left;
+		margin-left: 20px;
+	} 
+	
+	.header_mid{
+		width: 1200px;
+		margin:0 auto;
+	}
+	.mid_img{
+		margin:0 auto;
+		width: 340px;
+		height: 340px;
+	}
+	#join {
+		border:inset;
+	}
+</style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/webFront/header.jsp" %>
+	<div id="wrap">
+	<!-- 상단바  -->
+	<div id="header">
+		<!-- 상단바 _ top 메뉴 -->
+		<div class="header_top_wrap">
+			<div class="header_top_left">
+				<ul class="header_top_leftbar">
+					<li><a href="center">CENTER</a></li>
+					<li><a href="">REVIEW</a></li>
+				</ul>
+			</div>
+			<div class="header_top_right">
+				<ul class="header_top_rightbar">
+					<li><a href="login">LOGIN</a></li>
+					<li><a href="${pageContext.request.contextPath }/join">JOIN</a></li>
+					<li><a href="">MY PAGE</a></li>
+					<li><a href="">ORDER</a></li>
+					<li><a href=""><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
+				</ul>
+			</div>
+	
+		</div>
+		<!-- 로고 이미지  -->
+		<div class="header_mid">
+			<div class="mid_img">
+				<a>
+					<img src="${pageContext.request.contextPath }/resources/img/webFront/webLogo.png"/>
+				</a>
+			</div>
+		</div>
+		</div>
 	<h2 align="center">회원 가입</h2>
 	
-	<form>
+	<form id="join">
 		<table align="center">
 			<tr>
 			<td width="200px">* 이름</td>
@@ -72,7 +163,7 @@
 			</div>
 	</form>
 	
-	
+	</div>
 	
 	<script>
 	
