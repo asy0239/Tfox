@@ -121,7 +121,10 @@
 		height: 30px; 
 		width: 100px;
 	}
-	
+	.t{
+		height: 15px;
+		width: 90px;
+	}
 	
 	
 	
@@ -177,6 +180,8 @@
 											<option value="padding">패딩</option>
 											<option value="coat">코트</option>	
 										</select>
+										색상&nbsp;<input type="text" class="t"> 사이즈&nbsp;<input type="text" class="t">
+					
 									</td>
 									
 								</tr>
