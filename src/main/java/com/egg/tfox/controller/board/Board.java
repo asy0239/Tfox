@@ -34,4 +34,12 @@ public class Board {
 	public String hoodItem(){
 		return "webFront/hood-item";
 	}
+	@GetMapping("/board/gesipan")
+	public String gesipan(){
+		return "board/gesipan";
+	}
+	@GetMapping("/board/gesimul")
+	public String gesimul(){
+		return "board/gesimul";
+	}
 }

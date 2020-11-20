@@ -76,11 +76,9 @@ pageEncoding="UTF-8"/>
                         <a href="#">게시판 관리</a>
                     </div>  
                     <ul class="hideShow side ">   
-                   		<li><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
+                   		<li><a href="${pageContext.request.contextPath }/board/gesipan">게시판 관리</a></li>
+                        <li><a href="${pageContext.request.contextPath }/board/gesimul">게시물 관리</a></li>
+                        <li><a href="">메인 진열 관리</a></li>
                 	 </ul>
                 <li class="menu">
                     <div>

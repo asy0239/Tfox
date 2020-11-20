@@ -70,7 +70,83 @@
 				</dd>
 			</dl>
 		</div>
-	</div>
+		<div class="item-cont">
+			<dl class="item-list">
+				<dt class="item-img">
+					<a><img src="${pageContext.request.contextPath }/resources/img/webFront/item1.PNG"/></a>
+				</dt>
+				<dd class="info">
+					<ul>
+						<li class="info-color"></li>
+						<li class="info-name"></li>
+						<li class="info-price"></li>
+					</ul>
+				</dd>
+			</dl>
+			<dl class="item-list">
+				<dt class="item-img">
+					<a><img src="${pageContext.request.contextPath }/resources/img/webFront/item2.PNG"/></a>
+				</dt>
+				<dd class="info">
+					<ul>
+						<li class="info-color"></li>
+						<li class="info-name"></li>
+						<li class="info-price"></li>
+					</ul>
+				</dd>
+			</dl>
+			<dl class="item-list">
+				<dt class="item-img">
+					<a><img src="${pageContext.request.contextPath }/resources/img/webFront/item3.PNG"/></a>
+				</dt>
+				<dd class="info">
+					<ul>
+						<li class="info-color"></li>
+						<li class="info-name"></li>
+						<li class="info-price"></li>
+					</ul>
+				</dd>
+			</dl>
+		</div>
+		<div class="item-cont">
+			<dl class="item-list">
+				<dt class="item-img">
+					<a><img src="${pageContext.request.contextPath }/resources/img/webFront/item1.PNG"/></a>
+				</dt>
+				<dd class="info">
+					<ul>
+						<li class="info-color"></li>
+						<li class="info-name"></li>
+						<li class="info-price"></li>
+					</ul>
+				</dd>
+			</dl>
+			<dl class="item-list">
+				<dt class="item-img">
+					<a><img src="${pageContext.request.contextPath }/resources/img/webFront/item2.PNG"/></a>
+				</dt>
+				<dd class="info">
+					<ul>
+						<li class="info-color"></li>
+						<li class="info-name"></li>
+						<li class="info-price"></li>
+					</ul>
+				</dd>
+			</dl>
+			<dl class="item-list">
+				<dt class="item-img">
+					<a><img src="${pageContext.request.contextPath }/resources/img/webFront/item3.PNG"/></a>
+				</dt>
+				<dd class="info">
+					<ul>
+						<li class="info-color"></li>
+						<li class="info-name"></li>
+						<li class="info-price"></li>
+					</ul>
+				</dd>
+			</dl>
+		</div>
+	</div> 
 
 
 </body>
