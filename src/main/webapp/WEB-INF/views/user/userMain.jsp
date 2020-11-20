@@ -38,9 +38,6 @@
 		<div id="wrap">
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-
-
-
 		<section class="contents">
 			<article>
 		
