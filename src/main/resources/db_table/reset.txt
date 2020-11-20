@@ -1,0 +1,16 @@
+/*동시 실행 말고 하나씩 실행 바람*/
+
+/*TABLE ALL DELETE*/
+Begin
+for c in (select table_name from user_tables) loop
+  execute immediate 'drop table '||c.table_name||' cascade constraints';
+end loop;
+End;
+
+
+/*SEQUENCES ALL DELETE*/
+Begin
+for c in (SELECT * FROM all_sequences WHERE SEQUENCE_OWNER='DBUSER') loop
+  execute immediate 'drop SEQUENCE '||c.sequence_name;
+end loop;
+End;

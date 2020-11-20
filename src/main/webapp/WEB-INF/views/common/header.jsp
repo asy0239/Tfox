@@ -19,7 +19,7 @@ pageEncoding="UTF-8"/>
     <%-- 고정되는 부분입니다.아래 메뉴에 자기부분 채워넣어주세요.^^  --%>
         <!--header -->
         <header>
-            <h1 onclick="location.href='${pageContext.request.contextPath }/member'">
+            <h1 onclick="location.href='${pageContext.request.contextPath }/mainView'">
                 <img src="${pageContext.request.contextPath }/resources/img/common/logo1.png" alt="logo">
            
             </h1>

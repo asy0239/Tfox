@@ -101,7 +101,7 @@ span{
 
 </style>
 <body>
-<form name='homeForm' method="get" action="member">
+<form name='homeForm' method="get" action="mainView">
 	<div id="top"></div>
 	<div id="frame" style="text-align:center; margin:0 auto;">
 		<div id="context">
