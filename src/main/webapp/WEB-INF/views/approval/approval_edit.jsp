@@ -111,8 +111,7 @@
 							</tr>
 						</table>
 					</form>
-					
-					<div id="editor"></div>
+				<div id="editor"></div>
 					<div>
 						<button id="cancle_btn" onclick="cancle();">취소</button>	
 					</div>
@@ -121,7 +120,6 @@
 						<input type="hidden" id="hd2" name="doc_type"> 
 						<input type="submit" id="submit" value="기안">
 					</form>
-					
 				</div>
 			</article>
 		</section>
