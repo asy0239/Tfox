@@ -1,7 +1,10 @@
 package com.egg.tfox.controller.approval;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,11 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.egg.tfox.entity.approval.ApprovalDoc;
+import com.egg.tfox.service.approval.ApprovalService;
+import com.egg.tfox.vo.approval.ApprovalMainVo;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 public class ApprovalController {
+	
+	@Autowired
+	private ApprovalService approvalService;
 	
 	// 새 결재 문서 작성 페이지로 이동
 	@GetMapping("/approval/approval_edit")
@@ -45,7 +55,9 @@ public class ApprovalController {
 	
 	// 전자결재 메인 페이지로 이동 
 	@GetMapping("/approval/approval_Main")
-	public String approvalMain() {
+	public String approvalMain(Model model) {
+		List<ApprovalMainVo> list = approvalService.selectDocList();
+		model.addAttribute("docList",list);
 		return "/approval/approval_Main";
 	}
 	
@@ -62,5 +74,25 @@ public class ApprovalController {
 	@GetMapping("/approval/approval_get_detail")
 	public String approvalGetDetail() {
 		return "/approval/approval_get_detail";
+	}
+	
+	@GetMapping("/approval/approval_temporary")
+	public String approvalTemporary() {
+		return "/approval/approval_temporary";
+	}
+	
+	@GetMapping("/approval/approval_reference")
+	public String approvalReference() {
+		return "/approval/approval_reference";
+	}
+	
+	@GetMapping("/approval/approval_manage")
+	public String approvalManage() {
+		return "/approval/approval_manage";
+	}
+	
+	@GetMapping("/approval/approval_edit_template")
+	public String approvalEditTemplate() {
+		return "/approval/approval_edit_template";
 	}
 }

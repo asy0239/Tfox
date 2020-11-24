@@ -50,9 +50,9 @@ pageEncoding="UTF-8"/>
                         <li><a href="${pageContext.request.contextPath }/approval/approval_edit">새 결재문서 작성</a></li>
                         <li><a href="${pageContext.request.contextPath }/approval/approval_send">결재 상신함</a></li>
                         <li><a href="${pageContext.request.contextPath }/approval/approval_get">결재 수신함</a></li>
-                        <li><a href="">임시 저장함</a></li>
-                        <li><a href="">참조 수신함</a></li>
-                        <li><a href="">문서 관리</a></li>
+                        <li><a href="${pageContext.request.contextPath }/approval/approval_temporary">임시 저장함</a></li>
+                        <li><a href="${pageContext.request.contextPath }/approval/approval_reference">참조 수신함</a></li>
+                        <li><a href="${pageContext.request.contextPath }/approval/approval_manage">문서 관리</a></li>
                     </ul>
                 </li>
                 <li class="menu">
