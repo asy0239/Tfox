@@ -21,8 +21,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.egg.tfox" />
+			<!-- 
+		@Service, @Repository, @Component를 스캔하도록 설정
+		- context 모듈 필요
+	 -->
+	<context:component-scan base-package="com.egg.tfox">
 	
+	</context:component-scan>
 	
 	
 </beans:beans>

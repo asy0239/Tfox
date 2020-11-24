@@ -9,9 +9,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <configuration>
 		<!-- 별칭 부여 공간 -->
-	
+		
 	<typeAliases>
-			</typeAliases>	
+		<typeAlias type="com.egg.tfox.entity.Employee" alias="employee"/>
+	</typeAliases>	
 
 	<!-- enviroments : 사용환경에 대한 정의 . 개발/배포을 구분하기 위해 사용 -->
 	<environments default="development">
@@ -42,7 +43,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		- mappers는 mapper 파일의 위치를 지정
 	 -->
 	<mappers>
-		<mapper resource="mybatis/mapper/student-mapper.xml" />
 		
 	</mappers>
 
