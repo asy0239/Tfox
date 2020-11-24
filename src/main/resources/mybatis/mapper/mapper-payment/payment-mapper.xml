@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
+
 <!-- DTD 선언 -->
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -10,4 +12,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  -->
 <mapper namespace="payment">
 	
+
 </mapper>

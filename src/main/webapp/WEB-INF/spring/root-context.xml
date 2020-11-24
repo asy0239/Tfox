@@ -9,11 +9,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
-	http://www.springframework.org/schema/beans 
-	https://www.springframework.org/schema/beans/spring-beans.xsd
-	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context.xsd">
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- 
 		앞으로 스프링에서 사용할 도구가 있다면 bean 태그로 등록
@@ -28,12 +27,14 @@
 		- constructor-args : 생성자를 통한 정보 전달(필수)
 		- property : setter 메소드를 통한 정보 전달(선택)
 	-->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+
 		<property name="username" value="tfox"></property>
 		<property name="password" value="tfox"></property>
 	</bean>
+
 	
 	<!-- 
 		DBCP 방식의 연결을 수행하는 도구
@@ -88,10 +89,28 @@
 		@Service, @Repository, @Component를 스캔하도록 설정
 		- context 모듈 필요
 	 -->
-	<context:component-scan base-package="com.egg.tfox">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
+
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	<bean id="successHandler" class="com.egg.tfox.controller.main.SuccessHandler"/>
 	
+	<security:http>
+		<security:intercept-url pattern="/" access="hasRole('ROLE_MEMBER')"/>
+		<security:form-login login-page="/loginMain" authentication-success-handler-ref="successHandler"/>
+	</security:http>
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource2" 
+			users-by-username-query="select emp_loginid, emp_password, enabled from employee where emp_loginid=?" 
+			authorities-by-username-query="select emp_loginid, auth from employee where emp_loginid=?"/>
+			<security:password-encoder ref="passwordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+		<!-- 
+		@Service, @Repository, @Component를 스캔하도록 설정
+		- context 모듈 필요
+	 -->
+
+
 </beans>
 
 
