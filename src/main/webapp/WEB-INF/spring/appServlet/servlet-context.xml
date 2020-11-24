@@ -28,7 +28,7 @@
 	</context:component-scan>
 
 	
-	</context:component-scan>
+
 	
 	
 </beans:beans>
