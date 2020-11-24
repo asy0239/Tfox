@@ -50,9 +50,9 @@ pageEncoding="UTF-8"/>
                         <li><a href="${pageContext.request.contextPath }/approval/approval_edit">새 결재문서 작성</a></li>
                         <li><a href="${pageContext.request.contextPath }/approval/approval_send">결재 상신함</a></li>
                         <li><a href="${pageContext.request.contextPath }/approval/approval_get">결재 수신함</a></li>
-                        <li><a href="">임시 저장함</a></li>
-                        <li><a href="">참조 수신함</a></li>
-                        <li><a href="">문서 관리</a></li>
+                        <li><a href="${pageContext.request.contextPath }/approval/approval_temporary">임시 저장함</a></li>
+                        <li><a href="${pageContext.request.contextPath }/approval/approval_reference">참조 수신함</a></li>
+                        <li><a href="${pageContext.request.contextPath }/approval/approval_manage">문서 관리</a></li>
                     </ul>
                 </li>
                 <li class="menu">
@@ -61,11 +61,8 @@ pageEncoding="UTF-8"/>
                         <a href="#">유저관리</a>
                     </div>
                     <ul class="hideShow side "> 
-                        <li><a href="${pageContext.request.contextPath }/user">메인</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
+                        <li><a href="${pageContext.request.contextPath }/user">유저관리</a></li>
+                        
                     </ul>
         
                     

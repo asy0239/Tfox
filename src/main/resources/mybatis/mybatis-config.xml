@@ -11,7 +11,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 별칭 부여 공간 -->
 		
 	<typeAliases>
+
 		<typeAlias type="com.egg.tfox.entity.Employee" alias="employee"/>
+
+		<typeAlias type="com.egg.tfox.vo.approval.ApprovalMainVo" alias="approvalMainVo"/>
+
 	</typeAliases>	
 
 	<!-- enviroments : 사용환경에 대한 정의 . 개발/배포을 구분하기 위해 사용 -->
@@ -32,17 +36,18 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.OracleDriver" />
-				<property name="url" value="jdbc:oracle:thin:@Localhost:1521:xe" />
-				<property name="username" value="springuser" />
-				<property name="password" value="springuser" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="username" value="tfox" />
+				<property name="password" value="tfox" />
 			</dataSource>
 		</environment>
 	</environments>
-	<!-- 
+	<!-- 	
 		Mapper란 sql 명령만 가지고 있는 파일 말함
 		- mappers는 mapper 파일의 위치를 지정
 	 -->
 	<mappers>
+
 		
 	</mappers>
 

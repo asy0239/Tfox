@@ -63,27 +63,39 @@
 							<span>전체 결재 내역 보기</span>
 						</div>
 					</div>
+					<c:forEach var="doc" items="${docList }">
 					<div id="sec_box_lg">
-						<div>
-							<img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg">
+							<div>
+								<c:choose>
+									<c:when test="${doc.temp_id eq 'TMP001'}">
+										<img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg">
+									</c:when>
+									<c:when test="${doc.temp_id eq 'TMP002'}">
+										<img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg">
+									</c:when>
+									<c:when test="${doc.temp_id eq 'TMP003'}">
+										<img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg">
+									</c:when>
+								</c:choose>
+							</div>		
+							<div>
+								${doc.temp_title }
+							</div>		
+							<div>
+								${doc.app_title }
+							</div>	
+							<div>
+								<img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg">
+							</div>
+							<div>	
+								<p>${doc.emp_name }</p>
+								<p>${doc.dept_name }</p>
+							</div>
+							<div>
+								${doc.app_date }
+							</div>	
 						</div>
-						<div>
-							양식명
-						</div>
-						<div>
-							문서 제목
-						</div>
-						<div>
-							<img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg">
-						</div>
-						<div>
-							<p>사원이름</p>
-							<p>부서</p>
-						</div>
-						<div>
-							날짜
-						</div>
-					</div>
+						</c:forEach>
 				</div> 
 				
 			</article>
