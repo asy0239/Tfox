@@ -9,4 +9,9 @@ public class VacationController {
 	public String appendance() {
 		return "/appendance/vacationRequest";
 	}
+	
+	@GetMapping("/appendance/test")
+	public String test() {
+		return "/appendance/test";
+	}
 }
