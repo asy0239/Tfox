@@ -27,16 +27,7 @@
 		- constructor-args : 생성자를 통한 정보 전달(필수)
 		- property : setter 메소드를 통한 정보 전달(선택)
 	-->
-	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
 
-		<property name="username" value="tfox"></property>
-		<property name="password" value="tfox"></property>
-	</bean>
-
-	
-	<!-- 
 		DBCP 방식의 연결을 수행하는 도구
 		- 기존 연결도구 정보 + 관리정보
 		- maxTotal : 관리할 총 연결의 개수
