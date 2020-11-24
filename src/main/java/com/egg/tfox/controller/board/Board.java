@@ -15,11 +15,6 @@ public class Board {
 	public String main() {
 		return "webFront/main";
 	}
-	
-	@GetMapping("/webFront/login")
-	public String login() {
-		return "webFront/login";
-	}
 
 	@GetMapping("/webFront/slide")
 	public String slide() {
@@ -42,4 +37,12 @@ public class Board {
 	public String gesimul(){
 		return "board/gesimul";
 	}
+	
+	
+	@GetMapping("/webFront/login")
+	public String login() {
+		return "webFront/login";
+	}
+	
+	
 }
