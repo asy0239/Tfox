@@ -14,7 +14,14 @@
 	margin:0 auto;
 	padding:0 auto;
 }
-} 
+.btn {
+		width: 100px;
+    	height: 30px;
+    	font-size: large;
+    	border-radius: 10px/10px;
+    	background: white;
+    	font-weight: bold;
+	}
 
 	.header{
 		width:1200px;
@@ -62,7 +69,7 @@
 	}
 	#cart {
 		margin-top:1 auto;
-		border-top:1px solid lightgray;
+		border-bottom:1px solid lightgray;
 	}
 	#item-table {
 		width:1200px;
@@ -86,14 +93,7 @@
  	border-bottom:1px solid lightgray;
  	margin-bottom:20px;
  }
- #userInfo, #newInfo {
- 	width:1200px;
- 	height:600px;
- 	border:1px outset lightgray;
- 	border-radius:100px/50px;
- 	border-spacing: 100px;
-  	border-collapse: separate;
- }
+
  
  #userInfo {
  	display:block;	
@@ -104,20 +104,57 @@
  		display:none;
  	
  }
- #newInfo td:nth-child(1){
-		height: 30px;
-		width: 100px;
-		background:lightgray;
-		color:black;
-		border-radius: 50px / 10px;
- 
- }
+.input {
+	    width: 200px;
+    	height: 48px;
+    	border-width: 0 0 2px 0;
+    	border-color: lightgray;
+    	padding: 11px 70px 11px 0;
+    	color: #252525;
+    	font-size:large;
+    	outline: 0;
+    	border-radius: 0;
+    	box-sizing: border-box;
+    	caret-color: gray;
+	}
+	#phone {
+		width: 200px;
+    	height: 48px;
+    	border-width: 0 0 2px 0;
+    	border-color: lightgray;
+    	padding: 11px 70px 11px 0;
+    	color: #252525;
+    	font-size:large;
+    	outline: 0;
+    	border-radius: 0;
+    	box-sizing: border-box;
+    	caret-color: gray;
+	}
  
  
  #homeSearch {
  	cursor:pointer;
  	backgrond-color:red;
  }
+ .address {
+		width: 250px;
+    	height: 48px;
+    	border-width: 0 0 2px 0;
+    	border-color: lightgray;
+    	padding: 11px 70px 11px 0;
+    	color: #252525;
+    	font-size:large;
+    	outline: 0;
+    	border-radius: 0;
+    	box-sizing: border-box;
+    	caret-color: gray;
+	
+	}
+	
+	#pay {
+		margin: 0 auto;
+    	padding:100px;
+	}
 
  
 
@@ -158,7 +195,7 @@
 		</div>
 <h2 align="center" id="cart">C A R T</h2>
 <div class="confirm">
-<h2 id="cart">주문/결제</h2>
+<h2>주문/결제</h2>
 <div id="item-table">
 <!-- 상품정보 테이블 -->
 	<form>
@@ -182,7 +219,7 @@
 	</form>
 </div>
 <!-- 배송지 정보 테이블 -->
-<h2 id="cart">배송지정보</h2>
+<h2>배송지정보</h2>
 
 	<div id="infoSelect">배송지 선택
 	<input type="radio" name="info" id="Ui" checked>회원정보 배송지
@@ -208,44 +245,37 @@
 </div>
 <!-- 신규배송지 -->
 <div class="homeInfo">
-<form>
-	<table id="newInfo">
-		<tr>
-			<td>이름 </td>
-			<td><input type="text" maxlength="13" name="userId" id="userId"></td>
-		</tr>
-		<tr>
-			<td>연락처 </td>
-					<td>
-						<select>
-							<option value="010" selected>010</option>
-							<option>011</option>
-							<option>016</option>
-							<option>017</option>
-							<option>018</option>
-						</select>-
-						<input type="text" maxlength="4" name="tel2" size="2">-
-						<input type="text" maxlength="4" name="tel3" size="2">
-					</td>
-		</tr>
-		<tr>
-					<td>우편번호</td>
-					<td><input type="text" name="zipCode"></td>
-					<td><div id="homeSearch">검색</div></td>
-				</tr>
-				<tr>
-					<td>주소</td>
-					<td><input type="text" name="address1"></td>
-					<td><input type="text" name="address2"></td>
-					<td></td>
-				</tr>
-	</table>
-				</form>
+	<form id="newInfo">
+		<div>
+			<h3>
+				<label>이름</label>
+			</h3>
+				<span><input type="text" class="input"></span>
+			<h3>
+				<label>번호</label>
+			</h3>
+				<span><input type="text"  id="phone"></span>-
+				<span><input type="text"  id="phone"></span>-
+				<span><input type="text"  id="phone"></span>
+				
+			<h3>
+				<label>주소</label>
+			</h3>
+				<span><input type="text" class="address"></span>
+				<span><button class="btn">우편검색</button></span>
+				<br>
+				<span><input type="text" class="address"></span>
+				<span><input type="text" class="address" placeholder="상세주소"></span>
+				
+		</div>
+	</form>
 </div>
 </div>
 <!-- 결제 수단 -->
-<div id="pay">카카오페이
-	<input type="submit" value="결제하기">
+	<h3><label>결제 구분</label></h3>
+<div id="pay" align="center">
+	<label>카카오 페이</label>
+	<span><input type="submit" value="결제하기" class="btn"></span>
 </div>
 </div>
 <script>

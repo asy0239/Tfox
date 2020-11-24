@@ -61,11 +61,8 @@ pageEncoding="UTF-8"/>
                         <a href="#">유저관리</a>
                     </div>
                     <ul class="hideShow side "> 
-                        <li><a href="${pageContext.request.contextPath }/user">메인</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
+                        <li><a href="${pageContext.request.contextPath }/user">유저관리</a></li>
+                        
                     </ul>
         
                     
