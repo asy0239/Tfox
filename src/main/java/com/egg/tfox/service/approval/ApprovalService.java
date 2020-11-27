@@ -4,5 +4,8 @@ import java.util.List;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
 
 public interface ApprovalService {
-	public List<ApprovalMainVo> selectDocList();
+	List<ApprovalMainVo> selectDocList();
+	int overWeekDay();
+	int noCheckDoc();
+	int allDoc();
 }

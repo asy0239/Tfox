@@ -6,9 +6,7 @@
 } */
 
 #manage_table {
-	position: absolute;
-    margin: 350px 0px 0px 40px;
-    width: 73%;
+    width: 100%;
     text-align: center;
     border-collapse: collapse;
 }
@@ -24,4 +22,8 @@
 #manage_table td {
 	border-bottom:solid 1px black;
 	height: 70px;
+}
+
+#doc_box {
+	margin-bottom:50px;
 }

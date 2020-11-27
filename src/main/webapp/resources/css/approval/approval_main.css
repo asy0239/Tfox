@@ -33,14 +33,16 @@
 	margin:40px 20px;
 }
 
-#doc_box > #doc_img {
+#doc_box > img {
 	margin:30px 52px;
 	vertical-align:middle;
 }
 
 #doc_name {
-	text-align:center;
-	margin:-15px;
+	font-size: 15px;
+    text-align: center;
+    margin: -15px;
+    font-weight: bolder;
 }
 
 #sec_area {
@@ -50,7 +52,7 @@
 	margin-top:-200px;
 	width:90%;
 	display:grid;
-	grid-template-rows: repeat(3, 200px);
+	grid-template-rows: repeat(3, 140px);
 	grid-template-columns: repeat(3,1fr);
 	grid-auto-flow: row || row dense || dense;
 	

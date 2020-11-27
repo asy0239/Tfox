@@ -17,7 +17,29 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	@Override
 	public List<ApprovalMainVo> selectAll() {
 		List<ApprovalMainVo> list = sqlSession.selectList("approval.docList");
-		return sqlSession.selectList("approval.docList");
+		return list;
 	}
+
+	@Override
+	public int overWeekDay() {
+		int count = sqlSession.selectOne("approval.overWeek");
+		return count;
+	}
+
+	@Override
+	public int noCheckDoc() {
+		int count = sqlSession.selectOne("approval.noCheckDoc");
+		return count;
+	}
+
+	@Override
+	public int allDoc() {
+		int count = sqlSession.selectOne("approval.allDoc");
+		return count;
+	}
+	
+	
+	
+	
 }
 	

@@ -20,4 +20,22 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return approvalDao.selectAll();
 	}
 
+	@Override
+	public int overWeekDay() {
+		int count = approvalDao.overWeekDay();
+		return count;
+	}
+
+	@Override
+	public int noCheckDoc() {
+		int count = approvalDao.noCheckDoc();
+		return count;
+	}
+
+	@Override
+	public int allDoc() {
+		int count = approvalDao.allDoc();
+		return count;
+	}
+
 }

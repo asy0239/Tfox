@@ -30,4 +30,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and appdoc.emp_id = emp.emp_id
 		and emp.dept_id = dept.dept_id
 	</select>
+	
+	<!-- approval Main 의 7일 이상 지연된 문서 건수 표시 -->
+	<select id="overWeek" resultType="int">
+		select count(*) 
+		from approval_doc
+		where app_date <![CDATA[<]]> sysdate - 7
+	</select>
+	<!-- approval Main 의 확인하지 않은 문서 건수 표시 -->
+	<select id="noCheckDoc" resultType="int">
+		select count(*)
+		from approval_doc
+		where app_checktime is null
+	</select>
+	<!-- approval Main 의 전제 결재 내역 건수 표시 -->
+	<select id="allDoc" resultType="int">
+		select count(*)
+		from approval_doc
+	</select>
 </mapper>
