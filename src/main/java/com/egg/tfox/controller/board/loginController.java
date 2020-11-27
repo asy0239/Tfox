@@ -15,12 +15,11 @@ import com.egg.tfox.service.board.BoardService;
 public class loginController {
 	
 	private User service;
-	private BoardService boardService;
 	@RequestMapping(value="/login.web", method = RequestMethod.POST)
 	public String login(User user, HttpServletRequest req, RedirectAttributes rttr) {
 		
 		HttpSession session = req.getSession();
-		User login = boardService.login(user);
+		User login = BoardService.login(user);
 		
 		
 		return "redirect:/";

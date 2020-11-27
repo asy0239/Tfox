@@ -4,8 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <!-- Toast Editor 2.0.0과 의존성 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
@@ -46,13 +44,13 @@
 		<section class="contents">
 			<article>
 				<!-- 내용작성을 이곳에서~ -->
-				<form id="htmlpass" method="post" action="readTemplate">
+				
 				<div class="conWrap">
 					<div id="app_title">
 						새 결재 문서 작성
 					</div>
 					<div id="app_subTitle">
-					<label for="doc" id="doc_label">빈문서</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<label for="doc" id="doc_label">빈 문서</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<select name="doc" id="doc">
 							<option id="doc_op"value="빈문서" selected="selected">빈문서</option>
 							<option id="doc_op"value="품의서">품의서</option>
@@ -62,23 +60,21 @@
 						</select>
 					</div>
 					
-					<!-- <form> -->
+					<form>
 						<table id="doc_table">
 							<tr>
 								<th id="table_th">제목</th>
-								<td><input id="table_input" type="text" name="doc_title" placeholder="제목을 입력해주세요"></td>
+								<td><input id="table_input" type="text" placeholder="제목을 입력해주세요"></td>
 								<td id="none_td"></td>	
 							</tr>
 							<tr>
 								<th id="table_th">수신참조</th>
 								<td>
-										<input class="susin" id="table_input" type="text" name="temporary" placeholder="참조자를 선택해주세요">
+										<input class="susin" id="table_input" type="text" placeholder="참조자를 선택해주세요">
 								</td>
 								<td id="none_td">
-									<div id="1" onclick="modal1(this);">
-										<a href="#">									
-											<img src="${pageContext.request.contextPath }/resources/img/approval/user-solid.svg">
-										</a>
+									<div id="1" onclick="modal1(this);">									
+										<img src="${pageContext.request.contextPath }/resources/img/approval/user-solid.svg">
 									</div>
 								</td>
 							</tr>
@@ -114,18 +110,17 @@
 								</td>
 							</tr>
 						</table>
-					<!-- </form> -->
+					</form>
 				<div id="editor"></div>
 					<div>
 						<button id="cancle_btn" onclick="cancle();">취소</button>	
 					</div>
-					<!-- <form id="htmlpass" method="post" action="readTemplate"> -->
+					<form id="htmlpass" method="post" action="readTemplate">
 						<input type="hidden" id="hd" name="htmlcontent"> 
 						<input type="hidden" id="hd2" name="doc_type"> 
 						<input type="submit" id="submit" value="기안">
-					<!-- </form> -->
+					</form>
 				</div>
-				</form>
 			</article>
 		</section>
 	</div>
@@ -206,8 +201,6 @@
 		     var label = $("#doc_label");
 		     var select = $("#doc option:selected").val();
 		     
-		     
-		     
 		     label.empty();
 		     label.append(select);
 		  });
@@ -248,8 +241,8 @@
 			 $("#my_modal3").hide();
 		 };
 		 
-		 /* $("#submit").on("click", function(){
+		 $("#submit").on("click", function(){
 			 alert("정상 처리 되었습니다.")
-		 }); */
+		 });
 	</script>	
 </html>

@@ -32,23 +32,18 @@
 						<button id="approval_btn" onclick="editTemplate();"> 양식 추가하기 </button>
 					</div>
 				<div id="doc_box_area">
-					<c:forEach var="template" items="${templateList }">
-						<div id="doc_box">
-						<c:choose>
-							<c:when test="${template.temp_id eq 'TMP001'}">
-									<img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg">
-							</c:when>
-							<c:when test="${template.temp_id eq 'TMP002'}">
-								
-								<img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg">
-							</c:when>
-							<c:when test="${template.temp_id eq 'TMP003'}">
-								<img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg">
-							</c:when>
-						</c:choose>
-						<div id="doc_name">${template.temp_title }</div>
-						</div>
-					</c:forEach>
+					<div id="doc_box">	
+						<i class="fas fa-file-invoice-dollar fa-10x" id="doc_img"></i>
+						<div id="doc_name">품의서</div>
+					</div>
+					<div id="doc_box">
+						<i class="fas fa-file-alt fa-10x" id="doc_img"></i>
+					<div id="doc_name">기안서</div>
+					</div>
+					<div id="doc_box">
+						<i class="fas fa-file-contract fa-10x" id="doc_img"></i>
+						<div id="doc_name">회계장부</div>
+					</div>
 				</div>
 					<table id="manage_table">
 						<tr>

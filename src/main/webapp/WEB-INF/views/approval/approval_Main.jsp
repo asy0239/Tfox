@@ -1,7 +1,6 @@
 <jsp:directive.page language="java"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,24 +30,7 @@
 						<button id="approval_btn" onclick="edit();"> 결재 작성 버튼 </button>
 					</div>
 				<div id="doc_box_area">
-					<c:forEach var="template" items="${templateList }">
-						<div id="doc_box">
-						<c:choose>
-							<c:when test="${template.temp_id eq 'TMP001'}">
-									<img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg">
-							</c:when>
-							<c:when test="${template.temp_id eq 'TMP002'}">
-								
-								<img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg">
-							</c:when>
-							<c:when test="${template.temp_id eq 'TMP003'}">
-								<img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg">
-							</c:when>
-						</c:choose>
-						<div id="doc_name">${template.temp_title }</div>
-						</div>
-					</c:forEach>
-					<!-- <div id="doc_box">	
+					<div id="doc_box">	
 						<i class="fas fa-file-invoice-dollar fa-10x" id="doc_img"></i>
 						<div id="doc_name">품의서</div>
 					</div>
@@ -59,25 +41,25 @@
 					<div id="doc_box">
 						<i class="fas fa-file-contract fa-10x" id="doc_img"></i>
 						<div id="doc_name">회계장부</div>
-					</div> -->
+					</div>
 				</div>
 				</div>
 				<div id="sec_area">
 					<div id="sec_box">
 						<div>
-							<span>${overWeekDayCount }건</span>
+							<span>0건</span>
 							<span>7일 이상 지연된 결재요청</span>
 						</div>
 					</div>
 					<div id="sec_box">
 						<div>
-							<span>${noCheck }건</span>
+							<span>0건</span>
 							<span>확인하지 않은 결재요청</span>
 						</div>
 					</div>
 					<div id="sec_box">
 						<div>
-							<span style="color:purple">${allDocCount }건</span>
+							<span style="color:purple">2건</span>
 							<span>전체 결재 내역 보기</span>
 						</div>
 					</div>
@@ -124,16 +106,6 @@
 		function edit() {
 			location.href = "approval_edit";
 		}
-		
-		$(document).ready(function(){
-			var docSize = "<c:out value='${fn:length(docList)}'/>";
-			console.log("개수먼 : " + docSize);
-			$("#sec_area").css("grid-template-rows", "repeat(" + docSize + ", 140px)");
-		});
-		
-		$("#doc_box").on("click", function(){
-			location.href = "approval_edit?";
-		});
 	</script>
 </body>
 </html>

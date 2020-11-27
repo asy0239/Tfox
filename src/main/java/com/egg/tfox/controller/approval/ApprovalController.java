@@ -1,6 +1,5 @@
 package com.egg.tfox.controller.approval;
 
-import java.sql.Clob;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.egg.tfox.entity.approval.ApprovalDoc;
-import com.egg.tfox.entity.approval.TemplateEntity;
 import com.egg.tfox.service.approval.ApprovalService;
-import com.egg.tfox.service.approval.TemplateService;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +25,9 @@ public class ApprovalController {
 	@Autowired
 	private ApprovalService approvalService;
 	
-	@Autowired
-	private TemplateService templateService;
-	
 	// 새 결재 문서 작성 페이지로 이동
 	@GetMapping("/approval/approval_edit")
 	public String appWrite() {
-		
 		return "/approval/approval_edit";
 	}
 	
@@ -53,10 +46,8 @@ public class ApprovalController {
 			Model model) {
 		String template = htmlcontent;
 		String docType = doc_type;
-		System.out.println("request :" + request.getParameter("htmlcontent"));
+		System.out.println("request :"+ request.getParameter("htmlcontent"));
 //		System.out.println(template);
-		System.out.println("requset :" + request.getParameter("doc_title"));
-		System.out.println("requset :" + request.getParameter("doc"));
 		model.addAttribute("template", template);
 		model.addAttribute("docType", docType);
 		return "/approval/readTemplate";
@@ -65,19 +56,8 @@ public class ApprovalController {
 	// 전자결재 메인 페이지로 이동 
 	@GetMapping("/approval/approval_Main")
 	public String approvalMain(Model model) {
-		
-		// 메인 페이지에 표시할 여러 값들 가져오기
 		List<ApprovalMainVo> list = approvalService.selectDocList();
-		int overWeekDayCount = approvalService.overWeekDay();
-		int noCheckDocCount = approvalService.noCheckDoc();
-		int allDocCount = approvalService.allDoc();
-		List<TemplateEntity> templateList = templateService.listAll(); 
 		model.addAttribute("docList",list);
-		model.addAttribute("overWeekDayCount" , overWeekDayCount);
-		model.addAttribute("noCheck", noCheckDocCount);
-		model.addAttribute("allDocCount", allDocCount);
-		model.addAttribute("templateList", templateList);
-		
 		return "/approval/approval_Main";
 	}
 	
@@ -107,23 +87,12 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("/approval/approval_manage")
-	public String approvalManage(Model model) {
-		List<TemplateEntity> templateList = templateService.listAll();
-		model.addAttribute("templateList", templateList);
+	public String approvalManage() {
 		return "/approval/approval_manage";
 	}
 	
 	@GetMapping("/approval/approval_edit_template")
 	public String approvalEditTemplate() {
 		return "/approval/approval_edit_template";
-	}
-	
-	@PostMapping("/approval/editTemplate")
-	public String approvalEditTemplate(HttpServletRequest request) {
-		String content = request.getParameter("htmlcontent");
-		String title = request.getParameter("temp_title");
-		templateService.insertTemplate(content, title);
-		return "/approval/approval_manage";
-		
 	}
 }
