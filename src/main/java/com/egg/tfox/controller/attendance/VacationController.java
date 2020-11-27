@@ -5,13 +5,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class VacationController {
-	@GetMapping("/appendance/vacationRequest")
+	@GetMapping("/attendance/vacationRequest")
 	public String appendance() {
-		return "/appendance/vacationRequest";
+		return "/attendance/vacationRequest";
 	}
 	
-	@GetMapping("/appendance/test")
+	@GetMapping("/attendance/test")
 	public String test() {
-		return "/appendance/test";
+		return "/attendance/test";
+	}
+	@GetMapping("/attendance/vacationEdit")
+	public String vacationEdit() {
+		return "/attndance/vacationEdit";
+	}
+	
+	@GetMapping("/attendance/vacationRecong")
+	public String vacationRecong() {
+		return "/attendance/vacationRecong";
 	}
 }

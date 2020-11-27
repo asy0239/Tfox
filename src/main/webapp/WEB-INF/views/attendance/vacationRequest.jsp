@@ -43,12 +43,14 @@
 								</tr>
 								<tr>
 									<td>휴가현황</td>
+									<!-- 계산수식 불러와서 작성 -->
 									<td><p>0일(계산수식 여기다 작성)</p></td>
 								</tr>
 								<tr>
 									<td>종류</td>
 									<td>
 										<select name="category">
+										<!-- 여기에다가 휵가 종류 불러와야함 -->
 											<option value="category">연차</option>
 											<option value="category">병가</option>
 											<option value="category">교육</option>

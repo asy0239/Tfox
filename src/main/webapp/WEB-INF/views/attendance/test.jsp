@@ -39,7 +39,7 @@
 					<li>
 						<p class="bt_left" style="padding-bottom: 0;">
 							<button type="button"
-								onclick="vacationConfig.setVacationUseFlag()">저장</button>
+								onclick="setVacationUseFlag()">저장</button>
 						</p>
 					</li>
 				</ul>
