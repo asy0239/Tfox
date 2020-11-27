@@ -38,11 +38,4 @@ public class Board {
 		return "board/gesimul";
 	}
 	
-	
-	@GetMapping("/webFront/login")
-	public String login() {
-		return "webFront/login";
-	}
-	
-	
 }
