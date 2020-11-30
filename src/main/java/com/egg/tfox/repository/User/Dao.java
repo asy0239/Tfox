@@ -7,5 +7,7 @@ public interface Dao {
 	
 
 	
+	//회원가입
+	public void userJoin(User join);
   
 }
