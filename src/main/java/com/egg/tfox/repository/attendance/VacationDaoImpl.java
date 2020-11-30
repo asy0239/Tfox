@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.egg.tfox.entity.attendance.Vacation;
 
+@Repository
 public class VacationDaoImpl implements VacationDao {
 	@Autowired
 	private SqlSession sqlSession;

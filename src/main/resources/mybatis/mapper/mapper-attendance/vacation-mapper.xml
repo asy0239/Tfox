@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	- namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) 
  -->
 <mapper namespace="vacation">
-	<select id="allList" resultType="vacation">
+	<select id="allList" resultType="vacationVo">
 	
 	</select>
 
