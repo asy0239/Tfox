@@ -30,4 +30,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and appdoc.emp_id = emp.emp_id
 		and emp.dept_id = dept.dept_id
 	</select>
+	
+	<select id="templateRankList" resultType="hashmap" parameterType="string">
+		select temp_id , count(*)
+			from employee e , approval_doc doc
+			where e.emp_id = doc.emp_id
+			and emp_loginid = 'buser02'
+			group by temp_id
+			order by count(*) desc
+	</select>
+	
+	<select id="templateAll" resultType="string">
+		select temp_id from template
+	</select>
 </mapper>
