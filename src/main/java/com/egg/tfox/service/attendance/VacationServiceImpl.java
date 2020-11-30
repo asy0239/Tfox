@@ -1,0 +1,19 @@
+package com.egg.tfox.service.attendance;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.egg.tfox.entity.attendance.Vacation;
+import com.egg.tfox.repository.attendance.VacationDao;
+
+public class VacationServiceImpl implements VacationService {
+	@Autowired
+	private VacationDao vacationDao;
+
+	@Override
+	public List<Vacation> selectList() {
+		return vacationDao.selectAll();
+	}
+	
+}

@@ -6,6 +6,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+      table {
+        width: 100%;
+        border-top: 1px solid #444444;
+        border-collapse: collapse;
+      }
+      th, td {
+        border-bottom: 1px solid #444444;
+        padding: 10px;
+        text-align: center;
+      }
+  
+      #search{
+      	float:right;
+      }
+ 
+    </style>
 <body>
 	<div id="wrap">
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -13,10 +30,15 @@
 			<article>
 				<h3>휴가 승인 페이지</h3>
 				<hr>
-				<div class="search">
+				<div id="search">
 					<!-- 서치바 들어갈 예정 검색 버튼 들어가야함 ajax  -->
+					<select id="search_category">
+						<option value="부서"> 부서
+						<option value="이름"> 이름
+					</select>
 					<input type="text" placeholder="부서 검색 또는 이름 검색하기">
-					
+					<input type='button' value='검색' onclick='alert("안녕하세요")'/>
+
 				</div>
 				<div class="Recognition">
 					<table>
