@@ -1,6 +1,7 @@
 <jsp:directive.page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +86,7 @@ pageEncoding="UTF-8"/>
                     <ul class="hideShow side">
                         <li><a  href="${pageContext.request.contextPath }/product/insert">상품등록</a></li>
                         <li><a href="">상품목록</a></li>
-                        <li><a href="">메인 진열 관리</a></li>
+                        
                     </ul>
                 </li>
                 <li class="menu">
@@ -113,10 +114,11 @@ pageEncoding="UTF-8"/>
         
 
         <section class="contents">
+             
             <div class="topmenu">
                 <div>
                     
-                    <span class="name">김경민</span>
+                    <span class="name">${loginEmp.EMP_NAME}</span>
                     <span>님 안녕하세요</span>
                     <a href="#" id="hideMenu">▼</a>
                 </div>
@@ -125,9 +127,14 @@ pageEncoding="UTF-8"/>
                     <li>WELCOME!</li>
                     <li><a href="#">프로필 정보 수정</a></li>
                     <li><a href="#">비밀번호 변경</a></li>
-                    <li class="bar"><a href="#">로그아웃</a></li>
+                    <li class="bar"><a href="#" onclick="document.getElementById('logout-form').submit();">Sign out</a></li>
+                    <form id="logout-form" action='<c:url value='/logout'/>' method="POST">
+  						 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+					</form>
+
                 </ul>
-            </div>
+              </div>
+                   
 
             <!-- article 여기부분을 잘라서 사용하세요! -->
             <article>

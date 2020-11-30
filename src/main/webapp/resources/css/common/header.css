@@ -76,7 +76,7 @@ header h1 img{
 }
 .sideMenu ul.hideShow a{
     color: #afafaf;
-    font-size: 1.2em;
+    font-size: 1.1em;
     line-height: 40px;
 }
 .sideMenu ul.hideShow a::before{content: '- ';}

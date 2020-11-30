@@ -234,7 +234,7 @@
 											<option id="ownsu">자체공급</option>
 										</select>
 										&nbsp;
-										<button class="bt">등록</button>
+										<div id="1" onclick="modal">등록</div>
 					 				</td>
 								</tr>
 								
