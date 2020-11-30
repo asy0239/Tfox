@@ -8,10 +8,12 @@
 
 	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<bean id="successHandler" class="com.egg.tfox.controller.main.SuccessHandler"/>
+
 	
 	<security:http>
 		<security:intercept-url pattern="/" access="hasRole('ROLE_MEMBER')"/>
 		<security:form-login login-page="/loginMain" authentication-success-handler-ref="successHandler"/>
+		<security:logout logout-success-url="/" logout-url="/logout" invalidate-session="true"/>
 	</security:http>
 	
 	<security:authentication-manager>

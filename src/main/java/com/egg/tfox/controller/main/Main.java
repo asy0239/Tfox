@@ -19,6 +19,12 @@ public class Main {
 		}
 		return "login/loginPage";
 	}
+	@GetMapping("/accessError")
+	public String accessError() {
+		return "common/errPage";
+	}
+
+	
 	
 
 }
