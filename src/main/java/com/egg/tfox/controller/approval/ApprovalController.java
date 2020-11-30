@@ -1,10 +1,15 @@
 package com.egg.tfox.controller.approval;
 
+import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.egg.tfox.entity.Employee;
 import com.egg.tfox.entity.approval.ApprovalDoc;
+import com.egg.tfox.entity.approval.TemplateEntity;
 import com.egg.tfox.service.approval.ApprovalService;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
 
@@ -25,6 +32,7 @@ public class ApprovalController {
 	@Autowired
 	private ApprovalService approvalService;
 	
+	
 	// 새 결재 문서 작성 페이지로 이동
 	@GetMapping("/approval/approval_edit")
 	public String appWrite() {
@@ -36,7 +44,7 @@ public class ApprovalController {
 	public String appWriteSample() {
 		return "/approval/test";
 	}
-
+	
 	// 입력한 결재 문서 확인 페이지, test임
 	@PostMapping("/approval/readTemplate")
 	public String readTemplate(
@@ -57,6 +65,9 @@ public class ApprovalController {
 	@GetMapping("/approval/approval_Main")
 	public String approvalMain(Model model) {
 		List<ApprovalMainVo> list = approvalService.selectDocList();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userName = authentication.getName();
+		HashMap<Integer, TemplateEntity> templateList = approvalService.templateList(userName);
 		model.addAttribute("docList",list);
 		return "/approval/approval_Main";
 	}

@@ -15,13 +15,9 @@
 	<div id="wrap">
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-
-
-
 		<section class="contents">
 			<article>
 				<!-- 내용작성을 이곳에서~ -->
-
 				<div class="conWrap">
 					<div id="app_title">전자결재</div>
 					<div id="app_subTitle">
@@ -96,9 +92,8 @@
 							</div>	
 						</div>
 						</c:forEach>
-				</div> 
-				
-			</article>
+					</div> 
+				</article>
 		</section>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

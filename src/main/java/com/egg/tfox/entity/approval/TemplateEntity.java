@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 public class TemplateEntity {
 	private String temp_id;
 	private String temp_title;
-	private Clob temp_content;
+	private String temp_content;
 }

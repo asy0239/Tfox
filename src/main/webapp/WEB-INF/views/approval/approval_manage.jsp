@@ -17,9 +17,6 @@
 	<div id="wrap">
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-
-
-
 		<section class="contents">
 			<article>
 				<!-- 내용작성을 이곳에서~ -->

@@ -16,6 +16,7 @@
 	#test {
 		background:red;
 	}
+	
 	table, td , th {
 	border: 1px solid black;
 	border-collapse: collapse;
@@ -32,19 +33,15 @@
 	#approvalArea {
 		margin:auto;
 	}
+	
 </style>
 </head>
 <body>
 	<div id="wrap">
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
-
-
-
-
 		<section class="contents">
 			<article>
 				<!-- 내용작성을 이곳에서~ -->
-				
 				<div class="conWrap">
 					<div id="app_title">
 						새 결재 문서 작성
@@ -59,7 +56,6 @@
 							<option id="doc_op"value="초과근무서">초과근무서</option>
 						</select>
 					</div>
-					
 					<form>
 						<table id="doc_table">
 							<tr>
