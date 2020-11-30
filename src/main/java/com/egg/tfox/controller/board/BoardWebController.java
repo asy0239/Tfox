@@ -4,13 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class Board {
+public class BoardWebController {
 	
 	@GetMapping("/webFront/header")
 	public String header() {
 		return "webFront/header";
 	}
-	
 	@GetMapping("/webFront/main")
 	public String main() {
 		return "webFront/main";
@@ -33,9 +32,7 @@ public class Board {
 	public String gesipan(){
 		return "board/gesipan";
 	}
-	@GetMapping("/board/gesimul")
-	public String gesimul(){
-		return "board/gesimul";
-	}
+	
+	
 	
 }

@@ -18,4 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND USER_PWD=#{user_pwd} 
 	</select>
 
+	<select id="gesiList" resultType="com.egg.tfox.vo.board.GesiVO">
+		SELECT * FROM GESI
+	</select>
 </mapper>
