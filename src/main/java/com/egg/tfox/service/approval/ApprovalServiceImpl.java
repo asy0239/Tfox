@@ -8,25 +8,41 @@ import org.springframework.stereotype.Service;
 
 import com.egg.tfox.entity.approval.TemplateEntity;
 import com.egg.tfox.repository.approval.ApprovalDao;
+import com.egg.tfox.vo.approval.ApprovalMainNoCheckVo;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 @Service
+@Slf4j
 public class ApprovalServiceImpl implements ApprovalService{
 
 	@Autowired
 	private ApprovalDao approvalDao;
 	
 	@Override
-	public List<ApprovalMainVo> selectDocList() {
-		return approvalDao.selectAll();
+	public List<ApprovalMainVo> selectDocList(String userName) {
+		return approvalDao.selectAll(userName);
 	}
 
 	@Override
-	public HashMap<Integer, TemplateEntity> templateList(String userName) {
+	public List<HashMap<String, String>> templateList(String userName) {
 		// TODO Auto-generated method stub
-		HashMap<Integer, TemplateEntity> templateList = approvalDao.templateList(userName);
+		List<HashMap<String, String>> templateList = approvalDao.templateList(userName);
 		return templateList;
+	}
+
+	@Override
+	public List<ApprovalMainVo> weekIgnore(String userName) {
+		List<ApprovalMainVo> list = approvalDao.weekIgnore(userName);
+		return list;
+	}
+
+	@Override
+	public List<ApprovalMainNoCheckVo> noCheck(String userName) {
+		List<ApprovalMainNoCheckVo> list = approvalDao.noCheck(userName);
+		return list;
 	}
 
 }

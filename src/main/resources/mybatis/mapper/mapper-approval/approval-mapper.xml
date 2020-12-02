@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	- namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) 
  -->
 <mapper namespace="approval">
-	<select id="docList" resultType="approvalMainVo">
+	<select id="docList" resultType="approvalMainVo" parameterType="string">
 		select 
        appdoc.app_id,
        appdoc.emp_id,
@@ -23,24 +23,101 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        temp.temp_title,
        temp.temp_content,
        emp.emp_name,
+       emp.emp_loginid,
        dept.dept_id,
        dept.dept_name
 		from approval_doc appdoc, template temp , employee emp , department dept
 		where appdoc.temp_id = temp.temp_id
 		and appdoc.emp_id = emp.emp_id
 		and emp.dept_id = dept.dept_id
+        and emp.emp_loginid = #{userName}
 	</select>
 	
 	<select id="templateRankList" resultType="hashmap" parameterType="string">
-		select temp_id , count(*)
+		select temp_id , count(*) count
 			from employee e , approval_doc doc
 			where e.emp_id = doc.emp_id
-			and emp_loginid = 'buser02'
+			and emp_loginid = #{UserName}
 			group by temp_id
 			order by count(*) desc
 	</select>
 	
-	<select id="templateAll" resultType="string">
-		select temp_id from template
+	<select id="templateAll" resultType="com.egg.tfox.entity.approval.TemplateEntity">
+		select * from template
+	</select>
+	
+	<select id="weekIgnore" resultType="approvalMainVo" parameterType="string">
+		select 
+       appdoc.app_id,
+       appdoc.emp_id,
+       appdoc.app_title,
+       appdoc.app_excu_id,
+       appdoc.app_date,
+       appdoc.app_content,
+       appdoc.app_status,
+       appdoc.app_checktime,
+       temp.temp_id,
+       temp.temp_title,
+       temp.temp_content,
+       emp.emp_name,
+       emp.emp_loginid,
+       dept.dept_id,
+       dept.dept_name
+		from approval_doc appdoc, template temp , employee emp , department dept
+		where appdoc.temp_id = temp.temp_id
+		and appdoc.emp_id = emp.emp_id
+		and emp.dept_id = dept.dept_id
+        and emp.emp_loginid = #{userName}
+        and appdoc.app_checktime is null
+	</select>
+	
+	<select id="noCheck" resultType="approvalMainNoCheckVo" parameterType="string">
+select 
+    sendEmp.emp_id send_emp_id,
+    sendEmp.emp_name send_emp_name,
+    dept.dept_name send_dept_name,
+    approver.send_app_id,
+    approver.approver_id,
+    approver.approver_name,
+    approver.send_app_title,
+    approver.send_app_excu_id,
+    approver.send_app_date,
+    approver.send_app_content,
+    approver.send_app_status,
+    approver.send_app_checktime,
+    approver.get_apporder_code,
+    approver.get_apporder_check,
+    approver.get_apporder_apply,
+    approver.send_temp_id,
+    approver.send_temp_title,
+    approver.send_temp_content
+from employee sendEmp ,department dept, (select 
+    app_st.appstatment_id get_app_statment_id,
+    app_st.app_id get_app_id, 
+    app_st.emp_id approver_id,
+    app_st.apporder_code get_apporder_code,
+    app_st.apporder_check get_apporder_check,
+    app_st.apporder_apply get_apporder_apply,
+    emp.emp_loginid get_emp_loginid,
+    emp.emp_name approver_name,
+    app_doc.app_id send_app_id,
+    app_doc.emp_id send_emp_id,
+    app_doc.app_title send_app_title,
+    app_doc.app_excu_id send_app_excu_id,
+    app_doc.app_date send_app_date,
+    app_doc.app_content send_app_content,
+    app_doc.app_status send_app_status,
+    app_doc.app_checktime send_app_checktime,
+    app_doc.temp_id send_temp_id,
+    temp.temp_title send_temp_title,
+    temp.temp_content send_temp_content
+	from approval_statement app_st , approval_doc app_doc , employee emp, template temp
+	where app_st.app_id = app_doc.app_id
+	and emp.emp_id = app_st.emp_id
+	and app_st.apporder_apply != '승인'
+	and temp.temp_id = app_doc.temp_id) approver
+	where sendEmp.emp_id = approver.send_emp_id
+	and sendEmp.dept_id = dept.dept_id
+	and approver.get_emp_loginid = #{userName}
 	</select>
 </mapper>

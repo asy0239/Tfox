@@ -25,6 +25,7 @@ public class ApprovalMainVo {
 	private String temp_title;
 	private Clob temp_content;
 	private String emp_name;
+	private String emp_loginid;
 	private String dept_id;
 	private String dept_name;
 }
