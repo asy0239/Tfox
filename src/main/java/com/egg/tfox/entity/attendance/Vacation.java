@@ -14,7 +14,16 @@ public class Vacation {
 	private String emp_id;
 	private Date vacapl_start;
 	private Date vacapl_end;
-	private String vacapl_ref;
+	private Date vacapl_appdate;
 	private String vacapl_reason;
 	private String vacapl_status;
+	
+	//휴가 종류 이름 가지고오기
+	private String vactype_name;
+	
+	//Employee 테이블거 이름 가지고와야함
+	private String emp_name;
+	
+	//부서명 가지고오기
+	private String dept_name;
 }

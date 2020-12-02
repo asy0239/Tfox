@@ -4,16 +4,54 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 
-	mapper라는 영역 안에 구문을 작성한다.
-	- namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) 
- -->
+<!-- mapper라는 영역 안에 구문을 작성한다. - namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) -->
 <mapper namespace="vacation">
 	<select id="allList" resultType="vacationVo">
-	
+		SELECT
+		VC.VACAPL_ID
+		,
+		VT.VACTYPE_NAME
+		, E.EMP_NAME
+		, VC.VACAPL_START
+		, VC.VACAPL_END
+		,
+		VC.VACAPL_APPDATE
+		, VC.VACAPL_REASON
+		, VC.VACAPL_STATUS
+		, D.DEPT_NAME
+		FROM VACAPPLY VC
+		JOIN VACTYPE VT ON (VT.VACTYPE_ID = VC.VACTYPE_ID)
+		JOIN EMPLOYEE E ON (vc.emp_id = e.emp_id)
+		JOIN DEPARTMENT D ON
+		(E.DEPT_ID = D.DEPT_ID)
+		ORDER BY VACAPL_APPDATE DESC
 	</select>
 
-	
+	<select id="reqDay" resultType="String">
+		SELECT
+		TRUNC(MONTHS_BETWEEN(SYSDATE, emp_hiredate)/12,0) as EMP_DATE
+		FROM
+		EMPLOYEE
+		where emp_id = #{id}
+	</select>
+	<select id="vacReq" resultType="String">
+
+		SELECT
+		YEAR_DAY
+		FROM YEAR_MANAGE
+		WHERE YEAR_HIRE = #{reqday}
+	</select>
+
+	<select id="addreqDay" resultType="Integer">
+		SELECT
+		TO_DATE(TO_CHAR(V.VACAPL_END, 'YYYYMMDD')) - TO_DATE(V.VACAPL_START)+1
+		FROM VACAPPLY V
+		JOIN VACTYPE VT ON (VT.VACTYPE_ID = V.VACTYPE_ID)
+		WHERE EMP_ID = #{id}
+		AND VACTYPE_YEARYN = 'O'
+		AND VACAPL_STATUS = '승인'
+
+	</select>
 </mapper>
 
 

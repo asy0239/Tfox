@@ -17,5 +17,10 @@ public class VacationServiceImpl implements VacationService {
 	public List<Vacation> selectList() {
 		return vacationDao.selectAll();
 	}
+
+	@Override
+	public int reqday(String id) {
+		return vacationDao.reqDay(id);
+	}
 	
 }
