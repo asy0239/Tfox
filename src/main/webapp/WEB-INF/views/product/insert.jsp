@@ -135,7 +135,7 @@
 	
 	<div id="wrap">
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	
+		
 			<section class="contents">
 			<article>
 				<div class="conWrap" >
@@ -234,7 +234,7 @@
 											<option id="ownsu">자체공급</option>
 										</select>
 										&nbsp;
-										<div id="1" onclick="modal">등록</div>
+										<button class="bt">등록</button>
 					 				</td>
 								</tr>
 								
@@ -248,7 +248,7 @@
 											<option id="ownmd">자체제작</option>
 										</select>
 										&nbsp;
-										<button class="bt">등록</button>
+										<button class="bt" id="myBtn">등록</button>
 									</td>
 								</tr>
 								<tr>
@@ -294,6 +294,10 @@
         const editor = new toastui.Editor({
             el:document.querySelector(".toast-custom-editor")
         });
+        
+        
+  
     </script>
+    <%@ include file="modal_Manufacturer.jsp" %>
 </body>
 </html>
