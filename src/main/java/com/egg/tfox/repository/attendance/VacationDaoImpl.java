@@ -21,9 +21,10 @@ public class VacationDaoImpl implements VacationDao {
 
 	@Override
 	public int reqDay(String id) {
-		String reqday = sqlSession.selectOne("vacation.reqDay", id);
+		//
+		int reqday = sqlSession.selectOne("vacation.reqDay", id);
 		System.out.println(reqday);
-		String vacReq = sqlSession.selectOne("vacation.vacReq", reqday);
+		int vacReq = sqlSession.selectOne("vacation.vacReq", reqday);
 		System.out.println(vacReq);
 		List<Integer> ot = sqlSession.selectList("vacation.addreqDay", id);
 
@@ -34,9 +35,9 @@ public class VacationDaoImpl implements VacationDao {
 				System.out.println(sum);
 			}
 		}else {
-			return Integer.parseInt(vacReq);
+			return vacReq;
 		}
-		int result = Integer.parseInt(vacReq) - sum;
+		int result = vacReq - sum;
 		System.out.println("남은 휴가" + result);
 		return result;
 	}
