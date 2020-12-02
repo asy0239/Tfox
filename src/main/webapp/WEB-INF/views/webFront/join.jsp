@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 다음 주소 API -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <title>Insert title here</title>
 <style>
 
@@ -115,7 +117,7 @@
 		</div>
 		</div>
 	<div id="join">
-	<form id="joinForm">
+	<form id="joinForm" action="insert" method="POST">
 	<h2><label>가입정보를 입력해주세요.</label></h2>
 	<br>
 		<div>

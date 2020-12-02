@@ -11,14 +11,14 @@
 		INSERT
   		INTO USER_TABLE 
   		VALUES(
-  		 USER_ID, 
-		 USER_NAME, 
-		 USER_LOGINID, 
-		 USER_PWD, 
-		 USER_DATE, 
-		 USER_ADDR, 
-		 USER_NUMBER, 
-		 USER_EMAIL
+  		 #{USER_ID}, 
+		 #{USER_NAME}, 
+		 #{USER_LOGINID}, 
+		 #{USER_PWD}, 
+		 #{USER_DATE}, 
+		 #{USER_ADDR}, 
+		 #{USER_NUMBER}, 
+		 #{USER_EMAIL}
 		 )
 
 	</insert>
