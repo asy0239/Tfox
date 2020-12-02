@@ -17,9 +17,15 @@
 	font-weight: bold;
 }
 
+.gesimulList span{
+	margin-left: 30px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
 #t1 td:nth-child(1){
 		height:50px;
-		width: 400px;
+		width: 200px;
 		background-color:black;
 		color:white;
 		font-size:large;
@@ -33,13 +39,26 @@
 		
 	}
 	
-	table , tr ,td{
+table, tr, td, th{
 		border-collapse:collapse;
 		border: 1px solid black;
 	}
+#t1 , #t2{ 
+		width:100%;
+		margin-top: 10px;
+		
+	}
+.gesibtn{
+	width: 100%;
+	height: 60px;
+	margin-top: 10px;
+}
 #gesiB {
 	height: 50px;
 	width: 100px;
+	background:black;
+	color:white;
+	padding:0 auto;
 }
 input[class=br] {
 	display: none;
@@ -104,19 +123,19 @@ input[class=br]:radio+label {
 							<table id="t1">
 								<tr>
 									<td>기간</td>
-									<td><input class="br" id="br1" type="radio" name="" value="1"> 
+									<td><input class="br" id="br1" type="radio" name="gesiDate" value="1"> 
 										<label class="br" for="br1">오늘</label>
-										<input class="br" id="br2" type="radio" name="" value="2"> 
+										<input class="br" id="br2" type="radio" name="gesiDate" value="2"> 
 										<label class="br" for="br2">3일</label> 
-										<input class="br" id="br3" type="radio" name="" value="3">
+										<input class="br" id="br3" type="radio" name="gesiDate" value="3">
 										<label class="br" for="br3">7일</label> 
-										<input class="br" id="br4" type="radio" name="" value="4"> 
+										<input class="br" id="br4" type="radio" name="gesiDate" value="4"> 
 										<label class="br" for="br4">1개월</label> 
-										<input type="date">~<input type="date"></td>
+										<input type="date" id="searchDate" >~<input type="date"></td>
 								</tr>
 								<tr>
 									<td>게시판 선택</td>
-									<td><select name="gesi_code">
+									<td><select name="gesi_code" style="margin:10px">
 											<option value="1">전체</option>
 											<option value="2">Q&A</option>
 											<option value="3">상품 사용후기</option>
@@ -124,7 +143,7 @@ input[class=br]:radio+label {
 								</tr>
 								<tr>
 									<td>게시글 찾기</td>
-									<td><select>
+									<td><select style="margin:10px">
 											<option value="gesi_title">제목</option>
 											<option value="gesi_content">내용</option>
 											<option value="user_id">작성자</option>
@@ -133,44 +152,56 @@ input[class=br]:radio+label {
 								</tr>
 								<tr>
 									<td>답변상태</td>
-									<td><input type="radio" value="전체">전체 <input
+									<td><input type="radio" value="전체" style="margin:10px">전체 
+									<input
 										type="radio" value="답변 전">답변 전 <input type="radio"
 										value="답변 완료">답변 완료</td>
 								</tr>
 								<tr>
 									<td>댓글여부</td>
-									<td><input type="radio" value="전체">전체 <input
+									<td><input type="radio" value="전체" style="margin:10px">전체 <input
 										type="radio" value="있음">있음 <input type="radio"
 										value="없음">없음</td>
 								</tr>
 
 
 							</table>
-							<button type="submit" id="gesiB">검색</button>
+							<div class="gesibtn" align="center">
+								<button type="submit" id="gesiB">검색</button>
+							</div>
+							
 						</form>
-					</div>
-					<br><br>
+					</div> 
+					<hr>
 					<!-- 게시물 검색목록 -->
-					<div>
-						<table align="center">
+					<div class="gesimulList">
+						<span>전체 게시물 목록</span>
+						<table id="t2" align="center">
 							<tr>
-								<th colspan="6" align="center" class="title">전체 게시물 목록</th>
+								<th colspan="7" align="center" class="gesiListBtn">
+									<button></button>
+									<button></button>
+									<button></button>
+									<button></button>
+								</th>
 							</tr>
 							<tr class="listName">
 								<th><input type="checkbox"></th>
 								<th class="qnaAnsYn">번호</th>
-								<th class="qnaNote" colspan="4">분류</th>
+								<th class="qnaNote" >분류</th>
 								<th class="qnaDate">제목</th>
 								<th class="qnaDate">작성일</th>
 								<th class="qnaDate">작성자</th>
 								<th class="qnaDate">답변상태</th>
 							</tr>
-							<c:forEach var="ql" items="${ requestScope.list }">
+							<c:forEach var="ql" items="${ gesiList}">
+								<c:url value='/gesi.web?gesi_code=${ql.gesi_code}' var="gesiWebURl"/> 
 								<tr class="listResult">
 									<!-- 이부분에 함수 넣어서 출력해야됨   -->
-									<td><c:out value="${ql.gesi_code }" /></td>
-									<td colspan="4"><c:out value="" /></td>
-									<td><c:out value="" /></td>
+									<td><c:out value="<input type='checkbox'/>" escapeXml="false"/></td>
+									<td><c:out value="<a href='${gesiWebURl }'>${ql.gesi_name }<a/>" escapeXml="false"/></td>
+									<td><c:out value="${ql.gesi_title}" /></td>
+									<td><c:out value="${ql.gesi_date}" /></td>
 									<td><c:out value="" /></td>
 									<td><c:out value="" /></td>
 									<td><c:out value="" /></td>

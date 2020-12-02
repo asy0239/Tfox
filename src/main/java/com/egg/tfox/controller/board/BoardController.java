@@ -29,16 +29,36 @@ public class BoardController {
 	@RequestMapping (value="/board/gesiS.do", method = RequestMethod.GET)
 	public String gesimulList(@RequestParam String gesi_code, 
 								HttpServletRequest req, Model model) {
-		/*
-		 * List<GesiVO> gesiList; if(gesi_code.equals("1")) { gesiList =
-		 * service.selectList(); model.addAttribute("gesiList", gesiList);
-		 * 
-		 * }
-		 */
+		System.out.println(gesi_code);
 		
 		
-		
+		 List<GesiVO> gesiList; 
+		 if(gesi_code.equals("1")) { 
+			 gesiList = service.selectList();
+			 model.addAttribute("gesiList", gesiList);
+			 
+			 System.out.println(gesiList);
+		  
+		 }
 		return "board/gesimul";
 	}
 
+	@RequestMapping(value="/gesi.web", method = RequestMethod.GET)
+	public String gesiWebList(@RequestParam String gesi_code, 
+								HttpServletRequest req, Model model) {
+		System.out.println(gesi_code);
+		
+		String webURL = null;
+		List gesiWebList;
+		
+		if(gesi_code.equals("GS001")) {
+			gesiWebList = service.selectQnaList(gesi_code);
+			webURL="webFront/center";
+		}else if(gesi_code.equals("GS002")) {
+			
+			webURL="webFront/center";
+		}
+		
+		return webURL;
+	}
 }
