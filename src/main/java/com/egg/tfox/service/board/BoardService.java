@@ -11,4 +11,6 @@ public interface BoardService {
 
 	public List<GesiVO> selectList();
 
+	public List selectQnaList(String gesi_code);
+
 }

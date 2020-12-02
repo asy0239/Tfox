@@ -24,4 +24,10 @@ public class BoardDaoImpl implements BoardDao {
 	public List<GesiVO> selectList() {
 		return sql.selectList("board.gesiList");
 	}
+
+	@Override
+	public List selectQnaList() {
+		
+		return null;
+	}
 }

@@ -19,6 +19,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="gesiList" resultType="com.egg.tfox.vo.board.GesiVO">
-		SELECT * FROM GESI
+		SELECT    
+				G.GESI_ID
+     	 	   ,G.GESI_TITLE
+      		   ,G.GESI_CONTENT
+      	       ,G.GESI_DATE
+      		   ,G.GESI_STATUS
+      		   ,G.GESI_ANSDATE
+      		   ,G.GESI_ANSCONTENT
+               ,G.USER_ID
+      		   ,U.USER_NAME
+      		   ,G.GESI_CODE
+      		   ,T.GESI_NAME 
+      	FROM GESI G
+      	JOIN GESITYPE T ON T.GESI_CODE = G.GESI_CODE
+        JOIN USER_TABLE U ON U.USER_ID = G.USER_ID
+	</select>
+	
+	<select id="QnaList" resultType="com.egg">
+		
 	</select>
 </mapper>

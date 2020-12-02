@@ -26,6 +26,11 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectList();
 	}
 
+	@Override
+	public List selectQnaList(String gesi_code) {
+		return dao.selectQnaList();
+	}
+
 
 	
 }

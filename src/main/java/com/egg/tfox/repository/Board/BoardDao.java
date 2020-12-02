@@ -10,5 +10,7 @@ public interface BoardDao {
 	public User login(User user);
 
 	public List<GesiVO> selectList();
+
+	public List selectQnaList();
   
 }
