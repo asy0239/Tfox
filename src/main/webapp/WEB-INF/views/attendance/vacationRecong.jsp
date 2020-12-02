@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,15 +54,19 @@
 								<td>상태</td>
 							</tr>
 							<!-- 이부분부터 반복문 사용해서 뽑을것 -->
+							<c:forEach var="vac" items="${vaclist}">
 							<tr>
-								<td>박찬영</td>
-								<td>인사</td>
-								<td>2020-08-23</td>
-								<td>연차</td>
-								<td>2020-09-12 ~ 2020-09-13</td>
-								<td>승인</td>
-								<td>자세히보기</td>
+								<td>${vac.emp_name }</td>
+								<td>${vac.dept_name }</td>
+								<td>${vac.vacapl_appdate }</td>
+								<td>${vac.vactype_name }</td>
+								<td><fmt:formatDate value="${vac.vacapl_start }" pattern="yyyy.MM.dd"/>
+									 ~ <fmt:formatDate value="${vac.vacapl_end }" pattern="yyyy.MM.dd"/>
+								</td>
+								<td>${vac.vacapl_status }</td>
+								<td><a href="$">자세히보기</a></td>
 							</tr>
+							</c:forEach>
 							<tr>
 								<td>박찬영</td>
 								<td>인사</td>

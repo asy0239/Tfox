@@ -8,5 +8,7 @@ public interface VacationDao {
 
 	List<Vacation> selectAll();
 
+	int reqDay(String id);
+
 
 }

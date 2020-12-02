@@ -16,6 +16,28 @@ public class VacationDaoImpl implements VacationDao {
 	@Override
 	public List<Vacation> selectAll() {
 		List<Vacation> list = sqlSession.selectList("vacation.allList");
-		return sqlSession.selectList("vacation.allList");
-	} 
+		return list;
+	}
+
+	@Override
+	public int reqDay(String id) {
+		String reqday = sqlSession.selectOne("vacation.reqDay", id);
+		System.out.println(reqday);
+		String vacReq = sqlSession.selectOne("vacation.vacReq", reqday);
+		System.out.println(vacReq);
+		List<Integer> ot = sqlSession.selectList("vacation.addreqDay", id);
+
+		int sum = 0;
+		if (ot != null) {
+			for (int i = 0; i < ot.size(); i++) {
+				sum = sum + ot.get(i);
+				System.out.println(sum);
+			}
+		}else {
+			return Integer.parseInt(vacReq);
+		}
+		int result = Integer.parseInt(vacReq) - sum;
+		System.out.println("남은 휴가" + result);
+		return result;
+	}
 }

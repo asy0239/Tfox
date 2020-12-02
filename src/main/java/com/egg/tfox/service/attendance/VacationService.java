@@ -8,4 +8,6 @@ public interface VacationService {
 
 	public List<Vacation> selectList();
 
+	public int reqday(String id);
+
 }
