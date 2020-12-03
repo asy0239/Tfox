@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.egg.tfox.entity.Employee;
 import com.egg.tfox.entity.attendance.Vacation;
+import com.egg.tfox.entity.attendance.VacationRequest;
 import com.egg.tfox.service.attendance.VacationService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +28,15 @@ public class VacationController {
 	@GetMapping("/attendance/vacationRequest")
 	public String appendance(HttpServletRequest request,Model model) {
 		String id =((Employee) request.getSession().getAttribute("loginEmp")).getEMP_ID();
+		String corpid = ((Employee) request.getSession().getAttribute("loginEmp")).getCORP_ID();
+		
+		String deptname = vacationService.deptname(id);
+		List<String> category = vacationService.vacCategory();
 		int vacaday = vacationService.reqday(id);
 		
+		model.addAttribute("reqDay", vacaday);
+		model.addAttribute("deptname", deptname);
+		model.addAttribute("category", category);
 		System.out.println(vacaday);
 		return "/attendance/vacationRequest";
 	}
@@ -37,7 +47,7 @@ public class VacationController {
 	}
 	@GetMapping("/attendance/vacationEdit")
 	public String vacationEdit() {
-		return "/attndance/vacationEdit";
+		return "/attendance/vacationEdit";
 	}
 	
 	@GetMapping("/attendance/vacationRecong")
@@ -47,5 +57,15 @@ public class VacationController {
 		model.addAttribute("vaclist", list);
 	
 		return "/attendance/vacationRecong";
+	}
+	
+	@PostMapping("/attendance/vacationInsert")
+	public String vacationInsert(@ModelAttribute VacationRequest vacRequest) {
+		System.out.println(vacRequest.getEmp_id());
+		System.out.println(vacRequest.getVactype_name());
+		System.out.println(vacRequest.getVacapl_reason());
+		System.out.println(vacRequest.getVacapl_end());
+		System.out.println(vacRequest.getVacapl_start());
+		return "redirect:/attendance/vacationRecong";
 	}
 }

@@ -10,4 +10,8 @@ public interface VacationService {
 
 	public int reqday(String id);
 
+	public String deptname(String id);
+
+	public List<String> vacCategory();
+
 }
