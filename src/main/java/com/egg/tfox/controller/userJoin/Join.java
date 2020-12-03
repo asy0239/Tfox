@@ -1,6 +1,7 @@
 package com.egg.tfox.controller.userJoin;
 
-import org.apache.ibatis.session.SqlSession;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,55 +9,54 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.egg.tfox.entity.User;
 import com.egg.tfox.service.join.JoinService;
 
+
 @Controller
 public class Join {
 	@Autowired
-	private SqlSession sqlSession;
-	@GetMapping("/join")
+	private JoinService joinService; 
+	@GetMapping("/webFront/join")
 	public String join() {
-		return "join";
+		return "webFront/join";
 	}
-	
-	@PostMapping("/join")
-	public String join(@ModelAttribute User user) {
-		sqlSession.insert("User.add", user);
-		return "redirect:insert_finish";
+	@PostMapping("/userinsert")
+	public String insert(@RequestParam String phone1,
+			@RequestParam String phone2,
+			@RequestParam String phone3,
+			@RequestParam String user_pwd1,
+			@RequestParam String user_pwd2,
+			@RequestParam String user_addr1,
+			@RequestParam String user_addr2,
+			@RequestParam String user_addr3,
+			User user) {
+		String phone = phone1+"-"+phone2+"-"+phone3;
+		String pwd = user_pwd1;
+		String user_addr = user_addr1 + " " + user_addr2 + " " + user_addr3;
+		user.setPhone(phone);
+		user.setUser_pwd(pwd);
+		user.setUser_addr(user_addr);
+		System.out.println("form 값 : " + user);
+		System.out.println("phone : " + phone);
+		joinService.userJoin(user);
+		return "webFront/join2";
 	}
+		
+		
 	
+
 	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
 	@ResponseBody
-	public String idCheck() {
-		System.out.println("쳌");
-		return "넘어가라";
+	public String idCheck(@RequestParam Map<String, Object> param) {
+		String inputId = (String) param.get("checkId");
+		String checkResult = joinService.checkId(inputId);
+		System.out.println("checkResult : " + checkResult);
+		return checkResult;
 		
 	}
-	/*
-	 * @Controller
-	 * 
-	 * @RequestMapping("/signup/*") public class SingupController {
-	 * 
-	 * @Inject private SignupService signupService;
-	 * 
-	 * //SignUp GET
-	 * 
-	 * @RequestMapping(value="/signup.do", method=RequestMethod.GET) public void
-	 * signupGET() {
-	 * 
-	 * }
-	 * 
-	 * //SignUp PSOT
-	 * 
-	 * @RequestMapping(value="/signup.do", method=RequestMethod.POST) public String
-	 * signupPOST(SignupVO signVO) {
-	 * 
-	 * signupService.insertMember(signVO);
-	 * 
-	 * return "main"; }
-	 */
 	
 }

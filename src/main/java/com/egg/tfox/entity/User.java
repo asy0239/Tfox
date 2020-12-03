@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 @Builder 
 public class User {
-  
 	private String user_id;
 	private String user_name;
 	private String user_loginid;
 	private String user_pwd;
+	private String phone;
 	private Date user_date;
 	private String user_addr;
 	private String user_number;

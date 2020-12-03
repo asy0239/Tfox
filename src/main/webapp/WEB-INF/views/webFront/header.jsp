@@ -112,7 +112,7 @@
 			<div class="header_top_right">
 				<ul class="header_top_rightbar">
 					<li><a href="login">LOGIN</a></li>
-					<li><a href="${pageContext.request.contextPath }/join">JOIN</a></li>
+					<li><a href="${pageContext.request.contextPath }/webFront/join">JOIN</a></li>
 					<li><a href="">MY PAGE</a></li>
 					<li><a href="">ORDER</a></li>
 					<li><a href=""><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
