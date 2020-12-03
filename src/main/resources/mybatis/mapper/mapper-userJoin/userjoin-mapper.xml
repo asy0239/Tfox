@@ -7,7 +7,7 @@
 
 
 <mapper namespace="User">
-	<insert id="userJoin" parameterType="User">
+	<insert id="userJoin" parameterType="user">
 		INSERT
   		INTO USER_TABLE 
   		VALUES(

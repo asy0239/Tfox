@@ -35,8 +35,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       	JOIN GESITYPE T ON T.GESI_CODE = G.GESI_CODE
         JOIN USER_TABLE U ON U.USER_ID = G.USER_ID
 	</select>
-	
-	<select id="QnaList" resultType="com.egg">
-		
-	</select>
 </mapper>
