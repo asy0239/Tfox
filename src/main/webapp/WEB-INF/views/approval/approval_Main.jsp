@@ -78,7 +78,7 @@
 					</div>
 					<div id="sec_box" onclick="noCheck();">
 						<div>
-							<span>${fn:length(noCheck) }건</span>
+							<span>${fn:length(noCheck)}건</span>
 							<span>확인하지 않은 결재요청(수신)</span>
 						</div>
 					</div>
@@ -89,7 +89,7 @@
 						</div>
 					</div>
 					
-						<c:forEach var="doc" items="${docList }">
+						<c:forEach var="doc" items="${docList}">
 								<div id="sec_box_lg">
 								<div>
 									<c:choose>
@@ -145,11 +145,8 @@
 			;
 		});
 		
-		
-		
 		// 7일간 안본 문서 내역 보기
  		function weekIgnore(){
-			
 			$.ajax({
 				type:"GET",
 				url:"${pageContext.request.contextPath}/approval/weekIgnore.do",
@@ -160,7 +157,6 @@
 					var tmpList = ['TMP001' , 'TMP002', 'TMP003'];
 					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>'+data.length+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>'+${noCheck.size()}+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">'+${docList.size()}+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
 					if(data.length == 0) {
-						console.log("list : 가 널입니다");
 						$("#sec_area").append('<div id="sec_box_lg" class="nullDoc">조회된 내역이 없습니다.</div>')
 					} else {
 						$.each(data,function(index, doc){
@@ -177,14 +173,12 @@
 				url:"${pageContext.request.contextPath}/approval/noCheck.do",
 				dataType:"json",
 				success:function(data) {
-					console.log("noCheck 통신됨 :" + data)
 					$("#sec_area").html('');
 					/* $("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>0건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>0건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">2건</span> <span>전체 결재 내역 보기</span> </div> </div> <c:forEach var="doc" items="${data.weekIgnore }"> <div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq 'TMP001'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP002'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP003'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>${doc.temp_title }</div> <div>${doc.app_title }</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>${doc.emp_name }</p> <p>${doc.dept_name }</p> </div> <div>${doc.app_date }</div> </div> </c:forEach> </div>'); */
 					var tmpList = ['TMP001' , 'TMP002', 'TMP003'];
 					console.log(data.length==0);
 					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>'+${weekIgnore.size()}+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>'+data.length+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">'+${docList.size()}+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
 					if(data.length == 0) {
-						console.log("list : 가 널입니다");
 						$("#sec_area").append('<div id="sec_box_lg" class="nullDoc">조회된 내역이 없습니다.</div>')
 					} else {
 						$.each(data,function(index, doc){
@@ -202,14 +196,12 @@
 				url:"${pageContext.request.contextPath}/approval/totalDoc.do",
 				dataType:"json",
 				success:function(data) {
-					console.log("totalDoc 통신됨 :" + data)
 					$("#sec_area").html('');
 					/* $("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>0건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>0건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">2건</span> <span>전체 결재 내역 보기</span> </div> </div> <c:forEach var="doc" items="${data.weekIgnore }"> <div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq 'TMP001'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP002'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP003'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>${doc.temp_title }</div> <div>${doc.app_title }</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>${doc.emp_name }</p> <p>${doc.dept_name }</p> </div> <div>${doc.app_date }</div> </div> </c:forEach> </div>'); */
 					var tmpList = ['TMP001' , 'TMP002', 'TMP003'];
 					console.log(data.length==0);
 					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>'+${weekIgnore.size()}+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>'+data.length+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">'+${docList.size()}+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
 					if(data.length == 0) {
-						console.log("list : 가 널입니다");
 						$("#sec_area").append('<div id="sec_box_lg" class="nullDoc">조회된 내역이 없습니다.</div>')
 					} else {
 						$.each(data,function(index, doc){
