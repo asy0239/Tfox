@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  -->
 <mapper namespace="approval">
 	<select id="docList" resultType="approvalMainVo" parameterType="string">
-		select 
+	select 
        appdoc.app_id,
        appdoc.emp_id,
        appdoc.app_title,
@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="noCheck" resultType="approvalMainNoCheckVo" parameterType="string">
-select 
+	select 
     sendEmp.emp_id send_emp_id,
     sendEmp.emp_name send_emp_name,
     dept.dept_name send_dept_name,

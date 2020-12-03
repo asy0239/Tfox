@@ -27,7 +27,6 @@ public class loginController {
 		System.out.println(req.getParameter("user_id"));
 		HttpSession session = req.getSession();
 //		User login = service.login(user);
-		
 //		if(login == null) {
 //			session.setAttribute("loginUser", null);
 //			rttr.addFlashAttribute("msg", false);

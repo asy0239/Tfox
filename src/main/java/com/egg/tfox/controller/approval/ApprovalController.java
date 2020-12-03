@@ -115,6 +115,7 @@ public class ApprovalController {
 	@RequestMapping(value="/approval/totalDoc.do")
 	@ResponseBody
 	public HashMap<String, Object> approvalMainTotal(Model model){
+		
 		return null;
 	}
 	 
