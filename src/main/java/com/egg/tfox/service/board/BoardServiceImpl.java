@@ -1,6 +1,7 @@
 package com.egg.tfox.service.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +22,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<GesiVO> selectList() {
-		
-		return dao.selectList();
+	public List<GesiVO> selectList(Map<String, Object> mapList) {
+		// TODO Auto-generated method stub
+		return dao.selectList(mapList);
 	}
 
 	@Override
 	public List selectQnaList(String gesi_code) {
-		return dao.selectQnaList();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
