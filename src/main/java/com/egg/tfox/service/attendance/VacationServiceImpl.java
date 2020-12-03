@@ -22,5 +22,15 @@ public class VacationServiceImpl implements VacationService {
 	public int reqday(String id) {
 		return vacationDao.reqDay(id);
 	}
+
+	@Override
+	public String deptname(String id) {
+		return vacationDao.deptname(id);
+	}
+
+	@Override
+	public List<String> vacCategory() {
+		return vacationDao.vacCategory();
+	}
 	
 }

@@ -35,7 +35,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where emp_id = #{id}
 	</select>
 	<select id="vacReq" resultType="String">
-
 		SELECT
 		YEAR_DAY
 		FROM YEAR_MANAGE
@@ -47,10 +46,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		TO_DATE(TO_CHAR(V.VACAPL_END, 'YYYYMMDD')) - TO_DATE(V.VACAPL_START)+1
 		FROM VACAPPLY V
 		JOIN VACTYPE VT ON (VT.VACTYPE_ID = V.VACTYPE_ID)
-		WHERE EMP_ID = #{id}
+		WHERE
+		EMP_ID = #{id}
 		AND VACTYPE_YEARYN = 'O'
 		AND VACAPL_STATUS = '승인'
+	</select>
 
+	<select id="deptname" resultType="String">
+		SELECT
+		D.DEPT_NAME
+		FROM DEPARTMENT D
+		JOIN EMPLOYEE E ON (D.DEPT_ID = E.DEPT_ID)
+		WHERE
+		EMP_ID = #{id}
+	</select>
+
+	<select id="category" resultType="String"> 
+		SELECT
+		VACTYPE_NAME
+		FROM VACTYPE
+		WHERE VACTYPE_YN = 'Y'
 	</select>
 </mapper>
 

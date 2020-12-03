@@ -10,5 +10,9 @@ public interface VacationDao {
 
 	int reqDay(String id);
 
+	String deptname(String id);
+
+	List<String> vacCategory();
+
 
 }

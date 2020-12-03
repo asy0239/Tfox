@@ -127,7 +127,7 @@ font {
 										<tr>
 											<th scope="row">휴가 일수</th>
 											<td style="padding: 0;">
-												<table class="sub_table1" id="vcTable">
+												<table>
 													<col>
 													<col>
 													<col>
@@ -139,7 +139,7 @@ font {
 													<col>
 													<col>
 													<tbody>
-														<tr class="row-count-0">
+														<tr>
 															<td>N(입사연도)</td>
 															<td>N+1</td>
 															<td>N+2</td>
@@ -151,7 +151,7 @@ font {
 															<td>N+8</td>
 															<td>N+9</td>
 														</tr>
-														<tr class="row-count-0">
+														<tr>
 															<td><label><input type="text" value="15"
 																	name="vc_date"> 일</label></td>
 															<td><label><input type="text" value="15"
@@ -173,7 +173,7 @@ font {
 															<td><label><input type="text" value="17"
 																	name="vc_date"> 일</label></td>
 														</tr>
-														<tr class="row-count-1">
+														<tr>
 															<td>N+10</td>
 															<td>N+11</td>
 															<td>N+12</td>
@@ -185,7 +185,7 @@ font {
 															<td>N+18</td>
 															<td>N+19</td>
 														</tr>
-														<tr class="row-count-1">
+														<tr>
 															<td><label><input type="text" value="20"
 																	name="vc_date"> 일</label></td>
 															<td><label><input type="text" value="21"
@@ -273,9 +273,9 @@ font {
 
 
 
-								<div class="hidden pdt_50">
-									<h4 class="fl mgr_20">휴가 종류</h4>
-									<a onclick="#"> <span class="sms_plus"></span> 추가
+								<div class="vacCate">
+									<h4>휴가 종류</h4>
+									<button id="addVacCate">추가</button>
 									</a>
 								</div>
 								<table class="tableType01 gon" id="vcTypeTable">
@@ -292,97 +292,41 @@ font {
 											<th scope="row" class="C">차감 여부</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr data-type-value="10" id="vacation_type_value_10"
-											data-priority="1" data-type-index=0>
-											<td>연차 <span class="vacation-case"> </span>
-											</td>
-											<td class="C"><select id="vacation_use_0">
+									<tbody id="vacCategory">
+										<tr>
+											<td>연차</td>
+											<td><select id="vacation_use">
 													<option value="Y" selected>사용</option>
 													<option value="N">사용 안 함</option>
 											</select></td>
-											<td class="C"><label> <input type="checkbox"
+											<td><label><input type="checkbox"
 													id="vacation_minus_0" checked="checked"> 연차에서 차감
 											</label></td>
 										</tr>
-										<tr data-type-value="11" id="vacation_type_value_11"
-											data-priority="2" data-type-index=1>
-											<td>포상 <span class="vacation-case"> </span>
-											</td>
-											<td class="C"><select id="vacation_use_1">
+										<tr>
+											<td>병가</td>
+											<td><select id="vacation_use">
 													<option value="Y" selected>사용</option>
 													<option value="N">사용 안 함</option>
 											</select></td>
-											<td class="C"><label> <input type="checkbox"
-													id="vacation_minus_1"> 연차에서 차감
+											<td><label><input type="checkbox"
+													id="vacation_minus_0" checked="checked"> 연차에서 차감
 											</label></td>
 										</tr>
-										<tr data-type-value="21" id="vacation_type_value_21"
-											data-priority="3" data-type-index=2>
-											<td>훈련 <span class="vacation-case"> <span
-													class="icon file_delete"
-													onclick="vacationConfig.deleteVacationType(21)"></span>
-											</span>
-											</td>
-											<td class="C"><select id="vacation_use_2">
+										<tr>
+											<td>포상휴가</td>
+											<td><select id="vacation_use">
 													<option value="Y" selected>사용</option>
 													<option value="N">사용 안 함</option>
 											</select></td>
-											<td class="C"><label> <input type="checkbox"
-													id="vacation_minus_2"> 연차에서 차감
-											</label></td>
-										</tr>
-										<tr data-type-value="22" id="vacation_type_value_22"
-											data-priority="4" data-type-index=3>
-											<td>교육 <span class="vacation-case"> <span
-													class="icon file_delete"
-													onclick="vacationConfig.deleteVacationType(22)"></span>
-											</span>
-											</td>
-											<td class="C"><select id="vacation_use_3">
-													<option value="Y" selected>사용</option>
-													<option value="N">사용 안 함</option>
-											</select></td>
-											<td class="C"><label> <input type="checkbox"
-													id="vacation_minus_3"> 연차에서 차감
-											</label></td>
-										</tr>
-										<tr data-type-value="23" id="vacation_type_value_23"
-											data-priority="5" data-type-index=4>
-											<td>경조사 <span class="vacation-case"> <span
-													class="icon file_delete"
-													onclick="vacationConfig.deleteVacationType(23)"></span>
-											</span>
-											</td>
-											<td class="C"><select id="vacation_use_4">
-													<option value="Y" selected>사용</option>
-													<option value="N">사용 안 함</option>
-											</select></td>
-											<td class="C"><label> <input type="checkbox"
-													id="vacation_minus_4"> 연차에서 차감
-											</label></td>
-										</tr>
-										<tr data-type-value="24" id="vacation_type_value_24"
-											data-priority="6" data-type-index=5>
-											<td>병가 <span class="vacation-case"> <span
-													class="icon file_delete"
-													onclick="vacationConfig.deleteVacationType(24)"></span>
-											</span>
-											</td>
-											<td class="C"><select id="vacation_use_5">
-													<option value="Y" selected>사용</option>
-													<option value="N">사용 안 함</option>
-											</select></td>
-											<td class="C"><label> <input type="checkbox"
-													id="vacation_minus_5" checked="checked"> 연차에서 차감
+											<td><label> <input type="checkbox"
+													id="vacation_minus_0" checked="checked"> 연차에서 차감
 											</label></td>
 										</tr>
 									</tbody>
 								</table>
-
-								<div class="bt_left">
-									<button type="button"
-										onclick="vacationConfig.saveVacationType()">저장</button>
+								<div class="catButton">
+									<button type="button" onclick="saveVacCategory()">저장</button>
 								</div>
 							</div>
 						</div>
@@ -393,4 +337,22 @@ font {
 	</div>
 
 </body>
+<script>
+var i = 0;
+	
+$("#addVacCate").on("click", function(){
+	i++;
+	console.log(i);
+	$("#vacCategory").append('<tr id='+i+'> <td><input type="text" size="10"></td> <td><select id="vacation_use"> <option value="Y" selected>사용</option> <option value="N">사용 안 함</option> </select></td> <td><label> <input type="checkbox" id="vacation_minus_0" checked="checked"> 연차에서 차감 </label></td> </tr>')
+});
+
+/*  function saveVacCategory(){
+	$.ajax({
+		type:GET,
+		dataType:"json",
+		url:"${pageContext.request.contextPath}/appendance/vacationEdit",
+		data:{i:[{"휴가종류":"포상휴가"}]}
+	});
+}  */
+</script>
 </html>
