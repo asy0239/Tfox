@@ -9,17 +9,24 @@
 <mapper namespace="User">
 	<insert id="userJoin" parameterType="user">
 		INSERT
-  		INTO USER_TABLE 
+  		INTO USER_TABLE (user_id, user_name, user_loginid, user_pwd ,user_date, user_addr,user_number, user_email, phone)
   		VALUES(
-  		 #{USER_ID}, 
-		 #{USER_NAME}, 
-		 #{USER_LOGINID}, 
-		 #{USER_PWD}, 
-		 #{USER_DATE}, 
-		 #{USER_ADDR}, 
-		 #{USER_NUMBER}, 
-		 #{USER_EMAIL}
+  		 'U'||TRIM(TO_CHAR(SEQ_USERID.nextval,'000000')), 
+		 #{user_name}, 
+		 #{user_loginid},
+		 #{user_pwd}, 
+		 SYSDATE, 
+		 #{user_addr},
+		 #{user_number}, 
+		 #{user_email},
+		 #{phone}
 		 )
-
+	
 	</insert>
+	
+	<select id="checkId" resultType="string" parameterType="string">
+		select count(*) from user_table
+		where user_loginId = #{inputId}
+	</select>
+	
 </mapper>

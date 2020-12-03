@@ -49,7 +49,7 @@
     	caret-color: gray;
 	}
 	.birth {
-	 	width: 170px;
+	 	
     	height: 48px;
     	border-width: 0 0 2px 0;
     	border-color: lightgray;
@@ -75,7 +75,7 @@
     	caret-color: gray;
 	
 	}
-	.btn {
+	.btn, #idCheck {
 		width: 100px;
     	height: 30px;
     	font-size: large;
@@ -104,6 +104,7 @@
 	}
 
 </style>
+
 </head>
 <body>
 	<div id="wrap">
@@ -117,69 +118,56 @@
 		</div>
 		</div>
 	<div id="join">
-	<form id="joinForm" action="insert" method="POST">
+	<form id="joinForm" action="${pageContext.request.contextPath }/userinsert" method="POST">
 	<h2><label>가입정보를 입력해주세요.</label></h2>
 	<br>
 		<div>
 			<h3>
 			<label>이름</label>
 			</h3>
-				<span><input type="text" class="input"></span>
+				<span><input type="text" class="input" name="user_name"></span>
 				<h3>
 			<label id="userId">아이디</label>
 			</h3>
-				<span><input type="text" class="input"></span>
-				<span><button class="btn" id="idCheck">중복확인</button></span>
+				<div>
+				<span><input type="text" class="input" id="checkId" name="user_loginid"></span>
+				<div class="eheck_font" id="idCheck"></div>
+				<span><input type="button" class="btn" id="idCheck" value="중복확인"></span>
+				</div>
 				<h3>
 			<label>비밀번호</label>
 			</h3>
-				<span><input type="password" class="input" placeholder="비밀번호"></span>
+				<span><input type="password" class="input" placeholder="비밀번호" name="user_pwd1"></span>
 				<br>
-				<span><input type="password" class="input" placeholder="비밀번호 재입력"></span>
+				<span><input type="password" class="input" placeholder="비밀번호 재입력" name="user_pwd2"></span>
 				<h3>
 				<label>번호</label>
 			</h3>
-				<span><input type="text"  id="phone"></span>-
-				<span><input type="text"  id="phone"></span>-
-				<span><input type="text"  id="phone"></span>
+				<span><input type="text"  id="phone" name="phone1"></span>-
+				<span><input type="text"  id="phone" name="phone2"></span>-
+				<span><input type="text"  id="phone" name="phone3"></span>
 				<h3>
 			<label>생년월일</label>
 			</h3>
-				<span><input type="text" class="birth" placeholder="년도"></span>
-				<span><select class="birth">
-					<option>월</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-					<option>7</option>
-					<option>8</option>
-					<option>9</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-				</select></span>
-				<span><input type="text" class="birth" placeholder="일"></span>
+				<span><input type="date" class="birth" placeholder="년도" name="user_number"></span>
 				<h3>
 			<label>이메일</label>
 			</h3>
-				<span><input type="text" class="input"></span>
+				<span><input type="email" class="input" name="user_email"></span>
 				<h3>
 			<label>주소</label>
 			</h3>
-				<span><input type="text" class="address"></span>
+				<span><input type="text" class="address"  name="user_addr1"></span>
 				<span><button class="btn">우편검색</button></span>
 				<br>
-				<span><input type="text" class="address"></span>
-				<span><input type="text" class="address" placeholder="상세주소"></span>
+				<span><input type="text" class="address"  name="user_addr2"></span>
+				<span><input type="text" class="address" placeholder="상세주소" name="user_addr3"></span>
 				
 				
 		</div>
 				<div class="subjoin" align="center">
 				<span><button value="" class="btn">취소</button></span>
-				<span><button value="" class="btn">가입하기</button></span>
+				<span><button type="submit" class="btn" id="insertUser">가입하기</button></span>
 			</div>
 				
 	</form>
@@ -187,23 +175,33 @@
 	
 	
 	<script>
-	
-	function insertUser() {
-		$("").submit();
-	}
+	//모든 공백 체크 정규식
+	var empJ = /\s/g; 
+	//아이디 정규식 
+	var idJ = /^[a-z0-9][a-z0-9_\-]{4,19}$/; 
+	// 비밀번호 정규식
+	var pwJ = /^[A-Za-z0-9]{4,12}$/;
+	// 이름 정규식
+	var nameJ = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; 
+	// 이메일 검사 정규식 
+	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	// 휴대폰 번호 정규식
+	var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+
 	
 	$("#idCheck").on("click", function(){
-		var userId = "개새끼!";
-		
-		console.log("씨발!!");
-		
+	
+		var checkId = $("#checkId").val();
 		$.ajax({
-			url: "idCheck",
+			url: "${pageContext.request.contextPath}/idCheck",
 			type: "post",
-			data: "국윤창",
+			dataType:"json",
+			data: {
+				"checkId" : checkId,
+			},
 			success: function(data) {
 				console.log(data);
-				if(data === "possible") {
+				if(data == "0") {
 					alert("사용 가능한 아이디 입니다");
 				} else {
 					alert("사용 불가능한 아이디 입니다");
@@ -214,6 +212,23 @@
 			}
 		});
 	});
+	$(document).ready(function() {
+		
+	
+	$("#checkId").blur(function() {
+		if($('#checkId').val() == '') {
+			$('#idCheck').text('아이디를 입력하세요.');
+			$('#idCheck').css('color', 'red');
+			
+		} else if(idJ.test($('#checkId').val())!=true) {
+			$('#idCheck').text('4~12자의 영문, 숫자만 사용 가능합니다.');
+			$('#idCheck').css('color', 'red');
+		} 		
+		
+	});
+	});
+	
+	
 	</script>
 </body>
 </html>

@@ -1,22 +1,26 @@
 package com.egg.tfox.service.join;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.egg.tfox.entity.User;
+import com.egg.tfox.repository.User.JoinDao;
 
 
 @Service
 public class JoinServiceImpl implements JoinService {
-	private User join;
+	@Autowired
+	private JoinDao joinDao;
 	
-	public void setUser(User join) {
-		this.join = join;
+	@Override
+	public void userJoin(User user) {
+		joinDao.userJoin(user);		
 	}
 
 	@Override
-	public void userJoin(User join) {
-		//join.userJoin(join);
-		
+	public String checkId(String inputId) {
+		String checkResult = joinDao.checkId(inputId);
+		return checkResult;
 	}
 
 }
