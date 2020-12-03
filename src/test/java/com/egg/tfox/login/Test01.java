@@ -2,7 +2,6 @@ package com.egg.tfox.login;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -20,20 +19,20 @@ import lombok.extern.slf4j.Slf4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/security-context.xml" })
-public class test {
+public class Test01 {
 	@Autowired
 	PasswordEncoder encoder;
 
 	@Autowired
 	DataSource ds;
 
-	// @Test
+	 @Test
 	public void test() {
 		log.info("{}", encoder);
 		log.info("{}", ds);
 	}
 
-	@Test
+	//@Test
 	public void test2() {
 		Connection con = null;
 		PreparedStatement pstmt = null;

@@ -14,6 +14,7 @@
 		<security:intercept-url pattern="/" access="hasRole('ROLE_MEMBER')"/>
 		<security:form-login login-page="/loginMain" authentication-success-handler-ref="successHandler"/>
 		<security:logout logout-success-url="/" logout-url="/logout" invalidate-session="true"/>
+		<security:csrf disabled="true"/>
 	</security:http>
 	
 	<security:authentication-manager>

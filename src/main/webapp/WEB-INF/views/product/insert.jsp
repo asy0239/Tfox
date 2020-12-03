@@ -295,8 +295,6 @@
             el:document.querySelector(".toast-custom-editor")
         });
         
-        
-  
     </script>
     <%@ include file="modal_Manufacturer.jsp" %>
 </body>
