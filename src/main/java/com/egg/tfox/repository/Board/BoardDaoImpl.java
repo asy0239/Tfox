@@ -1,6 +1,7 @@
 package com.egg.tfox.repository.Board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,16 @@ public class BoardDaoImpl implements BoardDao {
 		return sql.selectOne("board.login", user);
 	}
 
-	@Override
-	public List<GesiVO> selectList() {
-		return sql.selectList("board.gesiList");
-	}
 
 	@Override
 	public List selectQnaList() {
 		
 		return null;
+	}
+
+	@Override
+	public List<GesiVO> selectList(Map<String, Object> mapList) {
+		// TODO Auto-generated method stub
+		return sql.selectList("board.gesiList", mapList);
 	}
 }

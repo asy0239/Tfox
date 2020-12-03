@@ -1,6 +1,8 @@
 package com.egg.tfox.controller.board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,19 +29,32 @@ public class BoardController {
 	}
 	
 	@RequestMapping (value="/board/gesiS.do", method = RequestMethod.GET)
-	public String gesimulList(@RequestParam String gesi_code, 
-								HttpServletRequest req, Model model) {
-		System.out.println(gesi_code);
+	public String gesimulList(
+								@RequestParam String searchDate,
+								@RequestParam String searchDate2,
+								@RequestParam String gesi_code,
+								@RequestParam String searchType,
+								@RequestParam String typeKeyword,
+								HttpServletRequest req, Model model) {	
+		
+		Map<String, Object> mapList = new HashMap<>();
+		mapList.put("startD", searchDate);
+		mapList.put("endD", searchDate2);
+		mapList.put("gesi_code", gesi_code);
+		mapList.put("searchType", searchType);
+		mapList.put("keyword", typeKeyword);
 		
 		
-		 List<GesiVO> gesiList; 
-		 if(gesi_code.equals("1")) { 
-			 gesiList = service.selectList();
-			 model.addAttribute("gesiList", gesiList);
-			 
-			 System.out.println(gesiList);
+		System.out.println(mapList);
+		
+		
+	
+		  List<GesiVO> gesiList; gesiList = service.selectList(mapList);
+		  model.addAttribute("gesiList", gesiList);
 		  
-		 }
+		  System.out.println(gesiList);
+		 
+
 		return "board/gesimul";
 	}
 

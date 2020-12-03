@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class GesiVO {
 	
+	private int rn;                 //게시물 번호
 	private String gesi_id;  		//게시물 ID
 	private String gesi_title; 		//제목
 	private String gesi_content;	//내용

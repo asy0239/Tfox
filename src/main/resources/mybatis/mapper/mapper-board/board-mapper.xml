@@ -18,21 +18,74 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND USER_PWD=#{user_pwd} 
 	</select>
 
-	<select id="gesiList" resultType="com.egg.tfox.vo.board.GesiVO">
-		SELECT    
-				G.GESI_ID
-     	 	   ,G.GESI_TITLE
-      		   ,G.GESI_CONTENT
-      	       ,G.GESI_DATE
-      		   ,G.GESI_STATUS
-      		   ,G.GESI_ANSDATE
-      		   ,G.GESI_ANSCONTENT
-               ,G.USER_ID
-      		   ,U.USER_NAME
-      		   ,G.GESI_CODE
-      		   ,T.GESI_NAME 
-      	FROM GESI G
-      	JOIN GESITYPE T ON T.GESI_CODE = G.GESI_CODE
-        JOIN USER_TABLE U ON U.USER_ID = G.USER_ID
+	<select id="gesiList" resultType="com.egg.tfox.vo.board.GesiVO" parameterType="map">
+		SELECT RN
+      		, GESI_ID
+      		, GESI_TITLE
+      		, GESI_CONTENT
+      		, GESI_DATE
+      		, GESI_STATUS
+      		, GESI_ANSDATE
+      		, GESI_ANSCONTENT
+      		, USER_ID
+      		, USER_NAME
+      		, GESI_CODE
+      		, GESI_NAME 
+		FROM (	SELECT ROWNUM RN
+      		  			, A.GESI_ID
+      		  			, A.GESI_TITLE
+      		  			, A.GESI_CONTENT
+      		  			, A.GESI_DATE
+      		  			, A.GESI_STATUS
+      		  			, A.GESI_ANSDATE
+      		  			, A.GESI_ANSCONTENT
+      		  			, A.USER_ID
+      		  			, A.USER_NAME
+      		  			, A.GESI_CODE
+      		  			, A.GESI_NAME 
+ 					FROM (SELECT G.GESI_ID
+     	 	   					,G.GESI_TITLE
+      		   					,G.GESI_CONTENT
+      	       					,G.GESI_DATE
+      		   					,G.GESI_STATUS
+      		   					,G.GESI_ANSDATE
+      		   					,G.GESI_ANSCONTENT
+               					,G.USER_ID
+      		   					,U.USER_NAME
+      		   					,G.GESI_CODE
+      		   					,T.GESI_NAME 
+      						FROM GESI G
+      						JOIN GESITYPE T ON T.GESI_CODE = G.GESI_CODE
+        					JOIN USER_TABLE U ON U.USER_ID = G.USER_ID
+        					<where>
+        						<if test="startD != null and startD != ''
+        			 			 and endD != null and endD != ''">
+        							<![CDATA[
+									AND G.GESI_DATE >= #{startD} 
+									AND G.GESI_DATE <= #{endD}
+									]]>
+        						</if>
+        	
+        						<if test="gesi_code != null and gesi_code != ''">
+        							AND G.GESI_CODE = #{gesi_code}
+        						</if>
+        	
+        						<if test="searchType == 'gesi_title'
+        						and keyword != null and keyword != '' ">
+        							AND INSTR(G.GESI_TITLE, #{keyword}) > 0 
+        						</if>
+        	
+        						<if test="searchType == 'gesi_content'
+        						and keyword != null and keyword != '' ">
+        							AND INSTR(G.GESI_CONTENT, #{keyword}) > 0 
+        						</if>
+        	
+        						<if test="searchType == 'user_name'
+        						and keyword != null and keyword != '' ">
+        							AND INSTR(U.USER_NAME, #{keyword}) > 0 
+        						</if>
+        					</where>
+        					ORDER BY G.GESI_DATE DESC) A)
+      
 	</select>
 </mapper>

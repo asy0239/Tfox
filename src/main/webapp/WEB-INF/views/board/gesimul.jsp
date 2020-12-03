@@ -131,24 +131,23 @@ input[class=br]:radio+label {
 										<label class="br" for="br3">7일</label> 
 										<input class="br" id="br4" type="radio" name="gesiDate" value="4"> 
 										<label class="br" for="br4">1개월</label> 
-										<input type="date" id="searchDate" >~<input type="date"></td>
+										<input type="date" name="searchDate" >~<input type="date" name="searchDate2"></td>
 								</tr>
 								<tr>
 									<td>게시판 선택</td>
 									<td><select name="gesi_code" style="margin:10px">
-											<option value="1">전체</option>
-											<option value="2">Q&A</option>
-											<option value="3">상품 사용후기</option>
+											<option value="">전체</option>
+											<option value="GS001">Q&A</option>
+											<option value="GS002">상품 사용후기</option>
 									</select></td>
 								</tr>
 								<tr>
 									<td>게시글 찾기</td>
-									<td><select style="margin:10px">
+									<td><select style="margin:10px" name="searchType">
 											<option value="gesi_title">제목</option>
 											<option value="gesi_content">내용</option>
-											<option value="user_id">작성자</option>
-											<option value="">상품명</option>
-									</select> <input type="text"/></td>
+											<option value="user_name">작성자</option>
+									</select> <input type="text" name="typeKeyword"/></td>
 								</tr>
 								<tr>
 									<td>답변상태</td>
@@ -194,22 +193,62 @@ input[class=br]:radio+label {
 								<th class="qnaDate">작성자</th>
 								<th class="qnaDate">답변상태</th>
 							</tr>
-							<c:forEach var="ql" items="${ gesiList}">
+							<c:forEach var="ql" items="${ gesiList}" varStatus="status">
 								<c:url value='/gesi.web?gesi_code=${ql.gesi_code}' var="gesiWebURl"/> 
 								<tr class="listResult">
 									<!-- 이부분에 함수 넣어서 출력해야됨   -->
 									<td><c:out value="<input type='checkbox'/>" escapeXml="false"/></td>
+									<td><c:out value="${ql.rn}" /></td>
 									<td><c:out value="<a href='${gesiWebURl }'>${ql.gesi_name }<a/>" escapeXml="false"/></td>
 									<td><c:out value="${ql.gesi_title}" /></td>
 									<td><c:out value="${ql.gesi_date}" /></td>
-									<td><c:out value="" /></td>
-									<td><c:out value="" /></td>
-									<td><c:out value="" /></td>
+									<td><c:out value="${ql.user_name }" /></td>
+									<td><c:out value="${ql.gesi_status}" /></td>
 								</tr>
 							</c:forEach>
 						</table>
-						<div class="paging-area" align="center">
-						</div>
+						<%-- <div class="paging-area" align="center">
+							<button id="paging"
+							onclick="location.href='${applicationScope.contextPath}/gesiS.do?currentPage=1'"><<</button>
+							<c:if test="${ requestScope.pi.currentPage <= 1 }">
+								<button id="paging" disabled><</button>
+							</c:if>
+
+							<c:if test="${ requestScope.pi.currentPage > 1 }">
+								<button id="paging"
+									onclick="location.href='${applicationScope.contextPath}/gesiS.do?currentPage=<c:out value="${ requestScope.pi.currentPage - 1 }"/>'"><</button>
+							</c:if>
+
+
+							<c:forEach var="p" begin="${ requestScope.pi.startPage }"
+							end="${ requestScope.pi.endPage }" step="1">
+							<c:if test="${ requestScope.pi.currentPage eq p }">
+								<button id="paging" disabled>
+									<c:out value="${ p }" />
+								</button>
+							</c:if>
+							<c:if test="${ requestScope.pi.currentPage ne p }">
+								<button id="paging"
+								onclick="location.href='${applicationScope.contextPath}/qnaList.rl?currentPage=<c:out value="${ p }"/>'">
+								<c:out value="${ p }" />
+								</button>
+							</c:if>
+							</c:forEach>
+
+
+							<c:if test="${ requestScope.pi.currentPage >= requestScope.pi.maxPage }">
+								<button id="paging" disabled>></button>
+							</c:if>
+
+							<c:if test="${ requestScope.pi.currentPage < requestScope.pi.maxPage }">
+								<button id="paging"
+								onclick="location.href='${applicationScope.contextPath}/qnaList.rl?currentPage=<c:out value="${ requestScope.pi.currentPage + 1 }"/>'">></button>
+							</c:if>
+
+						<button id="paging"
+						onclick="location.href='${applicationScope.contextPath}/qnaList.rl?currentPage=<c:out value="${ requestScope.pi.maxPage }"/>'">>></button>
+							
+						</div> --%>
 					</div>
 				</div>
 			</article>
