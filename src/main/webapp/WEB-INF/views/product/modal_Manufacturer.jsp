@@ -36,6 +36,7 @@
           	 
          
         }
+        
      
         .close:hover,
         .close:focus {
