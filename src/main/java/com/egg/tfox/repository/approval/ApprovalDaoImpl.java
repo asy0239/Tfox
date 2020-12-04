@@ -15,6 +15,7 @@ import com.egg.tfox.entity.Approval;
 import com.egg.tfox.entity.approval.TemplateEntity;
 import com.egg.tfox.vo.approval.ApprovalMainDocCountVo;
 import com.egg.tfox.vo.approval.ApprovalMainNoCheckVo;
+import com.egg.tfox.vo.approval.ApprovalMainRefVo;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,12 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	@Override
 	public List<ApprovalMainNoCheckVo> noCheck(String userName) {
 		List<ApprovalMainNoCheckVo> list = sqlSession.selectList("approval.noCheck", userName);
+		return list;
+	}
+
+	@Override
+	public List<ApprovalMainRefVo> refDoc(String userName) {
+		List<ApprovalMainRefVo> list = sqlSession.selectList("approval.refDoc", userName);
 		return list;
 	}
 	

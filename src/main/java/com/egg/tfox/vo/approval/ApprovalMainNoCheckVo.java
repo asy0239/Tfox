@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+// 로그인한 사용자에게 온 결재 내역
 public class ApprovalMainNoCheckVo {
     private String send_emp_id;
     private String send_emp_name;
@@ -20,7 +21,7 @@ public class ApprovalMainNoCheckVo {
     private String approver_name;
     private String send_app_title;
     private String send_app_excu_id;
-    private Date send_app_date;
+    private Date app_date;
     private String send_app_status;
     private String send_app_checktime;
     private String get_apporder_code;

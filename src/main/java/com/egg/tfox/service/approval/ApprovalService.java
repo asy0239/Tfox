@@ -16,4 +16,6 @@ public interface ApprovalService {
 	List<ApprovalMainVo> weekIgnore(String userName);
 
 	List<ApprovalMainNoCheckVo> noCheck(String userName);
+
+	HashMap<String, Object> totalDoc(String userName);
 }
