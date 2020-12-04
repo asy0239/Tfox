@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+// 자신이 보낸 문서 내역
 public class ApprovalMainVo {
 	private String app_id;
 	private String emp_id;

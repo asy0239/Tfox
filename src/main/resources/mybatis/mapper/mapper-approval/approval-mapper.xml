@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="templateAll" resultType="com.egg.tfox.entity.approval.TemplateEntity">
 		select * from template
 	</select>
-	
+	<!-- 사용자가 보낸 문서가 7일이상 지연된 결재요청 -->
 	<select id="weekIgnore" resultType="approvalMainVo" parameterType="string">
 		select 
        appdoc.app_id,
@@ -68,9 +68,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and appdoc.emp_id = emp.emp_id
 		and emp.dept_id = dept.dept_id
         and emp.emp_loginid = #{userName}
+        and to_char(appdoc.app_date, 'yyyymmdd') <![CDATA[<]]> (sysdate - 7)        
         and appdoc.app_checktime is null
 	</select>
-	
+	<!-- 사용자가 결재처리 해야 될 내역 -->
 	<select id="noCheck" resultType="approvalMainNoCheckVo" parameterType="string">
 	select 
     sendEmp.emp_id send_emp_id,
@@ -81,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     approver.approver_name,
     approver.send_app_title,
     approver.send_app_excu_id,
-    approver.send_app_date,
+    approver.send_app_date app_date,
     approver.send_app_content,
     approver.send_app_status,
     approver.send_app_checktime,
@@ -119,5 +120,61 @@ from employee sendEmp ,department dept, (select
 	where sendEmp.emp_id = approver.send_emp_id
 	and sendEmp.dept_id = dept.dept_id
 	and approver.get_emp_loginid = #{userName}
+	</select>
+	<!-- 사용자의 참조 문서 -->
+	<select id="refDoc" parameterType="string" resultType="com.egg.tfox.vo.approval.ApprovalMainRefVo">
+		select 
+    send_app_id,
+    send_emp_id,
+    send_emp.emp_loginid send_emp_loginid,
+    send_emp.emp_name send_emp_name,
+    dept.dept_id send_dept_id,
+    dept.dept_name send_dept_name,
+    ref_emp_id,
+    ref_emp_name,
+    ref_emp_loginid,
+    app_title,
+    app_excu_id,
+    app_date,
+    app_content,
+    app_status,
+    temp_id,
+    temp_title,
+    temp_content,
+    ref_dept_id,
+    ref_dept_name
+from (select 
+    send_app_id,
+    send_emp_id,
+    ref_emp_id,
+    e.emp_name ref_emp_name,
+    e.emp_loginid ref_emp_loginid,
+    app_doc.app_title,
+    app_doc.app_excu_id,
+    app_doc.app_date,
+    app_doc.app_content,
+    app_doc.app_status,
+    app_doc.app_checktime
+    temp_id,
+    temp.temp_title,
+    temp.temp_content,
+    dept.dept_id ref_dept_id,
+    dept.dept_name ref_dept_name
+    from (select 
+       app_doc.app_id send_app_id,
+       app_doc.emp_id send_emp_id,
+       app_ref.emp_id ref_emp_id,
+       app_st.emp_id approval_emp_id,
+       app_st.apporder_code apporder_code
+	from approval_doc app_doc , approval_reference app_ref , approval_statement app_st
+	where app_doc.app_id = app_ref.app_id
+	and app_doc.app_id = app_st.app_id) , employee e, approval_doc app_doc, template temp, department dept
+	where e.emp_id = ref_emp_id
+	and app_doc.app_id = send_app_id
+	and temp.temp_id = app_doc.temp_id
+	and e.dept_id = dept.dept_id
+	and e.emp_loginid = #{userName}), employee send_emp , department dept 
+	where send_emp_id = send_emp.emp_id
+	and send_emp.dept_id = dept.dept_id
 	</select>
 </mapper>

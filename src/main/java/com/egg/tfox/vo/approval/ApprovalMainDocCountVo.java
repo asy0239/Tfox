@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+// 자신이 보낸 문서 내역 갯수
 public class ApprovalMainDocCountVo {
 	private String tmp_id;
 	private String count;

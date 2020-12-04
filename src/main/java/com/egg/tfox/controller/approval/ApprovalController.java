@@ -83,11 +83,15 @@ public class ApprovalController {
 		List<ApprovalMainVo> weekIgnore = approvalService.weekIgnore(userName);
 		// 결재 처리를 안한 내역
 		List<ApprovalMainNoCheckVo> noCheck = approvalService.noCheck(userName);
+		// 사용자와 관려된 모든 내역
+		HashMap<String, Object> totalList = approvalService.totalDoc(userName);
 		model.addAttribute("docList",list);
 		model.addAttribute("userTemplateList", userTemplateList);
 		model.addAttribute("templateList", templateList);
 		model.addAttribute("weekIgnore",weekIgnore);
 		model.addAttribute("noCheck", noCheck);
+		model.addAttribute("totalDoc", totalList);
+		
 		
 		return "/approval/approval_Main";
 	}
@@ -115,8 +119,11 @@ public class ApprovalController {
 	@RequestMapping(value="/approval/totalDoc.do")
 	@ResponseBody
 	public HashMap<String, Object> approvalMainTotal(Model model){
-		
-		return null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userName = authentication.getName();
+		HashMap<String, Object> list = approvalService.totalDoc(userName);
+		log.info("totalList : " + list);
+		return list;
 	}
 	 
 	@GetMapping("/approval/approval_send")
