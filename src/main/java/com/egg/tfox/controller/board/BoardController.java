@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.egg.tfox.service.board.BoardService;
 import com.egg.tfox.vo.board.GesiVO;
+import com.egg.tfox.vo.board.PageInfo;
 
 @Controller
 public class BoardController {
@@ -35,7 +36,9 @@ public class BoardController {
 								@RequestParam String gesi_code,
 								@RequestParam String searchType,
 								@RequestParam String typeKeyword,
-								HttpServletRequest req, Model model) {	
+								@RequestParam(value="nowPage", required=false)String nowPage, 
+								@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+								HttpServletRequest req, Model model, PageInfo pi) {	
 		
 		Map<String, Object> mapList = new HashMap<>();
 		mapList.put("startD", searchDate);
@@ -44,13 +47,25 @@ public class BoardController {
 		mapList.put("searchType", searchType);
 		mapList.put("keyword", typeKeyword);
 		
+		int total = service.countBoard(mapList);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		pi = new PageInfo(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
 		System.out.println(mapList);
 		
 		
 	
-		  List<GesiVO> gesiList; gesiList = service.selectList(mapList);
+		  List<GesiVO> gesiList; gesiList = service.selectList(mapList, pi);
 		  model.addAttribute("gesiList", gesiList);
+		  model.addAttribute("paging", pi);
 		  
 		  System.out.println(gesiList);
 		 

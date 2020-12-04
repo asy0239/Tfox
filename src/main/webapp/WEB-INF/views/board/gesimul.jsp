@@ -207,48 +207,24 @@ input[class=br]:radio+label {
 								</tr>
 							</c:forEach>
 						</table>
-						<%-- <div class="paging-area" align="center">
-							<button id="paging"
-							onclick="location.href='${applicationScope.contextPath}/gesiS.do?currentPage=1'"><<</button>
-							<c:if test="${ requestScope.pi.currentPage <= 1 }">
-								<button id="paging" disabled><</button>
+						<div class="paging-area" align="center">
+							<c:if test="${paging.startPage != 1 }">
+								<a href="/gesiS.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 							</c:if>
-
-							<c:if test="${ requestScope.pi.currentPage > 1 }">
-								<button id="paging"
-									onclick="location.href='${applicationScope.contextPath}/gesiS.do?currentPage=<c:out value="${ requestScope.pi.currentPage - 1 }"/>'"><</button>
-							</c:if>
-
-
-							<c:forEach var="p" begin="${ requestScope.pi.startPage }"
-							end="${ requestScope.pi.endPage }" step="1">
-							<c:if test="${ requestScope.pi.currentPage eq p }">
-								<button id="paging" disabled>
-									<c:out value="${ p }" />
-								</button>
-							</c:if>
-							<c:if test="${ requestScope.pi.currentPage ne p }">
-								<button id="paging"
-								onclick="location.href='${applicationScope.contextPath}/qnaList.rl?currentPage=<c:out value="${ p }"/>'">
-								<c:out value="${ p }" />
-								</button>
-							</c:if>
+							<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+								<c:choose>
+								<c:when test="${p == paging.nowPage }">
+									<b>${p }</b>
+								</c:when>
+								<c:when test="${p != paging.nowPage }">
+									<a href="/gesiS.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+								</c:when>
+								</c:choose>
 							</c:forEach>
-
-
-							<c:if test="${ requestScope.pi.currentPage >= requestScope.pi.maxPage }">
-								<button id="paging" disabled>></button>
+							<c:if test="${paging.endPage != paging.lastPage}">
+								<a href="/gesiS.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 							</c:if>
-
-							<c:if test="${ requestScope.pi.currentPage < requestScope.pi.maxPage }">
-								<button id="paging"
-								onclick="location.href='${applicationScope.contextPath}/qnaList.rl?currentPage=<c:out value="${ requestScope.pi.currentPage + 1 }"/>'">></button>
-							</c:if>
-
-						<button id="paging"
-						onclick="location.href='${applicationScope.contextPath}/qnaList.rl?currentPage=<c:out value="${ requestScope.pi.maxPage }"/>'">>></button>
-							
-						</div> --%>
+						</div>
 					</div>
 				</div>
 			</article>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.egg.tfox.entity.User;
 import com.egg.tfox.vo.board.GesiVO;
+import com.egg.tfox.vo.board.PageInfo;
 
 public interface BoardService {
 
@@ -12,6 +13,8 @@ public interface BoardService {
 
 	public List selectQnaList(String gesi_code);
 
-	public List<GesiVO> selectList(Map<String, Object> mapList);
+	public List<GesiVO> selectList(Map<String, Object> mapList, PageInfo pi);
+
+	public int countBoard(Map<String, Object> mapList);
 
 }
