@@ -24,19 +24,20 @@ public class Join {
 	public String join() {
 		return "webFront/join";
 	}
+	//가입하기
 	@PostMapping("/userinsert")
 	public String insert(@RequestParam String phone1,
 			@RequestParam String phone2,
 			@RequestParam String phone3,
 			@RequestParam String user_pwd1,
 			@RequestParam String user_pwd2,
-			@RequestParam String user_addr1,
-			@RequestParam String user_addr2,
-			@RequestParam String user_addr3,
+			@RequestParam String userAddress,
+			@RequestParam String AddressNum,
+			@RequestParam String AddressDetail,
 			User user) {
 		String phone = phone1+"-"+phone2+"-"+phone3;
 		String pwd = user_pwd1;
-		String user_addr = user_addr1 + " " + user_addr2 + " " + user_addr3;
+		String user_addr = userAddress + " " + AddressNum + " " + AddressDetail;
 		user.setPhone(phone);
 		user.setUser_pwd(pwd);
 		user.setUser_addr(user_addr);
@@ -47,13 +48,13 @@ public class Join {
 	}
 		
 		
-	
+	//아이디 체크
 
 	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
 	@ResponseBody
 	public String idCheck(@RequestParam Map<String, Object> param) {
-		String inputId = (String) param.get("checkId");
-		String checkResult = joinService.checkId(inputId);
+		String inputId = (String) param.get("userId");
+		String checkResult = joinService.userId(inputId);
 		System.out.println("checkResult : " + checkResult);
 		return checkResult;
 		

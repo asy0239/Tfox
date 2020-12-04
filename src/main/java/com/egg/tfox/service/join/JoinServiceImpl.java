@@ -16,10 +16,10 @@ public class JoinServiceImpl implements JoinService {
 	public void userJoin(User user) {
 		joinDao.userJoin(user);		
 	}
-
+	//아이디 체크
 	@Override
-	public String checkId(String inputId) {
-		String checkResult = joinDao.checkId(inputId);
+	public String userId(String inputId) {
+		String checkResult = joinDao.userId(inputId);
 		return checkResult;
 	}
 

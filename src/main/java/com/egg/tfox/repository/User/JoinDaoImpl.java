@@ -25,8 +25,8 @@ public class JoinDaoImpl implements JoinDao {
 	}
 	// 아이디 체크
 	@Override
-	public String checkId(String inputId) {
-		String checkResult = sqlSession.selectOne("User.checkId",inputId);
+	public String userId(String inputId) {
+		String checkResult = sqlSession.selectOne("User.userId",inputId);
 		return checkResult;
 	}
 }

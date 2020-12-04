@@ -6,6 +6,6 @@ public interface JoinDao {
 	//회원가입
 	void userJoin(User user);
 	// 아이디 체크
-	String checkId(String inputId);
+	String userId(String inputId);
   
 }
