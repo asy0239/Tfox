@@ -25,6 +25,7 @@ public class VacationController {
 	@Autowired
 	private VacationService vacationService;
 	
+	//휴가신청페이지
 	@GetMapping("/attendance/vacationRequest")
 	public String appendance(HttpServletRequest request,Model model) {
 		String id =((Employee) request.getSession().getAttribute("loginEmp")).getEMP_ID();
@@ -37,19 +38,20 @@ public class VacationController {
 		model.addAttribute("reqDay", vacaday);
 		model.addAttribute("deptname", deptname);
 		model.addAttribute("category", category);
-		System.out.println(vacaday);
+
 		return "/attendance/vacationRequest";
 	}
 	
-	@GetMapping("/attendance/test")
+	@GetMapping("/attendance/vacationMypage")
 	public String test() {
-		return "/attendance/test";
+		return "/attendance/vacationMypage";
 	}
 	@GetMapping("/attendance/vacationEdit")
 	public String vacationEdit() {
 		return "/attendance/vacationEdit";
 	}
 	
+	//휴가 승인리스트 보여주는곳
 	@GetMapping("/attendance/vacationRecong")
 	public String vacationRecong(Model model) {
 		List<Vacation> list = vacationService.selectList();
@@ -59,13 +61,10 @@ public class VacationController {
 		return "/attendance/vacationRecong";
 	}
 	
+	//insert구문
 	@PostMapping("/attendance/vacationInsert")
 	public String vacationInsert(@ModelAttribute VacationRequest vacRequest) {
-		System.out.println(vacRequest.getEmp_id());
-		System.out.println(vacRequest.getVactype_name());
-		System.out.println(vacRequest.getVacapl_reason());
-		System.out.println(vacRequest.getVacapl_end());
-		System.out.println(vacRequest.getVacapl_start());
+		vacationService.vacInsert(vacRequest);
 		return "redirect:/attendance/vacationRecong";
 	}
 }

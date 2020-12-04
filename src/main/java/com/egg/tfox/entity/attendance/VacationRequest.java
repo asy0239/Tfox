@@ -14,6 +14,7 @@ public class VacationRequest {
 	private String emp_id;
 	private String dept_name;
 	private String vactype_name;
+	private String vactype_id;
 	private Date vacapl_start;
 	private Date vacapl_end;
 	private String vacapl_reason;
