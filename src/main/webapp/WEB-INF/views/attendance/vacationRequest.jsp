@@ -32,7 +32,7 @@
 					<h2>휴가 신청</h2>
 					<hr>
 					<div class="subtitle">
-					<form method="post" action="vacationInsert">
+					<form method="post" action="vacationInsert" onsubmit="return call();">
 						<table>
 							<tbody>
 								<tr>
@@ -51,7 +51,7 @@
 								<tr>
 									<td>종류</td>
 									<td>
-										<select name="vactype_name">
+										<select id="typename" name="vactype_name">
 										<!-- 여기에다가 휴가 종류 불러와야함 -->
 										<c:forEach var="category" items="${category }">
 											<option value="${category }">${category}</option>
@@ -61,7 +61,7 @@
 								</tr>
 								<tr>
 									<td>휴가기간</td>
-									<td><input name="vacapl_start" type="date" required> - <input name="vacapl_end" type="date" required></td>
+									<td><input id="startdate" name="vacapl_start" type="date" required> - <input id="enddate" name="vacapl_end" type="date" required></td>
 								</tr>
 								<tr>
 									<td>사유</td>
@@ -81,47 +81,27 @@
 
 <script>
 
-/* function call()
+function call()
 {
-    var startdate = document.getElementById("#startdate").value;
-    var enddate = document.getElementById("#enddate").value;
-    var ar1 = sdd.split('-');
-    var ar2 = edd.split('-');
+
+	var reqDay = document.getElementById("reqDay").value;
+    var startdate = document.getElementById("startdate").value;
+    var enddate = document.getElementById("enddate").value;
+    var typename = document.getElementById("typename").value;
+    var ar1 = startdate.split('-');
+    var ar2 = enddate.split('-');
     var da1 = new Date(ar1[0], ar1[1], ar1[2]);
     var da2 = new Date(ar2[0], ar2[1], ar2[2]);
     var dif = da2 - da1;
     var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
- if(startdate && enddate){
-    document.getElementById('days').value = parseInt(dif/cDay) + 1
+    var calDay = reqDay - parseInt(dif/cDay) + 1;
+    console.log(calDay);
+ if (typename == "연차"){
+ 	if (calDay < 0){
+	 	alert("남은 연차수보다 휴가 신청기간이 깁니다 조정해주세요.");
+	 	return false;
+ 	}
  }
 }
-$("#confirm").click(function(){
-	var name = $("#name").val();
-	var deptname = $("#deptname").val();
-	var reqDay = $("#reqDay").val();
-	var category = $("#category").val();
-	var startdate = $("#startdate").val();
-	var enddate = $("#enddate").val();
-
-	console.log(enddate);
-	console.log(startdate);
-	
-	console.log(enddate - startdate);
-  $.ajax({
-         url: "requestObject",
-         type: "POST",
-         data: name:name,
-         dataType:"json"
-         success: function(data){
-             $('#result').text(data);
-         },
-         error: function(){
-             alert("simpleWithObject err");
-         }
-     }); 
-}); */
-
-
-
 </script>
 </html>

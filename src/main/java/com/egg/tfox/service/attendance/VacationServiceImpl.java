@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.egg.tfox.entity.attendance.Vacation;
+import com.egg.tfox.entity.attendance.VacationRequest;
 import com.egg.tfox.repository.attendance.VacationDao;
 
 @Service
@@ -32,5 +33,17 @@ public class VacationServiceImpl implements VacationService {
 	public List<String> vacCategory() {
 		return vacationDao.vacCategory();
 	}
+
+	
+
+	@Override
+	public void vacInsert(VacationRequest vacRequest) {
+		// TODO Auto-generated method stub
+		 vacationDao.vacInsert(vacRequest);
+	}
+
+
+		
+	
 	
 }

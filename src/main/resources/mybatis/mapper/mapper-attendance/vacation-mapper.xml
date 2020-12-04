@@ -55,18 +55,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="deptname" resultType="String">
 		SELECT
 		D.DEPT_NAME
-		FROM DEPARTMENT D
+		FROM
+		DEPARTMENT D
 		JOIN EMPLOYEE E ON (D.DEPT_ID = E.DEPT_ID)
 		WHERE
-		EMP_ID = #{id}
+		EMP_ID =
+		#{id}
 	</select>
 
-	<select id="category" resultType="String"> 
+	<select id="category" resultType="String">
 		SELECT
 		VACTYPE_NAME
 		FROM VACTYPE
 		WHERE VACTYPE_YN = 'Y'
 	</select>
+
+	<select id="catetype" resultType="String">
+		SELECT
+			VACTYPE_ID
+		FROM VACTYPE
+		WHERE VACTYPE_NAME = #{vactype_name}
+	</select>
+	<insert id="vacinsert" parameterType="com.egg.tfox.entity.attendance.VacationRequest">
+		Insert into VACAPPLY
+		(VACAPL_ID
+		,VACTYPE_ID
+		,EMP_ID
+		,VACAPL_START
+		,VACAPL_END
+		,VACAPL_APPDATE
+		,VACAPL_REASON
+		,VACAPL_STATUS)
+		values
+		('VC'||TRIM(TO_CHAR(SEQ_VACAPLID.nextval,'000000'))
+		,#{vactype_id}
+		,#{emp_id}
+		,to_date(#{vacapl_start}, '/RR/MM/DD')
+		,to_date(#{vacapl_end}, '/RR/MM/DD')
+		,DEFAULT
+		,#{vacapl_reason}
+		,'승인대기중')
+
+	</insert>
 </mapper>
 
 

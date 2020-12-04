@@ -98,13 +98,13 @@ font {
 								<div class="leftvacset">
 									<h4 class="vacsubTitle">휴가 생성 조건</h4>
 									<ul class="mgb_10">
-										<li class="gt-pv-5">- 설정한 휴가 생성 기준으로 매년 생성일자(회계연도 기준) 또는
+										<li>- 설정한 휴가 생성 기준으로 매년 생성일자(회계연도 기준) 또는
 											사용자 입사일(입사일 기준)에 휴가가 자동 생성됩니다.</li>
-										<li class="gt-pv-5">- 조직에 속하지 않거나 입사일이 없는 사용자는 휴가가 생성되지
+										<li>- 조직에 속하지 않거나 입사일이 없는 사용자는 휴가가 생성되지
 											않습니다.</li>
-										<li class="gt-pv-5">- 사용하던 휴가 생성 기준을 변경 적용하는 경우, 기존 휴가
+										<li>- 사용하던 휴가 생성 기준을 변경 적용하는 경우, 기존 휴가
 											데이터는 초기화됩니다. (기존 휴가 생성분 삭제 및 새 기준에 맞추어 재생성)</li>
-										<li class="gt-pv-5">- 적용 전 입력한 휴가 생성 조건에 따라 생성될 전직원 생성
+										<li>- 적용 전 입력한 휴가 생성 조건에 따라 생성될 전직원 생성
 											예정휴가를 다운로드받아보실 수 있습니다.</li>
 									</ul>
 								</div>
@@ -278,7 +278,7 @@ font {
 									<button id="addVacCate">추가</button>
 									</a>
 								</div>
-								<table class="tableType01 gon" id="vcTypeTable">
+								<table class="tablevactype" id="vcTypeTable">
 									<caption>휴가 종류 목록으로 휴가명, 사용 여부, 차감 여부로 구성되어 있습니다.</caption>
 									<colgroup>
 										<col width="20%">
