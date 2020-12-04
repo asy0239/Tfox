@@ -24,7 +24,7 @@
 	
 	</insert>
 	
-	<select id="checkId" resultType="string" parameterType="string">
+	<select id="userId" resultType="string" parameterType="string">
 		select count(*) from user_table
 		where user_loginId = #{inputId}
 	</select>
