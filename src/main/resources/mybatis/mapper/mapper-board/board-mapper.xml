@@ -17,6 +17,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE USER_ID=#{user_loginid}
 		AND USER_PWD=#{user_pwd} 
 	</select>
+	
+	<select id="countBoard" resultType="int" parameterType="map">
+		SELECT COUNT(*)
+		FROM (SELECT G.GESI_ID
+     	 	   					,G.GESI_TITLE
+      		   					,G.GESI_CONTENT
+      	       					,G.GESI_DATE
+      		   					,G.GESI_STATUS
+      		   					,G.GESI_ANSDATE
+      		   					,G.GESI_ANSCONTENT
+               					,G.USER_ID
+      		   					,U.USER_NAME
+      		   					,G.GESI_CODE
+      		   					,T.GESI_NAME 
+      						FROM GESI G
+      						JOIN GESITYPE T ON T.GESI_CODE = G.GESI_CODE
+        					JOIN USER_TABLE U ON U.USER_ID = G.USER_ID
+        					<where>
+        						<if test="startD != null and startD != ''
+        			 			 and endD != null and endD != ''">
+        							<![CDATA[
+									AND G.GESI_DATE >= #{startD} 
+									AND G.GESI_DATE <= #{endD}
+									]]>
+        						</if>
+        	
+        						<if test="gesi_code != null and gesi_code != ''">
+        							AND G.GESI_CODE = #{gesi_code}
+        						</if>
+        	
+        						<if test="searchType == 'gesi_title'
+        						and keyword != null and keyword != '' ">
+        							AND INSTR(G.GESI_TITLE, #{keyword}) > 0 
+        						</if>
+        	
+        						<if test="searchType == 'gesi_content'
+        						and keyword != null and keyword != '' ">
+        							AND INSTR(G.GESI_CONTENT, #{keyword}) > 0 
+        						</if>
+        	
+        						<if test="searchType == 'user_name'
+        						and keyword != null and keyword != '' ">
+        							AND INSTR(U.USER_NAME, #{keyword}) > 0 
+        						</if>
+        					</where>)
+		
+	</select>
 
 	<select id="gesiList" resultType="com.egg.tfox.vo.board.GesiVO" parameterType="map">
 		SELECT RN
@@ -86,6 +133,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         						</if>
         					</where>
         					ORDER BY G.GESI_DATE DESC) A)
-      
+      		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 </mapper>

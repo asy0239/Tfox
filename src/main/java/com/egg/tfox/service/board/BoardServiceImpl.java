@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.egg.tfox.entity.User;
 import com.egg.tfox.repository.Board.BoardDao;
 import com.egg.tfox.vo.board.GesiVO;
+import com.egg.tfox.vo.board.PageInfo;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -22,15 +23,21 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<GesiVO> selectList(Map<String, Object> mapList) {
+	public List<GesiVO> selectList(Map<String, Object> mapList, PageInfo pi) {
 		// TODO Auto-generated method stub
-		return dao.selectList(mapList);
+		return dao.selectList(mapList,pi);
 	}
 
 	@Override
 	public List selectQnaList(String gesi_code) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		return null;
+	}
+
+	@Override
+	public int countBoard(Map<String, Object> mapList) {
+		// TODO Auto-generated method stub
+		return dao.countBoard(mapList);
 	}
 
 
