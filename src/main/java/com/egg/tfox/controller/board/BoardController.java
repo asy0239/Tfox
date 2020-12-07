@@ -15,14 +15,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.egg.tfox.service.board.BoardService;
+import com.egg.tfox.service.board.QnaService;
 import com.egg.tfox.vo.board.GesiVO;
 import com.egg.tfox.vo.board.PageInfo;
+import com.egg.tfox.vo.board.QnaListVO;
 
 @Controller
 public class BoardController {
 	
 	@Autowired
-	private BoardService service;
+	private BoardService boardService;
+	
+	@Autowired
+	private QnaService qnaService;
 
 	@GetMapping("/board/gesimul")
 	public String gesimul(){
@@ -47,7 +52,7 @@ public class BoardController {
 		mapList.put("searchType", searchType);
 		mapList.put("keyword", typeKeyword);
 		
-		int total = service.countBoard(mapList);
+		int total = boardService.countBoard(mapList);
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "5";
@@ -60,33 +65,34 @@ public class BoardController {
 		pi = new PageInfo(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
 		System.out.println(mapList);
-		
-		
 	
-		  List<GesiVO> gesiList; gesiList = service.selectList(mapList, pi);
+		  List<GesiVO> gesiList; gesiList = boardService.selectList(mapList, pi);
 		  model.addAttribute("gesiList", gesiList);
 		  model.addAttribute("paging", pi);
 		  
 		  System.out.println(gesiList);
-		 
 
 		return "board/gesimul";
 	}
 
 	@RequestMapping(value="/gesi.web", method = RequestMethod.GET)
 	public String gesiWebList(@RequestParam String gesi_code, 
-								HttpServletRequest req, Model model) {
+								HttpServletRequest req, Model model, PageInfo pi) {
 		System.out.println(gesi_code);
 		
 		String webURL = null;
-		List gesiWebList;
+		
 		
 		if(gesi_code.equals("GS001")) {
-			gesiWebList = service.selectQnaList(gesi_code);
+			List<QnaListVO> gesiWebList = qnaService.selectQnaList(gesi_code);
+			
+			model.addAttribute("qnaList", gesiWebList);
+			System.out.println(gesiWebList);
+			
 			webURL="webFront/center";
 		}else if(gesi_code.equals("GS002")) {
 			
-			webURL="webFront/center";
+			webURL="webFront/review";
 		}
 		
 		return webURL;

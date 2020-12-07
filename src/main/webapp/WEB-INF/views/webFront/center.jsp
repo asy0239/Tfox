@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,6 @@
 					<th colspan="6" align="center" class="gesiListBtn"></th>
 				</tr>
 				<tr class="listName">
-					<th><input type="checkbox"></th>
 					<th class="qnaAnsYn">번호</th>
 					<th class="qnaNote">분류</th>
 					<th class="qnaDate">제목</th>
@@ -30,19 +30,19 @@
 					<th class="qnaDate">작성자</th>
 				</tr>
 				<!-- 목록 출력 -->
+				<%-- <c:forEach var="qna" items="${ qnaList}">
 				<tr>
-					<td></td>
-					<td></td>
+					<td><c:out value="" /></td>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
 				</tr>
-				
+				</c:forEach> --%>
 			</table>
 		</div>
 		<div>
-			<button>글쓰기</button>
+			<button type="button" onclick="location.href='${pageContext.request.contextPath }/webFront/QnaInsert'">글쓰기</button>
 		</div>
 
 	</div>
