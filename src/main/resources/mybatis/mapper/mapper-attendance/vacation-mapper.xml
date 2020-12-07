@@ -97,6 +97,77 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		,'승인대기중')
 
 	</insert>
+	
+	<select id="AllreqDay" resultType="Integer">
+		SELECT
+		TO_DATE(TO_CHAR(V.VACAPL_END, 'YYYYMMDD')) - TO_DATE(V.VACAPL_START)+1
+		FROM VACAPPLY V
+		JOIN VACTYPE VT ON (VT.VACTYPE_ID = V.VACTYPE_ID)
+		WHERE
+		EMP_ID = #{id}
+		AND VACAPL_STATUS = '승인'
+	</select>
+	 
+	<select id="myList" resultType="vacationVo">
+	        		SELECT
+		VC.VACAPL_ID
+		,
+		VT.VACTYPE_NAME
+		, E.EMP_NAME
+		, VC.VACAPL_START
+		, VC.VACAPL_END
+		,
+		VC.VACAPL_APPDATE
+		, VC.VACAPL_REASON
+		, VC.VACAPL_STATUS
+		, D.DEPT_NAME
+		FROM VACAPPLY VC
+		JOIN VACTYPE VT ON (VT.VACTYPE_ID = VC.VACTYPE_ID)
+		JOIN EMPLOYEE E ON (vc.emp_id = e.emp_id)
+		JOIN DEPARTMENT D ON
+		(E.DEPT_ID = D.DEPT_ID)
+        where vc.emp_id = #{id}
+		ORDER BY VACAPL_APPDATE DESC
+	</select>
+	
+	<select id="ctday" resultType="String">
+			SELECT
+		SUM(TO_DATE(TO_CHAR(V.VACAPL_END, 'YYYYMMDD')) - TO_DATE(V.VACAPL_START)+1) 
+		FROM VACAPPLY V
+		JOIN VACTYPE VT ON (VT.VACTYPE_ID = V.VACTYPE_ID)
+		WHERE EMP_ID = #{id}
+        AND VACAPL_STATUS = '승인'
+		AND VACTYPE_NAME = #{category}
+	</select>
+	<select id="loadOnOff" resultType="com.egg.tfox.entity.attendance.VacationSet">
+		SELECT 
+   			 CORP_ID
+  			, VAC_YN
+ 			, VAC_CREATE
+  			, VAC_DATE
+		FROM VACATIONSET
+	</select>
+	<update id="vacOnOff">
+	 UPDATE VACATIONSET
+			SET VAC_YN = #{vacOnOff}
+			WHERE CORP_ID = COR001
+	</update>
+	<select id="vcsday" resultType="com.egg.tfox.entity.attendance.VacationSet">
+	SELECT
+    	YEAR_ID
+  	  , YEAR_DAY
+	  FROM YEAR_MANAGE
+	</select>
+	
+	<select id="setVacCate" resultType="com.egg.tfox.entity.attendance.VacationSet">
+	SELECT
+        VACTYPE_ID
+      , VACTYPE_NAME
+      , VACTYPE_YN
+      , VACTYPE_YEARYN
+   FROM VACTYPE
+	
+	</select>
 </mapper>
 
 
