@@ -62,7 +62,7 @@ pageEncoding="UTF-8"/>
                         <a href="#">유저관리</a>
                     </div>
                     <ul class="hideShow side "> 
-                        <li><a href="${pageContext.request.contextPath }/user">유저관리</a></li>
+                        <li><a href="${pageContext.request.contextPath }/user/userMain">유저관리</a></li>
                         
                     </ul>
         
