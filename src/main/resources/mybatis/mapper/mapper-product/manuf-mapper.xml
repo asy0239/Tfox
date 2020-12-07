@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	mapper라는 영역 안에 구문을 작성한다.
+	- namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) 
+ -->
+<mapper namespace="manuf">
+<insert id="add" parameterType="manuf">
+	insert into manufactur 
+	values(#{manu_name} , #{manu_ceo})
+</insert>	
+
+</mapper>

@@ -13,7 +13,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 
 		<typeAlias type="com.egg.tfox.entity.Employee" alias="employee"/>
-
+		<typeAlias type="com.egg.tfox.entity.Manuf" alias="manuf"/>
+		<typeAlias type="com.egg.tfox.entity.Supplier" alias="sup"/>
+		
 		<typeAlias type="com.egg.tfox.vo.approval.ApprovalMainVo" alias="approvalMainVo"/>
 		<typeAlias type="com.egg.tfox.vo.approval.ApprovalMainNoCheckVo" alias="approvalMainNoCheckVo"/>
 		<typeAlias type="com.egg.tfox.entity.attendance.Vacation" alias="vacationVo"/>
