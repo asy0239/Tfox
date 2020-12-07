@@ -1,19 +1,21 @@
 package com.egg.tfox.controller.approval;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.egg.tfox.entity.Employee;
-import com.egg.tfox.entity.approval.ApprovalDoc;
 import com.egg.tfox.entity.approval.TemplateEntity;
+import com.egg.tfox.service.approval.ApprovalEditService;
 import com.egg.tfox.service.approval.ApprovalService;
 import com.egg.tfox.service.approval.TemplateService;
+import com.egg.tfox.vo.approval.ApprovalEditDocVo;
+import com.egg.tfox.vo.approval.ApprovalEditEmpVo;
 import com.egg.tfox.vo.approval.ApprovalMainNoCheckVo;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
 
@@ -39,9 +43,16 @@ public class ApprovalController {
 	
 	@Autowired
 	private TemplateService templateService;
+	
+	@Autowired
+	private ApprovalEditService approvalEditService;
 	// 새 결재 문서 작성 페이지로 이동
 	@GetMapping("/approval/approval_edit")
-	public String appWrite() {
+	public String appWrite(HttpServletRequest request , Model model) {
+		HttpSession session = request.getSession();
+		Employee emp = (Employee) session.getAttribute("loginEmp");		
+		String searchEmpList = approvalEditService.searchEmpList(emp.getEMP_ID());
+		model.addAttribute("empList",searchEmpList);
 		return "/approval/approval_edit";
 	}
 	
@@ -54,17 +65,33 @@ public class ApprovalController {
 	// 입력한 결재 문서 확인 페이지, test임
 	@PostMapping("/approval/readTemplate")
 	public String readTemplate(
-			@RequestParam String htmlcontent,
-			@RequestParam String doc_type,
 			HttpServletRequest request,
 			Model model) {
-		String template = htmlcontent;
-		String docType = doc_type;
-		System.out.println("request :"+ request.getParameter("htmlcontent"));
-//		System.out.println(template);
-		model.addAttribute("template", template);
-		model.addAttribute("docType", docType);
-		return "/approval/readTemplate";
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userName = authentication.getName();	
+		String app_title = request.getParameter("inputTitle");
+		String app_content = request.getParameter("htmlcontent");
+		String temp_name = request.getParameter("doc_type");
+		String soosin_empId = request.getParameter("soosin_empId");
+		String player_empId = request.getParameter("player_empId");
+		String final_empId = request.getParameter("final_empId");
+		
+		ApprovalEditDocVo appDoc = ApprovalEditDocVo.builder()
+		// app_doc
+		.app_title(app_title)
+		.emp_name(userName)
+		.app_excu_id(player_empId)
+		.app_content(app_content)
+		.app_status("전송")
+		.temp_name(temp_name)
+		// app_ref
+		.ref_emp_id(soosin_empId)
+		.approval_emp_id(final_empId).build();
+		
+		approvalEditService.insertAppDoc(appDoc);
+		
+		
+		return "redirect:/approval/approval_Main";
 	}
 	
 	// 전자결재 메인 페이지로 이동 
@@ -95,6 +122,8 @@ public class ApprovalController {
 		
 		return "/approval/approval_Main";
 	}
+
+	
 	
 	@RequestMapping(value="/approval/weekIgnore.do" , method = RequestMethod.GET)
 	@ResponseBody
@@ -112,7 +141,6 @@ public class ApprovalController {
 		String userName = authentication.getName();
 		
 		List<ApprovalMainNoCheckVo> list = approvalService.noCheck(userName);
-		log.info("list : " + list);
 		return list;
 	}
 	
@@ -122,7 +150,6 @@ public class ApprovalController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userName = authentication.getName();
 		HashMap<String, Object> list = approvalService.totalDoc(userName);
-		log.info("totalList : " + list);
 		return list;
 	}
 	 

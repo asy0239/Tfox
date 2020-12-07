@@ -88,9 +88,8 @@
 							<span>전체 결재 내역 보기</span>
 						</div>
 					</div>
-					<c:forEach var="doc" items="${totalDoc['sendList']}" begin='0' end= '6'>
+					<%-- <c:forEach var="doc" items="${totalDoc['sendList']}">
 							<div id="sec_box_lg">
- 								<%-- <div>${docMap['emp_id']}</div> --%>
 								<div>
 									<c:choose>
 										<c:when test="${doc['temp_id'] eq 'TMP001'}">
@@ -123,7 +122,7 @@
 								</div>
 								<div>${doc['app_date'] }</div>
 								</div>
-						</c:forEach>
+						</c:forEach> --%>
 					</div>
 					<div id="pageNumber">
 					</div>
@@ -137,22 +136,30 @@
 			location.href = "approval_edit";
 		}
 		
+		
+		// 페이지 넘길시 발생하는 이벤트
+		$(document).on('click','.choice',function(){
+			var id_check = $(this).attr("id");		
+			var choice_category = $(".category").attr("id");
+			if(choice_category == 'Ignore') {
+				weekIgnore(id_check);
+			}
+			if(choice_category == 'noCheck'){
+				noCheck(id_check);
+			}
+			if(choice_category == 'total'){
+				totalDoc(id_check);
+			}
+		});
+		
+		// 페이지 시작 시 실행하는 함수
 		$(document).ready(function() {
-			var sendList = ${docList.size()};
-			var weekIgnore = ${totalDoc['refList'].size()};
-			var noCheck = ${noCheck.size()};
-			var total = sendList + weekIgnore + noCheck;
-			if(${docList.size()} == 0) {
-				$("#sec_area").append('<div id="sec_box_lg" class="nullDoc">조회된 내역이 없습니다.</div>')
-			} else {
-				$("#sec_area").css("grid-template-rows", "repeat("+sendList+" ,140px)")				
-			};
-			$("#total").text(total +"건");
-			
+			var id = 0;
+			totalDoc(0);
 		});
 		
 		// 7일간 안본 문서 내역 보기
- 		function weekIgnore(){
+ 		function weekIgnore(id){
 			$.ajax({
 				type:"GET",
 				url:"${pageContext.request.contextPath}/approval/weekIgnore.do",
@@ -164,24 +171,36 @@
 					var noCheck = ${noCheck.size()};
 					var total = sendList + ref + noCheck;
 					$("#sec_area").html('');
+					$("#pageNumber").html('');
+					var data = paging(data);
 					if(data.length == 0){
 						$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")
+					} else {
+						$("#sec_area").css("grid-template-rows", "repeat("+data.length+" ,130px)")									
 					}
-					$("#sec_area").css("grid-template-rows", "repeat("+data.length+" ,140px)")				
-					/* $("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>0건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>0건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">2건</span> <span>전체 결재 내역 보기</span> </div> </div> <c:forEach var="doc" items="${data.weekIgnore }"> <div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq 'TMP001'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP002'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP003'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>${doc.temp_title }</div> <div>${doc.app_title }</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>${doc.emp_name }</p> <p>${doc.dept_name }</p> </div> <div>${doc.app_date }</div> </div> </c:forEach> </div>'); */
-					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>'+data.length+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>'+noCheck+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">'+total+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
+					if(!id) {
+						id = 0;
+					}
+					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div class="category" id="Ignore"> <span>'+data.length+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div id="noCheck"> <span>'+noCheck+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div id="total"> <span style="color: purple">'+total+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
 					if(data.length == 0) {
 						$("#sec_area").append('<div id="sec_box_lg" class="nullDoc">조회된 내역이 없습니다.</div>')
 					} else {
-						$.each(data,function(index, doc){
+						if(data.length < 5) {
+							$.each(data,function(index, doc){
 								$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.emp_name+'</p> <p>'+doc.dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')							
-						})
+							})
+						} else {
+							$.each(data[id],function(index, doc){
+								$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.emp_name+'</p> <p>'+doc.dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')							
+							})
+							
+						}
 					}
 				}
 			});
 		};
 		// 결재하지 않은 결재
-		function noCheck(){
+		function noCheck(id){
 			$.ajax({
 				type:"GET",
 				url:"${pageContext.request.contextPath}/approval/noCheck.do",
@@ -192,30 +211,42 @@
 					var ref = ${totalDoc['refList'].size()};
 					var noCheck = ${noCheck.size()};
 					var total = sendList + ref + noCheck;
-					console.log(noCheck);
 					$("#sec_area").html('');
-					/* $("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>0건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>0건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">2건</span> <span>전체 결재 내역 보기</span> </div> </div> <c:forEach var="doc" items="${data.weekIgnore }"> <div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq 'TMP001'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP002'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP003'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>${doc.temp_title }</div> <div>${doc.app_title }</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>${doc.emp_name }</p> <p>${doc.dept_name }</p> </div> <div>${doc.app_date }</div> </div> </c:forEach> </div>'); */
+					$("#pageNumber").html('');
+					var data = paging(data);
+					console.log("noCheck : " + data[0]);
 					if(noCheck == 0) {
 						$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")				
 					} else {
-						$("#sec_area").css("grid-template-rows", "repeat("+noCheck+" ,140px)")
+						$("#sec_area").css("grid-template-rows", "repeat("+noCheck+" ,130px)")
 					}
-					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>'+${weekIgnore.size()}+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>'+noCheck+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">'+total+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
+					if(!id) {
+						id = 0;
+					}
+					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div id="Ignore"> <span>'+${weekIgnore.size()}+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div class="category" id="noCheck"> <span>'+noCheck+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div id="total"> <span style="color: purple">'+total+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
 					if(data.length == 0) {
 						$("#sec_area").append('<div id="sec_box_lg" class="nullDoc">조회된 내역이 없습니다.</div>')
 					} else {
-						$.each(data,function(index, doc){
-								$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.send_temp_title+'</div> <div>'+doc.send_app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.send_app_date)+'</div> </div>')							
-						})
+						if(data.length < 5) {
+							$.each(data,function(index, doc){
+									$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.send_temp_title+'</div> <div>'+doc.send_app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')							
+							})
+							
+						} else {
+							$.each(data[id],function(index, doc){
+								$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.send_temp_title+'</div> <div>'+doc.send_app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')							
+							})
+						}
 					}
 				}
 			});
 		};
 		
 		// 로그인한 계정의 관련된 모든 문서들을 볼 수 있다.
-		function totalDoc(){
+		function totalDoc(id){
 			$.ajax({
 				type:"GET",
+				data: {choice : "choice"},
 				url:"${pageContext.request.contextPath}/approval/totalDoc.do",
 				dataType:"json",
 				success:function(data) {
@@ -225,44 +256,50 @@
 					var noCheck = ${noCheck.size()};
 					var total = sendList + ref + noCheck;
 					var total_doc = sortDate(data); // 페이징할 데이터
-					var dataPerpage = 10; // 한 페이지에 나타낼 데이터 수
-					var pageCount = 5; // 한 화면에 나올 페이지 수
 					$("#sec_area").html('');
 					/* $("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>0건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>0건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">2건</span> <span>전체 결재 내역 보기</span> </div> </div> <c:forEach var="doc" items="${data.weekIgnore }"> <div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq 'TMP001'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP002'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP003'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>${doc.temp_title }</div> <div>${doc.app_title }</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>${doc.emp_name }</p> <p>${doc.dept_name }</p> </div> <div>${doc.app_date }</div> </div> </c:forEach> </div>'); */
-					$("#sec_area").css("grid-template-rows", "repeat("+total+" ,140px)")				
-					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>'+${weekIgnore.size()}+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>'+noCheck+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">'+total+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
-					// 페이징 버튼 추가
-					if(pageNumber > 1) {
-						var arr = pagingNumDef(pageNumber);
-						for(var i = 0; i < arr.length; i++) {
-							console.log(i);
-							$("#pageNumber").append('<a class="choice" id="'+i+'">'+arr[i]+'</a>');
-						}
+					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div id="Ignore"> <span>'+${weekIgnore.size()}+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div id="noCheck"> <span>'+noCheck+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div class="category" id="total"> <span style="color: purple">'+total+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
+					if(!id) {
+						id = 0;
 					}
-					
-					$(".choice").bind('click' , function(){
-						console.log($(this).attr('id'));
-						pageChoice = $(this).attr('id');
-						
-					});
-					
-					if(total_doc.length == 0) {
+					var pagingData = paging(total_doc);
+					if(pagingData.length == 0) {
+						$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")				
+					} else if(pagingData.length <= 5){
+						$("#sec_area").css("grid-template-rows", "repeat("+	pagingData.length+" ,130px)")
+					} else {
+						$("#sec_area").css("grid-template-rows", "repeat("+	7+" ,130px)")
+					}				
+					if(pagingData.length == 0) {
 						$("#sec_area").append('<div id="sec_box_lg" class="nullDoc">조회된 내역이 없습니다.</div>')
 					} else {
-						$.each(total_doc,function(index, doc){
-							if(!doc.emp_id && !doc.approver_id) {
-								// ref 행을 위한 if
-								console.log("ref 실행");
-								$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')
-							} else if(!doc.approver_id && !doc.ref_emp_id){
-								// sendList 행을 위한 if
-								$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.emp_name+'</p> <p>'+doc.dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')															
-							} else if(!doc.ref_emp_id && !doc.emp_id) {
-								// noCheckList 행을 위한 if
-								console.log("nocheck 실행");
-								$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.send_temp_title+'</div> <div>'+doc.send_app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')
-							}	
-						})
+						if(pagingData.length <= 5) {
+							$.each(pagingData , function(index, doc){
+								if(!doc.emp_id && !doc.approver_id) {
+									// ref 행을 위한 if
+									$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')
+								} else if(!doc.approver_id && !doc.ref_emp_id){
+									// sendList 행을 위한 if
+									$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.emp_name+'</p> <p>'+doc.dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')															
+								} else if(!doc.ref_emp_id && !doc.emp_id) {
+									// noCheckList 행을 위한 if
+									$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.send_temp_title+'</div> <div>'+doc.send_app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')
+								}	
+							})
+						} else {
+							$.each(pagingData[id] , function(index, doc){
+								if(!doc.emp_id && !doc.approver_id) {
+									// ref 행을 위한 if
+									$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')
+								} else if(!doc.approver_id && !doc.ref_emp_id){
+									// sendList 행을 위한 if
+									$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.emp_name+'</p> <p>'+doc.dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')															
+								} else if(!doc.ref_emp_id && !doc.emp_id) {
+									// noCheckList 행을 위한 if
+									$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.send_temp_title+'</div> <div>'+doc.send_app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')
+								}	
+							})
+						}
 					}
 					
 					
@@ -272,8 +309,25 @@
 			});
 		};
 		
-		function pagingData(data , pageNumber , idx) {
-			
+		function paging(data) {
+			var pageCount = Math.floor(data.length/5); // 한 화면에 나올 페이지 수 5개의 데이터를 보여줌
+			var result = [];
+			if(data.length < 6) {
+				return data;
+			}
+			// 페이징 버튼 추가
+			if(pageCount > 1) {
+				var arr = pagingNumDef(pageCount);
+				$("#pageNumber").html("");
+				for(var i = 0; i < arr.length; i++) {
+					$("#pageNumber").append('<a class="choice" id="'+i+'">'+arr[i]+'</a>');
+				}
+			}
+			// 5개 씩 나눔
+			for(var i = 0; i <= pageCount; i++) {
+				result.push(data.splice(0,5));
+			}
+			return result;
 		}
 		
 		// 페이징 카운트
@@ -297,6 +351,11 @@
 			});
 			
 			return total;
+		}
+		
+		// 날짜 정렬 최신순(onload)
+		function sortDateMain(data) {
+			console.log(data);
 		}
 		
 		// 날짜 데이터 포맷팅 함수

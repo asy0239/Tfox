@@ -26,103 +26,8 @@
 	</div>
 	
 	<script>
-			var employeeName = [
-		    {
-		        "language": "jQuery",
-		        "value": 122
-		    },
-		    {
-		        "language": "AngularJS",
-		        "value": 132,
-		        "disabled": true
-		    },
-		    {
-		        "language": "ReactJS",
-		        "value": 422
-		    },
-		    {
-		        "language": "VueJS",
-		        "value": 232
-		    },
-		    {
-		        "language": "JavaScript",
-		        "value": 765
-		    },
-		    {
-		        "language": "Java",
-		        "value": 876
-		    },
-		    {
-		        "language": "Python",
-		        "value": 453
-		    },
-		    {
-		        "language": "TypeScript",
-		        "value": 125,
-		        "selected": true
-		    },
-		    {
-		        "language": "PHP",
-		        "value": 633
-		    },
-		    {
-		        "language": "Ruby on Rails",
-		        "value": 832
-		    }
-		];
-
-		var groupData = [
-		    {
-		        "groupName": "JavaScript",
-		        "groupData": [
-		            {
-		                "employeeName": "jQuery",
-		                "value": 122
-		            },
-		            {
-		                "employeeName": "AngularJS",
-		                "value": 643
-		            },
-		            {
-		                "employeeName": "ReactJS",
-		                "value": 422
-		            },
-		            {
-		                "employeeName": "VueJS",
-		                "value": 622
-		            }
-		        ]
-		    },
-		    {
-		        "groupName": "Popular",
-		        "groupData": [
-		            {
-		                "employeeName": "JavaScript",
-		                "value": 132
-		            },
-		            {
-		                "employeeName": "Java",
-		                "value": 112
-		            },
-		            {
-		                "employeeName": "Python",
-		                "value": 124
-		            },
-		            {
-		                "employeeName": "TypeScript",
-		                "value": 121
-		            },
-		            {
-		                "employeeName": "PHP",
-		                "value": 432
-		            },
-		            {
-		                "employeeName": "Ruby on Rails",
-		                "value": 421
-		            }
-		        ]
-		    }
-		];
+		var emp = '${empList}';
+		var empJson = JSON.parse(emp);
 			var settings3 = {
 				    // data item name
 				    itemName: "employeeName",
@@ -139,24 +44,31 @@
 				    // search placeholder text
 				    searchPlaceholderText: "search",
 				    // items data array
-				    dataArray: employeeName,
+				    dataArray: empJson,
 				    // group data array
-				    groupDataArray: groupData,
+				    groupDataArray: empJson,
 				    callable: function (items) {
 				      // your code
 				      var choiceValue = "";
+				      var choiceValueId = "";
 				      for(var i = 0; i < items.length; i++) {
 				    	  if(i==0) {
-				    		  choiceValue += items[i].employeeName;		    		  
+				    		  choiceValue += items[i].employeeName;	
+				    		  choiceValueId += items[i].value;
 				    	  } else {
 				    		  choiceValue += ", ";
-					    	  choiceValue += items[i].employeeName;		 	    		  
+				    		  choiceValueId += ", ";
+					    	  choiceValue += items[i].employeeName;		
+					    	  choiceValueId += items[i].value;
 				    	  }
 				      }
 			    	  var finalApp = choiceValue;
+			    	  var finalAppId = choiceValueId;
 			    	  $(".finalApp").attr('value' , finalApp);
+			    	  $("#finalAppHidden").attr('value', finalAppId);
 			    	  
 					  choiceValue = "";
+					  choiceValueId = "";
 					  
 				    }
 				};

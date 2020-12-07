@@ -177,4 +177,34 @@ from (select
 	where send_emp_id = send_emp.emp_id
 	and send_emp.dept_id = dept.dept_id
 	</select>
+	
+	<insert id="insertDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+		insert into approval_doc
+		values (('AP'||TRIM(TO_CHAR(SEQ_APPID.currval),'000000')),
+		        #{emp_id}, #{app_title}, #{app_excu_id}, sysdate,
+		        #{app_content}, #{app_status}, null , #{temp_id})
+	</insert>
+	
+	<insert id="insertRefDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+		insert into approval_reference
+		values (#{app_id},#{ref_emp_id}, ('AR'||TRIM(TO_CHAR(SEQ_APREFID.currval),'000000'))		
+	</insert>
+	
+	<select id="selectTempId" resultType="string" parameterType="string">
+		select temp_id from template where temp_title = #{temp_title}
+	</select>
+	<select id="selectEmpId" resultType="string" parameterType="string">
+		select emp_id from employee where emp_name = #{emp_name}
+	</select>
+	
+	<select id="selectEmp_pos" resultType="com.egg.tfox.vo.approval.ApprovalEmpPos" parameterType="string">
+		select
+		    emp.emp_id,
+		    emp.emp_name,
+		    pos.pos_id,
+		    pos.pos_name
+		from employee emp, position pos
+		where emp.pos_id = pos.pos_id
+		and emp.emp_id = #{emp_id} 
+	</select>
 </mapper>
