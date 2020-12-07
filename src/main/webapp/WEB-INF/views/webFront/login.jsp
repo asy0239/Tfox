@@ -12,16 +12,16 @@
 <body>
 	<%@ include file="/WEB-INF/views/webFront/header.jsp"%>
 	<div class="loginWeb_wrap">
-		<form name='login.web' method="post" action="login.web">
+		<form name='login.web' method="get" action="login.web">
 			<div id="tt">
 				<h1 align="center">Login</h1>
 				<div align="center">
 					<div>
-						<label><b>ID</b> </label> <input type="text" name="user_id">
+						<label><b>ID</b> </label> <input type="text" name="user_loginid">
 					</div>
 					<div>
 						<label> <b>PW</b>
-						</label> <input type="password" name="user_pwd">
+						</label> <input type="password" name="user_loginpwd">
 					</div>
 					<div class="remember">
 						<label> <input type="checkbox" />아이디 기억

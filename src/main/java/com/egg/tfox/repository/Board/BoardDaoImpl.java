@@ -1,6 +1,5 @@
 package com.egg.tfox.repository.Board;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.egg.tfox.entity.User;
 import com.egg.tfox.vo.board.GesiVO;
 import com.egg.tfox.vo.board.PageInfo;
+import com.egg.tfox.vo.board.UserVO;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -20,15 +19,9 @@ public class BoardDaoImpl implements BoardDao {
 	private SqlSession sql;
 
 	@Override
-	public User login(User user) {
-		return sql.selectOne("board.login", user);
-	}
-
-
-	@Override
-	public List selectQnaList() {
-		
-		return null;
+	public UserVO login(Map<String, Object> loginInfo) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("board.login", loginInfo);
 	}
 
 	@Override
@@ -51,4 +44,7 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return sql.selectOne("board.countBoard", mapList);
 	}
+
+
+
 }

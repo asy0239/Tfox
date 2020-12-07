@@ -12,10 +12,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	- namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) 
  -->
 <mapper namespace="board">
-	<select id="login" resultType="com.egg.tfox.entity.User">
-		SELECT * FROM USER_TABLE 
-		WHERE USER_ID=#{user_loginid}
-		AND USER_PWD=#{user_pwd} 
+	<select id="login" resultType="com.egg.tfox.vo.board.UserVO" parameterType="map">
+		SELECT
+			   USER_ID
+			 , USER_NAME
+			 , USER_LOGINID
+			 , USER_PWD
+			 , USER_DATE
+			 , USER_ADDR
+			 , USER_NUMBER
+			 , USER_EMAIL
+		 FROM USER_TABLE 
+		 WHERE USER_LOGINID=#{userId}
+		 AND USER_PWD=#{userPwd} 
 	</select>
 	
 	<select id="countBoard" resultType="int" parameterType="map">

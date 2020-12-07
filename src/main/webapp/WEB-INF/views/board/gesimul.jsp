@@ -207,6 +207,7 @@ input[class=br]:radio+label {
 								</tr>
 							</c:forEach>
 						</table>
+						<!-- 페이징 처리 -->
 						<div class="paging-area" align="center">
 							<c:if test="${paging.startPage != 1 }">
 								<a href="/gesiS.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>

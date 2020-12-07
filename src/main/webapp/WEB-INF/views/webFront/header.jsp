@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,13 +111,24 @@
 				</ul>
 			</div>
 			<div class="header_top_right">
+			<c:if test="${ empty sessionScope.loginUser }">
 				<ul class="header_top_rightbar">
-					<li><a href="login">LOGIN</a></li>
+					<li><a href="${pageContext.request.contextPath }/webFront/login">LOGIN</a></li>
 					<li><a href="${pageContext.request.contextPath }/webFront/join">JOIN</a></li>
 					<li><a href="">MY PAGE</a></li>
 					<li><a href="">ORDER</a></li>
 					<li><a href=""><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
 				</ul>
+			</c:if>
+			<c:if test="${ !empty sessionScope.loginUser }">
+				<ul class="header_top_rightbar">
+					<li><a href=""><c:out value="${ sessionScope.loginUser.user_name }"/> 님</a></li>
+					<li><a href="${pageContext.request.contextPath }/webFront/logout">LOGOUT</a></li>
+					<li><a href="">MY PAGE</a></li>
+					<li><a href="">ORDER</a></li>
+					<li><a href=""><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
+				</ul>
+			</c:if>
 			</div>
 	
 		</div>

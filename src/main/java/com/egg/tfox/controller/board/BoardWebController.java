@@ -10,19 +10,25 @@ public class BoardWebController {
 	public String header() {
 		return "webFront/header";
 	}
-	@GetMapping("/webFront/main")
-	public String main() {
-		return "webFront/main";
-	}
 
 	@GetMapping("/webFront/slide")
 	public String slide() {
 		return "webFront/slide";
 	}
 	
+	
+	
+	@GetMapping("/webFront/main")
+	public String main() {
+		return "webFront/main";
+	}
 	@GetMapping("/webFront/center")
 	public String center() {
 		return "webFront/center";
+	}
+	@GetMapping("/webFront/QnaInsert")
+	public String qnainsert() {
+		return "webFront/QnaInsert";
 	}
 	@GetMapping("/webFront/hood-item")
 	public String hoodItem(){

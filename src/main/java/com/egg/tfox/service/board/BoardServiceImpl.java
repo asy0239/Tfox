@@ -6,10 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.egg.tfox.entity.User;
 import com.egg.tfox.repository.Board.BoardDao;
 import com.egg.tfox.vo.board.GesiVO;
 import com.egg.tfox.vo.board.PageInfo;
+import com.egg.tfox.vo.board.UserVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -18,8 +18,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao dao;
 	
 	@Override
-	public User login(User user) {
-		return dao.login(user);
+	public UserVO login(Map<String, Object> loginInfo) {
+		return dao.login(loginInfo);
 	}
 	
 	@Override
@@ -28,11 +28,6 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectList(mapList,pi);
 	}
 
-	@Override
-	public List selectQnaList(String gesi_code) {
-		// TODO Auto-generated method stub 
-		return null;
-	}
 
 	@Override
 	public int countBoard(Map<String, Object> mapList) {

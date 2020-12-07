@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	mapper라는 영역 안에 구문을 작성한다.
+	- namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) 
+ -->
+<mapper namespace="qna">
+	<select id="qnaList" resultType="com.egg.tfox.vo.board.QnaListVO" parameterType="string">
+		SELECT    
+				G.GESI_ID
+     	 	   ,G.GESI_TITLE
+      		   ,G.GESI_CONTENT
+      	       ,G.GESI_DATE
+      		   ,G.GESI_STATUS
+      		   ,G.GESI_ANSDATE
+      		   ,G.GESI_ANSCONTENT
+               ,G.USER_ID
+      		   ,U.USER_NAME
+      		   ,G.GESI_CODE
+      		   ,T.GESI_NAME 
+               ,QT.QNA_NAME
+      	FROM GESI G
+      	JOIN GESITYPE T ON T.GESI_CODE = G.GESI_CODE
+        JOIN USER_TABLE U ON U.USER_ID = G.USER_ID
+        JOIN QNA Q ON Q.GESI_ID = G.GESI_ID
+        JOIN QNATYPE QT ON QT. QNA_CODE = Q.QNA_CODE
+        WHERE G.GESI_CODE = #{gesi_code}
+        ORDER BY G.GESI_DATE DESC
+	</select>
+		
+	
+</mapper>
