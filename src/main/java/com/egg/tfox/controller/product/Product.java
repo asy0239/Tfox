@@ -15,10 +15,6 @@ public class Product {
 
 	
 	
-		@PostMapping("/product/insert")
-	  @ResponseBody 
-	  String addManu(String name, String CEO) {
-	  
-	  return name+CEO; }
+		
 	 
 }
