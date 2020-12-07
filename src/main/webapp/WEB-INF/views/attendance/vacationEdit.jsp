@@ -6,17 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 메인</title>
-<script>
-
- 	function setUseFlag(){
- 		var onoff = $('input[type=radio][name=vacOnOff]:checked').val();
-		if(onoff == 'Y'){
-			$('#vac_config').show();
-		}else{
-			$('#vac_config').hide();
-		}
-	}
-	</script>
+ 	
 <style>
 #top {
 	width: 100%;
@@ -52,18 +42,7 @@ font {
 	font-size: 20px;
 }
 
-#calendar {
-	width: 100%;
-	height: 600px;
-}
 
-.checktool {
-	padding-top: 20px;
-}
-
-.vac_config {
-	
-}
 </style>
 </head>
 <body>
@@ -75,15 +54,18 @@ font {
 					<div class="cont_box">
 						<div class="setting_field">
 							<h4>휴가 설정</h4>
-							<form id="vacationset" method="post" action="#">
+							<form id="vacationset" method="post" action="vacOnOff">
 								<ul class="set_input w_auto">
 									<li>
 										<p>사용 여부</p>
 										<div>
-											<label class="mgr_20"> <input type="radio"
-												name="vacOnOff" value="Y" checked onclick="setUseFlag();">사용함
-											</label> <label><input type="radio" name="vacOnOff" value="N"
-												onclick="setUseFlag();"> 사용 안 함</label>
+										<c:forEach var="oh" items="${onOff }">										
+											<label> 
+											<input type="radio" name="vacOnOff" value="Y" onclick="setUseFlag();" <c:if test="${oh.vac_yn eq 'Y'}">checked</c:if>>사용함
+											</label>
+											<label>
+											<input type="radio" name="vacOnOff" value="N" onclick="setUseFlag();" <c:if test="${oh.vac_yn eq 'N'}">checked</c:if>> 사용 안 함</label>
+										</c:forEach>
 										</div>
 									</li>
 									<li>
@@ -96,7 +78,7 @@ font {
 
 							<div id="vac_config">
 								<div class="leftvacset">
-									<h4 class="vacsubTitle">휴가 생성 조건</h4>
+									<h4>휴가 생성 조건</h4>
 									<ul class="mgb_10">
 										<li>- 설정한 휴가 생성 기준으로 매년 생성일자(회계연도 기준) 또는
 											사용자 입사일(입사일 기준)에 휴가가 자동 생성됩니다.</li>
@@ -110,10 +92,9 @@ font {
 								</div>
 								<br> <br>
 
-								<div class="after gt-mv-20">
-									<label><input type="radio" name="create_type" value="A"
-										checked /> 회계연도 기준</label> <label class="gt-ml-40"><input
-										name="create_type" type="radio" value="J" /> 입사일 기준</label>
+								<div>
+									<label> <input type="radio" name="create_type" value="A" checked /> 회계연도 기준</label>
+									<label> <input name="create_type" type="radio" value="J" /> 입사일 기준</label>
 								</div>
 
 								<table class="vacDate">
@@ -124,6 +105,7 @@ font {
 										<col>
 									</colgroup>
 									<tbody>
+										
 										<tr>
 											<th scope="row">휴가 일수</th>
 											<td style="padding: 0;">
@@ -152,26 +134,10 @@ font {
 															<td>N+9</td>
 														</tr>
 														<tr>
-															<td><label><input type="text" value="15"
+														<c:forEach var="day" items="${vcsday }" end="9">
+															<td><label><input type="text" value="${day.year_day }"
 																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="15"
-																	name="vc_date"> 일</label></td>																	
-															<td><label><input type="text" value="15"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="15"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="15"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="15"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="16"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="16"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="17"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="17"
-																	name="vc_date"> 일</label></td>
+														</c:forEach>
 														</tr>
 														<tr>
 															<td>N+10</td>
@@ -186,26 +152,10 @@ font {
 															<td>N+19</td>
 														</tr>
 														<tr>
-															<td><label><input type="text" value="20"
+														<c:forEach var="day" items="${vcsday }" begin="10" end="19">
+															<td><label><input type="text" value="${day.year_day }"
 																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="21"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="21"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="22"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="22"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="23"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="23"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="24"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="24"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
+														</c:forEach>
 														</tr>
 														<tr class="row-count-2">
 															<td>N+20</td>
@@ -220,26 +170,10 @@ font {
 															<td>N+29</td>
 														</tr>
 														<tr class="row-count-2">
-															<td><label><input type="text" value="25"
+														<c:forEach var="day" items="${vcsday }" begin="20" end="29">
+															<td><label><input type="text" value="${day.year_day }"
 																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
-															<td><label><input type="text" value="25"
-																	name="vc_date"> 일</label></td>
+														</c:forEach>
 														</tr>
 													</tbody>
 												</table>
@@ -266,7 +200,6 @@ font {
 									</tbody>
 								</table>
 
-
 								<div class="vacdaysetbtn">
 									<button type="button" onclick="">적용</button>
 								</div>
@@ -276,7 +209,6 @@ font {
 								<div class="vacCate">
 									<h4>휴가 종류</h4>
 									<button id="addVacCate">추가</button>
-									</a>
 								</div>
 								<table class="tablevactype" id="vcTypeTable">
 									<caption>휴가 종류 목록으로 휴가명, 사용 여부, 차감 여부로 구성되어 있습니다.</caption>
@@ -293,36 +225,21 @@ font {
 										</tr>
 									</thead>
 									<tbody id="vacCategory">
+										<c:forEach var="cate" items="${vCate }">
 										<tr>
-											<td>연차</td>
-											<td><select id="vacation_use">
-													<option value="Y" selected>사용</option>
-													<option value="N">사용 안 함</option>
-											</select></td>
-											<td><label><input type="checkbox"
-													id="vacation_minus_0" checked="checked"> 연차에서 차감
-											</label></td>
+											<td>${cate.vactype_name }</td>
+											<td>
+											<select id="vacation_use">
+													<option value="Y" <c:if test="${cate.vactype_yn eq 'Y' }">selected</c:if>>사용</option>
+													<option value="N" <c:if test="${cate.vactype_yn eq 'N' }">selected</c:if>>사용 안 함</option>
+											</select>
+											</td>
+											<td>
+											<label><input type="checkbox" id="vacation_minus_0" checked="checked"> 연차에서 차감 </label>
+											</td>
 										</tr>
-										<tr>
-											<td>병가</td>
-											<td><select id="vacation_use">
-													<option value="Y" selected>사용</option>
-													<option value="N">사용 안 함</option>
-											</select></td>
-											<td><label><input type="checkbox"
-													id="vacation_minus_0" checked="checked"> 연차에서 차감
-											</label></td>
-										</tr>
-										<tr>
-											<td>포상휴가</td>
-											<td><select id="vacation_use">
-													<option value="Y" selected>사용</option>
-													<option value="N">사용 안 함</option>
-											</select></td>
-											<td><label> <input type="checkbox"
-													id="vacation_minus_0" checked="checked"> 연차에서 차감
-											</label></td>
-										</tr>
+										</c:forEach>		
+									
 									</tbody>
 								</table>
 								<div class="catButton">
@@ -338,13 +255,37 @@ font {
 
 </body>
 <script>
+
+function setUseFlag(){
+		var onoff = $('input[type=radio][name=vacOnOff]:checked').val();
+	if(onoff == 'Y'){
+		$('#vac_config').show();
+	}else{
+		$('#vac_config').hide();
+	}
+}
 var i = 0;
 	
 $("#addVacCate").on("click", function(){
 	i++;
 	console.log(i);
-	$("#vacCategory").append('<tr id='+i+'> <td><input type="text" size="10"></td> <td><select id="vacation_use"> <option value="Y" selected>사용</option> <option value="N">사용 안 함</option> </select></td> <td><label> <input type="checkbox" id="vacation_minus_0" checked="checked"> 연차에서 차감 </label></td> </tr>')
+	$("#vacCategory").append('<tr id='+i+'> <td><input type="text" size="10"></td> <td><select id="vacation_use"> <option value="Y" selected>사용</option> <option value="N">사용 안 함</option> </select></td> <td><label> <input type="checkbox" id="vacation_minus_0" > 연차에서 차감 </label></td> </tr>')
 });
+
+function setVacationUseFlag(){
+	var save = $('input[name=vacOnOff]:checked').val();
+	if (save == 'Y'){
+		if(confirm('휴가 기능을 \'사용함\'으로 설정하시겠습니까?')){
+			$('#vacationset').submit();
+		}}
+	else{
+		if(confirm('휴가 기능을 \'사용 안 함\'으로 설정하시겠습니까?')){
+			$('#vacationset').submit();
+		}
+		
+
+	}
+}
 
 /*  function saveVacCategory(){
 	$.ajax({

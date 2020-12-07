@@ -64,36 +64,9 @@
 									 ~ <fmt:formatDate value="${vac.vacapl_end }" pattern="yyyy.MM.dd"/>
 								</td>
 								<td>${vac.vacapl_status }</td>
-								<td><a href="$">자세히보기</a></td>
+								<td><a href="detail?vacapl_id=${vac.vacapl_id }">자세히보기</a></td>
 							</tr>
 							</c:forEach>
-							<tr>
-								<td>박찬영</td>
-								<td>인사</td>
-								<td>2020-08-23</td>
-								<td>연차</td>
-								<td>2020-09-12 ~ 2020-09-13</td>
-								<td>승인</td>
-								<td>자세히보기</td>
-							</tr>
-							<tr>
-								<td>박찬영</td>
-								<td>인사</td>
-								<td>2020-08-23</td>
-								<td>연차</td>
-								<td>2020-09-12 ~ 2020-09-13</td>
-								<td>승인</td>
-								<td>자세히보기</td>
-							</tr>
-							<tr>
-								<td>박찬영</td>
-								<td>인사</td>
-								<td>2020-08-23</td>
-								<td>연차</td>
-								<td>2020-09-12 ~ 2020-09-13</td>
-								<td>승인</td>
-								<td>자세히보기</td>
-							</tr>
 						</tbody>
 					<!-- 페이징 처리 들어갈 위치 -->
 					</table>
