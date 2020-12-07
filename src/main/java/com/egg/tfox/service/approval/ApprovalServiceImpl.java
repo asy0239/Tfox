@@ -56,11 +56,6 @@ public class ApprovalServiceImpl implements ApprovalService{
 		list.put("refList", refList);
 		list.put("noCheckList", noCheckList);
 		list.put("sendList", sendList);
-		
-		log.info("list sendList : " + sendList);
-		log.info("list noCheckList : " + noCheckList);
-		log.info("list refList : " + refList);
-		
 		return list;
 	}
 

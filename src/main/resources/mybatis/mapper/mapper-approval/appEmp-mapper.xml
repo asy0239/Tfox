@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="appEmp">
+	<select id="employee" resultType="com.egg.tfox.vo.approval.ApprovalEditEmpVo" parameterType="string">
+		select 
+		    e.emp_id,
+		    e.emp_name,
+		    e.dept_id,
+		    dept.dept_name
+		from employee e , department dept
+		where e.dept_id = dept.dept_id
+		and e.emp_id != #{emp_ID}
+		and e.emp_id != 'admin'
+		order by dept_id
+	</select>
+</mapper>

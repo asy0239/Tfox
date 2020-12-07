@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,10 +23,13 @@
 			<div id="close_btn" onclick="closeModal1();">닫기</div>
 			<div id="save_btn" onclick="saveModal();"></div>
 		</div>
-		
 	</div>
 	
-	<script>
+	<script type="text/javascript">
+
+			var emp = '${empList}';
+			var empJson = JSON.parse(emp);
+			
 			var employeeName = [
 		    {
 		        "language": "jQuery",
@@ -139,24 +143,32 @@
 				    // search placeholder text
 				    searchPlaceholderText: "search",
 				    // items data array
-				    dataArray: employeeName,
+				    dataArray: empJson,
 				    // group data array
-				    groupDataArray: groupData,
+				    groupDataArray: empJson,
 				    callable: function (items) {
-				      // your code
 				      var choiceValue = "";
+				      var choiceValueId = "";
 				      for(var i = 0; i < items.length; i++) {
 				    	  if(i==0) {
-				    		  choiceValue += items[i].employeeName;		    		  
+				    		  choiceValue += items[i].employeeName;	
+				    		  choiceValueId += items[i].value;
 				    	  } else {
 				    		  choiceValue += ", ";
-					    	  choiceValue += items[i].employeeName;		 	    		  
+				    		  choiceValueId += ", ";
+					    	  choiceValue += items[i].employeeName;		
+					    	  choiceValueId += items[i].value;
 				    	  }
 				      }
 			    	  var susin = choiceValue;
+			    	  var susinEmpId = choiceValueId;
 			    	  $(".susin").attr('value' , susin);
+			    	  $("#soosinHidden").attr('value', susinEmpId);
+			    	  
 				    	  					  
 					  choiceValue = "";
+					  
+					  
 					  
 				    }
 				};
