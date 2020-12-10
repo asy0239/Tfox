@@ -6,25 +6,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- mapper라는 영역 안에 구문을 작성한다. - namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) -->
 <mapper namespace="vacation">
-	<select id="allList" resultType="vacationVo">
-		SELECT
-		VC.VACAPL_ID
-		,
-		VT.VACTYPE_NAME
-		, E.EMP_NAME
-		, VC.VACAPL_START
-		, VC.VACAPL_END
-		,
-		VC.VACAPL_APPDATE
-		, VC.VACAPL_REASON
-		, VC.VACAPL_STATUS
-		, D.DEPT_NAME
-		FROM VACAPPLY VC
-		JOIN VACTYPE VT ON (VT.VACTYPE_ID = VC.VACTYPE_ID)
-		JOIN EMPLOYEE E ON (vc.emp_id = e.emp_id)
-		JOIN DEPARTMENT D ON
-		(E.DEPT_ID = D.DEPT_ID)
-		ORDER BY VACAPL_APPDATE DESC
+	<select id="allList" resultType="vacationVo" parameterType="map">
+		SELECT RN
+      , VACAPL_ID
+      , VACTYPE_NAME
+      , EMP_NAME
+      , VACAPL_START
+      , VACAPL_END
+      , VACAPL_APPDATE
+      , VACAPL_REASON
+      , VACAPL_STATUS
+      , DEPT_NAME
+   FROM ( SELECT ROWNUM RN
+      , A.VACAPL_ID
+      , A.VACTYPE_NAME
+      , A.EMP_NAME
+      , A.VACAPL_START
+      , A.VACAPL_END
+      , A.VACAPL_APPDATE
+      , A.VACAPL_REASON
+      , A.VACAPL_STATUS
+      , A.DEPT_NAME
+      FROM (SELECT 		
+      VC.VACAPL_ID
+      , VT.VACTYPE_NAME
+      , E.EMP_NAME
+      , VC.VACAPL_START
+      , VC.VACAPL_END
+      , VC.VACAPL_APPDATE
+      , VC.VACAPL_REASON
+      , VC.VACAPL_STATUS
+      , D.DEPT_NAME
+   FROM VACAPPLY VC 
+   JOIN VACTYPE VT ON (VT.VACTYPE_ID = VC.VACTYPE_ID)
+   JOIN EMPLOYEE E ON (vc.emp_id = e.emp_id)
+   JOIN DEPARTMENT D ON (E.DEPT_ID = D.DEPT_ID)
+   <where>
+   		<if test="search_cate == 'dept_name' and keyword != null and keyword !='' ">
+   		AND INSTR(D.DEPT_NAME, #{keyword}) > 0 
+   		</if>
+   		<if test="search_cate == 'emp_name' and keyword != null and keyword!= '' ">
+   		AND INSTR(E.EMP_NAME, #{keyword}) > 0
+   		</if> 
+   </where>
+  ORDER BY VACAPL_APPDATE DESC) A)
+  WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 
 	<select id="reqDay" resultType="String">
@@ -68,6 +94,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VACTYPE_NAME
 		FROM VACTYPE
 		WHERE VACTYPE_YN = 'Y'
+	</select>
+	
+	<select id="categoryAll" resultType="String">
+		SELECT
+		VACTYPE_NAME
+		FROM VACTYPE
 	</select>
 
 	<select id="catetype" resultType="String">
@@ -150,8 +182,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="vacOnOff">
 	 UPDATE VACATIONSET
 			SET VAC_YN = #{vacOnOff}
-			WHERE CORP_ID = COR001
+			WHERE CORP_ID = 'COR001'
 	</update>
+	
 	<select id="vcsday" resultType="com.egg.tfox.entity.attendance.VacationSet">
 	SELECT
     	YEAR_ID
@@ -166,8 +199,96 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       , VACTYPE_YN
       , VACTYPE_YEARYN
    FROM VACTYPE
-	
 	</select>
+	
+	<select id="detailList" resultType="vacationVo">
+		SELECT
+		VC.VACAPL_ID
+		,
+		VT.VACTYPE_NAME
+		, E.EMP_NAME
+		, VC.VACAPL_START
+		, VC.VACAPL_END
+		,
+		VC.VACAPL_APPDATE
+		, VC.VACAPL_REASON
+		, VC.VACAPL_STATUS
+		, D.DEPT_NAME
+		FROM VACAPPLY VC
+		JOIN VACTYPE VT ON (VT.VACTYPE_ID = VC.VACTYPE_ID)
+		JOIN EMPLOYEE E ON (vc.emp_id = e.emp_id)
+		JOIN DEPARTMENT D ON
+		(E.DEPT_ID = D.DEPT_ID)
+		WHERE VACAPL_ID = #{vacapl_id}
+		ORDER BY VACAPL_APPDATE DESC
+	</select>
+	
+	<select id="countBoard" resultType="int">
+		  SELECT COUNT(*)
+  FROM (SELECT 		
+      VC.VACAPL_ID
+      , VT.VACTYPE_NAME
+      , E.EMP_NAME
+      , VC.VACAPL_START
+      , VC.VACAPL_END
+      , VC.VACAPL_APPDATE
+      , VC.VACAPL_REASON
+      , VC.VACAPL_STATUS
+      , D.DEPT_NAME
+       FROM VACAPPLY VC 
+   JOIN VACTYPE VT ON (VT.VACTYPE_ID = VC.VACTYPE_ID)
+   JOIN EMPLOYEE E ON (vc.emp_id = e.emp_id)
+   JOIN DEPARTMENT D ON (E.DEPT_ID = D.DEPT_ID)
+    <where>
+   		<if test="search_cate == 'dept_name' and keyword != null and keyword !='' ">
+   		AND INSTR(D.DEPT_NAME, #{keyword}) > 0
+   		</if>
+   		
+   		<if test="search_cate == 'emp_name' and keyword != null and keyword!= '' ">
+   		AND INSTR(E.EMP_NAME, #{keyword}) > 0
+   		</if> 
+   </where>)
+	</select>
+	
+	<update id="acceptY">
+		UPDATE VACAPPLY
+		SET VACAPL_STATUS = '승인'
+		WHERE VACAPL_ID = #{y}
+	</update>
+	
+	<update id="acceptN">
+		UPDATE VACAPPLY
+		SET VACAPL_STATUS = '반려'
+		WHERE VACAPL_ID = #{n}
+	</update>
+	
+	<update id="vacDaySet">
+			UPDATE YEAR_MANAGE
+			SET YEAR_DAY = #{vcdate}
+			WHERE YEAR_ID = #{yearid}
+	</update>
+	
+	<update id="vacCateSet">
+	MERGE INTO VACTYPE
+	USING DUAL
+	ON (VACTYPE_NAME = #{vactypeName})
+	WHEN MATCHED THEN
+		UPDATE SET
+		VACTYPE_YN = #{vactypeYN}
+	  , VACTYPE_YEARYN = #{yearYN}
+	WHEN NOT MATCHED THEN	
+		INSERT (
+	    VACTYPE_ID
+	  , VACTYPE_NAME
+	  , VACTYPE_YN
+	  , VACTYPE_YEARYN
+		) VALUES (
+		'VCT'||TRIM(TO_CHAR(SEQ_VACTYPEID.nextval,'000'))
+	  , #{vactypeName}
+	  , #{vactypeYN}
+	  , #{yearYN}
+		)
+	</update>
 </mapper>
 
 

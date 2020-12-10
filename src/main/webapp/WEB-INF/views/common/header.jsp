@@ -34,10 +34,10 @@ pageEncoding="UTF-8"/>
                     </div>
                     <ul class="hideShow side">
                         <li><a href="${pageContext.request.contextPath }/attendance/attendance">근태 현황</a></li>
+                        <li><a href="">근무 설정</a></li>
                         <li><a href="${pageContext.request.contextPath }/attendance/vacationRequest">휴가 신청</a></li>
                         <li><a href="${pageContext.request.contextPath }/attendance/vacationMypage">내 휴가 현황</a></li>
                         <li><a href="${pageContext.request.contextPath }/attendance/vacationEdit">휴가 설정</a></li>
-                        <li><a href="">근무 설정</a></li>
                         <li><a href="${pageContext.request.contextPath }/attendance/vacationRecong">휴가 승인</a></li>
                     </ul>
                 </li>

@@ -9,8 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.egg.tfox.entity.attendance.PagingVO;
 import com.egg.tfox.entity.attendance.Vacation;
-import com.egg.tfox.entity.attendance.VacationMy;
 import com.egg.tfox.entity.attendance.VacationRequest;
 import com.egg.tfox.entity.attendance.VacationSet;
 
@@ -20,9 +20,15 @@ public class VacationDaoImpl implements VacationDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<Vacation> selectAll() {
-		List<Vacation> list = sqlSession.selectList("vacation.allList");
-		return list;
+	public List<Vacation> selectAll(Map<String, Object>map, PagingVO pi) {
+		Map<String, Object> list = new HashMap<>();
+		list.put("search_cate", map.get("search_cate"));
+		list.put("keyword", map.get("keyword"));
+		list.put("start", pi.getStart());
+		list.put("end", pi.getEnd());
+		
+		
+		return sqlSession.selectList("vacation.allList", list);
 	}
 
 	@Override
@@ -40,7 +46,6 @@ public class VacationDaoImpl implements VacationDao {
 		if (ot != null) {
 			for (int i = 0; i < ot.size(); i++) {
 				sum = sum + ot.get(i);
-				System.out.println(sum);
 			}
 		}else {
 			return Integer.parseInt(vacReq);
@@ -58,17 +63,25 @@ public class VacationDaoImpl implements VacationDao {
 
 	@Override
 	public List<String> vacCategory() {
-		//카테고리 리스트 가지고오기
+		//카테고리에서 사용중(Y)인것 리스트 가지고오기
 		List<String> category = sqlSession.selectList("vacation.category");
+		return category;
+	}
+	
+	@Override
+	public List<String> vacCategoryAll() {
+		//카테고리 모든 리스트 가지고오기
+		List<String> category = sqlSession.selectList("vacation.categoryAll");
 		return category;
 	}
 
 
 	@Override
 	public void vacInsert(VacationRequest vacRequest) {
+		//휴가 신청폼
 		String catetype = sqlSession.selectOne("vacation.catetype", vacRequest);
 		vacRequest.setVactype_id(catetype);
-		sqlSession.selectOne("vacation.vacinsert",vacRequest);
+		sqlSession.insert("vacation.vacinsert",vacRequest);
 	}
 
 	@Override
@@ -115,7 +128,7 @@ public class VacationDaoImpl implements VacationDao {
 
 	@Override
 	public List<String> vacSearchDay(List<String> category, String id) {
-	
+	  //날짜계산 
 		Map<String, Object> map = new HashMap<>();
 		String sum;
 		List<String> result = new ArrayList<>();
@@ -142,18 +155,21 @@ public class VacationDaoImpl implements VacationDao {
 
 	@Override
 	public List<Vacation> myVacList(String id) {
+		//내 휴가리스트
 		List<Vacation> list = sqlSession.selectList("vacation.myList", id);
 		return list;
 	}
 
 	@Override
 	public List<VacationSet> onoff() {
+		// 휴가 설정 가지고오는것 (초기 불러올떄)
 		List<VacationSet> list = sqlSession.selectList("vacation.loadOnOff");
 		return list;
 	}
 
 	@Override
 	public void vacOnOffUpdate(String vacOnOff) {
+		//휴가 사용 ON OFF
 		sqlSession.selectOne("vacation.vacOnOff", vacOnOff);
 	}
 
@@ -166,9 +182,64 @@ public class VacationDaoImpl implements VacationDao {
 
 	@Override
 	public List<VacationSet> vacCate() {
+		//카테고리 이름 가지고오는 구문
 		List<VacationSet> list = sqlSession.selectList("vacation.setVacCate");
 		return list;
 	}
+
+	@Override
+	public List<Vacation> detailList(String vacapl_id) {
+		List<Vacation> list = sqlSession.selectList("vacation.detailList", vacapl_id);
+		return list;
+	}
+
+	@Override
+	public int countBoard(Map<String, Object> map) {
+		return sqlSession.selectOne("vacation.countBoard", map);
+	}
+ 
+	@Override
+	public void vacAcceptY(String y) {
+		sqlSession.update("vacation.acceptY", y);
+	}
+
+	@Override
+	public void vacAcceptN(String n) {
+		sqlSession.update("vacation.acceptN", n);
+	}
+
+	@Override
+	public void vacDaySet(List<String> vc_date, List<String> year_id) {
+		Map<String, Object> list = new HashMap<>();
+		//왜 내부 foreach문이 안먹을까...
+		for(int i=0; i<vc_date.size(); i++) {
+			list.put("yearid", year_id.get(i));
+			list.put("vcdate", vc_date.get(i));
+			sqlSession.update("vacation.vacDaySet", list);
+			list.remove("yearid");
+			list.remove("vcdate");
+		}
+	}
+
+	@Override
+	public void vacCateSet(List<String> vactypeName, List<String> vactypeYN, List<String> yearYN) {
+		// 한 줄에 하나씩이라서 size로 반복문 돌리는것 가능한것.
+	
+		
+		Map<String, Object> list =new HashMap<>();
+		for(int i=0; i<vactypeName.size(); i++) {
+			list.put("vactypeName", vactypeName.get(i));
+			list.put("vactypeYN", vactypeYN.get(i));
+			list.put("yearYN", yearYN.get(i));
+			sqlSession.update("vacation.vacCateSet", list);
+			list.remove("vactypeName");
+			list.remove("vactypeYN");
+			list.remove("yearYN");
+		}
+			
+	}
+
+		
 
 	
 
