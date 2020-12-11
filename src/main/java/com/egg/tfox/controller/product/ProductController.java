@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.egg.tfox.entity.Manuf;
 import com.egg.tfox.entity.Supplier;
@@ -29,7 +30,19 @@ public class ProductController {
 
 		return "/product/insert";
 	}
-
+	@PostMapping("/product/insert")
+	public String product() {
+		System.out.println("성공");
+		
+		return "redirect:/product/insert_finish";
+	}
+	
+	@GetMapping("/product/insert_finish")
+	public String insertFinish(
+			) {
+		
+		return "/product/productList";
+	}
 	
 	
 		
