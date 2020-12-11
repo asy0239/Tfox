@@ -144,4 +144,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         					ORDER BY G.GESI_DATE DESC) A)
       		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
+	<select id="boardList" resultType="com.egg.tfox.vo.board.ProductVO">
+			SELECT 
+            	   PRO_ID
+				  , PRO_NAME
+				  , ST_ID
+				  , PRO_PRICE
+				  , PRO_BIGCATE
+				  , PRO_SMALLCATE
+                  , PRO_SUMMARY
+				  , PRO_DETAIL
+				  ,PRO_CONPRICE
+				  , PRO_SIZE
+                  , PRO_COLOR
+				  , PRO_EA
+     			  , PRO_STATUS
+				  , PRO_LEVEL
+    		FROM PRODUCT
+    		WHERE PRO_STATUS = 'Y'
+    		AND PRO_LEVEL = 1
+	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

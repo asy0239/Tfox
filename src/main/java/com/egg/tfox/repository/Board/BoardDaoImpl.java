@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.egg.tfox.vo.board.GesiVO;
 import com.egg.tfox.vo.board.PageInfo;
+import com.egg.tfox.vo.board.ProductVO;
 import com.egg.tfox.vo.board.UserVO;
 
 @Repository
@@ -43,6 +44,12 @@ public class BoardDaoImpl implements BoardDao {
 	public int countBoard(Map<String, Object> mapList) {
 		// TODO Auto-generated method stub
 		return sql.selectOne("board.countBoard", mapList);
+	}
+
+	@Override
+	public List<ProductVO> boardList() {
+		
+		return sql.selectList("board.boardList");
 	}
 
 
