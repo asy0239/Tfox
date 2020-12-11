@@ -38,7 +38,7 @@ public class Join {
 		String phone = phone1+"-"+phone2+"-"+phone3;
 		String pwd = user_pwd1;
 		String user_addr = userAddress + " " + AddressNum + " " + AddressDetail;
-		user.setPhone(phone);
+		user.setUser_phone(phone);
 		user.setUser_pwd(pwd);
 		user.setUser_addr(user_addr);
 		System.out.println("form 값 : " + user);

@@ -7,15 +7,59 @@
 
 
 <mapper namespace="UserList">
-	<select id="userList" resultType="User"  parameterType="list">
+	<!-- 총 회원리스트 -->
+	<select id="countUser" resultType="int">
+		select count(*)			    
+          from (select
+			   user_id,
+       	       user_name,
+     		   user_loginid,
+     		   user_date,
+     		   user_phone,
+     		   user_email
+     	  from user_table
+     		   )
+			   
+	</select>
+	<!-- 페이징 처리후 회원리스트 -->
+	<select id="userlist" resultType="User"  parameterType="map">
 		select 
 			   user_id,
        	       user_name,
      		   user_loginid,
      		   user_date,
-     		   phone,
+     		   user_phone,
      		   user_email
-          from user_table
+          from (
+          	   select ROWNUM RN,
+          	   A.user_id,
+          	   A.user_name,
+          	   A.user_loginid,
+          	   A.user_date,
+          	   A.user_phone,
+          	   A.user_email
+          	   		from(
+          	 		select U.user_id,
+       	       			   U.user_name,
+     		   			   U.user_loginid,
+     		   	  	 	   U.user_date,
+     		   			   U.user_phone,
+     		   	           U.user_email
+     		   	           from user_table U    		   	           
+     		   	           )A         	   
+          	    )
+       WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	<!-- 장바구니 유저 기본배송지 -->
+	<select id="getinfo" resultType="User" parameterType="list">
+		select 			    
+			   user_id,
+       	       user_name,    		      		  
+     		   user_phone,
+     		   user_addr    		   
+     	  from user_table
+     		   
+			   
 	</select>
 	
 </mapper>
