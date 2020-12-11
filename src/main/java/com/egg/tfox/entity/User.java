@@ -21,5 +21,6 @@ public class User {
 	private String user_addr;
 	private String user_number;
 	private String user_email;
+	private String user_addr2;
 	
 }

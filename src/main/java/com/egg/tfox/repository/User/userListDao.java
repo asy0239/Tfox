@@ -16,7 +16,6 @@ public interface userListDao {
 	//유저리스트 페이징
 	int countUser(Map<String, Object> maplist);
 	
-	//카트 기본배송지
-	List<User> getinfo();
+
 
 }

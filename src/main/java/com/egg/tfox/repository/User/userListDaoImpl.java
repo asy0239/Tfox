@@ -44,9 +44,5 @@ public int countUser(Map<String, Object> maplist) {
 	return sqlSession.selectOne("UserList.countUser", maplist);
 }
 
-@Override
-public List<User> getinfo() {
-	
-	return sqlSession.selectList("UserList.getinfo");
-}
+
 }

@@ -7,23 +7,37 @@
 
 
 <mapper namespace="cart">
-<select id="proinfo" resultType="proVo" parameterType="list">
-<!-- 상품정보 -->
-SELECT 
+<select id="getInfo" resultType="UserVO" parameterType="string">
+SELECT       
+	   USER_ID
+     , USER_NAME
+     , USER_PHONE
+     , USER_ADDR
+  FROM USER_TABLE
+ WHERE USER_LOGINID = #{userId}
+</select>
+
+<select id="proInfo" resultType="cartVo" parameterType="string">
+
+ SELECT 
        P.PRO_ID
      , P.PRO_NAME
      , P.PRO_COLOR
      , P.PRO_SIZE
      , P.PRO_PRICE
      , O.ORDER_EA
-     , U.USER_ID
-     , U.USER_NAME
-     , U.USER_PHONE
-     , U.USER_ADDR
-  FROM USER_TABLE U
-  JOIN PAYMENT PAY ON(PAY.USER_ID = U.USER_ID)
-  JOIN ORDERDETAIL O ON(O.PAY_ID = PAY.PAY_ID)
-  JOIN PRODUCT P ON(P.PRO_ID = O.PRO_ID)
+  FROM USER_TABLE U, PAYMENT PAY, ORDERDETAIL O, PRODUCT P 
+ WHERE PAY.USER_ID = U.USER_ID 
+   AND O.PAY_ID = PAY.PAY_ID
+   AND P.PRO_ID = O.PRO_ID
+   AND U.USER_LOGINID = #{userId}
+   
+</select>
+
+<select id="orderInfo" resultType="com.egg.tfox.vo.cart.orderdetailVo">
+SELECT  
+	   ORDER_EA 
+  FROM ORDERDETAIL
 </select>
 
 	

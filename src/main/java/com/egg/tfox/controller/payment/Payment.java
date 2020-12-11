@@ -10,15 +10,16 @@ import com.egg.tfox.service.payment.PayService;
 @Controller
 //@RequestMapping("/cart") 
 public class Payment {
-
 //	@Autowired
 //	private PayService payService;
+//	
+//	//주문/결제 confirm 페이지
+//	
+//	 @GetMapping("/pay") public String cart() { 
+//		 return "redirect:webFront/cart";
+//	 
+//	 }
 	
-	//주문/결제 confirm 페이지
-	/*
-	 * @GetMapping("/webFront/cart") public String cart() { return "webFront/cart";
-	 * //return "pay/confirm; }
-	 */
 	
 	
 }
