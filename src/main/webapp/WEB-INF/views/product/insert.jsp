@@ -121,15 +121,30 @@
 	}
 	#date{
 		height: 30px; 
-		width: 100px;
+		width: 150px;
 	}
 	.t{
 		height: 15px;
 		width: 90px;
 	}
+	.ph{
+		padding-left: 15px;
+		height: 340px;
+		width: 300px;
+	}
 	
 	
-	
+	 #photo{
+	 
+		height: 300px;
+		width: 300px;
+		border: 1px solid black;
+	}
+	 #photo1{
+	 	height: 100px;
+	 	width: 100px;
+	 	border: 1px solid black;
+	 }
 </style>
 </head>
 
@@ -198,8 +213,16 @@
 								</tr>
 								<tr>
 									<td> &nbsp;이미지</td>
-									<td></td>
-									<td></td>
+									<td class="ph">
+										<div id="photo">
+											<img id="titleImg" >
+										</div>
+									</td>
+									<td class="ph">
+										<div id="photo1">
+											<img id="contentImg1">
+										</div>
+									</td>
 								</tr>
 							</table>		
 						
@@ -237,7 +260,9 @@
 									<td>
 									&nbsp;
 										<select name="supply" id="supply">
-											<option id="ownsu">자체공급</option>
+										<c:forEach  var="supplier" items="${sup}">
+											<option id="ownsu">${supplier.sup_name}</option>
+										</c:forEach>
 										</select>
 										&nbsp;
 										<button class="bt" id="myBtn2">등록</button>
@@ -245,13 +270,17 @@
 								</tr>
 								
 								
-								
 								<tr>
+									
+					
 									<td>&nbsp;제조사</td>
 									<td>
 									&nbsp;
 										<select name="made" id="made">
-											<option id="ownmd">자체제작</option>
+								
+								<c:forEach var="manuf" items="${list}">
+											<option id="ownmd">${manuf.manu_name}</option>
+								</c:forEach>
 										</select>
 										&nbsp;
 										<button class="bt" id="myBtn">등록</button>
@@ -261,19 +290,38 @@
 									<td>&nbsp;제조일자</td>
 									<td> &nbsp;&nbsp;<input type="date" id="date"></td>
 								</tr>
+								
 								<tr>
 									<td>&nbsp;원산지</td>
 									<td>
 									&nbsp;
-										<select name="" id="">
-											<option id="">국내</option>
-											<option id="">국외</option>
-											<option id="">실내</option>
-										</select>
+										   <select id="select1" onchange="itemChange();">
+										        <option>국내</option>
+										        <option>국외</option>
+										     
+									        </select>
 										&nbsp;
-										<select name="" id="">
-											<option id="">국내선택</option>
-										</select>
+										 
+									        <select id="select2">
+									        	<option>선택하시오</option>
+									            <option>서울특별시</option>
+									            <option>부산광역시</option>
+									            <option>대구광역시</option>
+									            <option>인천광역시</option>
+									            <option>광주광역시</option>
+									            <option>대전광역시</option>
+									            <option>울산광역시</option>
+									            <option>세종특별자치시</option>
+									            <option>경기도</option>
+									            <option>강원도</option>
+									            <option>충청북도</option>
+									            <option>충청남도</option>
+									            <option>전라북도</option>
+									            <option>전라남도</option>
+									            <option>경상북도</option>
+									            <option>경상남도</option>
+									            <option>제주특별자치도</option>
+									        </select>
 									</td>
 								</tr>
 							</table>
@@ -292,6 +340,47 @@
 				
 				
 				</div>
+				
+				   <script>
+        function itemChange(){
+                
+          
+            var korea = ["서울특별시","부산광역시","대구광역시","인천광역시","인천광역시"
+            	,"광주광역시","대전광역시","울산광역시","세종특별자치시","경기도","강원도",
+            	"충청남도","충청북도","전라북도","전라남도","경상북도","경상남도","제주특별자치도"];
+           
+            var abroad = ["아시아","아메리카","유럽","아프리카","오세아니아"];
+            var selectItem = $("#select1").val();
+            
+           
+            var changeItem;
+              
+            if(selectItem == "국내"){
+              changeItem = korea;
+            }
+            else if(selectItem == "국외"){
+              changeItem = abroad;
+            }
+            $('#select2').empty();
+             
+            for(var count = 0; count < changeItem.length; count++){                
+                            var option = $("<option>"+changeItem[count]+"</option>");
+                            $('#select2').append(option);
+                        	
+                        }
+             
+            }
+        
+        $(function(){
+        	$("#photo").click(function(){
+        		$("#photo").click();
+        	});
+        	
+        });
+            
+        </script>
+				
+				
 			</article>
 		</section>
 	</div>
@@ -302,7 +391,7 @@
 
         // Get the modal
         var modal = document.getElementById('myModal');
-        var modal2 = document.getElementById('myModal2');
+        var modal2 =  document.getElementById('myModal2');
         
         
         // Get the button that opens the modal
@@ -310,8 +399,7 @@
 		var btn2 = document.getElementById("myBtn2");
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];                                          
-      
-
+      	var span2 = document.getElementById("ww");
 
 
         // When the user clicks on the button, open the modal 
@@ -325,6 +413,10 @@
         }
 
         // When the user clicks on <span> (x), close the modal
+        span2.onclick = function() {
+        
+            modal2.style.display = "none";
+        }
         span.onclick = function() {
             modal.style.display = "none";
         }

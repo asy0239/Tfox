@@ -1,13 +1,14 @@
 <jsp:directive.page language="java"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<div id="myModal2" class="modal">
  
       <!-- Modal content -->
       <div class="modal-content">
-      <div id="modal-3">제조사 등록<span class="close"> &times;</span></div>                                                          
+      <div id="modal-3">제조사 등록<span class="close" id="ww"> &times;</span></div>                                                          
 
         
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 	<form name="joinuser" id="joinuser"> 
     	<div id="modal-4">
         <table>
@@ -35,7 +36,7 @@
  		</div>
 <script type="text/javascript">
 
-		 
+
    
     	$('.rai').on('click',function(){
     		
@@ -80,11 +81,21 @@
 				contentType: "application/json; charset=utf-8;",
 				dataType: "json",
 				success: function(data){
-				
 					alert("등록 되었습니다.");
+	            	var txt = data.name;
+	          		$('#supply').append(str = '<option>' + txt +'<option>');
+	          		 $('#supply').children('option:last').remove();
+	          		$('#supply option').each(function(){
+	            		if($(this).val() == txt){
+	            			$(this).attr("selected" , "selected");
+	            		} 
+	            	 });
+	        		 var modal4 = document.getElementById('myModal2');
+	          		 modal4.style.display = "none";
 				},
 				error: function(){
 					alert("supplier 등록 실패");
+					
 				}
     			
     			

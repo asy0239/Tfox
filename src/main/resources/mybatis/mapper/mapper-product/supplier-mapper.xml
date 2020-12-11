@@ -16,4 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	values(#{sup_name} , #{sup_fee} , #{sup_pur})
 </insert>	
 
+
+
+<select id="supList"  resultType="sup">
+	select * from supplier
+</select>
+
 </mapper>
