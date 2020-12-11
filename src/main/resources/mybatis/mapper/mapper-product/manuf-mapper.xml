@@ -16,4 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	values(#{manu_name} , #{manu_ceo})
 </insert>	
 
+<select id="list"  resultType="manuf">
+	select *from manufactur
+</select>
+
+
+
+
+
 </mapper>

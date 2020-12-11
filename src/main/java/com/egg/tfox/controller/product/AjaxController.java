@@ -23,25 +23,27 @@ public class AjaxController {
 	@PostMapping("product/manuf")
 	@ResponseBody
 	public Object manufAjax(@RequestBody Manuf manuf) {
-			System.out.println(manuf);
-		  HashMap<String, Object> map = new HashMap<String, Object>();
-	        map.put("manu_name", manuf.getManu_name());
-	        map.put("manu_ceo", manuf.getManu_ceo());
+		HashMap<String, Object> map = new HashMap<String , Object>();
+		map.put("name", manuf.getManu_name());
 		int count = sqlSession.insert("manuf.add", manuf);
 		System.out.println(count);
 		return map;
 	}
+
+	
 	   
 	@PostMapping("/product/sup")
 	@ResponseBody
-	public int supplyAjax(@RequestBody Supplier supplier) {
-		System.out.println(supplier);
+	public Object supplyAjax(@RequestBody Supplier supplier) {
+		HashMap<String , Object> map = new HashMap<String , Object>();
+		map.put("name", supplier.getSup_name());
+	
 	
 
 		
 		int count = sqlSession.insert("sup.add" , supplier);
-		
-	 return count;
+		System.out.println(count);
+	 return map;
 	}
 	
 	

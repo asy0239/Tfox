@@ -45,9 +45,23 @@
             contentType: "application/json; charset=utf-8;",
             dataType: "json",
             success: function(data){
-            
-           		alert("등록되었습니다.");
-          
+            	alert('등록되었습니다.');
+				var str = '';
+            	var txt = data.name;
+            	str2 = txt;
+            	 str = '<option>' + str2 +'<option>';
+            	 
+          		$('#made').append(str);
+            	 $('#made').children('option:last').remove();
+            	 $('#made option').each(function(){
+            		if($(this).val() == str2){
+            			$(this).attr("selected" , "selected");
+            		} 
+            	 });
+            	 
+          		 var modal3 = document.getElementById('myModal');
+          		 
+          		 modal3.style.display = "none";
             
            	
             },
