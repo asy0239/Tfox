@@ -14,21 +14,24 @@
 	border-radius: 15px;
 	margin-top:-15px;
 }
-
 #approval_sign {
 	float:right;
 	background-color: #30A9DE;
 	border: none;
 	color: white;
-  	padding: 12px 3px 15px 30px;
+  	padding: 15px 30px 15px 30px;
  	text-align: center;
   	text-decoration: none;
  	display: inline-block;
 	font-size: 16px;
 	cursor:Pointer;
 	border-radius: 15px;
-	margin-top:-15px;
-	margin-left:20px;
+	margin-top: -15px;
+    margin-right: 40px;
+}
+
+#sign_input {
+	float:right;
 }
 
 #doc_box {
@@ -38,7 +41,9 @@
 	height:200px;
 	box-shadow:1px 1px 1px 1px #999; 
 	cursor:Pointer;
+	margin-top:-10px;
 }
+
 
 #doc_box:hover , #sec_box:hover , #sec_box_lg:hover {
 	box-shadow:1px 2px 2px 3px #999;

@@ -30,10 +30,13 @@
 						<span id="app_subsub">
 							사용자가 가장 많이 사용하는 결재 양식입니다. </span>
 						<div id="approval_sign">
-							<input type="text" id="txt">
+							사인 입력
 						</div>
 						<button id="approval_btn" onclick="edit();">결재 작성 버튼</button>
 					</div>
+					<div id="sign_input">
+							<input type="text" id="txt">
+						</div>
 					<div id="doc_box_area">
 						<c:forEach var="userTempList" items="${userTemplateList}">
 							<c:forEach var="tempList" items="${templateList}">
@@ -127,13 +130,30 @@
                 allowToSign: true,
                 img64: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
 				border: '1px solid #c7c8c9',
-                width: '50px',
+                width: '70
+                px',
 				height: '20px',
                 callback: function (data, action) {	
                 	console.log("sign");
+                	console.log(data);
                 }
             });
         });
+		
+	/*     $("#approval_sign").on('click', function(){
+	    	console.log("버튼클릭");
+            var sign = $('#txt').SignaturePad({
+                allowToSign: true,
+                img64: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+				border: '1px solid #c7c8c9',
+                width: '50px',
+				height: '50px',
+                callback: function (data, action) {	
+                	console.log("sign");
+                	console.log(data);
+                }
+            });
+	    }); */
 		
 		// 페이지 시작 시 실행하는 함수
 		$(document).ready(function() {

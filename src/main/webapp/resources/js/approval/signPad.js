@@ -407,8 +407,10 @@
 
             //get the control parent
             var wrapper = control.parent();
-            var img = $('<img>');
-
+            var img = $('#approval_sign');
+            var mySign = $('#mySign');
+            
+            
             //style it
             img.css("cursor", "pointer");
             // img.css("border", settings.border);
@@ -422,8 +424,6 @@
             }
 
 
-
-
             //init the big sign pad
             if (settings.allowToSign == true) {
                 //click to the pad bigger
@@ -431,11 +431,10 @@
                     //show the pad
                     back_drop.show();
                     big_pad.slideToggle();
-
                     //save control to use later
                     $.data(big_pad[0], 'img', img);
                     $.data(big_pad[0], 'control', control);
-
+					console.log("아니시발");
                     //settings.control = control;
                     //settings.img = img;
                 });
