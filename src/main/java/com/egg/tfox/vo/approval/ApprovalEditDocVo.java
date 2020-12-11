@@ -1,6 +1,7 @@
 package com.egg.tfox.vo.approval;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,9 +28,10 @@ public class ApprovalEditDocVo {
 	private String temp_id;
 	
 	// app_doc_ref
-	private String ref_emp_id; // 
+	private List<String> ref_emp_id; // 
 	
 	// approval_doc
-	private String approval_emp_id;//
+	private List<String> approval_emp_id;//
+	private int apporder_code;
 	
 }

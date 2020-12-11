@@ -9,10 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ApprovalEmpPos {
+public class ApprovalEmpPos /* implements Comparable<ApprovalEmpPos> */{
 	private String emp_id;
 	private String emp_name;
 	private String pos_id;
 	private String pos_name;
+	
+	/*
+	 * @Override public int compareTo(ApprovalEmpPos o) { int compareResult =
+	 * this.pos_id.compareTo(o.pos_id); if(compareResult < 0) { return -1; } else
+	 * if(compareResult > 0) { return 1; } return 0; }
+	 */
 	
 }

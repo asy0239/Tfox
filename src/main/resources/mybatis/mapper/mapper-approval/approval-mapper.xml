@@ -178,26 +178,30 @@ from (select
 	and send_emp.dept_id = dept.dept_id
 	</select>
 	
-	<insert id="insertDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+<!-- 	<insert id="insertDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
 		insert into approval_doc
-		values (('AP'||TRIM(TO_CHAR(SEQ_APPID.currval),'000000')),
+		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.nextval,'000000')),
 		        #{emp_id}, #{app_title}, #{app_excu_id}, sysdate,
 		        #{app_content}, #{app_status}, null , #{temp_id})
 	</insert>
 	
 	<insert id="insertRefDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
 		insert into approval_reference
-		values (#{app_id},#{ref_emp_id}, ('AR'||TRIM(TO_CHAR(SEQ_APREFID.currval),'000000'))		
+		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')),#{ref_emp_id}, 'AR'||TRIM(TO_CHAR(SEQ_APPID.nextval,'000000')))		
 	</insert>
-	
+	<insert id="insertState" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+		insert into approval_statement
+		values ('AS'||TRIM(TO_CHAR(SEQ_APSTID.nextval,'000000')),'AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')), #{approval_emp_id},#{apporder_code},null, null)
+	</insert>
+-->
 	<select id="selectTempId" resultType="string" parameterType="string">
 		select temp_id from template where temp_title = #{temp_title}
 	</select>
 	<select id="selectEmpId" resultType="string" parameterType="string">
-		select emp_id from employee where emp_name = #{emp_name}
+		select emp_id from employee where emp_loginid = #{emp_name}
 	</select>
-	
-	<select id="selectEmp_pos" resultType="com.egg.tfox.vo.approval.ApprovalEmpPos" parameterType="string">
+	<!-- com.egg.tfox.vo.approval.ApprovalEmpPos -->
+	<select id="selectEmp_pos" resultType="com.egg.tfox.vo.approval.ApprovalEmpPos">
 		select
 		    emp.emp_id,
 		    emp.emp_name,
@@ -205,6 +209,34 @@ from (select
 		    pos.pos_name
 		from employee emp, position pos
 		where emp.pos_id = pos.pos_id
-		and emp.emp_id = #{emp_id} 
+		and emp.emp_id in (
+			<foreach collection="list" item="item" index="index" separator=",">
+				#{item}
+			</foreach>
+			)
+		order by pos_id desc
 	</select>
+	
+	
+ 	<insert id="insertTotalDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+		insert all
+		into approval_doc
+		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.nextval,'000000')),
+		        #{emp_id}, #{app_title}, #{app_excu_id}, sysdate,
+		        #{app_content}, #{app_status}, null, #{temp_id})
+		<foreach collection="ref_emp_id" item="ref" index="index">
+		into approval_reference
+		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')),
+		        #{ref}, 
+		        'AR'||TRIM(TO_CHAR(SEQ_APREFID.nextval+#{index},'000000')))
+		</foreach>
+		<foreach collection="approval_emp_id" item="appr" index="index">
+		into approval_statement
+		values ('AS'||TRIM(TO_CHAR(SEQ_APSTID.nextval+#{index},'000000')),
+				'AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')),
+				 #{appr}, #{index}+1, null , '결재중')
+		</foreach>
+		select * from dual
+		
+	</insert>
 </mapper>

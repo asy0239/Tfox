@@ -1,6 +1,7 @@
 package com.egg.tfox.controller.approval;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,7 +53,9 @@ public class ApprovalController {
 		HttpSession session = request.getSession();
 		Employee emp = (Employee) session.getAttribute("loginEmp");		
 		String searchEmpList = approvalEditService.searchEmpList(emp.getEMP_ID());
+		List<TemplateEntity> tempList = templateService.listAll();
 		model.addAttribute("empList",searchEmpList);
+		model.addAttribute("tempList", tempList);
 		return "/approval/approval_edit";
 	}
 	
@@ -71,11 +74,23 @@ public class ApprovalController {
 		String userName = authentication.getName();	
 		String app_title = request.getParameter("inputTitle");
 		String app_content = request.getParameter("htmlcontent");
-		String temp_name = request.getParameter("doc_type");
+		String temp_name = request.getParameter("tempName");
 		String soosin_empId = request.getParameter("soosin_empId");
 		String player_empId = request.getParameter("player_empId");
 		String final_empId = request.getParameter("final_empId");
 		
+		String[] ref_split = soosin_empId.split(",");
+		List<String> refEmpList = new ArrayList<String>();
+		for(int i = 0; i < ref_split.length; i++) {
+			refEmpList.add(ref_split[i].trim());
+		} // 여기 손봐라
+		String[] final_split = final_empId.split(",");
+		List<String> approvalEmpList = new ArrayList<String>();
+		for(int i = 0; i < final_split.length; i++) {
+			approvalEmpList.add(final_split[i].trim());
+		}
+		
+		log.info("tempName : " + temp_name);
 		ApprovalEditDocVo appDoc = ApprovalEditDocVo.builder()
 		// app_doc
 		.app_title(app_title)
@@ -85,8 +100,9 @@ public class ApprovalController {
 		.app_status("전송")
 		.temp_name(temp_name)
 		// app_ref
-		.ref_emp_id(soosin_empId)
-		.approval_emp_id(final_empId).build();
+		.ref_emp_id(refEmpList)
+		// app_stats
+		.approval_emp_id(approvalEmpList).build();
 		
 		approvalEditService.insertAppDoc(appDoc);
 		
@@ -125,7 +141,7 @@ public class ApprovalController {
 
 	
 	
-	@RequestMapping(value="/approval/weekIgnore.do" , method = RequestMethod.GET)
+	@RequestMapping(value="/approval/weekIgnore.do" , method = RequestMethod.POST)
 	@ResponseBody
 	public List<ApprovalMainVo> approvalMainWeekIgnore(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -134,7 +150,7 @@ public class ApprovalController {
 		return list;
 	}
 	
-	@RequestMapping(value="/approval/noCheck.do", method = RequestMethod.GET)
+	@RequestMapping(value="/approval/noCheck.do", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ApprovalMainNoCheckVo> approvalMainNoCheck(Model model){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -144,7 +160,7 @@ public class ApprovalController {
 		return list;
 	}
 	
-	@RequestMapping(value="/approval/totalDoc.do")
+	@RequestMapping(value="/approval/totalDoc.do" , method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> approvalMainTotal(Model model){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

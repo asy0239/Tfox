@@ -52,11 +52,10 @@
 					<div id="app_subTitle">
 					<label for="doc" id="doc_label">빈 문서</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<select name="doc" id="doc">
-							<option id="doc_op"value="빈문서" selected="selected">빈문서</option>
-							<option id="doc_op"value="품의서">품의서</option>
-							<option id="doc_op"value="기안서">기안서</option>
-							<option id="doc_op"value="회계장부">회계장부</option>
-							<option id="doc_op"value="초과근무서">초과근무서</option>
+							<option id="doc_op" value="빈 문서" selected="selected">빈 문서</option>
+							<c:forEach items="${tempList }" var="temp">
+								<option id="doc_op" value="${temp.temp_title }">${temp.temp_title }</option>
+							</c:forEach>
 						</select>
 					</div>
 						<table id="doc_table">
@@ -119,6 +118,7 @@
 						<input type="hidden" id="soosinHidden" name="soosin_empId">
 						<input type="hidden" id="playerHidden" name="player_empId">
 						<input type="hidden" id="finalAppHidden" name="final_empId">
+						<input type="hidden" id="tempName" name="tempName">
 				</div>
 				</form>
 			</article>
@@ -170,7 +170,6 @@
                   callback: function (data, action) {
                   }
               });
-			  
           })
           
           // 테스트
@@ -196,9 +195,11 @@
 		  $("#doc").on("click", function(){
 		     var label = $("#doc_label");
 		     var select = $("#doc option:selected").val();
+		     var hidden2 = $("#tempName");
 		     
 		     label.empty();
 		     label.append(select);
+		     hidden2.val(select);
 		  });
 		  
 		  
