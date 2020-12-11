@@ -31,20 +31,20 @@
 		<br>
 		<h2 align="center">BEST</h2>
 		
-		<%--  <c:forEach var="pi" items="${ requestScope.list }">  --%>
+		 <c:forEach var="proL" items="${productList }"> 
 		 <div class="thumb-list" align="center">
 				<div>
-					<input type="hidden" value="<c:out value="${pi.dl}"/>">
-					<img src="${ applicationScope.contextPath }/resources/thumbnail_uploadFiles/<c:out value="${ hmap.changeName }"/>"
-						width="350px" height="400px">
+					<a href="/detail?pro_id=${proL.pro_id}">
+						<img src="/fileList?pro_id=${proL.pro_id }"
+										width="350px" height="400px">
+					</a>
 				</div>
 				<p>
-				상품이름: <c:out value="${ hmap.bno }"/><br> 
-				사이즈: <c:out value="${ hmap.bCount }"/><br>
-				가격: <c:out value=""/><c:out value=""/>
+				 <c:out value="${ proL.pro_name }"/><br> 
+				 <c:out value="${proL.pro_price }"/>
 				</p>
 			</div>
-			<%-- </c:forEach> --%>
-
+			</c:forEach> 
+	</div>
 </body>
 </html>

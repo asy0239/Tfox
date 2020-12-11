@@ -84,7 +84,17 @@
             el:document.querySelector("#editor"),
             initialEditType:'wysiwyg',
             
-        });        
+        }); 
+        
+ /*        $(#)
+      	  var template = $("#mydiv").html();
+      	  var opt = $(".editor_opt[name=doc_label]:checked").val();
+      	  var hidden = $("#hd");
+      	  var hidden2 = $("#hd2");
+      	  hidden.val(template);
+      	  hidden2.val(opt);
+      	  
+        }); */
     </script>
 	</div>
 </body>

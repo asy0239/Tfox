@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.egg.tfox.repository.Board.BoardDao;
 import com.egg.tfox.vo.board.GesiVO;
 import com.egg.tfox.vo.board.PageInfo;
+import com.egg.tfox.vo.board.ProductVO;
 import com.egg.tfox.vo.board.UserVO;
 
 @Service
@@ -33,6 +34,12 @@ public class BoardServiceImpl implements BoardService {
 	public int countBoard(Map<String, Object> mapList) {
 		// TODO Auto-generated method stub
 		return dao.countBoard(mapList);
+	}
+
+	@Override
+	public List<ProductVO> productList() {
+		// TODO Auto-generated method stub
+		return dao.boardList();
 	}
 
 
