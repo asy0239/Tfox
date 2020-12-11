@@ -117,6 +117,11 @@ public class VacationServiceImpl implements VacationService {
 		vacationDao.vacCateSet(vactypeName, vactypeYN, yearYN);
 	}
 
+	@Override
+	public void vacCateDelete(String name) {
+		vacationDao.vacCateDelete(name);
+	}
+
 	
 
 

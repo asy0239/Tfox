@@ -49,6 +49,8 @@ public interface VacationService {
 
 	public void vacCateSet(List<String> vactypeName, List<String> vactypeYN, List<String> yearYN);
 
+	public void vacCateDelete(String name);
+
 
 
 }

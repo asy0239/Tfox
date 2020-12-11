@@ -122,6 +122,8 @@ function addzero(num) {
 		return num;
 
 }
+    
+$(document).ready()
     //출근 버튼 클릭시 시간 가지고오기
     $(function(){
     	$("#attbtn1").click(function(){
@@ -133,7 +135,7 @@ function addzero(num) {
     				console.log(data)
     				$("#go").val();
     				if("#go" != null){
-    				$("#attbtn1").attr('disabled', true);
+    					$("#attbtn1").attr('disabled');
     				}
     			},
     			error:function(){

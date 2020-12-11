@@ -239,6 +239,11 @@ public class VacationDaoImpl implements VacationDao {
 			
 	}
 
+	@Override
+	public void vacCateDelete(String name) {
+		sqlSession.delete("vacation.catDelete", name);
+	}
+
 		
 
 	
