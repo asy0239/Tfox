@@ -213,8 +213,16 @@
 								</tr>
 								<tr>
 									<td> &nbsp;이미지</td>
-									<td class="ph"><div id="photo"></div></td>
-									<td class="ph"><div id="photo1"></div></td>
+									<td class="ph">
+										<div id="photo">
+											<img id="titleImg" >
+										</div>
+									</td>
+									<td class="ph">
+										<div id="photo1">
+											<img id="contentImg1">
+										</div>
+									</td>
 								</tr>
 							</table>		
 						
@@ -362,6 +370,13 @@
                         }
              
             }
+        
+        $(function(){
+        	$("#photo").click(function(){
+        		$("#photo").click();
+        	});
+        	
+        });
             
         </script>
 				
