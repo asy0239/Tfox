@@ -186,42 +186,14 @@
 <body>
 
 <div id="wrap">
-<!-- 상단바  -->
-	<div id="header">
-		<!-- 상단바 _ top 메뉴 -->
-		<div class="header_top_wrap">
-			<div class="header_top_left">
-				<ul class="header_top_leftbar">
-					<li><a href="center">CENTER</a></li>
-					<li><a href="">REVIEW</a></li>
-				</ul>
-			</div>
-			<div class="header_top_right">
-				<ul class="header_top_rightbar">
-					<li><a href="login">LOGIN</a></li>
-					<li><a href="${pageContext.request.contextPath }/join">JOIN</a></li>
-					<li><a href="">MY PAGE</a></li>
-					<li><a href="">ORDER</a></li>
-					<li><a href=""><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
-				</ul>
-			</div>
-	
-		</div>
-		<!-- 로고 이미지  -->
-		<div class="header_mid">
-			<div class="mid_img">
-				<a>
-					<img src="${pageContext.request.contextPath }/resources/img/webFront/webLogo.png"/>
-				</a>
-			</div>
-		</div>
-		</div>
+<%@ include file="/WEB-INF/views/webFront/header.jsp"%>
 <h2 align="center" id="cart">C A R T</h2>
-<div class="confirm">
+<div class="proInfo">
 <h2>주문/결제</h2>
 <div id="item-table">
 <!-- 상품정보 테이블 -->
-	<form name="proinfo" method="get" action="${ path }/webFront/cart/proinfo">
+		<c:if test="${ !empty sessionScope.loginUser }">
+	<form name="proInfo" method="get" action="proInfo">
 	<table id="proT1">
 		
 		<tr id="itemArea">
@@ -232,38 +204,44 @@
 			<th width="120px">배송비</th>
 			
 		</tr>
-		<c:forEach var="proinfo" items="${proinfo}">
+		<c:forEach var="proVo"  items="${proInfo}">
 		<!-- 상품정보 데이터 -->
-		<tr id="proinfo" align="center">
-			<input type="hidden" "<c:out value='${proinfo.pro_id }'/>">
+		<tr id="proInfo" align="center">
+			<input type="hidden" "<c:out value='${proVo.pro_id }'/>">
 			<td><input type="checkbox"></td>
-			<td><c:out value="${proinfo.pro_name}"/>
-				<c:out value="${proinfo.pro_color}"/>
-				<c:out value="${proinfo.pro_size}"/>
+			<td><c:out value="${proVo.pro_name}"/>
+				<c:out value="${proVo.pro_color}"/>
+				<c:out value="${proVo.pro_size}"/>
 			</td>
-			<td><c:out value="${proinfo.pro_ea}"/></td>
-			<td><c:out value="${proinfo.pro_price}"/></td>
+			<td><c:out value="${proVo.order_ea}"/></td>
+			<td><c:out value="${proVo.pro_price}"/></td>
 			
 			<td><c:out value="2500"/></td>
 		</tr>
 		</c:forEach>
 	</table>
 	</form>
+		</c:if>
 </div>
 <!-- 주문자 정보 -->
 <h2>주문자 정보</h2>
 <div id="userInfo">
-	<form name="userinfo" method="get" action="userinfo.do">
+	<form name="userinfo" method="get" action="getInfo" var="User">
 	<table id="userT1">
-	<!--<c:if test="${ !empty sessionScope.loginUser }">-->
 		<tr>
-			<input type="hidden" "<c:out value='${user.user_id }'/>">
-			<td>이름<c:out value="${user.user_name}"/></td>													
-			<td>연락처<c:out value="${user.phone }"/></td>
-			<td>주소<c:out value="${user.user_addr }"/></td>
+		 <th>이름</th>
+		 <th>연락처</th>
+		 <th>주소</th>
+		</tr>
+	<c:if test="${ !empty sessionScope.loginUser }">
+		<tr>
+			<input type="hidden" "<c:out value='${User.user_id }'/>">
+			<td>${user[0].user_name}</td>													
+			<td>${user[0].user_phone}</td>
+			<td>${user[0].user_addr}</td>
 			
 		</tr>
-	<!--</c:if>-->
+	</c:if>
 	</table>
 				</form>
 </div>
@@ -276,21 +254,21 @@
 	</div>
 
 <div class="homeInfo">
-	<form id="getInfo" name="getinfo" method="get" action="getinfo">
+	<form id="getInfo" name="User" method="get" action="getInfo">
 	<table>
-	<!--<c:if test="${ !empty sessionScope.loginUser }">-->
+	<c:if test="${ !empty sessionScope.loginUser }">
 		<tr>
 			<th>받으실분 </th>
 			<th>연락처</th>
 			<th>받으실 곳</th>
 		</tr>
 		<tr>
-			<input type="hidden" "<c:out value='${getinfo.user_id }'/>">			
-			<td><c:out value="${getinfo.user_name}"/></td>													
-			<td>연락처<c:out value="${getinfo.phone }"/></td>
-			<td>받으실 곳<c:out value="${getinfo.user_addr }"/></td>
+			<input type="hidden" ${user[0].user_id }">			
+			<td>${user[0].user_name}</td>													
+			<td>${user[0].user_phone}</td>
+			<td>${user[0].user_addr}</td>
 		</tr>
-	<!--</c:if>-->
+	</c:if>
 	</table>
 				</form>
 </div>
@@ -322,16 +300,31 @@
 	</form>
 </div>
 </div>
-<!-- 결제 수단 -->
-<div>
-	<form>
+<!-- 결제 정보 -->
+<div class="confirm">
+	<form id="confirm" action="confirm" method="post">
 	<table>
-	<div>
-	<h3><label>결제 정보</label></h3>
-	<label>상품 금액</label>
-	<label>배송비</label>
-	<label>총 결제 금액</label>
-	</div>
+		<tr>
+			<th>상품 합계 금액</th>
+		</tr>
+	    <tr>
+	    	<th>배송비</th>
+	    </tr>
+	    <tr>
+	     	<th>최종 결제 금액</th>
+	    </tr>
+	    <tr>
+	    	<td></td>
+	    </tr>
+	    <tr>
+	    	<td></td>
+	    </tr>
+		<tr>
+	    	<td></td>
+	    </tr>
+	
+	
+	
 	</table>
 	</form>
 </div>
