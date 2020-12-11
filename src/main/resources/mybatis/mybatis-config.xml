@@ -20,6 +20,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.egg.tfox.vo.approval.ApprovalMainNoCheckVo" alias="approvalMainNoCheckVo"/>
 		<typeAlias type="com.egg.tfox.entity.attendance.Vacation" alias="vacationVo"/>
 		<typeAlias type="com.egg.tfox.entity.User" alias="user"/>
+		<typeAlias type="com.egg.tfox.vo.cart.proVo" alias="proVo"/>
+		<typeAlias type="com.egg.tfox.vo.user.UserVo" alias="userVo"/>
 	</typeAliases>	
 
 	<!-- enviroments : 사용환경에 대한 정의 . 개발/배포을 구분하기 위해 사용 -->

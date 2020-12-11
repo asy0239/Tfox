@@ -117,7 +117,7 @@
 					<li><a href="${pageContext.request.contextPath }/webFront/join">JOIN</a></li>
 					<li><a href="">MY PAGE</a></li>
 					<li><a href="">ORDER</a></li>
-					<li><a href=""><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
+					<li><a href="${pageContext.request.contextPath }/webFront/cart"><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
 				</ul>
 			</c:if>
 			<c:if test="${ !empty sessionScope.loginUser }">
@@ -126,7 +126,7 @@
 					<li><a href="${pageContext.request.contextPath }/webFront/logout">LOGOUT</a></li>
 					<li><a href="">MY PAGE</a></li>
 					<li><a href="">ORDER</a></li>
-					<li><a href=""><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
+					<li><a href="${pageContext.request.contextPath }/webFront/cart"><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
 				</ul>
 			</c:if>
 			</div>

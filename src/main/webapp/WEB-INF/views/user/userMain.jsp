@@ -63,6 +63,9 @@ table, tr, td {
 	background: black;
 	color: white;
 }
+#userlist {
+	height: 300px;
+}
 </style>
 </head>
 <body>
@@ -118,13 +121,13 @@ table, tr, td {
 							</div>
 						</form>
 					</div>
-					<!-- 검색 목록 -->
+					<!-- 회원 목록 -->
 					<h3>
 						<label id="userlist"
 							style="font-size: x-large; font-weight: bold;">회원목록</label>
 					</h3>
-					<div>
-						<form>
+					<div id="userlist">
+						<form name="userlist" method="get" action="userlist">
 							<table id="t2">
 								<tr id="t2info">
 									<th><input type="checkbox"></th>
@@ -142,7 +145,7 @@ table, tr, td {
 							<td><c:out value="${user.user_name}"/></td>
 							<td><c:out value="${user.user_loginid}"/></td>
 							<td><c:out value="${user.user_date }"/></td>
-							<td><c:out value="${user.phone }"/></td>
+							<td><c:out value="${user.user_phone }"/></td>
 							<td><c:out value="${user.user_email }"/></td>
 							<td></td>
 						</tr>
@@ -150,6 +153,25 @@ table, tr, td {
 							</table>
 							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 						</form>
+					<!-- 페이징 -->
+					<div id="paging" align="center">
+						<c:if test="${pagin.startPage !=1 }">
+							<a href="/userlist?nowPage=${ paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+						</c:if>
+						<c:forEach begin="${ paging.startPage }" end="${ paging.endPage }" var="p">
+							<c:choose>
+							<c:when test="${ p == paging.nowPage }">
+							<b>${ p }</b>
+							</c:when>
+							<c:when test="${p != paging.nowPage }">
+								<a href="/userlist?nowpage=${ p }&cnePerPage=${paging.cntPerPage}">${ p }</a>
+							</c:when>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${ paging.endPage != paging.lastPage }">
+							<a href="/userlist?nowPage=${ paging.endPage+1 }&cntPerPage=${ paging.cntPerPage }">&gt;</a>
+						</c:if>
+					</div>
 					</div>
 					
 				</div>

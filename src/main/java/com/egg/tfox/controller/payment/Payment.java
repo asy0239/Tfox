@@ -8,18 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.egg.tfox.service.payment.PayService;
 
 @Controller
-/* @RequestMapping("/pay") */
+//@RequestMapping("/cart") 
 public class Payment {
 
 //	@Autowired
 //	private PayService payService;
 	
 	//주문/결제 confirm 페이지
-	@GetMapping("/confirm")
-	public String confirm() {
-		return "payment/confirm";
-		//return "pay/confirm;
-	}
+	/*
+	 * @GetMapping("/webFront/cart") public String cart() { return "webFront/cart";
+	 * //return "pay/confirm; }
+	 */
 	
 	
 }
