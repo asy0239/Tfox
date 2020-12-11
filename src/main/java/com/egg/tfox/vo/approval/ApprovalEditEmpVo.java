@@ -16,5 +16,5 @@ public class ApprovalEditEmpVo {
 	private String dept_id;
 	private String dept_name;
 	private String pos_id; // 
-	private String pos_name; //
+	private String pos_name; //	
 }

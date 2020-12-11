@@ -32,7 +32,7 @@ public class Test01 {
 		log.info("{}", ds);
 	}
 
-	//@Test
+	@Test
 	public void test2() {
 		Connection con = null;
 		PreparedStatement pstmt = null;

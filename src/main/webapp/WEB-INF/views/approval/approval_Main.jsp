@@ -2,6 +2,7 @@
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +29,9 @@
 						<span id="subMain"> 자주쓰는 결재 </span> 
 						<span id="app_subsub">
 							사용자가 가장 많이 사용하는 결재 양식입니다. </span>
+						<div id="approval_sign">
+							<input type="text" id="txt">
+						</div>
 						<button id="approval_btn" onclick="edit();">결재 작성 버튼</button>
 					</div>
 					<div id="doc_box_area">
@@ -88,41 +92,6 @@
 							<span>전체 결재 내역 보기</span>
 						</div>
 					</div>
-					<%-- <c:forEach var="doc" items="${totalDoc['sendList']}">
-							<div id="sec_box_lg">
-								<div>
-									<c:choose>
-										<c:when test="${doc['temp_id'] eq 'TMP001'}">
-											<img
-												src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg">
-										</c:when>
-										<c:when test="${doc['temp_id'] eq 'TMP002'}">
-											<img
-												src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg">
-										</c:when>
-										<c:when test="${doc['temp_id'] eq 'TMP003'}">
-											<img
-												src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg">
-										</c:when>
-										<c:otherwise>
-											<img
-												src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg">
-										</c:otherwise>
-									</c:choose>
-								</div>
-								<div>${doc['temp_title'] }</div>
-								<div>${doc['app_title'] }</div>
-								<div>
-									<img
-										src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg">
-								</div>
-								<div>
-									<p>${doc['emp_name']}</p>
-									<p>${doc['dept_name']}</p>
-								</div>
-								<div>${doc['app_date'] }</div>
-								</div>
-						</c:forEach> --%>
 					</div>
 					<div id="pageNumber">
 					</div>
@@ -130,7 +99,7 @@
 		</section>
 	</div>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	
+	<script src="${pageContext.request.contextPath  }/resources/js/approval/signPad.js"></script>
 	<script>
 		function edit() {
 			location.href = "approval_edit";
@@ -152,16 +121,30 @@
 			}
 		});
 		
+		$(document).ready(function () {		
+			console.log("test");
+            var sign = $('#txt').SignaturePad({
+                allowToSign: true,
+                img64: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+				border: '1px solid #c7c8c9',
+                width: '50px',
+				height: '20px',
+                callback: function (data, action) {	
+                	console.log("sign");
+                }
+            });
+        });
+		
 		// 페이지 시작 시 실행하는 함수
 		$(document).ready(function() {
-			var id = 0;
-			totalDoc(0);
+			var id = 1;
+			totalDoc(id);
 		});
 		
 		// 7일간 안본 문서 내역 보기
  		function weekIgnore(id){
 			$.ajax({
-				type:"GET",
+				type:"POST",
 				url:"${pageContext.request.contextPath}/approval/weekIgnore.do",
 				dataType:"json",
 				success:function(data){
@@ -170,8 +153,10 @@
 					var ref = ${totalDoc['refList'].size()};
 					var noCheck = ${noCheck.size()};
 					var total = sendList + ref + noCheck;
+					
 					$("#sec_area").html('');
 					$("#pageNumber").html('');
+					var data = sortDate_each(data);
 					var data = paging(data);
 					if(data.length == 0){
 						$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")
@@ -193,7 +178,6 @@
 							$.each(data[id],function(index, doc){
 								$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.emp_name+'</p> <p>'+doc.dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')							
 							})
-							
 						}
 					}
 				}
@@ -202,7 +186,7 @@
 		// 결재하지 않은 결재
 		function noCheck(id){
 			$.ajax({
-				type:"GET",
+				type:"POST",
 				url:"${pageContext.request.contextPath}/approval/noCheck.do",
 				dataType:"json",
 				success:function(data) {
@@ -211,10 +195,11 @@
 					var ref = ${totalDoc['refList'].size()};
 					var noCheck = ${noCheck.size()};
 					var total = sendList + ref + noCheck;
+				
 					$("#sec_area").html('');
 					$("#pageNumber").html('');
+					var data = sortDate_each(data);
 					var data = paging(data);
-					console.log("noCheck : " + data[0]);
 					if(noCheck == 0) {
 						$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")				
 					} else {
@@ -245,7 +230,7 @@
 		// 로그인한 계정의 관련된 모든 문서들을 볼 수 있다.
 		function totalDoc(id){
 			$.ajax({
-				type:"GET",
+				type:"POST",
 				data: {choice : "choice"},
 				url:"${pageContext.request.contextPath}/approval/totalDoc.do",
 				dataType:"json",
@@ -260,20 +245,38 @@
 					/* $("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div> <span>0건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div> <span>0건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div> <span style="color: purple">2건</span> <span>전체 결재 내역 보기</span> </div> </div> <c:forEach var="doc" items="${data.weekIgnore }"> <div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq 'TMP001'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP002'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq 'TMP003'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>${doc.temp_title }</div> <div>${doc.app_title }</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>${doc.emp_name }</p> <p>${doc.dept_name }</p> </div> <div>${doc.app_date }</div> </div> </c:forEach> </div>'); */
 					$("#sec_area").html('<div id="sec_box" onclick="weekIgnore();"> <div id="Ignore"> <span>'+${weekIgnore.size()}+'건</span> <span>7일 이상 지연된 결재요청(상신)</span> </div> </div> <div id="sec_box" onclick="noCheck();"> <div id="noCheck"> <span>'+noCheck+'건</span> <span>확인하지 않은 결재요청(수신)</span> </div> </div> <div id="sec_box" onclick="totalDoc();"> <div class="category" id="total"> <span style="color: purple">'+total+'건</span> <span>전체 결재 내역 보기</span> </div> </div>');
 					if(!id) {
-						id = 0;
+						id = 1;
 					}
 					var pagingData = paging(total_doc);
-					if(pagingData.length == 0) {
-						$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")				
-					} else if(pagingData.length <= 5){
-						$("#sec_area").css("grid-template-rows", "repeat("+	pagingData.length+" ,130px)")
+					console.log(pagingData.length);
+					if(total <= 5) {
+						if(pagingData.length == 0) {
+							$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")				
+						} else if(pagingData.length <= 5){
+							$("#sec_area").css("grid-template-rows", "repeat("+pagingData.length+" ,130px)")
+						} else {
+							$("#sec_area").css("grid-template-rows", "repeat("+7+" ,130px)")
+						}
 					} else {
-						$("#sec_area").css("grid-template-rows", "repeat("+	7+" ,130px)")
-					}				
+						if(pagingData.length == 0) {
+							$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")				
+						} else if(pagingData[id-1].length <= 5){
+							$("#sec_area").css("grid-template-rows", "repeat("+pagingData[id-1].length+" ,130px)")
+						} else {
+							$("#sec_area").css("grid-template-rows", "repeat("+7+" ,130px)")
+						}
+					}
+					/* if(pagingData.length == 0) {
+						$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")				
+					} else if(pagingData[id-1].length <= 5){
+						$("#sec_area").css("grid-template-rows", "repeat("+pagingData[id-1].length+" ,130px)")
+					} else {
+						$("#sec_area").css("grid-template-rows", "repeat("+7+" ,130px)")
+					} */				
 					if(pagingData.length == 0) {
 						$("#sec_area").append('<div id="sec_box_lg" class="nullDoc">조회된 내역이 없습니다.</div>')
 					} else {
-						if(pagingData.length <= 5) {
+						if(total <= 5) {
 							$.each(pagingData , function(index, doc){
 								if(!doc.emp_id && !doc.approver_id) {
 									// ref 행을 위한 if
@@ -287,7 +290,8 @@
 								}	
 							})
 						} else {
-							$.each(pagingData[id] , function(index, doc){
+							$.each(pagingData[id-1] , function(index, doc){
+								
 								if(!doc.emp_id && !doc.approver_id) {
 									// ref 행을 위한 if
 									$("#sec_area").append('<div id="sec_box_lg"> <div> <c:choose> <c:when test="${doc.temp_id eq '+tmpList[0]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[1]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg"> </c:when> <c:when test="${doc.temp_id eq '+tmpList[2]+'}"> <img src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg"> </c:when> <c:otherwise> <img src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg"> </c:otherwise> </c:choose> </div> <div>'+doc.temp_title+'</div> <div>'+doc.app_title+'</div> <div> <img src="${pageContext.request.contextPath }/resources/img/approval/user_circle.svg"> </div> <div> <p>'+doc.send_emp_name+'</p> <p>'+doc.send_dept_name+'</p> </div> <div>'+dateFormatting(doc.app_date)+'</div> </div>')
@@ -310,17 +314,21 @@
 		};
 		
 		function paging(data) {
-			var pageCount = Math.floor(data.length/5); // 한 화면에 나올 페이지 수 5개의 데이터를 보여줌
+			if(data.length % 5 == 0) {
+				var pageCount = Math.floor(data.length/5)-1; // 한 화면에 나올 페이지 수 5개의 데이터를 보여줌
+			} else {
+				var pageCount = Math.floor(data.length/5);
+			}
 			var result = [];
 			if(data.length < 6) {
 				return data;
 			}
 			// 페이징 버튼 추가
-			if(pageCount > 1) {
+			if(pageCount >= 1) {
 				var arr = pagingNumDef(pageCount);
 				$("#pageNumber").html("");
 				for(var i = 0; i < arr.length; i++) {
-					$("#pageNumber").append('<a class="choice" id="'+i+'">'+arr[i]+'</a>');
+					$("#pageNumber").append('<a class="choice" id="'+(i+1)+'">'+arr[i]+'</a>');
 				}
 			}
 			// 5개 씩 나눔
@@ -334,7 +342,7 @@
 		function pagingNumDef(pageNumber) {
 			var arr = new Array();
 			var pageNumber = pageNumber;
-			for(var i = 0; i < pageNumber; i++) {
+			for(var i = 0; i <= pageNumber; i++) {
 				arr[i] = i+1;
 			}
 			return arr;
@@ -350,57 +358,48 @@
 				return new Date(dateFormatting(b['app_date'])) - new Date(dateFormatting(a['app_date']));
 			});
 			
-			return total;
+			var temp1 = [];
+			var temp2 = [];
+			// 중복값 doc 제거
+			function uniqBy(a, key) {
+				var seen = {};
+				return a.filter(function(item) {
+					var k = key(item);
+					return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+					
+				})
+			}
+			
+			temp1 = uniqBy(result, JSON.stringify);
+			
+			return temp1;
+		}
+		
+		function sortDate_each(data){
+			var data = data;
+			var result = data.sort(function(a,b){
+				return new Date(dateFormatting(b['app_date'])) - new Date(dateFormatting(a['app_date']));
+			});
+			return data;
 		}
 		
 		// 날짜 정렬 최신순(onload)
 		function sortDateMain(data) {
 			console.log(data);
 		}
-		
-		// 날짜 데이터 포맷팅 함수
-		function dateFormatting(date){
-			var month="";
-			var year="";
-			var day="";
-			var resultDay="0";
-			var resultMonth="0";
-			if(date != null) {
-			for(var i = 0; i<date.length; i++){
-				if(!isNaN(date[i])) {
-					if(i < 2) {
-						if(date[i] != " "){
-							month += date[i];
-						}
-					}
-					if(i >= 2 && i < 6) {
-						if(date[i] != " "){
-							day += date[i];						
-						}
-					}
-					if(i>=6) {
-						year += date[i];
-					}
-				}
-			}
+	
+	function dateFormatting(date){
+			var time = new Date(date);
+			var year = time.getFullYear();
+			var month = time.getMonth()+1;
+			var day = time.getDate();
 			
-			if(day.length != 2){
-				resultDay += day;
-			} else {
-				resultDay = day;
-			}
-			if(month.length != 2) {
-				resultMonth += month;
-			} else {
-				resultMonth = month;
-			}
-		
-			var result = year+"-"+resultMonth+"-"+resultDay;
-			result.replace(/\s/gi,"");
-			return result;
-			}
-			return null;
-		}
+			month = month >= 10 ? month : '0' + month;
+			day = day >= 10 ? day : '0' + day;
+			return year + "-" + month + "-" + day;
+	}	
+			
+			
 	</script>
 </body>
 </html>

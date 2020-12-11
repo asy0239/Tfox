@@ -2,12 +2,15 @@ package com.egg.tfox.service.approval;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Spliterator;
+
+import javax.print.attribute.HashPrintJobAttributeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,19 +77,30 @@ public class ApprovalEditServiceImpl implements ApprovalEditService {
 	public void insertAppDoc(ApprovalEditDocVo appDoc) {
 		
 		// 참조자, 결재자, 시행자 리스트화
-		List<String> Ref_list = Arrays.asList(appDoc.getRef_emp_id().split(","));
-		List<String> approval_list = Arrays.asList(appDoc.getRef_emp_id().split(","));
-		List<String> excu_list = Arrays.asList(appDoc.getApp_excu_id().split(","));
+		List<String> ref_list = new ArrayList<String>();
+		List<String> approval_list = new ArrayList<String>();
+		List<String> excu_list = new ArrayList<String>();
 		
-		log.info("ref_list" + Ref_list);
-		log.info("approval_list" + approval_list);
-		log.info("excu_list" + excu_list);
+//		String[] ref_split = appDoc.getRef_emp_id().split(",");
+//		String[] approval_split = appDoc.getApproval_emp_id().split(",");
+//		String[] excu_split = appDoc.getApp_excu_id().split(",");
+//		for(int i = 0; i < ref_split.length; i++) {
+//			ref_list.add(ref_split[i].trim());
+//		}
+//		for(int i = 0; i < approval_split.length; i++) {
+//			approval_list.add(approval_split[i].trim());
+//		}
+//		for(int i = 0; i < excu_split.length; i++) {
+//			excu_list.add(excu_split[i].trim());
+//		}
+//		
+		// apporder_code 를 위한 직급vo 불러오기
+//		List<ApprovalEmpPos> refEmpPos = approvalEditDao.searchEmp_pos(ref_list);
+//		List<ApprovalEmpPos> approvalEmpPos = approvalEditDao.searchEmp_pos(approval_list);
+//		List<ApprovalEmpPos> excuEmpPos = approvalEditDao.searchEmp_pos(excu_list);
 		
-		approvalEditDao.searchEmp_pos(Ref_list);
-		
-		
+		approvalEditDao.insertAppDoc(appDoc, ref_list, approval_list, excu_list);
 //		approvalEditDao.insertAppDoc(appDoc , Ref_list, approval_list, excu_list);
-		
 	}
 	
 }
