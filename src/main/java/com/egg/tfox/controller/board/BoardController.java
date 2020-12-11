@@ -67,6 +67,7 @@ public class BoardController {
 		System.out.println(mapList);
 	
 		  List<GesiVO> gesiList; gesiList = boardService.selectList(mapList, pi);
+		  model.addAttribute("reqList", mapList);
 		  model.addAttribute("gesiList", gesiList);
 		  model.addAttribute("paging", pi);
 		  
@@ -76,22 +77,37 @@ public class BoardController {
 	}
 
 	@RequestMapping(value="/gesi.web", method = RequestMethod.GET)
-	public String gesiWebList(@RequestParam String gesi_code, 
+	public String gesiWebList(@RequestParam String gesi_code,
+							  @RequestParam(value="nowPage", required=false)String nowPage, 
+							  @RequestParam(value="cntPerPage", required=false)String cntPerPage, 
 								HttpServletRequest req, Model model, PageInfo pi) {
 		System.out.println(gesi_code);
 		
 		String webURL = null;
 		
-		
 		if(gesi_code.equals("GS001")) {
-			List<QnaListVO> gesiWebList = qnaService.selectQnaList(gesi_code);
+			
+			int total = qnaService.countQna(gesi_code);
+			
+			if (nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "10";
+			} else if (nowPage == null) {
+				nowPage = "1";
+			} else if (cntPerPage == null) { 
+				cntPerPage = "10";
+			}
+			
+			pi = new PageInfo(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			
+			List<QnaListVO> gesiWebList = qnaService.selectQnaList(gesi_code, pi);
 			
 			model.addAttribute("qnaList", gesiWebList);
+			model.addAttribute("paging", pi);
 			System.out.println(gesiWebList);
 			
 			webURL="webFront/center";
 		}else if(gesi_code.equals("GS002")) {
-			
 			webURL="webFront/review";
 		}
 		

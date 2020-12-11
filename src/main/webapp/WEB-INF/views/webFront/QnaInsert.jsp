@@ -10,24 +10,65 @@
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 </head>
+<style>
+	.qnaAddWrap {
+		width: 1200px;
+		margin:0 auto;
+	}
+	
+	table {
+  		border-collapse: separate;
+  		border-spacing: 0 10px;
+	}
+	
+</style>
 <body>
 	<div>
 		<%@ include file="/WEB-INF/views/webFront/header.jsp"%>
 		
-		<form  name="qna.add" method="get" action="qna.add">
-			<table>
+		<c:if test="${ !empty sessionScope.loginUser }">
+		<div class="qnaAddWrap">
+		<form  name="qnaAdd" method="get" action="qna.add">
+			<table align="center">
 				<tr>
 					<td>작성자</td>
+					<td><input type="text" name="user_name"
+						value="<c:out value="${ sessionScope.loginUser.user_name }"/>"/></td>
 				</tr>
-				<tr></tr>
-				<tr></tr>
-			<div id="editor"></div>
-			</table>			
-			
-			
+				<tr>
+					<td>제목</td>
+					<td><input type="text" name="gesi_title"/></td>
+				</tr>
+				<tr>
+					<td>문의유형</td>
+					<td>
+						<select id="qnatype" name="qnatype">
+							<!-- 여기에다가 문의 종류 불러와야함 -->
+							<c:forEach var="category" items="${qnaType }">
+								<option value="${category.qna_code }">${category.qna_name}</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>내용</td>
+					<td><div id="editor"></div></td>
+				</tr>
+			</table>
+			<div align="center">
+					<button type="submit">문의하기</button>
+			</div>	
+			<input type="hidden" name="user_id"
+						value="<c:out value="${ sessionScope.loginUser.user_id }"/>"/>
+						
+			<input type="hidden" name="gesi_content"
+						value="editor.get"/>
+						
 		</form>
-		
-		
+		</div>
+		</c:if>
+		<c:if test="${ empty sessionScope.loginUser }">
+		</c:if>
 
 	
 	
@@ -40,9 +81,9 @@
 	<script>
         //에디터 생성
         var editor = new toastui.Editor({
-            //el : element , 적용시킬 대상
-            //el:document.getElementById("editor"),
             el:document.querySelector("#editor"),
+            initialEditType:'wysiwyg',
+            
         });        
     </script>
 	</div>

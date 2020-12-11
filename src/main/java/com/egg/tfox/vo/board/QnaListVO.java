@@ -24,4 +24,4 @@ public class QnaListVO {
 	private String gesi_name;		//게시물 카테고리 이름
 	private String qna_name;		//문의 카테고리 이름
 
-}
+} 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.egg.tfox.service.board.BoardService;
@@ -26,7 +27,7 @@ public class loginController {
 		return "webFront/login";
 	}
 	
-	@GetMapping("/webFront/login.web")
+	@PostMapping("/webFront/login.web")
 	public String login(
 						@RequestParam String user_loginid,
 						@RequestParam String user_loginpwd,

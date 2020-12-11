@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -199,7 +200,7 @@ input[class=br]:radio+label {
 									<!-- 이부분에 함수 넣어서 출력해야됨   -->
 									<td><c:out value="<input type='checkbox'/>" escapeXml="false"/></td>
 									<td><c:out value="${ql.rn}" /></td>
-									<td><c:out value="<a href='${gesiWebURl }'>${ql.gesi_name }<a/>" escapeXml="false"/></td>
+									<td><c:out value="<a href='${gesiWebURl }' onclick='window.open(this.href)'  target=_blank>${ql.gesi_name }<a/>" escapeXml="false"/></td>
 									<td><c:out value="${ql.gesi_title}" /></td>
 									<td><c:out value="${ql.gesi_date}" /></td>
 									<td><c:out value="${ql.user_name }" /></td>
@@ -210,7 +211,8 @@ input[class=br]:radio+label {
 						<!-- 페이징 처리 -->
 						<div class="paging-area" align="center">
 							<c:if test="${paging.startPage != 1 }">
-								<a href="/gesiS.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+								<a href="${pageContext.request.contextPath }/board/gesiS.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}
+								&searchDate=${reqList.starD }&searchDate2=${reqList.endD }&gesi_code=${reqList.gesi_code }&searchType=${reqList.searchType }&typeKeyword=${reqList.keyword}">&lt;</a>
 							</c:if>
 							<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 								<c:choose>
@@ -218,12 +220,14 @@ input[class=br]:radio+label {
 									<b>${p }</b>
 								</c:when>
 								<c:when test="${p != paging.nowPage }">
-									<a href="/gesiS.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+									<a href="${pageContext.request.contextPath }/board/gesiS.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}
+									&searchDate=${reqList.starD }&searchDate2=${reqList.endD }&gesi_code=${reqList.gesi_code }&searchType=${reqList.searchType }&typeKeyword=${reqList.keyword}">${p }</a>
 								</c:when>
 								</c:choose>
 							</c:forEach>
 							<c:if test="${paging.endPage != paging.lastPage}">
-								<a href="/gesiS.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+								<a href="${pageContext.request.contextPath }/board/gesiS.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}
+								&searchDate=${reqList.starD }&searchDate2=${reqList.endD }&gesi_code=${reqList.gesi_code }&searchType=${reqList.searchType }&typeKeyword=${reqList.keyword}">&gt;</a>
 							</c:if>
 						</div>
 					</div>
@@ -231,10 +235,11 @@ input[class=br]:radio+label {
 			</article>
 		</section>
 	</div>
+<script>
+	
 
-	<script>
-
-	</script>
+</script>
+	
 
 </body>
 </html>
