@@ -230,6 +230,7 @@ font {
 											<th scope="row">휴가명</th>
 											<th scope="row" class="C">사용 여부</th>
 											<th scope="row" class="C">연차 차감 여부</th>
+											<th scope="row" class="C">삭제하게</th>
 										</tr>
 									</thead>
 									<tbody id="vacCategory">
@@ -247,6 +248,9 @@ font {
 													<option value="O" <c:if test="${cate.vactype_yearyn eq 'O' }">selected</c:if>>차감</option>
 													<option value="X" <c:if test="${cate.vactype_yearyn eq 'X' }">selected</c:if>>차감 안 함</option>
 											</select>
+											</td>
+											<td>
+												<input type="button" class="deleteCat" value="삭제하기" />
 											</td>
 										</tr>
 										</c:forEach>		
@@ -274,6 +278,52 @@ font {
 		$('#vac_config').hide();
 		}
 	}
+	$(".deleteCat").click(function(){
+		
+		var catDelete = $(this);
+		
+		var tr = catDelete.parent().parent();
+		var td = tr.children();
+
+		var no = td.eq(0).text();
+		$.ajax({
+			url : "${pageContext.request.contextPath}/attendance/vacationDeleteCat",
+			type : "POST",
+			data: {"name":no},
+			dataType: "JSON",
+			success:function(data){
+				
+				$("#vacCategory").html('');
+				$.each(data, function(index, cate){
+					var vactypeY = cate.vactype_yn;
+					var vactypeN = cate.vactype_yn
+					var yearY = cate.vactype_yearyn;
+					var yearN = cate.vactype_yearyn;
+					if(vactypeY == 'Y' ){
+						vactypeY = 'selected';
+						vactypeN = '';
+					}else{
+						vactypeN = 'selected';
+						vactypeY = '';
+					}
+					
+					if(yearY == 'O' ){
+						yearY = 'selected';
+						yearN = '';
+					}else{
+						yearN = 'selected';
+						yearY = '';
+					}
+					
+					$("#vacCategory").append('<tr> <td><input type="hidden" name="vactypeName" value="'+cate.vactype_name +'">'+cate.vactype_name +'</td> <td> <select name="vactypeYN"> <option value="Y" '+vactypeY+'>사용</option> <option value="N" '+vactypeN+'>사용 안 함</option> </select> </td> <td> <select name="yearYN"> <option value="O" '+yearY+'>차감</option> <option value="X" '+yearN+'>차감 안 함</option> </select> </td> <td> <input type="button" class="deleteCat" value="삭제하기" /> </td> </tr>')
+				});
+			},
+			error:function(){
+				alert("삭제되지 않았습니다")
+			},
+		});	
+	});
+	
 var i = 0;
 	
 $("#addVacCate").on("click", function(){
@@ -281,11 +331,19 @@ $("#addVacCate").on("click", function(){
 	i++;
 	console.log(i);
 	//$("#vacCategory").append('<tr id='+i+'> <td><input type="text" size="10"></td> <td><select id="vacation_use"> <option value="Y" selected>사용</option> <option value="N">사용 안 함</option> </select></td> <td><label> <input type="checkbox" id="vacation_minus_0" > 연차에서 차감 </label></td> </tr>')
-	$("#vacCategory").append('<tr> <td><input type="text" size="10" name="vactypeName" placeholder="휴가이름"></td> <td> <select name="vactypeYN"> <option value="Y" selected>사용</option> <option value="N">사용 안 함</option> </select> </td> <td> <select name="yearYN"> <option value="O" selected>차감</option> <option value="X">차감 안 함</option> </select> </td> </tr>')
+	$("#vacCategory").append('<tr> <td><input type="text" size="10" name="vactypeName" placeholder="휴가이름"></td> <td> <select name="vactypeYN"> <option value="Y" selected>사용</option> <option value="N">사용 안 함</option> </select> </td> <td> <select name="yearYN"> <option value="O" selected>차감</option> <option value="X">차감 안 함</option> </select> </td> <td> <input type="button" class="deleteCat" value="삭제하기" /> </td> </tr>')
 });
 
 
-
+$(document).ready(function(){
+	var test = "${onOff}"
+	console.log(test[36]);
+	if (test[36] == 'Y'){
+		$('#vac_config').show();
+	}else{
+		$('#vac_config').hide();
+	}
+});
 function setVacationUseFlag(){
 	var save = $('input[name=vacOnOff]:checked').val();
 	if (save == 'Y'){

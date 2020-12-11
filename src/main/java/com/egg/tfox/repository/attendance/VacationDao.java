@@ -49,6 +49,8 @@ public interface VacationDao {
 
 	void vacCateSet(List<String> vactypeName, List<String> vactypeYN, List<String> yearYN);
 
+	void vacCateDelete(String name);
+
 
 
 

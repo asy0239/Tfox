@@ -1,0 +1,1166 @@
+CREATE TABLE approval_doc
+(
+    app_id    VARCHAR2(20) NOT NULL,
+    emp_id    VARCHAR2(20),
+    app_title    VARCHAR2(200),
+    app_excu_id    VARCHAR2(1000),
+    app_date    DATE NOT NULL,
+    app_content    CLOB,
+    app_status    VARCHAR2(20) NOT NULL,
+    app_checktime    DATE,
+    temp_id    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE approval_reference
+(
+    app_id    VARCHAR2(20) NOT NULL,
+    emp_id    VARCHAR2(20) NOT NULL,
+    addref_id    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE approval_statement
+(
+    appstatment_id    VARCHAR2(15) NOT NULL,
+    app_id    VARCHAR2(20),
+    emp_id    VARCHAR2(15) NOT NULL,
+    apporder_code    VARCHAR2(15) NOT NULL,
+    apporder_check    DATE,
+    apporder_apply    VARCHAR2(30) NOT NULL
+);
+
+
+CREATE TABLE attdancebasic
+(
+    attdb_id    VARCHAR2(50) NOT NULL,
+    attdb_yn    VARCHAR2(10) NOT NULL,
+    attdb_oe    VARCHAR2(10) NOT NULL,
+    corp_id    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE attendance
+(
+    att_id    VARCHAR2(15) NOT NULL,
+    emp_id    VARCHAR2(20) NOT NULL,
+    att_start    DATE,
+    att_end    DATE,
+    att_reason    VARCHAR2(100),
+    att_status    VARCHAR2(15),
+    att_date    DATE
+);
+
+
+CREATE TABLE attendanceset
+(
+    attd_id    VARCHAR2(15) NOT NULL,
+    attset_day    VARCHAR2(15) NOT NULL,
+    attset_start    DATE NOT NULL,
+    attset_end    DATE NOT NULL,
+    corp_id    VARCHAR2(15) NOT NULL,
+    attd_category    VARCHAR2(30) NOT NULL,
+    attset_yn    VARCHAR2(15)
+);
+
+
+CREATE TABLE bonus
+(
+    bonus_std    VARCHAR2(30),
+    bonus_over    VARCHAR2(30)
+);
+
+
+CREATE TABLE CORP
+(
+    corp_id    VARCHAR2(15) NOT NULL,
+    corp_name    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE department
+(
+    dept_id    VARCHAR2(15) NOT NULL,
+    dept_name    VARCHAR2(50) NOT NULL
+);
+
+
+CREATE TABLE employee
+(
+    emp_id    VARCHAR2(20) NOT NULL,
+    emp_name    VARCHAR2(30) NOT NULL,
+    pos_id    VARCHAR2(20),
+    emp_hnum    VARCHAR2(15) NOT NULL,
+    emp_address    VARCHAR2(200) NOT NULL,
+    emp_email    VARCHAR2(100) NOT NULL,
+    emp_hiredate    DATE NOT NULL,
+    emp_leavedate    DATE,
+    emp_loginid    VARCHAR2(25) NOT NULL,
+    emp_password    VARCHAR2(500) NOT NULL,
+    emp_sign    BLOB,
+    dept_id    VARCHAR2(15),
+    corp_id    VARCHAR2(15) NOT NULL,
+    AUTH    VARCHAR2(30) DEFAULT 'ROLE_ADMIN',
+    ENABLED    NUMBER(10) DEFAULT 1
+);
+
+
+CREATE TABLE files
+(
+    file_id    VARCHAR2(15) NOT NULL,
+    file_type    VARCHAR2(15) NOT NULL,
+    file_originname    VARCHAR2(100) NOT NULL,
+    file_changename    VARCHAR2(50) NOT NULL,
+    file_date    DATE NOT NULL,
+    file_size    VARCHAR2(10)
+);
+
+
+CREATE TABLE gesi
+(
+    gesi_id    VARCHAR2(15) NOT NULL,
+    gesi_title    VARCHAR2(100) NOT NULL,
+    gesi_content    VARCHAR2(200) NOT NULL,
+    gesi_date    DATE NOT NULL,
+    gesi_status    VARCHAR2(15) NOT NULL,
+    gesi_ansdate    DATE,
+    gesi_anscontent    VARCHAR2(200),
+    user_id    VARCHAR2(15) NOT NULL,
+    gesi_code    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE gesitype
+(
+    gesi_code    VARCHAR2(15) NOT NULL,
+    gesi_name    VARCHAR2(30) NOT NULL
+);
+
+
+CREATE TABLE manufactur
+(
+    manu_name    VARCHAR2(30) NOT NULL,
+    manu_ceo    VARCHAR2(30) NOT NULL
+);
+
+
+CREATE TABLE orderdetail
+(
+    pay_id    VARCHAR2(15) NOT NULL,
+    pro_id    VARCHAR2(15) NOT NULL,
+    order_ea    NUMBER NOT NULL,
+    order_date    DATE NOT NULL,
+    order_num    VARCHAR2(30) NOT NULL,
+    order_state    VARCHAR2(30) NOT NULL,
+    total_price    VARCHAR2(30) NOT NULL
+);
+
+
+CREATE TABLE overwork
+(
+    emp_id    VARCHAR2(20) NOT NULL,
+    ovr_starttime    DATE NOT NULL,
+    ovr_endtime    DATE NOT NULL,
+    ovr_reason    VARCHAR2(100) NOT NULL,
+    ovr_id    VARCHAR2(15) NOT NULL,
+    ovr_date    DATE NOT NULL
+);
+
+
+CREATE TABLE payment
+(
+    pay_id    VARCHAR2(15) NOT NULL,
+    user_id    VARCHAR2(15) NOT NULL,
+    pay_type    VARCHAR2(50) NOT NULL,
+    pay_time    DATE NOT NULL,
+    pay_price    NUMBER NOT NULL,
+    pay_receipt_status    VARCHAR2(15) NOT NULL,
+    pay_status    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE position
+(
+    pos_id    VARCHAR2(20) NOT NULL,
+    pos_name    VARCHAR2(30) NOT NULL
+);
+
+
+CREATE TABLE product
+(
+    pro_id    VARCHAR2(15) NOT NULL,
+    pro_name    VARCHAR2(50) NOT NULL,
+    st_id    VARCHAR2(15) NOT NULL,
+    pro_price    NUMBER NOT NULL,
+    pro_bigcate    VARCHAR2(50),
+    pro_smallcate    VARCHAR2(50),
+    pro_summary    VARCHAR2(100) NOT NULL,
+    pro_detail    VARCHAR2(450) NOT NULL,
+    pro_conprice    NUMBER NOT NULL,
+    pro_size    VARCHAR2(20) NOT NULL,
+    pro_color    VARCHAR2(20) NOT NULL,
+    pro_ea    NUMBER(20),
+    pro_status    VARCHAR2(20) NOT NULL,
+    pro_level    NUMBER DEFAULT 0 NOT NULL
+);
+
+
+CREATE TABLE product_file
+(
+    pro_id    VARCHAR2(15),
+    file_id    VARCHAR2(15)
+);
+
+
+CREATE TABLE qna
+(
+    qna_code    VARCHAR2(15) NOT NULL,
+    gesi_code    VARCHAR2(15) NOT NULL,
+    gesi_id    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE qnatype
+(
+    qna_code    VARCHAR2(15) NOT NULL,
+    qna_name    VARCHAR2(30) NOT NULL
+);
+
+
+CREATE TABLE review
+(
+    rev_category    VARCHAR2(20) NOT NULL,
+    pay_id    VARCHAR2(15) NOT NULL,
+    pro_id    VARCHAR2(15) NOT NULL,
+    rev_rate    VARCHAR2(15),
+    gesi_code    VARCHAR2(15) NOT NULL,
+    gesi_id    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE review_file
+(
+    file_id    VARCHAR2(15),
+    gesi_id    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE stock
+(
+    st_id    VARCHAR2(15) NOT NULL,
+    st_price    NUMBER NOT NULL,
+    st_company    VARCHAR2(50) NOT NULL,
+    st_factory    VARCHAR2(50) NOT NULL,
+    st_date    DATE NOT NULL,
+    st_orign    VARCHAR2(100) NOT NULL
+);
+
+
+CREATE TABLE supplier
+(
+    sup_name    VARCHAR2(30),
+    sup_fee    NUMBER,
+    sup_pur    VARCHAR2(4)
+);
+
+
+CREATE TABLE template
+(
+    temp_id    VARCHAR2(15) NOT NULL,
+    temp_title    VARCHAR2(150) NOT NULL,
+    temp_content    CLOB NOT NULL
+);
+
+
+CREATE TABLE user_table
+(
+    user_id    VARCHAR2(15) NOT NULL,
+    user_name    VARCHAR2(20) NOT NULL,
+    user_loginid    VARCHAR2(30) NOT NULL,
+    user_pwd    VARCHAR2(100) NOT NULL,
+    user_date    DATE NOT NULL,
+    user_addr    VARCHAR2(150) NOT NULL,
+    user_number    VARCHAR2(50) NOT NULL,
+    user_email    VARCHAR2(50) NOT NULL,
+    user_phone    VARCHAR2(50) NOT NULL,
+    user_addr2    VARCHAR2(150)
+);
+
+
+CREATE TABLE vacapply
+(
+    vacapl_id    VARCHAR2(15) NOT NULL,
+    vactype_id    VARCHAR2(15) NOT NULL,
+    emp_id    VARCHAR2(20) NOT NULL,
+    vacapl_start    DATE NOT NULL,
+    vacapl_end    DATE NOT NULL,
+    vacapl_appdate    DATE DEFAULT SYSDATE NOT NULL,
+    vacapl_reason    VARCHAR2(100) NOT NULL,
+    vacapl_status    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE vacationset
+(
+    corp_id    VARCHAR2(15) NOT NULL,
+    vac_yn    VARCHAR2(10) NOT NULL,
+    vac_create    VARCHAR2(20) NOT NULL,
+    vac_date    DATE
+);
+
+
+CREATE TABLE vactype
+(
+    vactype_id    VARCHAR2(15) NOT NULL,
+    vactype_name    VARCHAR2(50) NOT NULL,
+    vactype_yn    VARCHAR2(15) NOT NULL,
+    vactype_yearyn    VARCHAR2(15) NOT NULL
+);
+
+
+CREATE TABLE year_manage
+(
+    year_id    VARCHAR2(15) NOT NULL,
+    corp_id    VARCHAR2(15) NOT NULL,
+    year_hire    NUMBER NOT NULL,
+    year_day    NUMBER NOT NULL,
+    year_standard    VARCHAR2(15)
+);
+
+
+
+CREATE UNIQUE INDEX 엔터티1_1_PK3 ON approval_doc
+( app_id );
+
+ALTER TABLE approval_doc
+ ADD CONSTRAINT 엔터티1_1_PK3 PRIMARY KEY ( app_id )
+ USING INDEX 엔터티1_1_PK3;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK8 ON approval_reference
+( addref_id,app_id );
+
+ALTER TABLE approval_reference
+ ADD CONSTRAINT 엔터티1_PK8 PRIMARY KEY ( addref_id,app_id )
+ USING INDEX 엔터티1_PK8;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK18 ON approval_statement
+( appstatment_id );
+
+ALTER TABLE approval_statement
+ ADD CONSTRAINT 엔터티1_PK18 PRIMARY KEY ( appstatment_id )
+ USING INDEX 엔터티1_PK18;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK1 ON attdancebasic
+( corp_id );
+
+ALTER TABLE attdancebasic
+ ADD CONSTRAINT 엔터티1_PK1 PRIMARY KEY ( corp_id )
+ USING INDEX 엔터티1_PK1;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK10 ON attendance
+( att_id );
+
+ALTER TABLE attendance
+ ADD CONSTRAINT 엔터티1_PK10 PRIMARY KEY ( att_id )
+ USING INDEX 엔터티1_PK10;
+
+
+
+CREATE UNIQUE INDEX 엔터티2_PK ON attendanceset
+( attd_id );
+
+ALTER TABLE attendanceset
+ ADD CONSTRAINT 엔터티2_PK PRIMARY KEY ( attd_id )
+ USING INDEX 엔터티2_PK;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK19 ON CORP
+( corp_id );
+
+ALTER TABLE CORP
+ ADD CONSTRAINT 엔터티1_PK19 PRIMARY KEY ( corp_id )
+ USING INDEX 엔터티1_PK19;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK16 ON department
+( dept_id );
+
+ALTER TABLE department
+ ADD CONSTRAINT 엔터티1_PK16 PRIMARY KEY ( dept_id )
+ USING INDEX 엔터티1_PK16;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK5 ON employee
+( emp_id );
+
+ALTER TABLE employee
+ ADD CONSTRAINT 엔터티1_PK5 PRIMARY KEY ( emp_id )
+ USING INDEX 엔터티1_PK5;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK13 ON files
+( file_id );
+
+ALTER TABLE files
+ ADD CONSTRAINT 엔터티1_PK13 PRIMARY KEY ( file_id )
+ USING INDEX 엔터티1_PK13;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_1_1_PK7 ON gesi
+( gesi_id );
+
+ALTER TABLE gesi
+ ADD CONSTRAINT 엔터티1_1_1_PK7 PRIMARY KEY ( gesi_id )
+ USING INDEX 엔터티1_1_1_PK7;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_1_1_1_1_PK7 ON gesitype
+( gesi_code );
+
+ALTER TABLE gesitype
+ ADD CONSTRAINT 엔터티1_1_1_1_1_PK7 PRIMARY KEY ( gesi_code )
+ USING INDEX 엔터티1_1_1_1_1_PK7;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK9 ON orderdetail
+( pay_id,pro_id );
+
+ALTER TABLE orderdetail
+ ADD CONSTRAINT 엔터티1_PK9 PRIMARY KEY ( pay_id,pro_id )
+ USING INDEX 엔터티1_PK9;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_1_PK10 ON overwork
+( ovr_id );
+
+ALTER TABLE overwork
+ ADD CONSTRAINT 엔터티1_1_PK10 PRIMARY KEY ( ovr_id )
+ USING INDEX 엔터티1_1_PK10;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK6 ON payment
+( pay_id );
+
+ALTER TABLE payment
+ ADD CONSTRAINT 엔터티1_PK6 PRIMARY KEY ( pay_id )
+ USING INDEX 엔터티1_PK6;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK17 ON position
+( pos_id );
+
+ALTER TABLE position
+ ADD CONSTRAINT 엔터티1_PK17 PRIMARY KEY ( pos_id )
+ USING INDEX 엔터티1_PK17;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK15 ON product
+( pro_id );
+
+ALTER TABLE product
+ ADD CONSTRAINT 엔터티1_PK15 PRIMARY KEY ( pro_id )
+ USING INDEX 엔터티1_PK15;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_1_2_PK5 ON qnatype
+( qna_code );
+
+ALTER TABLE qnatype
+ ADD CONSTRAINT 엔터티1_1_2_PK5 PRIMARY KEY ( qna_code )
+ USING INDEX 엔터티1_1_2_PK5;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_1_PK12 ON review
+( gesi_id );
+
+ALTER TABLE review
+ ADD CONSTRAINT 엔터티1_1_PK12 PRIMARY KEY ( gesi_id )
+ USING INDEX 엔터티1_1_PK12;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK2 ON stock
+( st_id );
+
+ALTER TABLE stock
+ ADD CONSTRAINT 엔터티1_PK2 PRIMARY KEY ( st_id )
+ USING INDEX 엔터티1_PK2;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_1_1_PK6 ON template
+( temp_id );
+
+ALTER TABLE template
+ ADD CONSTRAINT 엔터티1_1_1_PK6 PRIMARY KEY ( temp_id )
+ USING INDEX 엔터티1_1_1_PK6;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK ON user_table
+( user_id );
+
+ALTER TABLE user_table
+ ADD CONSTRAINT 엔터티1_PK PRIMARY KEY ( user_id )
+ USING INDEX 엔터티1_PK;
+
+
+
+CREATE UNIQUE INDEX 엔터티2_PK1 ON vacapply
+( vacapl_id );
+
+ALTER TABLE vacapply
+ ADD CONSTRAINT 엔터티2_PK1 PRIMARY KEY ( vacapl_id )
+ USING INDEX 엔터티2_PK1;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK3 ON vacationset
+( corp_id );
+
+ALTER TABLE vacationset
+ ADD CONSTRAINT 엔터티1_PK3 PRIMARY KEY ( corp_id )
+ USING INDEX 엔터티1_PK3;
+
+
+
+CREATE UNIQUE INDEX 엔터티3_PK ON vactype
+( vactype_id );
+
+ALTER TABLE vactype
+ ADD CONSTRAINT 엔터티3_PK PRIMARY KEY ( vactype_id )
+ USING INDEX 엔터티3_PK;
+
+
+
+CREATE UNIQUE INDEX 엔터티1_PK4 ON year_manage
+( year_id,corp_id );
+
+ALTER TABLE year_manage
+ ADD CONSTRAINT 엔터티1_PK4 PRIMARY KEY ( year_id,corp_id )
+ USING INDEX 엔터티1_PK4;
+
+
+
+COMMENT ON COLUMN approval_doc.app_id IS '문서id';
+
+COMMENT ON COLUMN approval_doc.emp_id IS '사원id';
+
+COMMENT ON COLUMN approval_doc.app_title IS '제목';
+
+COMMENT ON COLUMN approval_doc.app_excu_id IS '시행자';
+
+COMMENT ON COLUMN approval_doc.app_date IS '작성날짜';
+
+COMMENT ON COLUMN approval_doc.app_content IS '내용';
+
+COMMENT ON COLUMN approval_doc.app_status IS '상태';
+
+COMMENT ON COLUMN approval_doc.app_checktime IS '확인시간';
+
+COMMENT ON COLUMN approval_doc.temp_id IS '양식id';
+
+COMMENT ON TABLE approval_doc IS '결재문서';
+
+ALTER TABLE approval_doc
+ ADD CONSTRAINT approval_doc_FK FOREIGN KEY ( emp_id )
+ REFERENCES employee (emp_id );
+
+ALTER TABLE approval_doc
+ ADD CONSTRAINT approval_doc_FK1 FOREIGN KEY ( temp_id )
+ REFERENCES template (temp_id );
+
+
+
+COMMENT ON COLUMN approval_reference.app_id IS '문서id';
+
+COMMENT ON COLUMN approval_reference.emp_id IS '사원번호';
+
+COMMENT ON COLUMN approval_reference.addref_id IS '문서참조id';
+
+COMMENT ON TABLE approval_reference IS '문서 참조자들';
+
+ALTER TABLE approval_reference
+ ADD CONSTRAINT approval_reference_FK FOREIGN KEY ( app_id )
+ REFERENCES approval_doc (app_id );
+
+
+
+COMMENT ON COLUMN approval_statement.appstatment_id IS '문서내역id';
+
+COMMENT ON COLUMN approval_statement.app_id IS '문서id';
+
+COMMENT ON COLUMN approval_statement.emp_id IS '사원id';
+
+COMMENT ON COLUMN approval_statement.apporder_code IS '결재자 구분코드';
+
+COMMENT ON COLUMN approval_statement.apporder_check IS '확인시간';
+
+COMMENT ON COLUMN approval_statement.apporder_apply IS '결재자승인';
+
+COMMENT ON TABLE approval_statement IS '전자결재내역';
+
+ALTER TABLE approval_statement
+ ADD CONSTRAINT approval_statement_FK FOREIGN KEY ( app_id )
+ REFERENCES approval_doc (app_id );
+
+
+
+COMMENT ON COLUMN attdancebasic.attdb_id IS '근태설정id';
+
+COMMENT ON COLUMN attdancebasic.attdb_yn IS '근태사용여부';
+
+COMMENT ON COLUMN attdancebasic.attdb_oe IS '52시간근무적용여부';
+
+COMMENT ON COLUMN attdancebasic.corp_id IS '회사id';
+
+COMMENT ON TABLE attdancebasic IS '근태기본설정';
+
+ALTER TABLE attdancebasic
+ ADD CONSTRAINT attdancebasic_FK FOREIGN KEY ( corp_id )
+ REFERENCES CORP (corp_id );
+
+
+
+COMMENT ON COLUMN attendance.att_id IS '근태정보id';
+
+COMMENT ON COLUMN attendance.emp_id IS '사원id';
+
+COMMENT ON COLUMN attendance.att_start IS '출근시간';
+
+COMMENT ON COLUMN attendance.att_end IS '퇴근시간';
+
+COMMENT ON COLUMN attendance.att_reason IS '사유';
+
+COMMENT ON COLUMN attendance.att_status IS '근태상태';
+
+COMMENT ON COLUMN attendance.att_date IS '출퇴근날짜';
+
+COMMENT ON TABLE attendance IS '근태정보';
+
+ALTER TABLE attendance
+ ADD CONSTRAINT attendance_FK1 FOREIGN KEY ( emp_id )
+ REFERENCES employee (emp_id );
+
+
+
+COMMENT ON COLUMN attendanceset.attd_id IS '근태기본id';
+
+COMMENT ON COLUMN attendanceset.attset_day IS '요일';
+
+COMMENT ON COLUMN attendanceset.attset_start IS '출근시간';
+
+COMMENT ON COLUMN attendanceset.attset_end IS '퇴근시간';
+
+COMMENT ON COLUMN attendanceset.corp_id IS '회사id';
+
+COMMENT ON COLUMN attendanceset.attd_category IS '설정종류';
+
+COMMENT ON COLUMN attendanceset.attset_yn IS '날짜사용';
+
+COMMENT ON TABLE attendanceset IS '근태정책설정';
+
+ALTER TABLE attendanceset
+ ADD CONSTRAINT attendanceset_FK FOREIGN KEY ( corp_id )
+ REFERENCES attdancebasic (corp_id );
+
+
+
+COMMENT ON COLUMN bonus.bonus_std IS '표준';
+
+COMMENT ON COLUMN bonus.bonus_over IS '초과수당';
+
+COMMENT ON TABLE bonus IS '수당';
+
+
+
+COMMENT ON COLUMN CORP.corp_id IS '회사id';
+
+COMMENT ON COLUMN CORP.corp_name IS '회사이름';
+
+COMMENT ON TABLE CORP IS '회사정보';
+
+
+
+COMMENT ON COLUMN department.dept_id IS '부서id';
+
+COMMENT ON COLUMN department.dept_name IS '부서명';
+
+COMMENT ON TABLE department IS '부서';
+
+
+
+COMMENT ON COLUMN employee.emp_id IS '사원id';
+
+COMMENT ON COLUMN employee.emp_name IS '이름';
+
+COMMENT ON COLUMN employee.pos_id IS '직급id';
+
+COMMENT ON COLUMN employee.emp_hnum IS '주민번호';
+
+COMMENT ON COLUMN employee.emp_address IS '주소';
+
+COMMENT ON COLUMN employee.emp_email IS '이메일';
+
+COMMENT ON COLUMN employee.emp_hiredate IS '입사일';
+
+COMMENT ON COLUMN employee.emp_leavedate IS '퇴사일';
+
+COMMENT ON COLUMN employee.emp_loginid IS 'id';
+
+COMMENT ON COLUMN employee.emp_password IS 'password';
+
+COMMENT ON COLUMN employee.emp_sign IS '사인';
+
+COMMENT ON COLUMN employee.dept_id IS '부서id';
+
+COMMENT ON COLUMN employee.corp_id IS '회사id';
+
+COMMENT ON COLUMN employee.AUTH IS '권한';
+
+COMMENT ON COLUMN employee.ENABLED IS '활성화';
+
+COMMENT ON TABLE employee IS '사원';
+
+ALTER TABLE employee
+ ADD CONSTRAINT employee_FK FOREIGN KEY ( dept_id )
+ REFERENCES department (dept_id );
+
+ALTER TABLE employee
+ ADD CONSTRAINT employee_FK1 FOREIGN KEY ( pos_id )
+ REFERENCES position (pos_id );
+
+ALTER TABLE employee
+ ADD CONSTRAINT employee_FK2 FOREIGN KEY ( corp_id )
+ REFERENCES CORP (corp_id );
+
+
+
+COMMENT ON COLUMN files.file_id IS '파일id';
+
+COMMENT ON COLUMN files.file_type IS '구분';
+
+COMMENT ON COLUMN files.file_originname IS '원래이름';
+
+COMMENT ON COLUMN files.file_changename IS '변경된이름';
+
+COMMENT ON COLUMN files.file_date IS '날짜';
+
+COMMENT ON COLUMN files.file_size IS '파일크기';
+
+COMMENT ON TABLE files IS '파일';
+
+
+
+COMMENT ON COLUMN gesi.gesi_id IS '게시물 id';
+
+COMMENT ON COLUMN gesi.gesi_title IS '제목';
+
+COMMENT ON COLUMN gesi.gesi_content IS '내용';
+
+COMMENT ON COLUMN gesi.gesi_date IS '작성일';
+
+COMMENT ON COLUMN gesi.gesi_status IS '답변상태';
+
+COMMENT ON COLUMN gesi.gesi_ansdate IS '답변일';
+
+COMMENT ON COLUMN gesi.gesi_anscontent IS '답변내용';
+
+COMMENT ON COLUMN gesi.user_id IS '유저id';
+
+COMMENT ON COLUMN gesi.gesi_code IS '카테고리코드';
+
+COMMENT ON TABLE gesi IS '게시물';
+
+ALTER TABLE gesi
+ ADD CONSTRAINT gesi_FK FOREIGN KEY ( gesi_code )
+ REFERENCES gesitype (gesi_code );
+
+ALTER TABLE gesi
+ ADD CONSTRAINT gesi_FK1 FOREIGN KEY ( user_id )
+ REFERENCES user_table (user_id );
+
+
+
+COMMENT ON COLUMN gesitype.gesi_code IS '카테고리코드';
+
+COMMENT ON COLUMN gesitype.gesi_name IS '게시물명';
+
+COMMENT ON TABLE gesitype IS '게시물 카테고리';
+
+
+
+COMMENT ON COLUMN manufactur.manu_name IS '공급사이름';
+
+COMMENT ON COLUMN manufactur.manu_ceo IS 'CEO이름';
+
+COMMENT ON TABLE manufactur IS '제조사';
+
+
+
+COMMENT ON COLUMN orderdetail.pay_id IS '결제id';
+
+COMMENT ON COLUMN orderdetail.pro_id IS '상품id';
+
+COMMENT ON COLUMN orderdetail.order_ea IS '수량';
+
+COMMENT ON COLUMN orderdetail.order_date IS '주문날짜';
+
+COMMENT ON COLUMN orderdetail.order_num IS '주문번호';
+
+COMMENT ON COLUMN orderdetail.order_state IS '주문상태';
+
+COMMENT ON COLUMN orderdetail.total_price IS '총가격';
+
+COMMENT ON TABLE orderdetail IS '주문상세내역';
+
+ALTER TABLE orderdetail
+ ADD CONSTRAINT orderdetail_FK FOREIGN KEY ( pay_id )
+ REFERENCES payment (pay_id );
+
+ALTER TABLE orderdetail
+ ADD CONSTRAINT orderdetail_FK1 FOREIGN KEY ( pro_id )
+ REFERENCES product (pro_id );
+
+
+
+COMMENT ON COLUMN overwork.emp_id IS '사원id';
+
+COMMENT ON COLUMN overwork.ovr_starttime IS '시작시간';
+
+COMMENT ON COLUMN overwork.ovr_endtime IS '끝나는시간';
+
+COMMENT ON COLUMN overwork.ovr_reason IS '사유';
+
+COMMENT ON COLUMN overwork.ovr_id IS '초과근무id';
+
+COMMENT ON COLUMN overwork.ovr_date IS '초과근무 날짜';
+
+COMMENT ON TABLE overwork IS '초과근무테이블';
+
+ALTER TABLE overwork
+ ADD CONSTRAINT overwork_FK FOREIGN KEY ( emp_id )
+ REFERENCES employee (emp_id );
+
+
+
+COMMENT ON COLUMN payment.pay_id IS '결제id';
+
+COMMENT ON COLUMN payment.user_id IS '유저id';
+
+COMMENT ON COLUMN payment.pay_type IS '결제종류';
+
+COMMENT ON COLUMN payment.pay_time IS '결제시간';
+
+COMMENT ON COLUMN payment.pay_price IS '결제금액';
+
+COMMENT ON COLUMN payment.pay_receipt_status IS '현금영수증';
+
+COMMENT ON COLUMN payment.pay_status IS '결제상태';
+
+COMMENT ON TABLE payment IS '결제';
+
+ALTER TABLE payment
+ ADD CONSTRAINT payment_FK FOREIGN KEY ( user_id )
+ REFERENCES user_table (user_id );
+
+
+
+COMMENT ON COLUMN position.pos_id IS '직급id';
+
+COMMENT ON COLUMN position.pos_name IS '직급명';
+
+COMMENT ON TABLE position IS '직급';
+
+
+
+COMMENT ON COLUMN product.pro_id IS '상품id';
+
+COMMENT ON COLUMN product.pro_name IS '상품명';
+
+COMMENT ON COLUMN product.st_id IS '재고id';
+
+COMMENT ON COLUMN product.pro_price IS '판매가';
+
+COMMENT ON COLUMN product.pro_bigcate IS '상품대분류';
+
+COMMENT ON COLUMN product.pro_smallcate IS '상퓸소분류';
+
+COMMENT ON COLUMN product.pro_summary IS '상품 요약설명';
+
+COMMENT ON COLUMN product.pro_detail IS '상품상세설명';
+
+COMMENT ON COLUMN product.pro_conprice IS '소비자가';
+
+COMMENT ON COLUMN product.pro_size IS '사이즈';
+
+COMMENT ON COLUMN product.pro_color IS '컬러';
+
+COMMENT ON COLUMN product.pro_ea IS '수량';
+
+COMMENT ON COLUMN product.pro_status IS '판매상태';
+
+COMMENT ON COLUMN product.pro_level IS '상품레벨';
+
+COMMENT ON TABLE product IS '상품';
+
+
+
+COMMENT ON COLUMN product_file.pro_id IS '상품id';
+
+COMMENT ON COLUMN product_file.file_id IS '파일id';
+
+COMMENT ON TABLE product_file IS '상품파일';
+
+ALTER TABLE product_file
+ ADD CONSTRAINT product_file_FK FOREIGN KEY ( file_id )
+ REFERENCES files (file_id );
+
+ALTER TABLE product_file
+ ADD CONSTRAINT product_file_FK1 FOREIGN KEY ( pro_id )
+ REFERENCES product (pro_id );
+
+
+
+COMMENT ON COLUMN qna.qna_code IS '문의카테고리코드';
+
+COMMENT ON COLUMN qna.gesi_code IS '카테고리코드';
+
+COMMENT ON COLUMN qna.gesi_id IS '게시물 id';
+
+COMMENT ON TABLE qna IS '문의';
+
+ALTER TABLE qna
+ ADD CONSTRAINT qna_FK FOREIGN KEY ( gesi_id )
+ REFERENCES gesi (gesi_id );
+
+ALTER TABLE qna
+ ADD CONSTRAINT qna_FK1 FOREIGN KEY ( qna_code )
+ REFERENCES qnatype (qna_code );
+
+
+
+COMMENT ON COLUMN qnatype.qna_code IS '문의카테고리코드';
+
+COMMENT ON COLUMN qnatype.qna_name IS '문의유형명';
+
+COMMENT ON TABLE qnatype IS '문의유형';
+
+
+
+COMMENT ON COLUMN review.rev_category IS '분류';
+
+COMMENT ON COLUMN review.pay_id IS '결제id';
+
+COMMENT ON COLUMN review.pro_id IS '상품id';
+
+COMMENT ON COLUMN review.rev_rate IS '평점';
+
+COMMENT ON COLUMN review.gesi_code IS '카테고리코드';
+
+COMMENT ON COLUMN review.gesi_id IS '게시물 id';
+
+COMMENT ON TABLE review IS '리뷰';
+
+ALTER TABLE review
+ ADD CONSTRAINT review_FK FOREIGN KEY ( gesi_id )
+ REFERENCES gesi (gesi_id );
+
+ALTER TABLE review
+ ADD CONSTRAINT review_FK1 FOREIGN KEY ( pay_id,pro_id )
+ REFERENCES orderdetail (pay_id,pro_id );
+
+
+
+COMMENT ON COLUMN review_file.file_id IS '파일id';
+
+COMMENT ON COLUMN review_file.gesi_id IS '게시물 id';
+
+COMMENT ON TABLE review_file IS '리뷰파일';
+
+ALTER TABLE review_file
+ ADD CONSTRAINT review_file_FK1 FOREIGN KEY ( file_id )
+ REFERENCES files (file_id );
+
+ALTER TABLE review_file
+ ADD CONSTRAINT review_file_FK FOREIGN KEY ( gesi_id )
+ REFERENCES review (gesi_id );
+
+
+
+COMMENT ON COLUMN stock.st_id IS '재고id';
+
+COMMENT ON COLUMN stock.st_price IS '공급가';
+
+COMMENT ON COLUMN stock.st_company IS '공급사';
+
+COMMENT ON COLUMN stock.st_factory IS '제조사';
+
+COMMENT ON COLUMN stock.st_date IS '제조일자';
+
+COMMENT ON COLUMN stock.st_orign IS '원산지';
+
+COMMENT ON TABLE stock IS '재고';
+
+
+
+COMMENT ON COLUMN supplier.sup_name IS '제조사이름';
+
+COMMENT ON COLUMN supplier.sup_fee IS '수수료';
+
+COMMENT ON COLUMN supplier.sup_pur IS '상태';
+
+COMMENT ON TABLE supplier IS '공급';
+
+
+
+COMMENT ON COLUMN template.temp_id IS '양식id';
+
+COMMENT ON COLUMN template.temp_title IS '양식제목';
+
+COMMENT ON COLUMN template.temp_content IS '양식내용';
+
+COMMENT ON TABLE template IS '양식';
+
+
+
+COMMENT ON COLUMN user_table.user_id IS '유저id';
+
+COMMENT ON COLUMN user_table.user_name IS '이름';
+
+COMMENT ON COLUMN user_table.user_loginid IS '아이디';
+
+COMMENT ON COLUMN user_table.user_pwd IS '비밀번호';
+
+COMMENT ON COLUMN user_table.user_date IS '가입일';
+
+COMMENT ON COLUMN user_table.user_addr IS '주소';
+
+COMMENT ON COLUMN user_table.user_number IS '주민번호';
+
+COMMENT ON COLUMN user_table.user_email IS '이메일';
+
+COMMENT ON COLUMN user_table.user_phone IS '연락처';
+
+COMMENT ON COLUMN user_table.user_addr2 IS '주소2';
+
+COMMENT ON TABLE user_table IS '유저';
+
+
+
+COMMENT ON COLUMN vacapply.vacapl_id IS '휴가신청id';
+
+COMMENT ON COLUMN vacapply.vactype_id IS '휴가종류id';
+
+COMMENT ON COLUMN vacapply.emp_id IS '사원id';
+
+COMMENT ON COLUMN vacapply.vacapl_start IS '휴가시작날';
+
+COMMENT ON COLUMN vacapply.vacapl_end IS '휴가종료날';
+
+COMMENT ON COLUMN vacapply.vacapl_appdate IS '휴가신청일';
+
+COMMENT ON COLUMN vacapply.vacapl_reason IS '사유';
+
+COMMENT ON COLUMN vacapply.vacapl_status IS '상태';
+
+COMMENT ON TABLE vacapply IS '휴가신청';
+
+ALTER TABLE vacapply
+ ADD CONSTRAINT vacapply_FK FOREIGN KEY ( emp_id )
+ REFERENCES employee (emp_id );
+
+ALTER TABLE vacapply
+ ADD CONSTRAINT vacapply_FK1 FOREIGN KEY ( vactype_id )
+ REFERENCES vactype (vactype_id );
+
+
+
+COMMENT ON COLUMN vacationset.corp_id IS '회사id';
+
+COMMENT ON COLUMN vacationset.vac_yn IS '휴가사용여부';
+
+COMMENT ON COLUMN vacationset.vac_create IS '휴가생성조건';
+
+COMMENT ON COLUMN vacationset.vac_date IS '휴가생성일자';
+
+COMMENT ON TABLE vacationset IS '휴가기본설정';
+
+ALTER TABLE vacationset
+ ADD CONSTRAINT vacationset_FK FOREIGN KEY ( corp_id )
+ REFERENCES CORP (corp_id );
+
+
+
+COMMENT ON COLUMN vactype.vactype_id IS '휴가종류id';
+
+COMMENT ON COLUMN vactype.vactype_name IS '휴가명';
+
+COMMENT ON COLUMN vactype.vactype_yn IS '사용여부';
+
+COMMENT ON COLUMN vactype.vactype_yearyn IS '연차차감여부';
+
+COMMENT ON TABLE vactype IS '휴가종류';
+
+
+
+COMMENT ON COLUMN year_manage.year_id IS '근속연차관리id';
+
+COMMENT ON COLUMN year_manage.corp_id IS '회사id';
+
+COMMENT ON COLUMN year_manage.year_hire IS '입사년수';
+
+COMMENT ON COLUMN year_manage.year_day IS '연차일수';
+
+COMMENT ON COLUMN year_manage.year_standard IS '휴가기준';
+
+COMMENT ON TABLE year_manage IS '근속연차관리';
+
+ALTER TABLE year_manage
+ ADD CONSTRAINT year_manage_FK FOREIGN KEY ( corp_id )
+ REFERENCES vacationset (corp_id );
+
+CREATE SEQUENCE SEQ_EMPID INCREMENT BY 1 START WITH 22 NOCACHE;
+CREATE SEQUENCE SEQ_APPID INCREMENT BY 1 START WITH 4 NOCACHE;
+CREATE SEQUENCE SEQ_APREFID INCREMENT BY 1 START WITH 5 NOCACHE;
+CREATE SEQUENCE SEQ_APSTID INCREMENT BY 1 START WITH 8 NOCACHE;
+CREATE SEQUENCE SEQ_CORPID INCREMENT BY 1 START WITH 2 NOCACHE;
+CREATE SEQUENCE SEQ_DEPTID INCREMENT BY 1 START WITH 4 NOCACHE;
+CREATE SEQUENCE SEQ_FILEID INCREMENT BY 1 START WITH 1 NOCACHE;
+CREATE SEQUENCE SEQ_PAYID INCREMENT BY 1 START WITH 10 NOCACHE;
+CREATE SEQUENCE SEQ_PROID INCREMENT BY 1 START WITH 82 NOCACHE;
+CREATE SEQUENCE SEQ_QNAID INCREMENT BY 1 START WITH 1 NOCACHE;
+CREATE SEQUENCE SEQ_QNCID INCREMENT BY 1 START WITH 1 NOCACHE;
+CREATE SEQUENCE SEQ_REVID INCREMENT BY 1 START WITH 1 NOCACHE;
+CREATE SEQUENCE SEQ_STKID INCREMENT BY 1 START WITH 52 NOCACHE;
+CREATE SEQUENCE SEQ_TEMPID INCREMENT BY 1 START WITH 4 NOCACHE;
+CREATE SEQUENCE SEQ_USERID INCREMENT BY 1 START WITH 11 NOCACHE;
+CREATE SEQUENCE SEQ_VACAPLID INCREMENT BY 1 START WITH 31 NOCACHE;
+CREATE SEQUENCE SEQ_VACTYPEID INCREMENT BY 1 START WITH 6 NOCACHE;
+CREATE SEQUENCE SEQ_VACYEARID INCREMENT BY 1 START WITH 30 NOCACHE;
+CREATE SEQUENCE SEQ_ATTDSETID INCREMENT BY 1 START WITH 7 NOCACHE;
+CREATE SEQUENCE SEQ_GESICODE INCREMENT BY 1 START WITH 3 NOCACHE;
+CREATE SEQUENCE SEQ_GESIID INCREMENT BY 1 START WITH 10 NOCACHE;
+
+

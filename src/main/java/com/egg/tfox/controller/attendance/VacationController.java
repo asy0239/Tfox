@@ -1,6 +1,5 @@
 package com.egg.tfox.controller.attendance;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.egg.tfox.entity.Employee;
 import com.egg.tfox.entity.attendance.PagingVO;
 import com.egg.tfox.entity.attendance.Vacation;
-import com.egg.tfox.entity.attendance.VacationCateSet;
 import com.egg.tfox.entity.attendance.VacationRequest;
 import com.egg.tfox.entity.attendance.VacationSet;
 import com.egg.tfox.service.attendance.VacationService;
@@ -77,6 +76,7 @@ public class VacationController {
 		model.addAttribute("onOff", vac);
 		model.addAttribute("vcsday", vcsday);
 		model.addAttribute("vCate", vct);
+		
 		return "/attendance/vacationEdit";
 	}
 	
@@ -123,7 +123,6 @@ public class VacationController {
 	public String detail(@RequestParam String vacapl_id , Model model) {
 		List<Vacation> list = vacationService.detailList(vacapl_id);
 		model.addAttribute("vaclist", list);
-		System.out.println(list);
 		
 		return "/attendance/vacationAccept";
 	}
@@ -132,13 +131,11 @@ public class VacationController {
 	public String mydetail(@RequestParam String vacapl_id , Model model) {
 		List<Vacation> list = vacationService.detailList(vacapl_id);
 		model.addAttribute("vaclist", list);
-		System.out.println(list);
 		
 		return "/attendance/vacationmyAccept";
 	}
 	@PostMapping("/attendance/vacOnOff")
 	public String vacOnOff(@RequestParam String vacOnOff) {
-		System.out.println(vacOnOff);
 		vacationService.vacOnOffUpdate(vacOnOff);
 		
 		return "redirect:/attendance/vacationEdit";
@@ -146,14 +143,12 @@ public class VacationController {
 	
 	@PostMapping("/attendance/vacation/vacationY")
 	public String vacationY(@RequestParam String Y, Model model){
-		System.out.println(Y);
 		vacationService.vacAcceptY(Y);
 		return "redirect:/attendance/vacationRecong";
 	}
 	
 	@PostMapping("/attendance/vacation/vacationN")
 	public String vacationN(@RequestParam String N, Model model){
-		System.out.println(N);
 		vacationService.vacAcceptN(N);
 		return "redirect:/attendance/vacationRecong";
 		
@@ -177,11 +172,17 @@ public class VacationController {
 		map.put("yearYN", yearYN);
 		
 		vacationService.vacCateSet(vactypeName, vactypeYN, yearYN);
-		System.out.println(vactypeName);
-		System.out.println(vactypeYN);
-		System.out.println(yearYN);
 		
 		
 		return "redirect:/attendance/vacationEdit";
+	}
+	
+	@PostMapping("attendance/vacationDeleteCat")
+	@ResponseBody
+	public List<VacationSet> vacCateDelete(@RequestParam String name ) {
+		System.out.println(name);
+		vacationService.vacCateDelete(name);
+		List<VacationSet> vct = vacationService.vacCate();
+		return vct;
 	}
 }

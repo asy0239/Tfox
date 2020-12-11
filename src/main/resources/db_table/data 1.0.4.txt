@@ -1,0 +1,372 @@
+REM INSERTING into POSITION
+SET DEFINE OFF;
+Insert into POSITION (POS_ID,POS_NAME) values ('admin','관리자');
+Insert into POSITION (POS_ID,POS_NAME) values ('P001','이사');
+Insert into POSITION (POS_ID,POS_NAME) values ('P002','부장');
+Insert into POSITION (POS_ID,POS_NAME) values ('P003','과장');
+Insert into POSITION (POS_ID,POS_NAME) values ('P004','대리');
+Insert into POSITION (POS_ID,POS_NAME) values ('P005','사원');
+REM INSERTING into DEPARTMENT
+SET DEFINE OFF;
+Insert into DEPARTMENT (DEPT_ID,DEPT_NAME) values ('D001','행정');
+Insert into DEPARTMENT (DEPT_ID,DEPT_NAME) values ('D002','재무/회계');
+Insert into DEPARTMENT (DEPT_ID,DEPT_NAME) values ('D003','마케팅');
+Insert into DEPARTMENT (DEPT_ID,DEPT_NAME) values ('admin','admin');
+
+REM INSERTING into CORP
+SET DEFINE OFF;
+Insert into CORP (CORP_ID,CORP_NAME) values ('admin','마스터계정');
+Insert into CORP (CORP_ID,CORP_NAME) values ('COR001','TFOX');
+REM INSERTING into EMPLOYEE
+SET DEFINE OFF;
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000001','김경민','P002','810402-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Management.Dept01@egg.kr',to_date('09/05/16','RR/MM/DD'),null,'euser01','epass01','D001','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000002','안성윤','P002','790612-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Accounting.Dept01@egg.kr',to_date('09/05/16','RR/MM/DD'),null,'buser01','bpass01','D002','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('admin','관리자','admin','111111-1111111','관리자집','admin@admin.kr',to_date('90/01/01','RR/MM/DD'),null,'admin','admin','admin','admin','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000003','국윤창','P002','800912-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Marketing.Dept01@egg.kr',to_date('09/05/16','RR/MM/DD'),null,'muser01','mpass01','D003','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000004','윤자영','P003','850621-2123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Management.Dept02@egg.kr',to_date('13/09/09','RR/MM/DD'),null,'euser02','epass02','D001','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000005','박찬영','P003','840630-1211234','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Accounting.Dept02@egg.kr',to_date('13/09/09','RR/MM/DD'),null,'buser02','bpass02','D002','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000006','황인빈','P003','820225-1234123','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Marketing.Dept02@egg.kr',to_date('13/09/09','RR/MM/DD'),null,'muser02','mpass02','D003','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000007','김진호','P004','880502-1231232','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Management.Dept03@egg.kr',to_date('16/03/11','RR/MM/DD'),null,'euser03','epass03','D001','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000008','김정훈','P004','890504-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Accounting.Dept03@egg.kr',to_date('16/03/11','RR/MM/DD'),null,'buser03','bpass03','D002','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000009','조병근','P004','880922-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Marketing.Dept03@egg.kr',to_date('16/03/11','RR/MM/DD'),null,'muser03','mpass03','D003','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000010','유승완','P004','880112-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Management.Dept04@egg.kr',to_date('16/03/11','RR/MM/DD'),null,'euser04','epass04','D001','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000011','김순기','P004','870103-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Accounting.Dept04@egg.kr',to_date('16/03/11','RR/MM/DD'),null,'buser04','bpass04','D002','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000012','박나래','P004','860509-2123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Marketing.Dept04@egg.kr',to_date('16/03/11','RR/MM/DD'),null,'muser04','mpass04','D003','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000013','장도연','P005','890602-2123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Management.Dept05@egg.kr',to_date('18/09/16','RR/MM/DD'),null,'euser05','epass05','D001','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000014','이영지','P005','900102-2123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Accounting.Dept05@egg.kr',to_date('18/09/16','RR/MM/DD'),null,'buser05','bpass05','D002','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000015','이찬','P005','910709-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Marketing.Dept05@egg.kr',to_date('18/09/16','RR/MM/DD'),null,'muser05','mpass05','D003','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000016','카일','P005','920606-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Management.Dept06@egg.kr',to_date('18/09/16','RR/MM/DD'),null,'euser06','epass06','D001','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000017','장동건','P005','940304-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Accounting.Dept06@egg.kr',to_date('18/09/16','RR/MM/DD'),null,'buser06','bpass06','D002','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000018','강민경','P005','950916-2123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Marketing.Dept06@egg.kr',to_date('18/09/16','RR/MM/DD'),null,'muser06','mpass06','D003','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000019','김진표','P005','910519-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Management.Dept07@egg.kr',to_date('18/09/16','RR/MM/DD'),null,'euser07','epass07','D001','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000020','김민화','P005','930928-2123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Accounting.Dept07@egg.kr',to_date('18/09/16','RR/MM/DD'),null,'buser07','bpass07','D002','COR001','ROLE_ADMIN',1);
+Insert into EMPLOYEE (EMP_ID,EMP_NAME,POS_ID,EMP_HNUM,EMP_ADDRESS,EMP_EMAIL,EMP_HIREDATE,EMP_LEAVEDATE,EMP_LOGINID,EMP_PASSWORD,DEPT_ID,CORP_ID,AUTH,ENABLED) values ('E000021','김태민','P005','950724-1123456','서울특별시 강남구 테헤란도 152 강남 파이낸스 센터','Marketing.Dept07@egg.kr',to_date('18/09/16','RR/MM/DD'),null,'muser07','mpass07','D003','COR001','ROLE_ADMIN',1);
+
+
+
+REM INSERTING into TEMPLATE
+SET DEFINE OFF;
+insert into template values('TMP001', '기안서', '기안서양식내용');
+insert into template values('TMP002', '품의서', '품의서양식내용');
+insert into template values('TMP003', '회계장부', '회계장부양식내용');
+
+REM INSERTING into USER_TABLE
+SET DEFINE OFF;
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000001','박상아','user01','pass01',to_date('20/01/12','RR/MM/DD'),'서울시 성북구 종암동 25-16','970812-1','user01web@naver.com', '010-1234-1234');
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000002','정상진','user02','pass02',to_date('20/01/13','RR/MM/DD'),'서울시 성북구 종암동 25-17','970812-1','user02web@naver.com', '010-1112-3323');
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000003','황인','user03','pass03',to_date('20/01/14','RR/MM/DD'),'서울시 성북구 종암동 25-18','970812-1','user03web@naver.com', '010-7772-9999');
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000004','백인','user04','pass04',to_date('20/01/15','RR/MM/DD'),'서울시 성북구 종암동 25-19','970812-1','user04web@naver.com', '010-8883-9999');
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000005','흑인','user05','pass05',to_date('20/01/16','RR/MM/DD'),'서울시 성북구 종암동 25-20','970812-1','user05web@naver.com', '010-2323-2323');
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000006','전진희','user06','pass06',to_date('20/01/17','RR/MM/DD'),'서울시 성북구 종암동 25-21','970812-1','user06web@naver.com', '010-8282-8282');
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000007','박보검','user07','pass07',to_date('20/01/18','RR/MM/DD'),'서울시 성북구 종암동 25-22','970812-1','user07web@naver.com', '010-1231-1231');
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000008','안보현','user08','pass08',to_date('20/01/19','RR/MM/DD'),'서울시 성북구 종암동 25-23','970812-1','user08web@naver.com', '010-1111-1112');
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000009','한지평','user09','pass09',to_date('20/01/20','RR/MM/DD'),'서울시 성북구 종암동 25-24','970812-1','user09web@naver.com', '010-5522-5523');
+Insert into USER_TABLE (USER_ID,USER_NAME,USER_LOGINID,USER_PWD,USER_DATE,USER_ADDR,USER_NUMBER,USER_EMAIL,USER_PHONE) values ('U000010','링링','user10','pass10',to_date('20/01/21','RR/MM/DD'),'서울시 성북구 종암동 25-25','970812-1','user10web@naver.com', '010-2323-2424');
+
+REM INSERTING into VACATIONSET
+SET DEFINE OFF;
+Insert into VACATIONSET (CORP_ID,VAC_YN,VAC_CREATE,VAC_DATE) values ('COR001','O','회계연도 기준',null);
+
+INSERT INTO ATTDANCEBASIC (ATTDB_ID, ATTDB_YN, ATTDB_OE, CORP_ID) VALUES ('AB000001', 'Y', 'Y', 'COR001');
+
+REM INSERTING into ATTENDANCESET
+SET DEFINE OFF;
+Insert into ATTENDANCESET (ATTD_ID,ATTSET_DAY,ATTSET_START,ATTSET_END,CORP_ID,ATTD_CATEGORY) values ('AD00001','월',to_date('20/11/27','RR/MM/DD'),to_date('20/11/27','RR/MM/DD'),'COR001','일반근무');
+Insert into ATTENDANCESET (ATTD_ID,ATTSET_DAY,ATTSET_START,ATTSET_END,CORP_ID,ATTD_CATEGORY) values ('AD00002','화',to_date('20/11/27','RR/MM/DD'),to_date('20/11/27','RR/MM/DD'),'COR001','일반근무');
+Insert into ATTENDANCESET (ATTD_ID,ATTSET_DAY,ATTSET_START,ATTSET_END,CORP_ID,ATTD_CATEGORY) values ('AD00003','수',to_date('20/11/27','RR/MM/DD'),to_date('20/11/27','RR/MM/DD'),'COR001','일반근무');
+Insert into ATTENDANCESET (ATTD_ID,ATTSET_DAY,ATTSET_START,ATTSET_END,CORP_ID,ATTD_CATEGORY) values ('AD00004','목',to_date('20/11/27','RR/MM/DD'),to_date('20/11/27','RR/MM/DD'),'COR001','일반근무');
+Insert into ATTENDANCESET (ATTD_ID,ATTSET_DAY,ATTSET_START,ATTSET_END,CORP_ID,ATTD_CATEGORY) values ('AD00005','금',to_date('20/11/27','RR/MM/DD'),to_date('20/11/27','RR/MM/DD'),'COR001','일반근무');
+Insert into ATTENDANCESET (ATTD_ID,ATTSET_DAY,ATTSET_START,ATTSET_END,CORP_ID,ATTD_CATEGORY) values ('AD00006','토',to_date('20/11/01','RR/MM/DD'),to_date('20/11/01','RR/MM/DD'),'COR001','일반근무');
+Insert into ATTENDANCESET (ATTD_ID,ATTSET_DAY,ATTSET_START,ATTSET_END,CORP_ID,ATTD_CATEGORY) values ('AD00007','일',to_date('20/11/01','RR/MM/DD'),to_date('20/11/01','RR/MM/DD'),'COR001','일반근무');
+
+REM INSERTING into YEAR_MANAGE
+SET DEFINE OFF;
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y001','COR001',1,15,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y002','COR001',2,15,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y003','COR001',3,15,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y004','COR001',4,16,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y005','COR001',5,16,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y006','COR001',6,17,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y007','COR001',7,17,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y008','COR001',8,17,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y009','COR001',9,18,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y010','COR001',10,18,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y011','COR001',11,18,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y012','COR001',12,19,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y013','COR001',13,19,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y014','COR001',14,20,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y015','COR001',15,20,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y016','COR001',16,20,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y017','COR001',17,21,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y018','COR001',18,21,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y019','COR001',19,22,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y020','COR001',20,22,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y021','COR001',21,23,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y022','COR001',22,23,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y023','COR001',23,23,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y024','COR001',24,24,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y025','COR001',25,24,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y026','COR001',26,24,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y027','COR001',27,25,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y028','COR001',28,25,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y029','COR001',29,25,null);
+Insert into YEAR_MANAGE (YEAR_ID,CORP_ID,YEAR_HIRE,YEAR_DAY,YEAR_STANDARD) values ('Y030','COR001',30,26,null);
+
+REM INSERTING into STOCK
+SET DEFINE OFF;
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000001',20000,'자체제작','자체제작',to_date('20/11/11','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000002',15000,'자체제작','자체제작',to_date('20/11/12','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000003',25000,'자체제작','자체제작',to_date('20/11/13','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000004',27000,'자체제작','자체제작',to_date('20/11/14','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000005',26000,'자체제작','자체제작',to_date('20/11/15','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000006',24000,'자체제작','자체제작',to_date('20/11/16','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000007',13000,'자체제작','자체제작',to_date('20/11/17','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000008',16000,'자체제작','자체제작',to_date('20/03/01','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000009',25000,'자체제작','자체제작',to_date('20/03/02','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000010',20000,'자체제작','자체제작',to_date('20/03/03','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000011',20000,'자체제작','자체제작',to_date('20/03/04','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000012',20000,'자체제작','자체제작',to_date('20/03/05','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000013',20000,'자체제작','자체제작',to_date('20/03/06','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000014',20000,'자체제작','자체제작',to_date('20/03/07','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000015',20000,'자체제작','자체제작',to_date('20/03/08','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000016',20000,'자체제작','자체제작',to_date('20/03/09','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000017',20000,'자체제작','자체제작',to_date('20/03/10','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000018',20000,'자체제작','자체제작',to_date('20/03/11','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000019',20000,'자체제작','자체제작',to_date('20/03/12','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000020',20000,'자체제작','자체제작',to_date('20/03/13','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000021',20000,'자체제작','자체제작',to_date('20/03/14','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000022',20000,'자체제작','자체제작',to_date('20/03/15','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000023',20000,'자체제작','자체제작',to_date('20/03/16','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000024',20000,'자체제작','자체제작',to_date('20/03/17','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000025',20000,'자체제작','자체제작',to_date('20/03/18','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000026',20000,'자체제작','자체제작',to_date('20/03/19','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000027',20000,'자체제작','자체제작',to_date('20/03/20','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000028',20000,'자체제작','자체제작',to_date('20/03/21','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000029',20000,'자체제작','자체제작',to_date('20/03/22','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000030',20000,'자체제작','자체제작',to_date('20/03/23','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000031',20000,'자체제작','자체제작',to_date('20/03/24','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000032',20000,'자체제작','자체제작',to_date('20/03/25','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000033',20000,'자체제작','자체제작',to_date('20/03/26','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000034',20000,'자체제작','자체제작',to_date('20/03/27','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000035',20000,'자체제작','자체제작',to_date('20/03/28','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000036',20000,'자체제작','자체제작',to_date('20/03/29','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000037',20000,'자체제작','자체제작',to_date('20/03/30','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000038',20000,'자체제작','자체제작',to_date('20/03/31','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000039',20000,'자체제작','자체제작',to_date('20/04/01','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000040',20000,'자체제작','자체제작',to_date('20/04/02','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000041',20000,'자체제작','자체제작',to_date('20/04/03','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000042',20000,'자체제작','자체제작',to_date('20/04/04','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000043',20000,'자체제작','자체제작',to_date('20/04/05','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000044',20000,'자체제작','자체제작',to_date('20/04/06','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000045',20000,'자체제작','자체제작',to_date('20/04/07','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000046',20000,'자체제작','자체제작',to_date('20/04/08','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000047',20000,'자체제작','자체제작',to_date('20/04/09','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000048',20000,'자체제작','자체제작',to_date('20/04/10','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000049',20000,'자체제작','자체제작',to_date('20/04/11','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000050',20000,'자체제작','자체제작',to_date('20/04/12','RR/MM/DD'),'한국');
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values ('ST000051',20000,'자체제작','자체제작',to_date('20/04/13','RR/MM/DD'),'한국');
+
+
+
+REM INSERTING into PRODUCT
+SET DEFINE OFF;
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000008','네오 후드티','ST000001',30000,'top','맨투맨 &후드티','베이직한 기본디자인에 미니멀한 코튼라벨로 포인트를 준 오버핏 후드티','루즈하게 떨어지는 어깨라인에 오버핏으로 누구나 입기 좋은 후드티입니다. 넉넉한 사이즈로 트렌디 하면서도 편하게 코디할 수 있으며 베이직한 디자인에 코튼 라벨로 포인트를 주었습니다',30000,'L','핑크',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000009','네오 후드티','ST000001',30000,'top','맨투맨 &후드티','베이직한 기본디자인에 미니멀한 코튼라벨로 포인트를 준 오버핏 후드티','루즈하게 떨어지는 어깨라인에 오버핏으로 누구나 입기 좋은 후드티입니다. 넉넉한 사이즈로 트렌디 하면서도 편하게 코디할 수 있으며 베이직한 디자인에 코튼 라벨로 포인트를 주었습니다',30000,'L','아이보리',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000010','루즈핏 맨투맨','ST000002',21000,'top','맨투맨 &후드티','깔끔한 포인트인 맨투맨','앞부분에 과한 프린팅 혹은 레터링 디자인이 부담스러우셨던 분들에게 추천드리는 상품입니다. 앞면은 심플하고 작은 레터링 디자인으로 되어있으며, 뒷면에는 중앙에 충분히 포인트가 될 수 있게 적당한 폰트로 레터링 디자인이되어 있습니다.',21000,'S','베이지',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000011','루즈핏 맨투맨','ST000002',21000,'top','맨투맨 &후드티','깔끔한 포인트인 맨투맨','앞부분에 과한 프린팅 혹은 레터링 디자인이 부담스러우셨던 분들에게 추천드리는 상품입니다. 앞면은 심플하고 작은 레터링 디자인으로 되어있으며, 뒷면에는 중앙에 충분히 포인트가 될 수 있게 적당한 폰트로 레터링 디자인이되어 있습니다.',21000,'S','민트',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000012','루즈핏 맨투맨','ST000002',21000,'top','맨투맨 &후드티','깔끔한 포인트인 맨투맨','앞부분에 과한 프린팅 혹은 레터링 디자인이 부담스러우셨던 분들에게 추천드리는 상품입니다. 앞면은 심플하고 작은 레터링 디자인으로 되어있으며, 뒷면에는 중앙에 충분히 포인트가 될 수 있게 적당한 폰트로 레터링 디자인이되어 있습니다.',21000,'S','딥퍼플',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000013','루즈핏 맨투맨','ST000002',21000,'top','맨투맨 &후드티','깔끔한 포인트인 맨투맨','앞부분에 과한 프린팅 혹은 레터링 디자인이 부담스러우셨던 분들에게 추천드리는 상품입니다. 앞면은 심플하고 작은 레터링 디자인으로 되어있으며, 뒷면에는 중앙에 충분히 포인트가 될 수 있게 적당한 폰트로 레터링 디자인이되어 있습니다.',21000,'M','베이지',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000014','루즈핏 맨투맨','ST000002',21000,'top','맨투맨 &후드티','깔끔한 포인트인 맨투맨','앞부분에 과한 프린팅 혹은 레터링 디자인이 부담스러우셨던 분들에게 추천드리는 상품입니다. 앞면은 심플하고 작은 레터링 디자인으로 되어있으며, 뒷면에는 중앙에 충분히 포인트가 될 수 있게 적당한 폰트로 레터링 디자인이되어 있습니다.',21000,'M','민트',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000015','루즈핏 맨투맨','ST000002',21000,'top','맨투맨 &후드티','깔끔한 포인트인 맨투맨','앞부분에 과한 프린팅 혹은 레터링 디자인이 부담스러우셨던 분들에게 추천드리는 상품입니다. 앞면은 심플하고 작은 레터링 디자인으로 되어있으며, 뒷면에는 중앙에 충분히 포인트가 될 수 있게 적당한 폰트로 레터링 디자인이되어 있습니다.',21000,'M','딥퍼플',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000016','루즈핏 맨투맨','ST000002',21000,'top','맨투맨 &후드티','깔끔한 포인트인 맨투맨','앞부분에 과한 프린팅 혹은 레터링 디자인이 부담스러우셨던 분들에게 추천드리는 상품입니다. 앞면은 심플하고 작은 레터링 디자인으로 되어있으며, 뒷면에는 중앙에 충분히 포인트가 될 수 있게 적당한 폰트로 레터링 디자인이되어 있습니다.',21000,'L','베이지',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000001','네오 후드티','ST000001',30000,'top','맨투맨 &후드티','베이직한 기본디자인에 미니멀한 코튼라벨로 포인트를 준 오버핏 후드티','루즈하게 떨어지는 어깨라인에 오버핏으로 누구나 입기 좋은 후드티입니다. 넉넉한 사이즈로 트렌디 하면서도 편하게 코디할 수 있으며 베이직한 디자인에 코튼 라벨로 포인트를 주었습니다',30000,'S','블랙 ',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000002','네오 후드티','ST000001',30000,'top','맨투맨 &후드티','베이직한 기본디자인에 미니멀한 코튼라벨로 포인트를 준 오버핏 후드티','루즈하게 떨어지는 어깨라인에 오버핏으로 누구나 입기 좋은 후드티입니다. 넉넉한 사이즈로 트렌디 하면서도 편하게 코디할 수 있으며 베이직한 디자인에 코튼 라벨로 포인트를 주었습니다',30000,'S','핑크',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000003','네오 후드티','ST000001',30000,'top','맨투맨 &후드티','베이직한 기본디자인에 미니멀한 코튼라벨로 포인트를 준 오버핏 후드티','루즈하게 떨어지는 어깨라인에 오버핏으로 누구나 입기 좋은 후드티입니다. 넉넉한 사이즈로 트렌디 하면서도 편하게 코디할 수 있으며 베이직한 디자인에 코튼 라벨로 포인트를 주었습니다',30000,'S','아이보리',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000004','네오 후드티','ST000001',30000,'top','맨투맨 &후드티','베이직한 기본디자인에 미니멀한 코튼라벨로 포인트를 준 오버핏 후드티','루즈하게 떨어지는 어깨라인에 오버핏으로 누구나 입기 좋은 후드티입니다. 넉넉한 사이즈로 트렌디 하면서도 편하게 코디할 수 있으며 베이직한 디자인에 코튼 라벨로 포인트를 주었습니다',30000,'M','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000005','네오 후드티','ST000001',30000,'top','맨투맨 &후드티','베이직한 기본디자인에 미니멀한 코튼라벨로 포인트를 준 오버핏 후드티','루즈하게 떨어지는 어깨라인에 오버핏으로 누구나 입기 좋은 후드티입니다. 넉넉한 사이즈로 트렌디 하면서도 편하게 코디할 수 있으며 베이직한 디자인에 코튼 라벨로 포인트를 주었습니다',30000,'M','핑크',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000006','네오 후드티','ST000001',30000,'top','맨투맨 &후드티','베이직한 기본디자인에 미니멀한 코튼라벨로 포인트를 준 오버핏 후드티','루즈하게 떨어지는 어깨라인에 오버핏으로 누구나 입기 좋은 후드티입니다. 넉넉한 사이즈로 트렌디 하면서도 편하게 코디할 수 있으며 베이직한 디자인에 코튼 라벨로 포인트를 주었습니다',30000,'M','아이보리',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000007','네오 후드티','ST000001',30000,'top','맨투맨 &후드티','베이직한 기본디자인에 미니멀한 코튼라벨로 포인트를 준 오버핏 후드티','루즈하게 떨어지는 어깨라인에 오버핏으로 누구나 입기 좋은 후드티입니다. 넉넉한 사이즈로 트렌디 하면서도 편하게 코디할 수 있으며 베이직한 디자인에 코튼 라벨로 포인트를 주었습니다',30000,'L','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000017','루즈핏 맨투맨','ST000002',21000,'top','맨투맨 &후드티','깔끔한 포인트인 맨투맨','앞부분에 과한 프린팅 혹은 레터링 디자인이 부담스러우셨던 분들에게 추천드리는 상품입니다. 앞면은 심플하고 작은 레터링 디자인으로 되어있으며, 뒷면에는 중앙에 충분히 포인트가 될 수 있게 적당한 폰트로 레터링 디자인이되어 있습니다.',21000,'L','민트',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000018','루즈핏 맨투맨','ST000002',21000,'top','맨투맨 &후드티','깔끔한 포인트인 맨투맨','앞부분에 과한 프린팅 혹은 레터링 디자인이 부담스러우셨던 분들에게 추천드리는 상품입니다. 앞면은 심플하고 작은 레터링 디자인으로 되어있으며, 뒷면에는 중앙에 충분히 포인트가 될 수 있게 적당한 폰트로 레터링 디자인이되어 있습니다.',21000,'L','딥퍼플',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000019','몬텐드 백 프린팅 기모 후드티','ST000003',34000,'top','맨투맨 &후드티','컬러걱정없는 베이직한 후드티','F/W시즌 다양한 코디에 내추럴하고 캐주얼한 매력을 연출하기 좋은 기모 후드티입니다. 다양한 컬러와 사이즈, 루즈한 핏감으로 남녀 구분 없이 누구나 편안하게 착용이 가능하며 안감은 기모 소재로 높은 보온성을 자랑합니다.',34000,'S','그레이',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000020','몬텐드 백 프린팅 기모 후드티','ST000003',34000,'top','맨투맨 &후드티','컬러걱정없는 베이직한 후드티','F/W시즌 다양한 코디에 내추럴하고 캐주얼한 매력을 연출하기 좋은 기모 후드티입니다. 다양한 컬러와 사이즈, 루즈한 핏감으로 남녀 구분 없이 누구나 편안하게 착용이 가능하며 안감은 기모 소재로 높은 보온성을 자랑합니다.',34000,'S','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000021','몬텐드 백 프린팅 기모 후드티','ST000003',34000,'top','맨투맨 &후드티','컬러걱정없는 베이직한 후드티','F/W시즌 다양한 코디에 내추럴하고 캐주얼한 매력을 연출하기 좋은 기모 후드티입니다. 다양한 컬러와 사이즈, 루즈한 핏감으로 남녀 구분 없이 누구나 편안하게 착용이 가능하며 안감은 기모 소재로 높은 보온성을 자랑합니다.',34000,'S','아이보리',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000022','몬텐드 백 프린팅 기모 후드티','ST000003',34000,'top','맨투맨 &후드티','컬러걱정없는 베이직한 후드티','F/W시즌 다양한 코디에 내추럴하고 캐주얼한 매력을 연출하기 좋은 기모 후드티입니다. 다양한 컬러와 사이즈, 루즈한 핏감으로 남녀 구분 없이 누구나 편안하게 착용이 가능하며 안감은 기모 소재로 높은 보온성을 자랑합니다.',34000,'M','그레이',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000023','몬텐드 백 프린팅 기모 후드티','ST000003',34000,'top','맨투맨 &후드티','컬러걱정없는 베이직한 후드티','F/W시즌 다양한 코디에 내추럴하고 캐주얼한 매력을 연출하기 좋은 기모 후드티입니다. 다양한 컬러와 사이즈, 루즈한 핏감으로 남녀 구분 없이 누구나 편안하게 착용이 가능하며 안감은 기모 소재로 높은 보온성을 자랑합니다.',34000,'M','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000024','몬텐드 백 프린팅 기모 후드티','ST000003',34000,'top','맨투맨 &후드티','컬러걱정없는 베이직한 후드티','F/W시즌 다양한 코디에 내추럴하고 캐주얼한 매력을 연출하기 좋은 기모 후드티입니다. 다양한 컬러와 사이즈, 루즈한 핏감으로 남녀 구분 없이 누구나 편안하게 착용이 가능하며 안감은 기모 소재로 높은 보온성을 자랑합니다.',34000,'M','아이보리',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000025','몬텐드 백 프린팅 기모 후드티','ST000003',34000,'top','맨투맨 &후드티','컬러걱정없는 베이직한 후드티','F/W시즌 다양한 코디에 내추럴하고 캐주얼한 매력을 연출하기 좋은 기모 후드티입니다. 다양한 컬러와 사이즈, 루즈한 핏감으로 남녀 구분 없이 누구나 편안하게 착용이 가능하며 안감은 기모 소재로 높은 보온성을 자랑합니다.',34000,'L','그레이',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000026','몬텐드 백 프린팅 기모 후드티','ST000003',34000,'top','맨투맨 &후드티','컬러걱정없는 베이직한 후드티','F/W시즌 다양한 코디에 내추럴하고 캐주얼한 매력을 연출하기 좋은 기모 후드티입니다. 다양한 컬러와 사이즈, 루즈한 핏감으로 남녀 구분 없이 누구나 편안하게 착용이 가능하며 안감은 기모 소재로 높은 보온성을 자랑합니다.',34000,'L','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000027','몬텐드 백 프린팅 기모 후드티','ST000003',34000,'top','맨투맨 &후드티','컬러걱정없는 베이직한 후드티','F/W시즌 다양한 코디에 내추럴하고 캐주얼한 매력을 연출하기 좋은 기모 후드티입니다. 다양한 컬러와 사이즈, 루즈한 핏감으로 남녀 구분 없이 누구나 편안하게 착용이 가능하며 안감은 기모 소재로 높은 보온성을 자랑합니다.',34000,'L','아이보리',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000028','마운틴 후드티','ST000004',36000,'top','맨투맨 &후드티','아방한 디자인으로 간편하게 입기 좋은 후드티','적당히 여유있는 루즈핏의 후드티입니다. 앞면과 뒷면에 동일한 프린팅으로 통일감을 줌으로써 캐주얼함을 한층 더했습니다.',36000,'S','머스타드',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000029','마운틴 후드티','ST000004',36000,'top','맨투맨 &후드티','아방한 디자인으로 간편하게 입기 좋은 후드티','적당히 여유있는 루즈핏의 후드티입니다. 앞면과 뒷면에 동일한 프린팅으로 통일감을 줌으로써 캐주얼함을 한층 더했습니다.',36000,'S','네이비',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000030','마운틴 후드티','ST000004',36000,'top','맨투맨 &후드티','아방한 디자인으로 간편하게 입기 좋은 후드티','적당히 여유있는 루즈핏의 후드티입니다. 앞면과 뒷면에 동일한 프린팅으로 통일감을 줌으로써 캐주얼함을 한층 더했습니다.',36000,'S','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000031','마운틴 후드티','ST000004',36000,'top','맨투맨 &후드티','아방한 디자인으로 간편하게 입기 좋은 후드티','적당히 여유있는 루즈핏의 후드티입니다. 앞면과 뒷면에 동일한 프린팅으로 통일감을 줌으로써 캐주얼함을 한층 더했습니다.',36000,'M','머스타드',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000032','마운틴 후드티','ST000004',36000,'top','맨투맨 &후드티','아방한 디자인으로 간편하게 입기 좋은 후드티','적당히 여유있는 루즈핏의 후드티입니다. 앞면과 뒷면에 동일한 프린팅으로 통일감을 줌으로써 캐주얼함을 한층 더했습니다.',36000,'M','네이비',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000033','마운틴 후드티','ST000004',36000,'top','맨투맨 &후드티','아방한 디자인으로 간편하게 입기 좋은 후드티','적당히 여유있는 루즈핏의 후드티입니다. 앞면과 뒷면에 동일한 프린팅으로 통일감을 줌으로써 캐주얼함을 한층 더했습니다.',36000,'M','블랙 ',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000034','마운틴 후드티','ST000004',36000,'top','맨투맨 &후드티','아방한 디자인으로 간편하게 입기 좋은 후드티','적당히 여유있는 루즈핏의 후드티입니다. 앞면과 뒷면에 동일한 프린팅으로 통일감을 줌으로써 캐주얼함을 한층 더했습니다.',36000,'L','머스타드',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000035','마운틴 후드티','ST000004',36000,'top','맨투맨 &후드티','아방한 디자인으로 간편하게 입기 좋은 후드티','적당히 여유있는 루즈핏의 후드티입니다. 앞면과 뒷면에 동일한 프린팅으로 통일감을 줌으로써 캐주얼함을 한층 더했습니다.',36000,'L','네이비',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000036','마운틴 후드티','ST000004',36000,'top','맨투맨 &후드티','아방한 디자인으로 간편하게 입기 좋은 후드티','적당히 여유있는 루즈핏의 후드티입니다. 앞면과 뒷면에 동일한 프린팅으로 통일감을 줌으로써 캐주얼함을 한층 더했습니다.',36000,'L','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000037','기모맨투맨','ST000005',34000,'top','맨투맨 &후드티','다양한 컬러! 다양한 사이즈까지 완벽한 기모맨투맨!!','조군만의 공정 과정을 통해 뭉치지 않는 기모 안감을 사용하여 F/W시즌 따뜻한 보온성뿐만 아니라 루즈한 핏감으로 누구나 편안하고 멋스러운 연출이 가능한 맨투맨 아이템입니다',34000,'S','카멜',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000038','기모맨투맨','ST000005',34000,'top','맨투맨 &후드티','다양한 컬러! 다양한 사이즈까지 완벽한 기모맨투맨!!','조군만의 공정 과정을 통해 뭉치지 않는 기모 안감을 사용하여 F/W시즌 따뜻한 보온성뿐만 아니라 루즈한 핏감으로 누구나 편안하고 멋스러운 연출이 가능한 맨투맨 아이템입니다',34000,'S','라이트네이비',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000039','기모맨투맨','ST000005',34000,'top','맨투맨 &후드티','다양한 컬러! 다양한 사이즈까지 완벽한 기모맨투맨!!','조군만의 공정 과정을 통해 뭉치지 않는 기모 안감을 사용하여 F/W시즌 따뜻한 보온성뿐만 아니라 루즈한 핏감으로 누구나 편안하고 멋스러운 연출이 가능한 맨투맨 아이템입니다',34000,'S','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000040','기모맨투맨','ST000005',34000,'top','맨투맨 &후드티','다양한 컬러! 다양한 사이즈까지 완벽한 기모맨투맨!!','조군만의 공정 과정을 통해 뭉치지 않는 기모 안감을 사용하여 F/W시즌 따뜻한 보온성뿐만 아니라 루즈한 핏감으로 누구나 편안하고 멋스러운 연출이 가능한 맨투맨 아이템입니다',34000,'M','카멜',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000041','기모맨투맨','ST000005',34000,'top','맨투맨 &후드티','다양한 컬러! 다양한 사이즈까지 완벽한 기모맨투맨!!','조군만의 공정 과정을 통해 뭉치지 않는 기모 안감을 사용하여 F/W시즌 따뜻한 보온성뿐만 아니라 루즈한 핏감으로 누구나 편안하고 멋스러운 연출이 가능한 맨투맨 아이템입니다',34000,'M','라이트네이비',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000042','기모맨투맨','ST000005',34000,'top','맨투맨 &후드티','다양한 컬러! 다양한 사이즈까지 완벽한 기모맨투맨!!','조군만의 공정 과정을 통해 뭉치지 않는 기모 안감을 사용하여 F/W시즌 따뜻한 보온성뿐만 아니라 루즈한 핏감으로 누구나 편안하고 멋스러운 연출이 가능한 맨투맨 아이템입니다',34000,'M','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000043','기모맨투맨','ST000005',34000,'top','맨투맨 &후드티','다양한 컬러! 다양한 사이즈까지 완벽한 기모맨투맨!!','조군만의 공정 과정을 통해 뭉치지 않는 기모 안감을 사용하여 F/W시즌 따뜻한 보온성뿐만 아니라 루즈한 핏감으로 누구나 편안하고 멋스러운 연출이 가능한 맨투맨 아이템입니다',34000,'L','카멜',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000044','기모맨투맨','ST000005',34000,'top','맨투맨 &후드티','다양한 컬러! 다양한 사이즈까지 완벽한 기모맨투맨!!','조군만의 공정 과정을 통해 뭉치지 않는 기모 안감을 사용하여 F/W시즌 따뜻한 보온성뿐만 아니라 루즈한 핏감으로 누구나 편안하고 멋스러운 연출이 가능한 맨투맨 아이템입니다',34000,'L','라이트네이비',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000045','기모맨투맨','ST000005',34000,'top','맨투맨 &후드티','다양한 컬러! 다양한 사이즈까지 완벽한 기모맨투맨!!','조군만의 공정 과정을 통해 뭉치지 않는 기모 안감을 사용하여 F/W시즌 따뜻한 보온성뿐만 아니라 루즈한 핏감으로 누구나 편안하고 멋스러운 연출이 가능한 맨투맨 아이템입니다',34000,'L','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000046','갓오브 코튼 후드티','ST000006',32000,'top','맨투맨 &후드티','캐주얼한 프린팅으로 포인트주기 좋은 후드티','앞면과 뒷면에 큼지막한 프린트가 포인트인 후드티입니다. 또한 트렌디한 컬러감으로 인해 커플룩으로도 연출 가능하며, 여유 있는 사이즈로 남녀노소 착용하기 부담 없는 후드티입니다.',32000,'S','그레이',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000047','갓오브 코튼 후드티','ST000006',32000,'top','맨투맨 &후드티','캐주얼한 프린팅으로 포인트주기 좋은 후드티','앞면과 뒷면에 큼지막한 프린트가 포인트인 후드티입니다. 또한 트렌디한 컬러감으로 인해 커플룩으로도 연출 가능하며, 여유 있는 사이즈로 남녀노소 착용하기 부담 없는 후드티입니다.',32000,'S','블루',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000048','갓오브 코튼 후드티','ST000006',32000,'top','맨투맨 &후드티','캐주얼한 프린팅으로 포인트주기 좋은 후드티','앞면과 뒷면에 큼지막한 프린트가 포인트인 후드티입니다. 또한 트렌디한 컬러감으로 인해 커플룩으로도 연출 가능하며, 여유 있는 사이즈로 남녀노소 착용하기 부담 없는 후드티입니다.',32000,'S','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000049','갓오브 코튼 후드티','ST000006',32000,'top','맨투맨 &후드티','캐주얼한 프린팅으로 포인트주기 좋은 후드티','앞면과 뒷면에 큼지막한 프린트가 포인트인 후드티입니다. 또한 트렌디한 컬러감으로 인해 커플룩으로도 연출 가능하며, 여유 있는 사이즈로 남녀노소 착용하기 부담 없는 후드티입니다.',32000,'M','그레이',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000050','갓오브 코튼 후드티','ST000006',32000,'top','맨투맨 &후드티','캐주얼한 프린팅으로 포인트주기 좋은 후드티','앞면과 뒷면에 큼지막한 프린트가 포인트인 후드티입니다. 또한 트렌디한 컬러감으로 인해 커플룩으로도 연출 가능하며, 여유 있는 사이즈로 남녀노소 착용하기 부담 없는 후드티입니다.',32000,'M','블루',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000051','갓오브 코튼 후드티','ST000006',32000,'top','맨투맨 &후드티','캐주얼한 프린팅으로 포인트주기 좋은 후드티','앞면과 뒷면에 큼지막한 프린트가 포인트인 후드티입니다. 또한 트렌디한 컬러감으로 인해 커플룩으로도 연출 가능하며, 여유 있는 사이즈로 남녀노소 착용하기 부담 없는 후드티입니다.',32000,'M','블랙 ',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000052','갓오브 코튼 후드티','ST000006',32000,'top','맨투맨 &후드티','캐주얼한 프린팅으로 포인트주기 좋은 후드티','앞면과 뒷면에 큼지막한 프린트가 포인트인 후드티입니다. 또한 트렌디한 컬러감으로 인해 커플룩으로도 연출 가능하며, 여유 있는 사이즈로 남녀노소 착용하기 부담 없는 후드티입니다.',32000,'L','그레이',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000053','갓오브 코튼 후드티','ST000006',32000,'top','맨투맨 &후드티','캐주얼한 프린팅으로 포인트주기 좋은 후드티','앞면과 뒷면에 큼지막한 프린트가 포인트인 후드티입니다. 또한 트렌디한 컬러감으로 인해 커플룩으로도 연출 가능하며, 여유 있는 사이즈로 남녀노소 착용하기 부담 없는 후드티입니다.',32000,'L','블루',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000054','갓오브 코튼 후드티','ST000006',32000,'top','맨투맨 &후드티','캐주얼한 프린팅으로 포인트주기 좋은 후드티','앞면과 뒷면에 큼지막한 프린트가 포인트인 후드티입니다. 또한 트렌디한 컬러감으로 인해 커플룩으로도 연출 가능하며, 여유 있는 사이즈로 남녀노소 착용하기 부담 없는 후드티입니다.',32000,'L','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000055','모락모락 빵 맨투맨 ','ST000007',21000,'top','맨투맨 &후드티','바게트빵 프린팅이 귀여운 캐주얼 기모 맨투맨','귀여운 백프린팅이 포인트인 기모 맨투맨입니다. 가볍지만, 기모 덕분에 포근하게 착용하실 수 있는 아이템입니다. 적당히 여유있는 핏덕분에 남녀노소 모두 부담없이 착용하실 수 있으며, 레이어드티와 함께 매치하시면 더욱 멋스럽게 코디하실 수 있습니다.',21000,'S','차콜',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000056','모락모락 빵 맨투맨 ','ST000007',21000,'top','맨투맨 &후드티','바게트빵 프린팅이 귀여운 캐주얼 기모 맨투맨','귀여운 백프린팅이 포인트인 기모 맨투맨입니다. 가볍지만, 기모 덕분에 포근하게 착용하실 수 있는 아이템입니다. 적당히 여유있는 핏덕분에 남녀노소 모두 부담없이 착용하실 수 있으며, 레이어드티와 함께 매치하시면 더욱 멋스럽게 코디하실 수 있습니다.',21000,'S','크림',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000057','모락모락 빵 맨투맨 ','ST000007',21000,'top','맨투맨 &후드티','바게트빵 프린팅이 귀여운 캐주얼 기모 맨투맨','귀여운 백프린팅이 포인트인 기모 맨투맨입니다. 가볍지만, 기모 덕분에 포근하게 착용하실 수 있는 아이템입니다. 적당히 여유있는 핏덕분에 남녀노소 모두 부담없이 착용하실 수 있으며, 레이어드티와 함께 매치하시면 더욱 멋스럽게 코디하실 수 있습니다.',21000,'S','브라운',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000058','모락모락 빵 맨투맨 ','ST000007',21000,'top','맨투맨 &후드티','바게트빵 프린팅이 귀여운 캐주얼 기모 맨투맨','귀여운 백프린팅이 포인트인 기모 맨투맨입니다. 가볍지만, 기모 덕분에 포근하게 착용하실 수 있는 아이템입니다. 적당히 여유있는 핏덕분에 남녀노소 모두 부담없이 착용하실 수 있으며, 레이어드티와 함께 매치하시면 더욱 멋스럽게 코디하실 수 있습니다.',21000,'M','차콜',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000059','모락모락 빵 맨투맨 ','ST000007',21000,'top','맨투맨 &후드티','바게트빵 프린팅이 귀여운 캐주얼 기모 맨투맨','귀여운 백프린팅이 포인트인 기모 맨투맨입니다. 가볍지만, 기모 덕분에 포근하게 착용하실 수 있는 아이템입니다. 적당히 여유있는 핏덕분에 남녀노소 모두 부담없이 착용하실 수 있으며, 레이어드티와 함께 매치하시면 더욱 멋스럽게 코디하실 수 있습니다.',21000,'M','크림',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000060','모락모락 빵 맨투맨 ','ST000007',21000,'top','맨투맨 &후드티','바게트빵 프린팅이 귀여운 캐주얼 기모 맨투맨','귀여운 백프린팅이 포인트인 기모 맨투맨입니다. 가볍지만, 기모 덕분에 포근하게 착용하실 수 있는 아이템입니다. 적당히 여유있는 핏덕분에 남녀노소 모두 부담없이 착용하실 수 있으며, 레이어드티와 함께 매치하시면 더욱 멋스럽게 코디하실 수 있습니다.',21000,'M','브라운',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000061','모락모락 빵 맨투맨 ','ST000007',21000,'top','맨투맨 &후드티','바게트빵 프린팅이 귀여운 캐주얼 기모 맨투맨','귀여운 백프린팅이 포인트인 기모 맨투맨입니다. 가볍지만, 기모 덕분에 포근하게 착용하실 수 있는 아이템입니다. 적당히 여유있는 핏덕분에 남녀노소 모두 부담없이 착용하실 수 있으며, 레이어드티와 함께 매치하시면 더욱 멋스럽게 코디하실 수 있습니다.',21000,'L','차콜',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000062','모락모락 빵 맨투맨 ','ST000007',21000,'top','맨투맨 &후드티','바게트빵 프린팅이 귀여운 캐주얼 기모 맨투맨','귀여운 백프린팅이 포인트인 기모 맨투맨입니다. 가볍지만, 기모 덕분에 포근하게 착용하실 수 있는 아이템입니다. 적당히 여유있는 핏덕분에 남녀노소 모두 부담없이 착용하실 수 있으며, 레이어드티와 함께 매치하시면 더욱 멋스럽게 코디하실 수 있습니다.',21000,'L','크림',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000063','모락모락 빵 맨투맨 ','ST000007',21000,'top','맨투맨 &후드티','바게트빵 프린팅이 귀여운 캐주얼 기모 맨투맨','귀여운 백프린팅이 포인트인 기모 맨투맨입니다. 가볍지만, 기모 덕분에 포근하게 착용하실 수 있는 아이템입니다. 적당히 여유있는 핏덕분에 남녀노소 모두 부담없이 착용하실 수 있으며, 레이어드티와 함께 매치하시면 더욱 멋스럽게 코디하실 수 있습니다.',21000,'L','브라운',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000064','글라스 네오프렌 맨투맨','ST000008',26000,'top','맨투맨 &후드티','편안한 네오프렌 소재의 맨투맨','폴리와 레이온의 혼방 소재로 제작된 맨투맨입니다. 네오프렌 소재로 적절히 핏감을 잡아주며, 여름을 제외한 나머지 계절에 간편하게 입을 수 있는 적당한 두께감을 가지고 있습니다. 전면과 후면에 동일한 프린팅으로 캐주얼함을 더욱 살려 준 아이템입니다.',26000,'S','아이보리',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000065','글라스 네오프렌 맨투맨','ST000008',26000,'top','맨투맨 &후드티','편안한 네오프렌 소재의 맨투맨','폴리와 레이온의 혼방 소재로 제작된 맨투맨입니다. 네오프렌 소재로 적절히 핏감을 잡아주며, 여름을 제외한 나머지 계절에 간편하게 입을 수 있는 적당한 두께감을 가지고 있습니다. 전면과 후면에 동일한 프린팅으로 캐주얼함을 더욱 살려 준 아이템입니다.',26000,'S','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000066','글라스 네오프렌 맨투맨','ST000008',26000,'top','맨투맨 &후드티','편안한 네오프렌 소재의 맨투맨','폴리와 레이온의 혼방 소재로 제작된 맨투맨입니다. 네오프렌 소재로 적절히 핏감을 잡아주며, 여름을 제외한 나머지 계절에 간편하게 입을 수 있는 적당한 두께감을 가지고 있습니다. 전면과 후면에 동일한 프린팅으로 캐주얼함을 더욱 살려 준 아이템입니다.',26000,'S','그린',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000067','글라스 네오프렌 맨투맨','ST000008',26000,'top','맨투맨 &후드티','편안한 네오프렌 소재의 맨투맨','폴리와 레이온의 혼방 소재로 제작된 맨투맨입니다. 네오프렌 소재로 적절히 핏감을 잡아주며, 여름을 제외한 나머지 계절에 간편하게 입을 수 있는 적당한 두께감을 가지고 있습니다. 전면과 후면에 동일한 프린팅으로 캐주얼함을 더욱 살려 준 아이템입니다.',26000,'M','아이보리',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000068','글라스 네오프렌 맨투맨','ST000008',26000,'top','맨투맨 &후드티','편안한 네오프렌 소재의 맨투맨','폴리와 레이온의 혼방 소재로 제작된 맨투맨입니다. 네오프렌 소재로 적절히 핏감을 잡아주며, 여름을 제외한 나머지 계절에 간편하게 입을 수 있는 적당한 두께감을 가지고 있습니다. 전면과 후면에 동일한 프린팅으로 캐주얼함을 더욱 살려 준 아이템입니다.',26000,'M','블랙 ',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000069','글라스 네오프렌 맨투맨','ST000008',26000,'top','맨투맨 &후드티','편안한 네오프렌 소재의 맨투맨','폴리와 레이온의 혼방 소재로 제작된 맨투맨입니다. 네오프렌 소재로 적절히 핏감을 잡아주며, 여름을 제외한 나머지 계절에 간편하게 입을 수 있는 적당한 두께감을 가지고 있습니다. 전면과 후면에 동일한 프린팅으로 캐주얼함을 더욱 살려 준 아이템입니다.',26000,'M','그린',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000070','글라스 네오프렌 맨투맨','ST000008',26000,'top','맨투맨 &후드티','편안한 네오프렌 소재의 맨투맨','폴리와 레이온의 혼방 소재로 제작된 맨투맨입니다. 네오프렌 소재로 적절히 핏감을 잡아주며, 여름을 제외한 나머지 계절에 간편하게 입을 수 있는 적당한 두께감을 가지고 있습니다. 전면과 후면에 동일한 프린팅으로 캐주얼함을 더욱 살려 준 아이템입니다.',26000,'L','아이보리',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000071','글라스 네오프렌 맨투맨','ST000008',26000,'top','맨투맨 &후드티','편안한 네오프렌 소재의 맨투맨','폴리와 레이온의 혼방 소재로 제작된 맨투맨입니다. 네오프렌 소재로 적절히 핏감을 잡아주며, 여름을 제외한 나머지 계절에 간편하게 입을 수 있는 적당한 두께감을 가지고 있습니다. 전면과 후면에 동일한 프린팅으로 캐주얼함을 더욱 살려 준 아이템입니다.',26000,'L','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000072','글라스 네오프렌 맨투맨','ST000008',26000,'top','맨투맨 &후드티','편안한 네오프렌 소재의 맨투맨','폴리와 레이온의 혼방 소재로 제작된 맨투맨입니다. 네오프렌 소재로 적절히 핏감을 잡아주며, 여름을 제외한 나머지 계절에 간편하게 입을 수 있는 적당한 두께감을 가지고 있습니다. 전면과 후면에 동일한 프린팅으로 캐주얼함을 더욱 살려 준 아이템입니다.',26000,'L','그린',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000073','베어 프린팅 기모 후드티','ST000009',32000,'top','맨투맨 &후드티','귀여운 프린팅이 돋보이는 기모 후드티!','넉넉한 핏감과 기장감으로 편안하게 착용하기 좋은 후드입니다. 앞면에는 레터링을, 뒷면에는 귀여운 스키 타는 곰 프린팅으로 포인트를 주었습니다.',32000,'S','카키',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000074','베어 프린팅 기모 후드티','ST000009',32000,'top','맨투맨 &후드티','귀여운 프린팅이 돋보이는 기모 후드티!','넉넉한 핏감과 기장감으로 편안하게 착용하기 좋은 후드입니다. 앞면에는 레터링을, 뒷면에는 귀여운 스키 타는 곰 프린팅으로 포인트를 주었습니다.',32000,'S','그레이',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000075','베어 프린팅 기모 후드티','ST000009',32000,'top','맨투맨 &후드티','귀여운 프린팅이 돋보이는 기모 후드티!','넉넉한 핏감과 기장감으로 편안하게 착용하기 좋은 후드입니다. 앞면에는 레터링을, 뒷면에는 귀여운 스키 타는 곰 프린팅으로 포인트를 주었습니다.',32000,'S','블랙 ',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000076','베어 프린팅 기모 후드티','ST000009',32000,'top','맨투맨 &후드티','귀여운 프린팅이 돋보이는 기모 후드티!','넉넉한 핏감과 기장감으로 편안하게 착용하기 좋은 후드입니다. 앞면에는 레터링을, 뒷면에는 귀여운 스키 타는 곰 프린팅으로 포인트를 주었습니다.',32000,'M','카키',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000077','베어 프린팅 기모 후드티','ST000009',32000,'top','맨투맨 &후드티','귀여운 프린팅이 돋보이는 기모 후드티!','넉넉한 핏감과 기장감으로 편안하게 착용하기 좋은 후드입니다. 앞면에는 레터링을, 뒷면에는 귀여운 스키 타는 곰 프린팅으로 포인트를 주었습니다.',32000,'M','그레이',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000078','베어 프린팅 기모 후드티','ST000009',32000,'top','맨투맨 &후드티','귀여운 프린팅이 돋보이는 기모 후드티!','넉넉한 핏감과 기장감으로 편안하게 착용하기 좋은 후드입니다. 앞면에는 레터링을, 뒷면에는 귀여운 스키 타는 곰 프린팅으로 포인트를 주었습니다.',32000,'M','블랙 ',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000079','베어 프린팅 기모 후드티','ST000009',32000,'top','맨투맨 &후드티','귀여운 프린팅이 돋보이는 기모 후드티!','넉넉한 핏감과 기장감으로 편안하게 착용하기 좋은 후드입니다. 앞면에는 레터링을, 뒷면에는 귀여운 스키 타는 곰 프린팅으로 포인트를 주었습니다.',32000,'L','카키',10,'Y');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000080','베어 프린팅 기모 후드티','ST000009',32000,'top','맨투맨 &후드티','귀여운 프린팅이 돋보이는 기모 후드티!','넉넉한 핏감과 기장감으로 편안하게 착용하기 좋은 후드입니다. 앞면에는 레터링을, 뒷면에는 귀여운 스키 타는 곰 프린팅으로 포인트를 주었습니다.',32000,'L','그레이',10,'N');
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) values ('PR000081','베어 프린팅 기모 후드티','ST000009',32000,'top','맨투맨 &후드티','귀여운 프린팅이 돋보이는 기모 후드티!','넉넉한 핏감과 기장감으로 편안하게 착용하기 좋은 후드입니다. 앞면에는 레터링을, 뒷면에는 귀여운 스키 타는 곰 프린팅으로 포인트를 주었습니다.',32000,'L','블랙 ',10,'N');
+REM INSERTING into PAYMENT
+SET DEFINE OFF;
+Insert into PAYMENT (PAY_ID,USER_ID,PAY_TYPE,PAY_TIME,PAY_PRICE,PAY_RECEIPT_STATUS,PAY_STATUS) values ('PA000001','U000001','카카오페이',to_date('20/11/01','RR/MM/DD'),30000,'Y','결제대기');
+Insert into PAYMENT (PAY_ID,USER_ID,PAY_TYPE,PAY_TIME,PAY_PRICE,PAY_RECEIPT_STATUS,PAY_STATUS) values ('PA000002','U000002','카카오페이',to_date('20/11/02','RR/MM/DD'),32000,'Y','결제완료');
+Insert into PAYMENT (PAY_ID,USER_ID,PAY_TYPE,PAY_TIME,PAY_PRICE,PAY_RECEIPT_STATUS,PAY_STATUS) values ('PA000003','U000003','카카오페이',to_date('20/11/03','RR/MM/DD'),21000,'N','결제대기');
+Insert into PAYMENT (PAY_ID,USER_ID,PAY_TYPE,PAY_TIME,PAY_PRICE,PAY_RECEIPT_STATUS,PAY_STATUS) values ('PA000004','U000004','카카오페이',to_date('20/11/04','RR/MM/DD'),26000,'N','결제취소');
+Insert into PAYMENT (PAY_ID,USER_ID,PAY_TYPE,PAY_TIME,PAY_PRICE,PAY_RECEIPT_STATUS,PAY_STATUS) values ('PA000005','U000005','카카오페이',to_date('20/11/05','RR/MM/DD'),36000,'N','결제완료');
+Insert into PAYMENT (PAY_ID,USER_ID,PAY_TYPE,PAY_TIME,PAY_PRICE,PAY_RECEIPT_STATUS,PAY_STATUS) values ('PA000006','U000006','카카오페이',to_date('20/11/06','RR/MM/DD'),32000,'N','결제완료');
+Insert into PAYMENT (PAY_ID,USER_ID,PAY_TYPE,PAY_TIME,PAY_PRICE,PAY_RECEIPT_STATUS,PAY_STATUS) values ('PA000007','U000007','카카오페이',to_date('20/11/07','RR/MM/DD'),30000,'Y','결제대기');
+Insert into PAYMENT (PAY_ID,USER_ID,PAY_TYPE,PAY_TIME,PAY_PRICE,PAY_RECEIPT_STATUS,PAY_STATUS) values ('PA000008','U000008','카카오페이',to_date('20/11/08','RR/MM/DD'),30000,'N','결제완료');
+Insert into PAYMENT (PAY_ID,USER_ID,PAY_TYPE,PAY_TIME,PAY_PRICE,PAY_RECEIPT_STATUS,PAY_STATUS) values ('PA000009','U000009','카카오페이',to_date('20/11/09','RR/MM/DD'),25000,'Y','결제대기');
+REM INSERTING into VACTYPE
+SET DEFINE OFF;
+Insert into VACTYPE (VACTYPE_ID,VACTYPE_NAME,VACTYPE_YN,VACTYPE_YEARYN) values ('VCT001','연차','Y','O');
+Insert into VACTYPE (VACTYPE_ID,VACTYPE_NAME,VACTYPE_YN,VACTYPE_YEARYN) values ('VCT002','교육','Y','X');
+Insert into VACTYPE (VACTYPE_ID,VACTYPE_NAME,VACTYPE_YN,VACTYPE_YEARYN) values ('VCT003','훈련','Y','X');
+Insert into VACTYPE (VACTYPE_ID,VACTYPE_NAME,VACTYPE_YN,VACTYPE_YEARYN) values ('VCT004','포상','N','X');
+Insert into VACTYPE (VACTYPE_ID,VACTYPE_NAME,VACTYPE_YN,VACTYPE_YEARYN) values ('VCT005','병가','Y','X');
+Insert into VACTYPE (VACTYPE_ID,VACTYPE_NAME,VACTYPE_YN,VACTYPE_YEARYN) values ('VCT006','출산','Y','X');
+
+REM INSERTING into VACAPPLY
+SET DEFINE OFF;
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000001','VCT001','E000002',to_date('20/05/04','RR/MM/DD'),to_date('20/05/06','RR/MM/DD'),to_date('20/05/04','RR/MM/DD'),'집에가고싶어요','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000002','VCT001','E000005',to_date('20/06/02','RR/MM/DD'),to_date('20/06/04','RR/MM/DD'),to_date('20/06/01','RR/MM/DD'),'몸이안좋아요','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000003','VCT001','E000011',to_date('20/06/03','RR/MM/DD'),to_date('20/06/05','RR/MM/DD'),to_date('20/06/01','RR/MM/DD'),'월요병이싫어요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000004','VCT001','E000007',to_date('20/06/08','RR/MM/DD'),to_date('20/06/11','RR/MM/DD'),to_date('20/06/02','RR/MM/DD'),'일을너무오래한나머지쉬고싶음','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000005','VCT001','E000003',to_date('20/06/11','RR/MM/DD'),to_date('20/06/12','RR/MM/DD'),to_date('20/06/07','RR/MM/DD'),'오늘은 저도 쉬는날을 가지고 싶어요','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000006','VCT001','E000020',to_date('20/06/15','RR/MM/DD'),to_date('20/06/16','RR/MM/DD'),to_date('20/06/08','RR/MM/DD'),'가족과 함께 좋은 시간을 보내고 오겠습니다','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000007','VCT001','E000006',to_date('20/06/16','RR/MM/DD'),to_date('20/06/19','RR/MM/DD'),to_date('20/06/08','RR/MM/DD'),'어제 야근을 하고 나서 쉬는 시간이 없었기 때문에 휴가를 씁니다','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000008','VCT001','E000005',to_date('20/06/17','RR/MM/DD'),to_date('20/06/19','RR/MM/DD'),to_date('20/06/12','RR/MM/DD'),'수료후 집에갑니다','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000009','VCT002','E000002',to_date('20/06/22','RR/MM/DD'),to_date('20/06/24','RR/MM/DD'),to_date('20/06/21','RR/MM/DD'),'집에가고싶어요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000010','VCT001','E000015',to_date('20/06/24','RR/MM/DD'),to_date('20/06/25','RR/MM/DD'),to_date('20/06/20','RR/MM/DD'),'몸이안좋아요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000011','VCT001','E000007',to_date('20/07/01','RR/MM/DD'),to_date('20/07/03','RR/MM/DD'),to_date('20/06/29','RR/MM/DD'),'월요병이싫어요','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000012','VCT001','E000004',to_date('20/07/06','RR/MM/DD'),to_date('20/07/09','RR/MM/DD'),to_date('20/06/29','RR/MM/DD'),'일을너무오래한나머지쉬고싶음','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000013','VCT005','E000002',to_date('20/07/09','RR/MM/DD'),to_date('20/07/10','RR/MM/DD'),to_date('20/07/03','RR/MM/DD'),'오늘은 저도 쉬는날을 가지고 싶어요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000014','VCT002','E000001',to_date('20/07/13','RR/MM/DD'),to_date('20/07/13','RR/MM/DD'),to_date('20/07/10','RR/MM/DD'),'가족과 함께 좋은 시간을 보내고 오겠습니다','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000015','VCT002','E000007',to_date('20/07/15','RR/MM/DD'),to_date('20/07/15','RR/MM/DD'),to_date('20/07/10','RR/MM/DD'),'어제 야근을 하고 나서 쉬는 시간이 없었기 때문에 휴가를 씁니다','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000016','VCT003','E000011',to_date('20/07/16','RR/MM/DD'),to_date('20/07/16','RR/MM/DD'),to_date('20/07/10','RR/MM/DD'),'수료후 집에갑니다','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000017','VCT003','E000003',to_date('20/08/17','RR/MM/DD'),to_date('20/08/20','RR/MM/DD'),to_date('20/08/04','RR/MM/DD'),'집에가고싶어요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000018','VCT004','E000005',to_date('20/08/21','RR/MM/DD'),to_date('20/08/21','RR/MM/DD'),to_date('20/08/05','RR/MM/DD'),'몸이안좋아요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000019','VCT001','E000001',to_date('20/08/24','RR/MM/DD'),to_date('20/08/24','RR/MM/DD'),to_date('20/08/07','RR/MM/DD'),'월요병이싫어요','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000020','VCT004','E000011',to_date('20/08/31','RR/MM/DD'),to_date('20/09/02','RR/MM/DD'),to_date('20/08/14','RR/MM/DD'),'일을너무오래한나머지쉬고싶음','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000021','VCT003','E000005',to_date('20/09/07','RR/MM/DD'),to_date('20/09/07','RR/MM/DD'),to_date('20/08/28','RR/MM/DD'),'오늘은 저도 쉬는날을 가지고 싶어요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000022','VCT002','E000006',to_date('20/09/11','RR/MM/DD'),to_date('20/09/11','RR/MM/DD'),to_date('20/09/04','RR/MM/DD'),'가족과 함께 좋은 시간을 보내고 오겠습니다','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000023','VCT001','E000004',to_date('20/09/21','RR/MM/DD'),to_date('20/09/23','RR/MM/DD'),to_date('20/09/04','RR/MM/DD'),'어제 야근을 하고 나서 쉬는 시간이 없었기 때문에 휴가를 씁니다','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000024','VCT004','E000003',to_date('20/10/01','RR/MM/DD'),to_date('20/10/01','RR/MM/DD'),to_date('20/09/04','RR/MM/DD'),'수료후 집에갑니다','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000025','VCT003','E000015',to_date('20/10/05','RR/MM/DD'),to_date('20/10/05','RR/MM/DD'),to_date('20/10/04','RR/MM/DD'),'집에가고싶어요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000026','VCT002','E000020',to_date('20/10/07','RR/MM/DD'),to_date('20/10/09','RR/MM/DD'),to_date('20/10/04','RR/MM/DD'),'몸이안좋아요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000027','VCT001','E000018',to_date('20/10/19','RR/MM/DD'),to_date('20/10/21','RR/MM/DD'),to_date('20/10/08','RR/MM/DD'),'월요병이싫어요','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000028','VCT004','E000015',to_date('20/11/02','RR/MM/DD'),to_date('20/11/03','RR/MM/DD'),to_date('20/10/20','RR/MM/DD'),'일을너무오래한나머지쉬고싶음','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000029','VCT003','E000011',to_date('20/11/03','RR/MM/DD'),to_date('20/11/05','RR/MM/DD'),to_date('20/10/24','RR/MM/DD'),'오늘은 저도 쉬는날을 가지고 싶어요','반려');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000030','VCT002','E000018',to_date('20/11/04','RR/MM/DD'),to_date('20/11/05','RR/MM/DD'),to_date('20/10/25','RR/MM/DD'),'가족과 함께 좋은 시간을 보내고 오겠습니다','승인');
+Insert into VACAPPLY (VACAPL_ID,VACTYPE_ID,EMP_ID,VACAPL_START,VACAPL_END,VACAPL_APPDATE,VACAPL_REASON,VACAPL_STATUS) values ('VC000031','VCT001','E000020',to_date('20/11/06','RR/MM/DD'),to_date('20/11/06','RR/MM/DD'),to_date('20/10/30','RR/MM/DD'),'어제 야근을 하고 나서 쉬는 시간이 없었기 때문에 휴가를 씁니다','승인');
+
+REM INSERTING into APPROVAL_DOC
+SET DEFINE OFF;
+Insert into APPROVAL_DOC (APP_ID,EMP_ID,APP_TITLE,APP_EXCU_ID,APP_DATE,APP_STATUS,APP_CHECKTIME,TEMP_ID) values ('AP000001','E000005','결재문서제목1','E000005',to_date('20/11/11','RR/MM/DD'),'전송',to_date('20/11/21','RR/MM/DD'),'TMP001');
+Insert into APPROVAL_DOC (APP_ID,EMP_ID,APP_TITLE,APP_EXCU_ID,APP_DATE,APP_STATUS,APP_CHECKTIME,TEMP_ID) values ('AP000002','E000004','결재문서제목2','E000004',to_date('20/11/12','RR/MM/DD'),'전송',to_date('20/11/21','RR/MM/DD'),'TMP002');
+Insert into APPROVAL_DOC (APP_ID,EMP_ID,APP_TITLE,APP_EXCU_ID,APP_DATE,APP_STATUS,APP_CHECKTIME,TEMP_ID) values ('AP000003','E000003','결재문서제목3','E000003',to_date('20/11/01','RR/MM/DD'),'전송',to_date('20/11/21','RR/MM/DD'),'TMP003');
+REM INSERTING into APPROVAL_REFERENCE
+SET DEFINE OFF;
+Insert into APPROVAL_REFERENCE (APP_ID,EMP_ID,ADDREF_ID) values ('AP000001','E000007','AR000001');
+Insert into APPROVAL_REFERENCE (APP_ID,EMP_ID,ADDREF_ID) values ('AP000001','E000008','AR000002');
+Insert into APPROVAL_REFERENCE (APP_ID,EMP_ID,ADDREF_ID) values ('AP000002','E000009','AR000003');
+Insert into APPROVAL_REFERENCE (APP_ID,EMP_ID,ADDREF_ID) values ('AP000003','E000010','AR000004');
+REM INSERTING into APPROVAL_STATEMENT
+SET DEFINE OFF;
+Insert into APPROVAL_STATEMENT (APPSTATMENT_ID,APP_ID,EMP_ID,APPORDER_CODE,APPORDER_CHECK,APPORDER_APPLY) values ('AS000001','AP000001','E000003','1',to_date('20/11/21','RR/MM/DD'),'승인');
+Insert into APPROVAL_STATEMENT (APPSTATMENT_ID,APP_ID,EMP_ID,APPORDER_CODE,APPORDER_CHECK,APPORDER_APPLY) values ('AS000002','AP000001','E000002','2',to_date('20/11/21','RR/MM/DD'),'승인');
+Insert into APPROVAL_STATEMENT (APPSTATMENT_ID,APP_ID,EMP_ID,APPORDER_CODE,APPORDER_CHECK,APPORDER_APPLY) values ('AS000003','AP000001','E000001','3',to_date('20/11/21','RR/MM/DD'),'승인');
+Insert into APPROVAL_STATEMENT (APPSTATMENT_ID,APP_ID,EMP_ID,APPORDER_CODE,APPORDER_CHECK,APPORDER_APPLY) values ('AS000004','AP000002','E000002','1',to_date('20/11/21','RR/MM/DD'),'승인');
+Insert into APPROVAL_STATEMENT (APPSTATMENT_ID,APP_ID,EMP_ID,APPORDER_CODE,APPORDER_CHECK,APPORDER_APPLY) values ('AS000005','AP000002','E000003','2',to_date('20/11/21','RR/MM/DD'),'반려');
+Insert into APPROVAL_STATEMENT (APPSTATMENT_ID,APP_ID,EMP_ID,APPORDER_CODE,APPORDER_CHECK,APPORDER_APPLY) values ('AS000006','AP000003','E000002','1',to_date('20/11/21','RR/MM/DD'),'결재중');
+Insert into APPROVAL_STATEMENT (APPSTATMENT_ID,APP_ID,EMP_ID,APPORDER_CODE,APPORDER_CHECK,APPORDER_APPLY) values ('AS000007','AP000003','E000001','2',to_date('20/11/21','RR/MM/DD'),'결재중');
+
+INSERT INTO QNATYPE VALUES('QC'||TRIM(TO_CHAR(SEQ_QNCID.NEXTVAL,'000')),'상품관련문의');
+INSERT INTO QNATYPE VALUES('QC'||TRIM(TO_CHAR(SEQ_QNCID.NEXTVAL,'000')),'사이즈문의');
+INSERT INTO QNATYPE VALUES('QC'||TRIM(TO_CHAR(SEQ_QNCID.NEXTVAL,'000')),'재입고문의');
+INSERT INTO QNATYPE VALUES('QC'||TRIM(TO_CHAR(SEQ_QNCID.NEXTVAL,'000')),'기타문의');
+
+INSERT INTO GESITYPE VALUES('GS001', '질의응답');
+INSERT INTO GESITYPE VALUES('GS002', 'REVIEW');
+
+INSERT INTO GESI VALUES('G00001','사이즈문의','문의내용',TO_DATE('20/12/01','RR/MM/DD'),'N', NULL,NULL,'U000001','GS001');
+INSERT INTO GESI VALUES('G00002','상품문의','문의내용',TO_DATE('20/12/02','RR/MM/DD'),'N', NULL,NULL,'U000002','GS001');
+INSERT INTO GESI VALUES('G00003','주문관련문의','문의내용',TO_DATE('20/12/03','RR/MM/DD'),'N', NULL,NULL,'U000003','GS001');
+INSERT INTO GESI VALUES('G00004','문의','문의내용',TO_DATE('20/12/04','RR/MM/DD'),'N', NULL,NULL,'U000004','GS001');
+INSERT INTO GESI VALUES('G00005','교환문의','문의내용',TO_DATE('20/12/05','RR/MM/DD'),'N', NULL,NULL,'U000005','GS001');
+INSERT INTO GESI VALUES('G00006','반품문의','문의내용',TO_DATE('20/12/06','RR/MM/DD'),'N', NULL,NULL,'U000006','GS001');
+INSERT INTO GESI VALUES('G00007','바지리뷰','리뷰내용',TO_DATE('20/12/07','RR/MM/DD'),'N', NULL,NULL,'U000001','GS002');
+INSERT INTO GESI VALUES('G00008','니트리뷰','리뷰내용',TO_DATE('20/12/08','RR/MM/DD'),'N', NULL,NULL,'U000002','GS002');
+INSERT INTO GESI VALUES('G00009','상품후기','리뷰내용',TO_DATE('20/12/09','RR/MM/DD'),'N', NULL,NULL,'U000003','GS002');
+
+
+INSERT INTO QNA VALUES('QC002','GS0001','G00001');
+INSERT INTO QNA VALUES('QC001','GS0001','G00002');
+INSERT INTO QNA VALUES('QC001','GS0001','G00003');
+INSERT INTO QNA VALUES('QC004','GS0001','G00004');
+INSERT INTO QNA VALUES('QC004','GS0001','G00005');
+INSERT INTO QNA VALUES('QC004','GS0001','G00006');
+insert into manufactur
+values('자체제작','자체제작');
+
+insert into supplier
+values('자체제작',0,'y');
+
+INSERT INTO ORDERDETAIL(PAY_ID, PRO_ID, ORDER_EA, ORDER_DATE,  ORDER_NUM, ORDER_STATE, TOTAL_PRICE)
+  VALUES('PA000001', 'PR000008', '1', TO_DATE('2020/12/01', 'RRRR/MM/DD'), 'DO000001', '주문완료', '30,000');
+  
+  INSERT INTO ORDERDETAIL(PAY_ID, PRO_ID, ORDER_EA, ORDER_DATE,  ORDER_NUM, ORDER_STATE, TOTAL_PRICE)
+  VALUES('PA000001', 'PR000010', '1', TO_DATE('2020/12/01', 'RRRR/MM/DD'), 'DO000001', '주문완료', '24,000');
+  
+  INSERT INTO ORDERDETAIL(PAY_ID, PRO_ID, ORDER_EA, ORDER_DATE,  ORDER_NUM, ORDER_STATE, TOTAL_PRICE)
+  VALUES('PA000001', 'PR000019', '1', TO_DATE('2020/12/01', 'RRRR/MM/DD'), 'DO000001', '주문완료', '21,000');
+COMMIT;
+
+
+
+

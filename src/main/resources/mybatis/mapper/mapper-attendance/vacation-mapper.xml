@@ -289,6 +289,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  , #{yearYN}
 		)
 	</update>
+	<delete id="catDelete">
+		DELETE FROM VACTYPE
+		WHERE VACTYPE_NAME = #{name}
+	</delete>
 </mapper>
 
 
