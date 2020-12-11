@@ -7,6 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.VacationRequest_top span {
+	position: relative;
+	bottom: 8px;
+	margin-left: 30px;
+	font-size: 25px;
+	font-weight: bold;
+}
       table {
         width: 100%;
         border-top: 1px solid #444444;
@@ -29,7 +36,9 @@
 				<!-- 내용작성을 이곳에서~ -->
 
 				<div class="conWrap">
-					<h2>휴가 신청</h2>
+				<div class="VacationRequest_top">
+					<span>근태관리 > 휴가신청</span>
+				</div>
 					<hr>
 					<div class="subtitle">
 					<form method="post" action="vacationInsert" onsubmit="return call();">
@@ -69,7 +78,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<input type="submit">신청하기
+						<input type="submit" value="신청하기">
 						</form>
 					</div>
 				</div>

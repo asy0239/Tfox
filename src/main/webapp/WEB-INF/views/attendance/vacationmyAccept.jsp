@@ -30,7 +30,7 @@ th, td {
 				<!-- 내용작성을 이곳에서~ -->
 
 				<div class="conWrap">
-					<h2>휴가 신청 확인</h2>
+					<h2>내 휴가 자세히보기</h2>
 					<hr>
 					<div class="subtitle">
 						<c:forEach var="vaclist" items="${vaclist }">
@@ -64,21 +64,7 @@ th, td {
 									</tr>
 								</tbody>
 							</table>
-							<c:choose>
-									<c:when test="${vaclist.vacapl_status eq '승인대기중'}">
-										<form name="vacationY" method="post" action="vacationY">
-											<input type="hidden" name="Y" value="${vaclist.vacapl_id }">
-											<button>승인하기</button>
-										</form>
-										<form name="vacationN" method="post" action="vacationN">
-											<input type="hidden" name="N" value="${vaclist.vacapl_id }">
-											<button>반려하기</button>
-										</form>
-									</c:when>
-							<c:otherwise>
 									<button name="back" onclick="cancle()">확인</button>
-							</c:otherwise>
-							</c:choose>
 						</c:forEach>
 					</div>
 				</div>
@@ -89,7 +75,7 @@ th, td {
 </body>
 <script>
 function cancle(){
-	 location.replace("${pageContext.request.contextPath }/attendance/vacationRecong");
+	 location.replace("${pageContext.request.contextPath }/attendance/vacationMypage");
 };
 
 </script>
