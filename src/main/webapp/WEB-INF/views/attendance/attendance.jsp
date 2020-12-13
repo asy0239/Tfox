@@ -52,6 +52,11 @@ font {
 	font-size: 20px;
 }
 
+#nowTimes{
+	font-size:40px;
+	font-weight:bold;
+}
+
 #calendar {
 	width: 100%;
 	height: 600px;
@@ -64,6 +69,10 @@ font {
 	float: left;
 }
 </style>
+
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css' rel='stylesheet' />
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js"></script>
+
 </head>
 <body>
 	<div id="wrap">
@@ -76,21 +85,24 @@ font {
 					<p>잘 나옵니까?</p>
 					
 					<div class="checktoolbar">
-						<div class="checktool" style="float:left">
-							<button id="attbtn1">출근</button>
-							<input id="go" type="text"> <br> <br>
-							<button>퇴근</button>
-							<input id="exit" type="text">
+						<div id="checkwork" class="checktool" style="float:left">
+							<div id="checkgowork">
+							<input type="hidden" id="att_id" value="${time[0].att_id }">
+							<input type="button" id="attrbtn1" disabled value="출근하기">
+							<input id="gowork" type="text" value="${time[0].att_start }"readonly> <br> <br>
+							</div>
+							<div id="checkendwork">
+							<input type="button" id="attrbtn2" disabled value="퇴근하기">
+							<input id="exitwork" type="text" value="${time[0].att_end}" readonly>
+							</div>
 						</div>
 						<div class="attendance_timer" style="float:left">
 								<span id="nowTimes"></span>
 						</div>
 					</div>
+					<div id="calendar"></div>
 				</div>
-				<div>
-				<!-- 메인 출력단 -->
-					
-				</div>
+				<!-- 달력 -->
 			</article>
 		</section>
 	</div>
@@ -98,12 +110,128 @@ font {
 </body>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // 시간을 딜레이 없이 나타내기위한 선 실행
+
+
+
+$(document).ready(function(){
+	$(document).ready(function(){
+		var gowork = $("#gowork").val();
+		var exitwork = $("#exitwork").val();
+		console.log(gowork);
+		console.log(exitwork);
+		if(gowork == ''){
+			$("#attrbtn1").attr("disabled", false);
+			$("#attrbtn2").attr("disabled", false);
+		}else if(gowork != null && exitwork == ''){
+			$("#attrbtn1").attr("disabled", true);
+			$("#attrbtn2").attr("disabled", false);
+		}else{
+			$("#attrbtn1").attr("disabled", true);
+			$("#attrbtn2").attr("disabled", true);
+		}
+		
+	});	
+});	
+
+
+document.addEventListener('DOMContentLoaded', function() {
+	  var calendarEl = document.getElementById('calendar');
+
+	  var calendar = new FullCalendar.Calendar(calendarEl, {
+	    headerToolbar: {
+	      left: 'prev,next today',
+	      center: 'title',
+	      right: 'dayGridMonth,dayGridWeek,dayGridDay'
+	    },
+	    navLinks: true, // can click day/week names to navigate views
+	    editable: true,
+	    dayMaxEvents: true, // allow "more" link when too many events
+	 	events: function(start, callback){
+	 		$.ajax({
+	 			url:"${pageContext.request.contextPath}/attendance/attCalanview",
+	 			type:"POST",
+	 			async:false,
+	 			dataType:"JSON",
+	 			success:function(data){
+	 				var events = [];
+	 				console.log(data);
+	 					$(data).each(function(index, item){
+	 						console.log(item.cal_title);
+	 						var start = item.cal_start;
+	 						var time = item.cal_time;
+	 						var startdate = start +'T'+time;
+	 						var title = item.cal_title;
+	 						console.log(startdate);
+	 						events.push({
+	 							title: title,
+	 							start: startdate
+	 						});
+	 					});
+	 				console.log(events);
+	 				callback(events);
+	 				}
+	 		});
+	 	}
+	  });
+	  calendar.render();
+	  
+	  $("#attrbtn1").click(function(){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/attendance/attStart.do",
+				type : "POST",
+				dataType: "JSON",
+				success:function(data){
+					console.log(data);
+					$("#checkgowork").html('');
+					$.each(data,function(index, att){
+					var gowork = att.att_start;
+					var attid = att.att_id;
+					console.log(gowork);
+					console.log(attid);
+					$("#checkgowork").append('<input type="hidden" id="att_id" value="'+attid+'"> <input type="button" id="attrbtn1" disabled="true" value="출근하기"> <input id="gowork" type="text" value="'+gowork+'"readonly> <br> <br>');
+					});
+					alert("출근 처리 되었습니다.");
+					calendar.refetchEvents();
+				},
+				error:function(){
+					alert("출근처리되지 않았습니다.");
+				},
+			});	
+		});
+
+	$("#attrbtn2").click(function(){
+		var attid = $("#att_id").val();
+		console.log(attid);
+		$.ajax({
+			url : "${pageContext.request.contextPath}/attendance/attEnd.do",
+			type : "POST",
+			data : {"attid":attid},
+			dataType: "JSON",
+			success:function(data){
+				$("#checkendwork").html('');
+				$.each(data,function(index, att){
+				var gowork = att.att_start;
+				var attid = att.att_id;
+				var endwork = att.att_end;
+				$("#checkendwork").append('<input type="button" id="attrbtn2" disabled="true" value="퇴근하기"> <input id="exitwork" type="text" value="'+endwork+'"readonly>');
+				});
+					alert("퇴근 처리 되었습니다.");
+					calendar.refetchEvents();
+			},
+			error:function(){
+				alert("퇴근처리되지 않았습니다.")
+			},
+		});	
+	});
+	
+	
+	
     realTimer();
     // 이후 1초에 한번씩 시간을 갱신한다.
     setInterval(realTimer, 1000);
 });
+
+
 // 시간을 출력
 function realTimer() {
 	const nowDate = new Date();
@@ -123,27 +251,6 @@ function addzero(num) {
 
 }
     
-$(document).ready()
-    //출근 버튼 클릭시 시간 가지고오기
-    $(function(){
-    	$("#attbtn1").click(function(){
-    		$.ajax({
-    			url : "${pageContext.request.contextPath}/attendance/attStart.do",
-    			type : "POST",
-    			dataType: "JSON",
-    			success:function(data){
-    				console.log(data)
-    				$("#go").val();
-    				if("#go" != null){
-    					$("#attbtn1").attr('disabled');
-    				}
-    			},
-    			error:function(){
-    				alert("출근처리되지 않았습니다.")
-    			},
-    		});	
-    	});
-    });
 
 
 </script>

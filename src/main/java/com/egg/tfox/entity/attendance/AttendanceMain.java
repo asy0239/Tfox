@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 public class AttendanceMain {
 	private String att_id;
 	private String emp_id;
-	private Date att_start;
-	private Date att_end;
+	private String att_start;
+	private String att_end;
 	private String att_reason;
 	private String att_status;
 	private String att_date;
