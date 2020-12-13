@@ -18,4 +18,9 @@ public interface BoardService {
 
 	public List<ProductVO> productList();
 
+	public List<ProductVO> productOne(Map<String, Object> productInfo);
+
+	public List<ProductVO> detailList(String pro_name);
+
+
 }
