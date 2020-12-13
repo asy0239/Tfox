@@ -52,6 +52,18 @@ public class BoardDaoImpl implements BoardDao {
 		return sql.selectList("board.boardList");
 	}
 
+	@Override
+	public List<ProductVO> detailList(String pro_name) {
+		
+		return sql.selectList("board.detailList", pro_name);
+	}
+
+	@Override
+	public List<ProductVO> productOne(Map<String, Object> productInfo) {
+		// TODO Auto-generated method stub
+		return sql.selectList("board.productOne", productInfo);
+	}
+
 
 
 }

@@ -1,6 +1,8 @@
 package com.egg.tfox.controller.board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -51,10 +53,55 @@ public class BoardWebController {
 	
 		return "webFront/main";
 	}
+	
+	@GetMapping("/webFront/fileList")
+	public void fileList(
+			HttpServletResponse response,
+			@RequestParam String pro_id) {
+		
+	}
+	
+	@GetMapping("/webFront/detail")
+	public String productDetail(
+			@RequestParam String pro_name,
+			@RequestParam String pro_id,
+			Model model) {
+		
+		System.out.println(pro_name);
+		System.out.println(pro_id);
+		
+		Map<String, Object> productInfo = new HashMap<>();
+		productInfo.put("pro_id", pro_id);
+		productInfo.put("pro_name", pro_name);
+		
+		System.out.println(productInfo);
+		
+		List<ProductVO> productOne;
+		productOne = boardService.productOne(productInfo);
+		
+		System.out.println("P : "+ productOne);
+		
+		model.addAttribute("product", productOne);
+		
+		
+		/*
+		 * List<ProductVO> detailList; detailList = boardService.detailList(pro_name);
+		 * 
+		 * model.addAttribute("detail", detailList);
+		 */
+		return "/webFront/productDetail";
+	}
+	
+	
+	
+	
+	
+	
 	@GetMapping("/webFront/center")
 	public String center() {
 		return "webFront/center";
 	}
+	
 	
 	@GetMapping("/webFront/QnaInsert")
 	public String qnainsert(Model model) {
@@ -80,26 +127,10 @@ public class BoardWebController {
 		
 		return "webFront/center";
 	}
-	
-	@GetMapping("/webFront/fileList")
-	public void fileList(
-					HttpServletResponse response,
-					@RequestParam String pro_id
-					) {
-		
-	}
-	
-	@GetMapping("/webFront/detail")
-	public String productDetail() {
-		
-		return "/webFront/detail";
-	}
-	
-	
-	@GetMapping("/webFront/productDetail")
-	public String hoodItem(){
-		return "webFront/productDetail";
-	}
+	/*
+	 * @GetMapping("/webFront/productDetail") public String hoodItem(){ return
+	 * "webFront/productDetail"; }
+	 */
 	@GetMapping("/board/gesipan")
 	public String gesipan(){
 		return "board/gesipan";

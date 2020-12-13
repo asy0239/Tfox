@@ -34,7 +34,7 @@
 		 <c:forEach var="proL" items="${productList }"> 
 		 <div class="thumb-list" align="center">
 				<div>
-					<a href="/detail?pro_id=${proL.pro_id}">
+					<a href="${pageContext.request.contextPath }/webFront/detail?pro_name=${proL.pro_name}&pro_id=${proL.pro_id }">
 						<img src="/fileList?pro_id=${proL.pro_id }"
 										width="350px" height="400px">
 					</a>

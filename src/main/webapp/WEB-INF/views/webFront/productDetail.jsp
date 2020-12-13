@@ -1,5 +1,6 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,7 +110,8 @@
 		<div class="hood_item_info">
 			<form>
 				<div class="item_info_head">
-					<span id="item_title">마운틴 후드티</span><br>
+
+				<%-- 	<c:out value="${product.pro_name }" /><br> --%>
 					<span>Size : S M L</span>
 				</div>
 				<div class="item_info_mid">

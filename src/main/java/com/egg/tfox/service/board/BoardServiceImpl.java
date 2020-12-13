@@ -42,6 +42,20 @@ public class BoardServiceImpl implements BoardService {
 		return dao.boardList();
 	}
 
+	
+	@Override
+	public List<ProductVO> detailList(String pro_name) {
+		// TODO Auto-generated method stub
+		return dao.detailList(pro_name);
+	}
+
+	@Override
+	public List<ProductVO> productOne(Map<String, Object> productInfo) {
+		// TODO Auto-generated method stub
+		return dao.productOne(productInfo);
+	}
+
+
 
 	
 }
