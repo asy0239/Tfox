@@ -203,7 +203,6 @@
 	<table id="proT1">
 		
 		<tr id="itemArea">
-			<th><input type="checkbox" id="allCheck" name="allCheck" checked></th>
 			<th width="600px">상품정보</th>
 			<th width="50px">수량</th>
 			<th width="120px">상품금액</th>
@@ -215,7 +214,6 @@
 		<!-- 상품정보 데이터 -->
 		<tr id="proInfo" align="center">
 			<input type="hidden" "<c:out value='${proVo.pro_id }'/>">
-			<td><input type="checkbox" id="proCheck"  name="proCheck" value="${proVo.pro_price}"></td>
 			<td><c:out value="${proVo.pro_name}"/>
 			<a>+</a>
 				<c:out value="${proVo.pro_color}"/>
@@ -352,16 +350,6 @@ $("#Ni").on("click", function(){
     $("#getInfo").css("display","none");
     $("#newInfo").css("display","block");
 
-});
-$('#proCheck').click(function(){	
-	var sum = 0;
-	$('#proCheck').each(function() {
-	if($(this).is(":checked")==true) {
-		var proCheck = parseInt($(this).parents('tr').find('input[name=proCheck]').val());
-		sum = sum + proCheck;
-	}	
-	});
-	console.log(sum);
 });
 
 //주소 API
