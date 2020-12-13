@@ -86,7 +86,7 @@ pageEncoding="UTF-8"/>
                     </div>
                     <ul class="hideShow side">
                         <li><a  href="${pageContext.request.contextPath }/product/insert">상품등록</a></li>
-                        <li><a href="">상품목록</a></li>
+                        <li><a  href="${pageContext.request.contextPath }/product/productList">상품목록</a></li>
                         
                     </ul>
                 </li>

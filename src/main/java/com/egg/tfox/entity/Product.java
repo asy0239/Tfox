@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class product {
+public class Product {
 		private String pro_id;
 		private String pro_name;
 		private String st_id;

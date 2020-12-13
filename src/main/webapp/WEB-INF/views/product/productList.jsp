@@ -13,6 +13,25 @@
 	href="${pageContext.request.contextPath }/resources/css/product/modal.css">
 
 <title>상품관리 메인</title>
+
+<style>
+
+#top>div:nth-child(n) {
+	float: left;
+}
+
+
+#top>span {
+	color: #5E5E5E ;
+	position: relative;
+	bottom: 8px;
+	margin-left: 30px;
+	font-size: 25px;
+
+}
+
+
+</style>
 </head>
 <body>
 
@@ -23,7 +42,39 @@
 		<section class="contents">
 			<article>
 
-				<div class="conWrap"></div>
+				<div class="conWrap">
+				<div id="top">
+							<img
+								src="${pageContext.request.contextPath }/resources/img/common/G6.png">
+
+							<span>상품관리 > 상품목록</span>
+				</div>
+				<div>
+					<table>
+						<tr>
+						    <td>검색분류</td>
+						    <td><input type="text"></td>
+						</tr>
+						<tr>
+						    <td>상품분류</td>
+						    <td><input type="text"></td>
+						</tr>
+						<tr>
+						    <td>상품등록일</td>
+						    <td>
+						    </td>
+						</tr>
+						<tr>
+						    <td>판매상태</td>
+						    <td></td>
+						</tr>
+						
+					
+					</table>
+				
+				</div>
+				
+				</div>
 			</article>
 		</section>
 	</div>
