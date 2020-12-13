@@ -20,8 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 		"file:src/main/webapp/WEB-INF/spring/security-context.xml" })
 public class EditTest {
 	
-	@Autowired
-	private ApprovalEditService app_service;
 	
 	@Autowired
 	private ApprovalEditDao app_Dao;

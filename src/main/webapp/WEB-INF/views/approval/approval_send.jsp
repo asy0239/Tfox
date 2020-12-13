@@ -11,10 +11,6 @@
 <body>
 	 <div id="wrap">
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
-
-
-
-
 		<section class="contents">
 			<article>
 				<!-- 내용작성을 이곳에서~ -->
@@ -28,25 +24,39 @@
 				</div>
 				
 				<div id="sec_area">
-					<div id="sec_date">2020-11-16</div>
 					<div id="sec_box">
 						<div>
-							<span>22건</span>
-							<span>전체</span>
+							<span>${sendDocListSize }건</span>
+							<span>전체</span>	
 						</div>
 					</div>
 					<div id="sec_box">
 						<div>
-							<span>10건</span>
+						<c:choose>
+							<c:when test="${!empty sendIngDocList }">
+								<span>${sendIngDocList}건</span>
+							</c:when>
+							<c:when test="${empty sendIngDocList }">
+								<span>0건</span>
+							</c:when>
+						</c:choose>
 							<span>진행중</span>
 						</div>
 					</div>
 					<div id="sec_box">
 						<div>
-							<span style="color:red">2건</span>
+						<c:choose>
+							<c:when test="${!empty sendNoDocList }">
+								<span style="color:red">${sendNoDocList}건</span>
+							</c:when>
+							<c:when test="${empty sendNoDocList }">
+								<span style="color:red">0건</span>
+							</c:when>
+						</c:choose>
 							<span>반려</span>
 						</div>
 					</div>
+					
 					<div id="sec_box_lg">
 						<div>
 							<img src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg">
@@ -139,5 +149,9 @@
 			</article>
 		</section>
 	</div>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+	
+	</script>
 </body>
 </html>

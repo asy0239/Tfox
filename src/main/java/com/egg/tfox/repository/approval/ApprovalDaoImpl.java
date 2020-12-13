@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.egg.tfox.entity.Approval;
+import com.egg.tfox.entity.Employee;
 import com.egg.tfox.entity.approval.TemplateEntity;
 import com.egg.tfox.vo.approval.ApprovalMainDocCountVo;
 import com.egg.tfox.vo.approval.ApprovalMainNoCheckVo;
 import com.egg.tfox.vo.approval.ApprovalMainRefVo;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
+import com.egg.tfox.vo.approval.ApprovalSendDocVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,5 +58,35 @@ public class ApprovalDaoImpl implements ApprovalDao{
 		List<ApprovalMainRefVo> list = sqlSession.selectList("approval.refDoc", userName);
 		return list;
 	}
+
+	@Override
+	public void signEdit(String emp_ID, String signUrl) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("emp_id", emp_ID);
+		map.put("signUrl", signUrl);
+		sqlSession.update("signEdit.signUpdate", map);
+		
+
+	}
+
+	@Override
+	public HashMap<String, String> selectSign(String emp_ID) {
+		HashMap<String, String> resultMap = sqlSession.selectOne("signEdit.selectEmp", emp_ID);
+		return resultMap;
+	}
 	
+	
+	// 상신함 데이터 불러오기
+	@Override
+	public List<ApprovalSendDocVo> sendDocListGet(String emp_id) {
+		int count = sqlSession.selectOne("approval.sendDocListCount",emp_id);
+		List<ApprovalSendDocVo> sendDocList = sqlSession.selectList("approval.sendDocList", emp_id);
+		return sendDocList;
+	}
+	
+	@Override
+	public int sendDocListCount(String emp_id) {
+		int count = sqlSession.selectOne("approval.sendDocListCount",emp_id);
+		return count;
+	}
 }
