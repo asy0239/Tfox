@@ -35,8 +35,15 @@
 						<button id="approval_btn" onclick="edit();">결재 작성 버튼</button>
 					</div>
 					<div id="sign_input">
-							<input type="text" id="txt">
-						</div>
+					<c:if test="${empty sign.test_sign}">
+						<p id="signNull">사인을 입력해주세요</p>
+						<img id="signImg" src="" style="display:none">
+					</c:if>
+					<c:if test="${not empty sign.test_sign }">
+						<img id="signImg" src="${sign.test_sign }" style="display:block; width:140px; height: 100px">				
+					</c:if>
+					
+					</div>
 					<div id="doc_box_area">
 						<c:forEach var="userTempList" items="${userTemplateList}">
 							<c:forEach var="tempList" items="${templateList}">
@@ -122,38 +129,32 @@
 			if(choice_category == 'total'){
 				totalDoc(id_check);
 			}
+			
 		});
 		
-		$(document).ready(function () {		
-			console.log("test");
-            var sign = $('#txt').SignaturePad({
-                allowToSign: true,
-                img64: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-				border: '1px solid #c7c8c9',
-                width: '70
-                px',
-				height: '20px',
-                callback: function (data, action) {	
-                	console.log("sign");
-                	console.log(data);
-                }
-            });
+     	var sign = $('#signImg').SignaturePad({
+            allowToSign: true,
+            img64: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+			border: '1px solid #c7c8c9',
+            width: '70px',
+			height: '20px',
+            callback: function (data, action) {	
+            	$("#signImg").attr("src",data);
+            	$("#signImg").css("display", "block");
+            	$("#signImg").css("width" , "140px");            	
+            	$("#signImg").css("height" , "100px");       
+            	$("#signNull").css("display", 'none');
+            	$.ajax({
+            		type:"POST",
+            		url:"${pageContext.request.contextPath}/approval/signEdit",
+            		data: {"signUrl" : data},
+            		dataType:"json",
+            		success:function(data){
+            			
+            		}
+            	});
+            }
         });
-		
-	/*     $("#approval_sign").on('click', function(){
-	    	console.log("버튼클릭");
-            var sign = $('#txt').SignaturePad({
-                allowToSign: true,
-                img64: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-				border: '1px solid #c7c8c9',
-                width: '50px',
-				height: '50px',
-                callback: function (data, action) {	
-                	console.log("sign");
-                	console.log(data);
-                }
-            });
-	    }); */
 		
 		// 페이지 시작 시 실행하는 함수
 		$(document).ready(function() {
@@ -268,7 +269,7 @@
 						id = 1;
 					}
 					var pagingData = paging(total_doc);
-					console.log(pagingData.length);
+
 					if(total <= 5) {
 						if(pagingData.length == 0) {
 							$("#sec_area").css("grid-template-rows", "repeat(1 ,140px)")				
@@ -403,10 +404,7 @@
 			return data;
 		}
 		
-		// 날짜 정렬 최신순(onload)
-		function sortDateMain(data) {
-			console.log(data);
-		}
+		
 	
 	function dateFormatting(date){
 			var time = new Date(date);

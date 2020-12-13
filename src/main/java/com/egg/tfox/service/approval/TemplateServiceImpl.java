@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.egg.tfox.entity.approval.TemplateEntity;
 import com.egg.tfox.repository.approval.TemplateDao;
+import com.egg.tfox.vo.approval.ManageTempVo;
 
 @Service
 public class TemplateServiceImpl implements TemplateService{
@@ -23,12 +24,24 @@ public class TemplateServiceImpl implements TemplateService{
 	}
 
 	@Override
-	public void insertTemplate(String content, String title) {
-		// TODO Auto-generated method stub
+	public void insertTemplate(String content, String title, String emp_id) {
 		HashMap<String, String> templateMap = new HashMap<String, String>();
 		templateMap.put("content", content);
 		templateMap.put("title", title);
+		templateMap.put("emp_id", emp_id);
 		templateDao.insertTemplate(templateMap);
+	}
+
+	@Override
+	public String getTempContent(String tempName) {
+		String tempContent = templateDao.getTempContent(tempName);
+		return tempContent;
+	}
+
+	@Override
+	public List<ManageTempVo> allSelectTemp(String emp_id) {
+		List<ManageTempVo> allTempList = templateDao.allSelectTemp(emp_id);
+		return allTempList;
 	}
 
 	

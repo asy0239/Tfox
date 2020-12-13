@@ -32,6 +32,8 @@ import com.egg.tfox.vo.approval.ApprovalEditDocVo;
 import com.egg.tfox.vo.approval.ApprovalEditEmpVo;
 import com.egg.tfox.vo.approval.ApprovalMainNoCheckVo;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
+import com.egg.tfox.vo.approval.ApprovalSendDocVo;
+import com.egg.tfox.vo.approval.ManageTempVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,7 +67,7 @@ public class ApprovalController {
 		return "/approval/test";
 	}
 	
-	// 입력한 결재 문서 확인 페이지, test임
+	// 입력한 결재 문서 보내기
 	@PostMapping("/approval/readTemplate")
 	public String readTemplate(
 			HttpServletRequest request,
@@ -112,10 +114,13 @@ public class ApprovalController {
 	
 	// 전자결재 메인 페이지로 이동 
 	@GetMapping("/approval/approval_Main")
-	public String approvalMain(Model model) {
+	public String approvalMain(Model model , HttpServletRequest request) {
 		// 현재 로그인한 유저정보 조회
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userName = authentication.getName();	
+		HttpSession session = request.getSession();
+		Employee emp = (Employee) session.getAttribute("loginEmp");
+
 		// 현재 로그인한 유저 결재(상신) 문서 전체 내역
 		List<ApprovalMainVo> list = approvalService.selectDocList(userName);		
 		// 현재 로그인한 유저의 양식 리스트(순위)
@@ -128,12 +133,15 @@ public class ApprovalController {
 		List<ApprovalMainNoCheckVo> noCheck = approvalService.noCheck(userName);
 		// 사용자와 관려된 모든 내역
 		HashMap<String, Object> totalList = approvalService.totalDoc(userName);
+		// 사용자 sign 정보 가져오기
+		HashMap<String, String> sign = approvalService.selectSign(emp.getEMP_ID());
 		model.addAttribute("docList",list);
 		model.addAttribute("userTemplateList", userTemplateList);
 		model.addAttribute("templateList", templateList);
 		model.addAttribute("weekIgnore",weekIgnore);
 		model.addAttribute("noCheck", noCheck);
 		model.addAttribute("totalDoc", totalList);
+		model.addAttribute("sign", sign);
 		
 		
 		return "/approval/approval_Main";
@@ -168,9 +176,28 @@ public class ApprovalController {
 		HashMap<String, Object> list = approvalService.totalDoc(userName);
 		return list;
 	}
+	
+	@PostMapping("/approval/signEdit")
+	@ResponseBody
+	public void approvalEditSign(HttpServletRequest request , @RequestParam String signUrl) {
+		HttpSession session = request.getSession();
+		Employee emp = (Employee) session.getAttribute("loginEmp");
+		approvalService.signEdit(emp.getEMP_ID(), signUrl);
+		
+	}
 	 
+	// 상신함
 	@GetMapping("/approval/approval_send")
-	public String approvalSend() {
+	public String approvalSend(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		Employee emp = (Employee) session.getAttribute("loginEmp");
+		String emp_id = emp.getEMP_ID();
+		HashMap<String, List<ApprovalSendDocVo>> sendDocList = approvalService.sendDocListGet(emp_id); 
+		log.info(sendDocList.toString());
+		model.addAttribute("sendDocList",sendDocList.get("sendTotalDocList"));
+		model.addAttribute("sendDocListSize" , sendDocList.get("sendTotalDocList").size());
+		model.addAttribute("sendNoDocList", sendDocList.get("sendNoDocList"));
+		model.addAttribute("sendIngDocList", sendDocList.get("sendIngDocList"));
 		return "/approval/approval_send";
 	}
 	
@@ -195,7 +222,21 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("/approval/approval_manage")
-	public String approvalManage() {
+	public String approvalManage(Model model, HttpServletRequest request) {
+		// 현재 로그인한 유저정보 조회
+		HttpSession session = request.getSession();
+		Employee emp = (Employee) session.getAttribute("loginEmp");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userName = authentication.getName();
+		// 현재 로그인한 유저의 양식 리스트(순위)
+		List<HashMap<String, String>> userTemplateList = approvalService.templateList(userName);
+		// 결재 양식 정보
+		List<TemplateEntity> templateList = templateService.listAll();	
+		log.info(userTemplateList.toString());
+		List<ManageTempVo> allTempList = templateService.allSelectTemp(emp.getEMP_ID());
+		model.addAttribute("userTemplateList", userTemplateList);
+		model.addAttribute("templateList", templateList);
+		model.addAttribute("allTempList", allTempList);
 		return "/approval/approval_manage";
 	}
 	
@@ -203,4 +244,28 @@ public class ApprovalController {
 	public String approvalEditTemplate() {
 		return "/approval/approval_edit_template";
 	}
+	
+	@PostMapping("/approval/insertTemplate")
+	public String templateInsert(HttpServletRequest request,
+								@RequestParam String tempTitle,
+								@RequestParam String editorContent) {
+		HttpSession session = request.getSession();
+		Employee emp = (Employee) session.getAttribute("loginEmp");
+		String emp_id = emp.getEMP_ID();
+		log.info(editorContent);
+		templateService.insertTemplate(editorContent, tempTitle, emp_id);
+		return "/approval/approval_manage";
+	}
+	
+	// 결재 작성 시 양식 선택시 양식 불러오는 컨트롤러
+	@PostMapping("/approval/readTemp")
+	@ResponseBody
+	public HashMap<String, String> approvalEditorToTemp(@RequestParam String tempName) {
+		log.info("tempName : " + tempName);
+		String tempContent = templateService.getTempContent(tempName);
+		log.info("temp_content : " + tempContent);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("tempContent", tempContent);
+		return map;
+	}	
 }

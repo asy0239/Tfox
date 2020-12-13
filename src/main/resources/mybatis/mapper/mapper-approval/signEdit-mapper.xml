@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="signEdit">
+	<update id="signUpdate" parameterType="map">
+		update employee set test_sign = #{signUrl}
+		where emp_id = #{emp_id}
+	</update>
+	
+	<resultMap type="HashMap" id="signMap">
+
+		<result property="emp_id" column="emp_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="test_sign" column="test_sign" jdbcType="CLOB" javaType="java.lang.String" />
+
+	</resultMap>
+	
+	<select id="selectEmp" parameterType="string" resultMap="signMap" resultType="map">
+		select 
+		    emp_id,
+		    emp_sign
+		from employee
+		where emp_id = #{emp_id}
+	</select>
+	
+	
+</mapper>

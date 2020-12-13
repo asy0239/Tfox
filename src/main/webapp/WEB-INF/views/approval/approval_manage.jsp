@@ -24,35 +24,62 @@
 				<div class="conWrap">
 					<div id="app_title">전자결재</div>
 					<div id="app_subTitle">
-						<span id="subMain"> 문서 관리 </span> 
-						<span id="app_subsub"> 전체 문서 내역 및 양식을 관리할 수 있습니다. </span> 
+						<span id="subMain"> 문서 양식 관리 </span> 
+						<span id="app_subsub"> 전체 문서 양식을 관리할 수 있습니다. </span> 
 						<button id="approval_btn" onclick="editTemplate();"> 양식 추가하기 </button>
 					</div>
 				<div id="doc_box_area">
-					<div id="doc_box">	
-						<i class="fas fa-file-invoice-dollar fa-10x" id="doc_img"></i>
-						<div id="doc_name">품의서</div>
-					</div>
-					<div id="doc_box">
-						<i class="fas fa-file-alt fa-10x" id="doc_img"></i>
-					<div id="doc_name">기안서</div>
-					</div>
-					<div id="doc_box">
-						<i class="fas fa-file-contract fa-10x" id="doc_img"></i>
-						<div id="doc_name">회계장부</div>
-					</div>
+					<c:forEach var="userTempList" items="${userTemplateList}">
+							<c:forEach var="tempList" items="${templateList}">
+								<c:if test="${tempList.temp_id == userTempList.get('TEMP_ID')}">
+									<c:choose>
+										<c:when test="${tempList.temp_id eq 'TMP001'}">
+											<div id="doc_box">
+												<img
+													src="${pageContext.request.contextPath }/resources/img/approval/file-alt-solid.svg">
+												<div id="doc_name">${tempList.temp_title}</div>
+											</div>
+										</c:when>
+										<c:when test="${tempList.temp_id eq 'TMP002'}">
+											<div id="doc_box">
+												<img
+													src="${pageContext.request.contextPath }/resources/img/approval/품의서.svg">
+												<div id="doc_name">${tempList.temp_title}</div>
+											</div>
+										</c:when>
+										<c:when test="${tempList.temp_id eq 'TMP003'}">
+											<div id="doc_box">
+												<img
+													src="${pageContext.request.contextPath }/resources/img/approval/file-contract-solid.svg">
+												<div id="doc_name">${tempList.temp_title}</div>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div id="doc_box">
+												<img
+													src="${pageContext.request.contextPath }/resources/img/approval/file-solid.svg">
+												<div id="doc_name">${tempList.temp_title}</div>
+											</div>
+										</c:otherwise>
+									</c:choose>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
 				</div>
 					<table id="manage_table">
+						<caption style="text-align: left; font-size: 20px;">모든 사용자의 문서양식입니다.</caption>
 						<tr>
 							<th>번호</th>
 							<th>문서 제목</th>
 							<th>수정 날짜</th>
 						</tr>
-						<tr>
-							<td>1</td>
-							<td>제목이다!!!!!!!!!!!!!!!!</td>
-							<td>2020-10-10</td>
-						</tr>
+						<c:forEach var="userTempList" items="${allTempList}">
+							<tr>
+								<td>${userTempList.temp_id }</td>
+								<td>${userTempList.temp_title }</td>
+								<td>${userTempList.temp_date }</td>
+							</tr>
+						</c:forEach>
 					</table>
 				</div>
 			</article>

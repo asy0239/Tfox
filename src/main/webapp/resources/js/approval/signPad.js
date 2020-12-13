@@ -232,13 +232,13 @@
             back_drop.css('left', '0');
             back_drop.css('z-index', '1040 !important');
             back_drop.css('background-color', '#000');
-            back_drop.css('display', 'none');
+            back_drop.css('display', 'none'); // 어두어지는 효과
             back_drop.css('filter', 'alpha(opacity=50)');
             back_drop.css('opacity', '0.5');
             $('body').append(back_drop);
 
             big_pad = $('<div>');
-            big_pad.css('display', 'none');
+            big_pad.css('display', 'none'); // 모달창
             big_pad.css('position', 'fixed');
             big_pad.css('margin', '0 auto');
             big_pad.css('top', '0');
@@ -255,7 +255,7 @@
             big_pad.css('padding', '15px');
             big_pad.css('background-color', 'white');
             big_pad.css('margin-top', '200px');
-            big_pad.css('width', '45%');
+            big_pad.css('width', '45%'); // 모달창 크기
             big_pad.css('height', '45%');
             big_pad.css('border-radius', '10px');
             big_pad.attr('id', 'signPadBig');
@@ -396,19 +396,19 @@
 
         //init the signpad
         if (canvas) {
-            var sign1big = $(canvas).sketch({ defaultColor: "red", defaultSize: 5 });
+            var sign1big = $(canvas).sketch({ defaultColor: "black", defaultSize: 5 });
         }
 
         //for each control
         return this.each(function () {
 
             var control = $(this);
-            control.hide();
+            //control.hide();
 
             //get the control parent
             var wrapper = control.parent();
             var img = $('#approval_sign');
-            var mySign = $('#mySign');
+            var mySign = $('#txt');
             
             
             //style it
@@ -432,9 +432,8 @@
                     back_drop.show();
                     big_pad.slideToggle();
                     //save control to use later
-                    $.data(big_pad[0], 'img', img);
+                    $.data(big_pad[0], 'img', mySign);
                     $.data(big_pad[0], 'control', control);
-					console.log("아니시발");
                     //settings.control = control;
                     //settings.img = img;
                 });

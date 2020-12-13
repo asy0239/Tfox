@@ -13,16 +13,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select * from template
  	</select>
  	
+ 	<!-- 양식 저장 -->
  	<insert id="insertTemp" parameterType="map">
- 		insert into template
- 			(temp_id, temp_title, temp_content)
- 		values('TMP'||TRIM(TO_CHAR(SEQ_TEMPID.nextval,'000')), #{title}, empty_clob())
- 			
+		insert into template
+		(temp_id, temp_title, temp_content, temp_date , emp_id)
+		values('TMP'||TRIM(TO_CHAR(SEQ_TEMPID.nextval,'000')), #{title}, empty_clob(), sysdate, #{emp_id})
  	</insert>
  	<update id="ins_update" parameterType="map">
  		update template
  		set temp_content = #{content}
  		where temp_title = #{title}
  	</update>
+ 	
+ 	<select id="selectContent" resultType="string" parameterType="string">
+ 		select temp_content from template
+ 		where temp_title = #{tempName}
+ 	</select>
+ 	<!-- 문서관리 테이블 데이터 -->
+ 	<select id="selectAll" resultType="com.egg.tfox.vo.approval.ManageTempVo" parameterType="string">
+		select 
+		    TRANSLATE(temp_id,'0123456789'|| temp_id,'0123456789') temp_id,
+		    temp_title,
+		    temp_content,
+		    temp_date,
+		    emp_id
+		from template
+		
+ 	</select>
  </mapper>
  

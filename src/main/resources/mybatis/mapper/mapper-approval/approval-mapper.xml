@@ -239,4 +239,56 @@ from (select
 		select * from dual
 		
 	</insert>
+	
+	<select id="sendDocList" resultType="com.egg.tfox.vo.approval.ApprovalSendDocVo" parameterType="string">
+		select
+		    app_doc.app_id send_app_id,
+		    app_doc.emp_id send_emp_id,
+		    temp.temp_title temp_title,
+		    app_doc.app_title send_app_title,
+		    app_doc.app_date send_app_date,
+		    app_doc.app_content send_app_content,
+		    app_doc.app_status send_app_status,
+		    app_doc.app_checktime send_app_checkTime,
+		    app_st.appstatment_id st_id,
+		    app_st.emp_id st_emp_id,
+		    emp.emp_name st_emp_name,
+		    dept.dept_name st_emp_dept_name,
+		    app_st.apporder_code st_order_code,
+		    app_st.apporder_check st_order_checkTime,
+		    app_st.apporder_apply st_apply
+		from approval_doc app_doc , approval_statement app_st , employee emp , department dept, template temp
+		where app_doc.emp_id = #{emp_id}
+		and app_st.emp_id = emp.emp_id
+		and app_doc.app_id = app_st.app_id
+		and dept.dept_id = emp.dept_id
+		and app_doc.temp_id = temp.temp_id
+		order by send_app_date desc
+	</select>
+	
+	<select id="sendDocListCount" parameterType="string" resultType="int">
+		select count(*) from (select
+		    app_doc.app_id send_app_id,
+		    temp.temp_title temp_name,
+		    app_doc.emp_id send_emp_id,
+		    app_doc.app_title send_app_title,
+		    app_doc.app_date send_app_date,
+		    app_doc.app_content send_app_content,
+		    app_doc.app_status send_app_status,
+		    app_doc.app_checktime send_app_checkTime,
+		    app_st.appstatment_id st_id,
+		    app_st.emp_id st_emp_id,
+		    emp.emp_name st_emp_name,
+		    dept.dept_name st_emp_dept_name,
+		    app_st.apporder_code st_order_code,
+		    app_st.apporder_check st_order_checkTime,
+		    app_st.apporder_apply st_apply
+		from approval_doc app_doc , approval_statement app_st , employee emp , department dept, template temp
+		where app_doc.emp_id = 'E000003'
+		and app_st.emp_id = emp.emp_id
+		and app_doc.app_id = app_st.app_id
+		and dept.dept_id = emp.dept_id
+		and app_doc.temp_id = temp.temp_id
+		order by send_app_date desc)
+	</select>
 </mapper>
