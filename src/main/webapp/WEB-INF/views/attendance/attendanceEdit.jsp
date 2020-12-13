@@ -27,30 +27,28 @@
 		<section class="contents">
 			<article>
 			<div class="conWrap">
-				<form>
-				<div class="abc">
-					<h4>근태 사용 여부</h4>
+			<form id="attendsetOn" method="post" action="atdOnOff">
+				<div class="main_top">
+					<span>근태 사용 여부</span>
 					<div class="abcd">
-						<label><input type="radio" name="time_use_flag" value="Y"
-							checked> 사용함</label> <label><input type="radio"
-							name="time_use_flag" value="N"> 사용 안 함</label>
+						<label><input type="radio" name="time_use_flag" value="Y" <c:if test="${atdYN[0].attdb_yn eq 'Y'}">checked</c:if>> 사용함</label>
+						<label><input type="radio" name="time_use_flag" value="N" <c:if test="${atdYN[0].attdb_yn eq 'N'}">checked</c:if>> 사용 안 함</label>
 					</div>
 				</div>
-				<div class="abc">
-					<h4>52시간 근무 적용 여부</h4>
+				<div class="main_top">
+					<span>52시간 근무 적용 여부</span>
 					<div class="abcd">
-						<label><input type="radio" name="time_52hours" value="Y"
-							checked> 사용함</label> <label><input type="radio"
-							name="time_52hours" value="N"> 사용 안 함</label>
+						<label><input type="radio" name="time_52hours" value="Y" <c:if test="${atdYN[0].attdb_oe eq 'Y'}">checked</c:if>> 사용함</label> 
+						<label><input type="radio" name="time_52hours" value="N" <c:if test="${atdYN[0].attdb_oe eq 'N'}">checked</c:if>> 사용 안 함</label>
 					</div>
 				</div>
 				<div class="bt_left">
-					<button type="button" onclick="workTimeManage.setWorkTimeConfig();">저장</button>
+					<button type="button" onclick="setWorkTimeConfig();">저장</button>
 				</div>
 			</form>
 
 
-				<div>
+				<div class="main top">
 				<span>출퇴근 시간 설정</span>
 				</div>
 					<div class="timeall" style="float:left"> 
@@ -84,6 +82,20 @@
 </body>
 
 <script>
+function setVacationUseFlag(){
+	var save = $('input[name=vacOnOff]:checked').val();
+	if (save == 'Y'){
+		if(confirm('휴가 기능을 \'사용함\'으로 설정하시겠습니까?')){
+			$('#vacationset').submit();
+		}}
+	else{
+		if(confirm('휴가 기능을 \'사용 안 함\'으로 설정하시겠습니까?')){
+			$('#vacationset').submit();
+		}
+	
+
+	}
+}
 
 
 </script>

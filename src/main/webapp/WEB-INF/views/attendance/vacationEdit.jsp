@@ -296,7 +296,7 @@ font {
 				$("#vacCategory").html('');
 				$.each(data, function(index, cate){
 					var vactypeY = cate.vactype_yn;
-					var vactypeN = cate.vactype_yn
+					var vactypeN = cate.vactype_yn;
 					var yearY = cate.vactype_yearyn;
 					var yearN = cate.vactype_yearyn;
 					if(vactypeY == 'Y' ){

@@ -8,10 +8,112 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	mapper라는 영역 안에 구문을 작성한다.
 	- namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) 
  -->
-<mapper namespace="name">
+<mapper namespace="attendance">
+	<select id="worktime" resultType="com.egg.tfox.entity.attendance.AttendanceMain">
+	SELECT 
+			ATT_ID
+		  , EMP_ID
+		  , TO_CHAR(ATT_START, 'HH24:MI:SS') as ATT_START
+		  , TO_CHAR(ATT_END, 'HH24:MI:SS') as ATT_END
+		  , ATT_REASON
+		  , ATT_STATUS
+		  , ATT_DATE
+	FROM ATTENDANCE
+	WHERE TO_CHAR(ATT_DATE, 'YYMMDD') = to_char(SYSDATE, 'YYMMDD')
+	  AND EMP_ID = #{id}
+	</select>
 	
+	<insert id="workinsert">
+	INSERT INTO ATTENDANCE(
+		ATT_ID
+	  , EMP_ID
+	  , ATT_START
+	  , ATT_END
+	  , ATT_REASON
+	  , ATT_STATUS
+	  , ATT_DATE
+	)
+	VALUES(
+		'AT'||TRIM(TO_CHAR(SEQ_ATTID.nextval,'000000'))
+	  , #{id}
+	  , SYSDATE
+	  , NULL
+	  , NULL
+	  , '출근'
+	  , SYSDATE
+	)
+	</insert>
+	
+	<select id="starttime" resultType="com.egg.tfox.entity.attendance.AttendanceMain">
+	SELECT 
+			ATT_ID
+		  , TO_CHAR(ATT_START, 'HH24:MI:SS') as ATT_START
+	FROM ATTENDANCE
+	WHERE TO_CHAR(ATT_DATE, 'YYMMDD') = to_char(SYSDATE, 'YYMMDD')
+      AND EMP_ID = #{id}
+	
+	</select>
+	<update id="workendTime">
+		UPDATE ATTENDANCE
+		SET ATT_END = SYSDATE
+		WHERE ATT_ID = #{attid}
+	</update>
+	
+	<insert id="workcalinsert">
+	INSERT INTO CALENDAR(
+		CAL_ID
+	  , CAL_TITLE
+	  , CAL_START
+	) VALUES(
+		#{id}
+	  , '출근'
+	  , SYSDATE	
+	)
 
+	</insert>
+	<insert id="workcalendinsert">
+	INSERT INTO CALENDAR(
+		CAL_ID
+	  , CAL_TITLE
+	  , CAL_START
+	) VALUES(
+		#{id}
+	  , '퇴근'
+	  , SYSDATE	
+	)
+	</insert>
 	
+	<select id="calenList" resultType="com.egg.tfox.entity.attendance.Calendar">
+ SELECT
+        CAL_ID
+      , CAL_TITLE
+      , TO_CHAR(CAL_START, 'yyyy-mm-dd') CAL_START
+      , TO_CHAR(CAL_START, 'hh24:mi:ss') CAL_TIME
+  FROM CALENDAR
+ WHERE CAL_ID = #{id}
+	</select>
+	
+	<select id="attdYNlist" resultType="com.egg.tfox.entity.attendance.AttendanceEdit">
+		SELECT
+		      ATTDB_ID
+		    , ATTDB_YN
+		    , ATTDB_OE
+		    , CORP_ID
+		 FROM ATTDANCEBASIC
+	</select>
+	
+	<select id="attdSetlist" resultType="com.egg.tfox.entity.attendance.AttendanceSet">
+		SELECT
+			  ATTD_ID
+			, ATTSET_DAY
+			, ATTSET_START
+			, ATTSET_END
+			, CORP_ID
+			, ATTD_CATEGORY
+			, ATTSET_YN
+		 FROM ATTENDANCESET
+	
+	</select>
 </mapper>
 
 
