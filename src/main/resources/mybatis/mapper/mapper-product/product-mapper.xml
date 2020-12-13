@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="product">
+<select id="seq" resultType="String">
+  select 'PR'||TRIM(TO_CHAR(SEQ_PROID.nextval,'000000')) from dual
+
+</select>
+
+
+
+<insert id="add" parameterType="product">
+
+Insert into PRODUCT (PRO_ID,PRO_NAME,ST_ID,PRO_PRICE,
+PRO_BIGCATE,PRO_SMALLCATE,PRO_SUMMARY,
+PRO_DETAIL,PRO_CONPRICE,PRO_SIZE,PRO_COLOR,PRO_EA,PRO_STATUS) 
+values (#{pro_id},#{pro_name},#{st_id}, 
+#{pro_price},
+#{pro_bigcate},#{pro_smallcate},#{pro_summary},
+#{pro_detail},#{pro_conprice},#{pro_size},#{pro_color},#{pro_ea}, #{pro_status})
+
+
+</insert>
+
+<select id="product_file_seq" resultType="String">
+	  select 'P'||TRIM(TO_CHAR(SEQ_FILEID.nextval,'000000')) from dual
+</select>
+
+
+<insert id="pFiles" parameterType="pFiles">
+	insert into files (file_id, file_type ,file_originname, file_changename, file_date) values(
+            #{file_id}  ,#{file_type} , #{file_originName}, #{file_changeName} ,sysdate
+)
+</insert>
+
+
+
+<insert id="files" parameterType="files">
+insert into product_file (pro_id , file_id) values( #{pro_id} ,#{file_id} )
+</insert>
+
+
+<insert id="stock" parameterType="stock">
+Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values
+ (#{st_id},#{st_price}, #{st_company}, #{st_factory} , to_date(#{st_date},'RR/MM/DD'), #{st_orign})
+
+</insert>
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

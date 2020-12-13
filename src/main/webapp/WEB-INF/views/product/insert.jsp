@@ -36,11 +36,12 @@
 }
 
 #top>span {
+	color: #5E5E5E ;
 	position: relative;
 	bottom: 8px;
 	margin-left: 30px;
 	font-size: 25px;
-	font-weight: bold;
+	
 }
 
 #mid-1 {
@@ -151,9 +152,10 @@ button {
 }
 
 .ph {
-	padding-left: 15px;
+	padding-left: 10px;
 	height: 340px;
 	width: 300px;
+	padding-right: 10px;
 }
 
 #titleImgArea {
@@ -188,7 +190,7 @@ button {
 
 			<section class="contents">
 				<article>
-	<form action="insert" method="POST" name="form">
+	<form action="insert" method="POST" name="form" enctype="multipart/form-data" >
 					<div class="conWrap">
 
 						<div id="top">
@@ -230,7 +232,8 @@ button {
       									  <select id="second" name="pro_smallcate" style="width: 70px;"></select>
       		
 										색상&nbsp;<input type="text" class="t" name="pro_color"> 사이즈&nbsp;<input
-											type="text" name="pro_size" class="t">
+											type="text" name="pro_size" class="t"> 수량&nbsp;<input
+											type="number" name="pro_ea" class="t">
 
 										</td>
 
@@ -247,28 +250,25 @@ button {
 										<td>&nbsp;이미지</td>
 										<td class="ph">
 											<div id="titleImgArea">
-												<img id="titleImg" width="300" height="300">
+												<img id="titleImg"  name="im1" width="300" height="300">
 											</div>
 										</td>
 										<td class="ph">
 
 											<div id="contentImgArea1" class="photoC">
-												<img id="contentImg1" width="120" height="100">
+												<img id="contentImg1" name="im2" width="120" height="100">
 											</div>
 											<div id="contentImgArea2" class="photoC">
-												<img id="contentImg2" width="120" height="100">
+												<img id="contentImg2" name="im3" width="120" height="100">
 											</div>
 										</td>
 									</tr>
 								</table>
 								<div id="fileArea">
 									<!-- onchange 요소가 바뀌면 동작 this를 function에 전달 자기 자신 -->
-									<input type="file" id="thumbnailImg1" name="thumbnailImg1"
-										onchange="loadImg(this, 1)"> <input type="file"
-										id="thumbnailImg2" name="thumbnailImg2"
-										onchange="loadImg(this, 2)"> <input type="file"
-										id="thumbnailImg3" name="thumbnailImg3"
-										onchange="loadImg(this, 3)">
+									<input type="file" id="thumbnailImg1" name="thumbnailImg1" onchange="loadImg(this, 1)"> 
+									<input type="file" id="thumbnailImg2" name="thumbnailImg2" onchange="loadImg(this, 2)"> 
+									<input type="file" id="thumbnailImg3" name="thumbnailImg3" onchange="loadImg(this, 3)">
 
 								</div>
 
@@ -285,11 +285,11 @@ button {
 								<table>
 									<tr>
 										<td>&nbsp;공급가</td>
-										<td>&nbsp;&nbsp;<input type="text"></td>
+										<td>&nbsp;&nbsp;<input type="number" name="st_price"  ></td>
 									</tr>
 									<tr>
 										<td>&nbsp;소비자가</td>
-										<td>&nbsp;&nbsp;<input type="text"></td>
+										<td>&nbsp;&nbsp;<input type="number" name="pro_conprice" ></td>
 									</tr>
 
 								</table>
@@ -304,7 +304,7 @@ button {
 								<table>
 									<tr>
 										<td>&nbsp;공급사</td>
-										<td>&nbsp; <select name="supply" id="supply">
+										<td>&nbsp; <select name="st_company" id="supply">
 												<c:forEach var="supplier" items="${sup}">
 													<option id="ownsu">${supplier.sup_name}</option>
 												</c:forEach>
@@ -318,7 +318,7 @@ button {
 
 
 										<td>&nbsp;제조사</td>
-										<td>&nbsp; <select name="made" id="made">
+										<td>&nbsp; <select name="st_factory" id="made">
 
 												<c:forEach var="manuf" items="${list}">
 													<option id="ownmd">${manuf.manu_name}</option>
@@ -329,16 +329,16 @@ button {
 									</tr>
 									<tr>
 										<td>&nbsp;제조일자</td>
-										<td>&nbsp;&nbsp;<input type="date" id="date"></td>
+										<td>&nbsp;&nbsp;<input type="date" id="date" name="st_date"></td>
 									</tr>
 
 									<tr>
 										<td>&nbsp;원산지</td>
-										<td>&nbsp; <select id="select1" onchange="itemChange();">
+										<td>&nbsp; <select id="select1" name="a" onchange="itemChange();">
 												<option>국내</option>
 												<option>국외</option>
 
-										</select> &nbsp; <select id="select2">
+										</select> &nbsp; <select id="select2" name="b">
 												<option>선택하시오</option>
 												<option>서울특별시</option>
 												<option>부산광역시</option>
@@ -367,7 +367,7 @@ button {
 						</div>
 							<button id="btSubmit"  type="submit" >상품 등록</button>
 							<input  type="hidden" id="h" name="pro_detail"  >
-							<div id="test">test</div>
+							<input  type="hidden"  name="pro_status"  value="N"  >
 						</div>
 	</form>
 				</article>

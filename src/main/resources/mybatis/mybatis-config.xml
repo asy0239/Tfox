@@ -15,6 +15,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.egg.tfox.entity.Employee" alias="employee"/>
 		<typeAlias type="com.egg.tfox.entity.Manuf" alias="manuf"/>
 		<typeAlias type="com.egg.tfox.entity.Supplier" alias="sup"/>
+		<typeAlias type="com.egg.tfox.entity.Product" alias="product"/>
+		<typeAlias type="com.egg.tfox.entity.Files" alias="files"/>
+		<typeAlias type="com.egg.tfox.entity.Product_file" alias="pFiles"/>
+		<typeAlias type="com.egg.tfox.entity.Stock" alias="stock"/>
 		
 		<typeAlias type="com.egg.tfox.vo.approval.ApprovalMainVo" alias="approvalMainVo"/>
 		<typeAlias type="com.egg.tfox.vo.approval.ApprovalMainNoCheckVo" alias="approvalMainNoCheckVo"/>
