@@ -35,9 +35,12 @@ SELECT
 </select>
 
 <select id="orderInfo" resultType="com.egg.tfox.vo.cart.orderdetailVo">
-SELECT  
-	   ORDER_EA 
-  FROM ORDERDETAIL
+select nvl(sum(pro_price * order_ea),0)  
+from  orderdetail o, product p, user_table u, payment pay
+where p.pro_id = o.pro_id
+and pay.pay_id = o.pay_id
+and u.user_id = pay.user_id
+AND U.USER_LOGINID = #{userId}
 </select>
 
 	
