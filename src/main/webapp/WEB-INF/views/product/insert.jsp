@@ -309,7 +309,7 @@ button {
 													<option id="ownsu">${supplier.sup_name}</option>
 												</c:forEach>
 										</select> &nbsp;
-											<button class="bt" id="myBtn2">등록</button>
+											<input class="bt" id="myBtn2" type="button" value="등록" style="width:100px; height:30px">
 										</td>
 									</tr>
 
@@ -324,7 +324,7 @@ button {
 													<option id="ownmd">${manuf.manu_name}</option>
 												</c:forEach>
 										</select> &nbsp;
-											<button class="bt" id="myBtn">등록</button>
+											<input class="bt" id="myBtn" value="등록" type="button" style="width:100px; height:30px" >
 										</td>
 									</tr>
 									<tr>
