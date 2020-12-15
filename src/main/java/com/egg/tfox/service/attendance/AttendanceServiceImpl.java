@@ -1,6 +1,7 @@
 package com.egg.tfox.service.attendance;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,18 @@ public class AttendanceServiceImpl implements AttendanceService {
 	@Override
 	public List<AttendanceSet> attdSetlist() {
 		return attendancedao.attdSetlist();
+	}
+	@Override
+	public void atdOnOff(Map<String, Object> map) {
+		attendancedao.atdOnOff(map);
+	}
+	@Override
+	public void timedaySet(List<String> list, List<String> start_time, List<String> endtime) {
+		attendancedao.timedaySet(list, start_time, endtime);
+	}
+	@Override
+	public List<AttendanceSet> attdWorkTimelist() {
+		return attendancedao.attdWorkTimelist();
 	}
 
 

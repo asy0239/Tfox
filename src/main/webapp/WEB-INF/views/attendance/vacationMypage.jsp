@@ -5,8 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>내 휴가 페이지</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <style>
 
@@ -18,8 +20,10 @@
 	font-weight: bold;
 }
 #myVacationYear {
-	border: 2px solid black;
-	padding-bottom: 200px;
+	border: 1px solid gray;
+	border-radius:20px;
+	width:200px;
+	padding-bottom: 100px;
 }
 
 #texter {
@@ -27,17 +31,13 @@
 	font-weight: bold;
 }
 
-table {
-	width: 100%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
+.main_top span{
+	font-size: 20px;
+	font-weight: bold;
+
 }
 
-th, td {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: center;
-}
+
 </style>
 </head>
 <body>
@@ -49,17 +49,24 @@ th, td {
 				<div class="myVacation_top">
 					<span>근태관리 > 내 휴가현황</span>
 				</div>
+				
+				<div><a href="${pageContext.request.contextPath }/attendance/vacationMypage">내 휴가 현황&nbsp;&nbsp;</a><a href="${pageContext.request.contextPath }/attendance/vacationMycalendar"><span>내 휴가 캘린더</span></a></div>
+
 				<hr>
-				<h1>남은 휴가 정보</h1>
+				<div class="main_top">
+					<span>사용 휴가 정보</span>
+				</div>
 				<div id="myVacationYear">
-					<p id="texter">총 연차 일수 : ${Day.YearAllday }일</p>
-					<p id="texter">남은 연차 일수 : ${Day.leftday }일</p>
-					<p id="texter">사용한 연차 일수 : ${Day.yearDay }일</p>
-					<p id="texter">총 사용한 휴가일수 : ${Day.allDay }일</p>
+					<p id="texter"> 총 연차 일수 : ${Day.YearAllday }일</p>
+					<p id="texter"> 남은 연차 일수 : ${Day.leftday }일</p>
+					<p id="texter"> 사용한 연차 일수 : ${Day.yearDay }일</p>
+					<p id="texter"> 총 사용한 휴가일수 : ${Day.allDay }일</p>
 				</div>
 				<div id="maVacationCategory">
-					<h2>사용한 휴가 종류</h2>
-					<table>
+					<div class="main_top">
+					<span>사용한 휴가 종류</span>
+					</div>
+					<table class="table table-hover" style="text-align:center;">
 						<tbody>
 							<tr>
 								<c:forEach var="category" items="${category }">
@@ -76,8 +83,10 @@ th, td {
 				</div>
 
 				<div id="myVacationList">
-					<h1>신청한 휴가 정보</h1>
-					<table>
+					<div class="main_top">
+					<span>신청한 휴가 정보</span>
+					</div>
+					<table class="table table-hover">
 						<tbody>
 							<tr>
 								<td>신청자</td>

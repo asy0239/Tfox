@@ -293,6 +293,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM VACTYPE
 		WHERE VACTYPE_NAME = #{name}
 	</delete>
+	
+	<select id="myVacCalander" resultType="com.egg.tfox.entity.attendance.VacationMycalendar">
+		SELECT 
+        TO_CHAR(V.VACAPL_START, 'YYYY-MM-DD') as VACAPL_START
+      , TO_CHAR(V.VACAPL_END, 'YYYY-MM-DD') as VACAPL_END
+      , VC.VACTYPE_NAME
+ 	FROM VACAPPLY V
+	JOIN VACTYPE VC ON (V.VACTYPE_ID = VC.VACTYPE_ID)
+ 	WHERE EMP_ID = #{id}
+	</select>
 </mapper>
 
 

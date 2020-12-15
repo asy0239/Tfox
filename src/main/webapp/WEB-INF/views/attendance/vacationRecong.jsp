@@ -5,20 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>휴가 신청확인</title>
 </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <style>
-table {
-	width: 100%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
+
+.maintesttop span {
+	position: relative;
+	bottom: 8px;
+	margin-left: 30px;
+	font-size: 25px;
+	font-weight: bold;
 }
 
-th, td {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: center;
-}
 
 #search {
 	float: right;
@@ -30,8 +30,10 @@ th, td {
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 		<section class="contents">
 			<article>
-				<h3>휴가 승인 페이지</h3>
-				<hr>
+				<div class="conWrap">
+				<div class="maintesttop">
+					<span>근태관리 > 휴가승인</span>
+				</div>
 				<form name="vacationRecong" method="get" action="vacationRecong">
 					<div id="search">
 						<select id="search_category" name="search_cate">
@@ -43,8 +45,9 @@ th, td {
 					</div>
 				</form>
 				<div class="Recognition">
-					<table>
+					<table class="table table-hover" style="text-align:center;">
 						<tbody>
+							<thead class="thead-dark">
 							<tr>
 								<td>신청자</td>
 								<td>부서</td>
@@ -54,6 +57,7 @@ th, td {
 								<td>상세</td>
 								<td>상태</td>
 							</tr>
+							</thead>
 							<!-- 이부분부터 반복문 사용해서 뽑을것 -->
 							<c:forEach var="vac" items="${vaclist}">
 								<tr>
@@ -74,7 +78,7 @@ th, td {
 					<div style="display: block; text-align: center;">
 						<c:if test="${paging.startPage != 1 }">
 							<a
-								href="${pageContext.request.contextPath }/attendance/vacationRecong?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+								href="${pageContext.request.contextPath }/attendance/vacationRecong?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}&search_cate=${search.search_cate }&keyword=${search.keyword}">&lt;</a>
 						</c:if>
 						<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
 							var="p">
@@ -84,15 +88,16 @@ th, td {
 								</c:when>
 								<c:when test="${p != paging.nowPage }">
 									<a
-										href="${pageContext.request.contextPath }/attendance/vacationRecong?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+										href="${pageContext.request.contextPath }/attendance/vacationRecong?nowPage=${p }&cntPerPage=${paging.cntPerPage}&search_cate=${search.search_cate }&keyword=${search.keyword}">${p }</a>
 								</c:when>
 							</c:choose>
 						</c:forEach>
 						<c:if test="${paging.endPage != paging.lastPage}">
 							<a
-								href="${pageContext.request.contextPath }/attendance/vacationRecong?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+								href="${pageContext.request.contextPath }/attendance/vacationRecong?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}&search_cate=${search.search_cate }&keyword=${search.keyword}">&gt;</a>
 						</c:if>
 					</div>
+				</div>
 				</div>
 			</article>
 		</section>

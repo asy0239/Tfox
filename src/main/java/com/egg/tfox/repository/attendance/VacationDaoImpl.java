@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.egg.tfox.entity.attendance.PagingVO;
 import com.egg.tfox.entity.attendance.Vacation;
+import com.egg.tfox.entity.attendance.VacationMycalendar;
 import com.egg.tfox.entity.attendance.VacationRequest;
 import com.egg.tfox.entity.attendance.VacationSet;
 
@@ -102,7 +103,6 @@ public class VacationDaoImpl implements VacationDao {
 		if (ot != null) {
 			for (int i = 0; i < ot.size(); i++) {
 				sum = sum + ot.get(i);
-				System.out.println(sum);
 			}
 		}else {
 			map.put("yearDay", sum);
@@ -111,7 +111,6 @@ public class VacationDaoImpl implements VacationDao {
 		if (allt != null) {
 			for (int i = 0; i < allt.size(); i++) {
 				sum1 = sum1 + allt.get(i);
-				System.out.println(sum1);
 			}
 		}else {
 			map.put("allDay", sum1);
@@ -138,7 +137,6 @@ public class VacationDaoImpl implements VacationDao {
 		//null값인경우 0을 추가한다 
 		for(int i = 0; i<category.size(); i++) {
 			map.put("category", category.get(i));
-			System.out.println(category.get(i));
 			sum = sqlSession.selectOne("vacation.ctday", map);
 			map.remove("category");
 			if(sum == null) {
@@ -147,7 +145,6 @@ public class VacationDaoImpl implements VacationDao {
 			}else {
 				result.add(sum);
 			}
-			System.out.println("sum" + sum);
 		}		
 
 		return result;
@@ -242,6 +239,11 @@ public class VacationDaoImpl implements VacationDao {
 	@Override
 	public void vacCateDelete(String name) {
 		sqlSession.delete("vacation.catDelete", name);
+	}
+
+	@Override
+	public List<VacationMycalendar> myVacCalendar(String id) {
+		return sqlSession.selectList("vacation.myVacCalander", id);
 	}
 
 		

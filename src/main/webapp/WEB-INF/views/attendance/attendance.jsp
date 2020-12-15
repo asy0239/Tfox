@@ -10,13 +10,16 @@
 <style>
 .checktoolbar{
 	float:left;
+	width: 100%;
 }
 .checktool{
-	padding-right:250px;
+	padding-right:30%;
+	padding-top: 10px;
 
 }
 .attendance_timer span{
 	font-size:35px;
+	padding-top:20px;
 }
 #top {
 	width: 100%;
@@ -24,18 +27,13 @@
 	border: 1px solid black;
 }
 
-table {
-	width: 1000px;
-	heigth: 500px;
+.maintesttop span {
+	position: relative;
+	bottom: 8px;
+	margin-left: 30px;
+	font-size: 25px;
+	font-weight: bold;
 }
-
-table, tr, td {
-	border-collapse: collapse;
-	border: 1px solid black;
-	text-align: center;
-	margin: auto;
-}
-
 #top>span {
 	font-size: 40px;
 }
@@ -62,14 +60,12 @@ font {
 	height: 600px;
 }
 
-.checktool {
-	padding-top: 20px;
-}
-.checktoolbar{
-	float: left;
-}
-</style>
 
+
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css' rel='stylesheet' />
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js"></script>
 
@@ -80,24 +76,30 @@ font {
 		<section class="contents">
 			<article>
 				<div class="conWrap">
-					<h3>근태 현황</h3>
-					<hr>
-					<p>잘 나옵니까?</p>
+					<div class="maintesttop">
+					<span>근태관리 > 근태 현황</span>
+				</div>
 					
 					<div class="checktoolbar">
 						<div id="checkwork" class="checktool" style="float:left">
 							<div id="checkgowork">
-							<input type="hidden" id="att_id" value="${time[0].att_id }">
-							<input type="button" id="attrbtn1" disabled value="출근하기">
-							<input id="gowork" type="text" value="${time[0].att_start }"readonly> <br> <br>
+								<input type="hidden" id="att_id" value="${time[0].att_id }">
+								<input type="button" class="btn btn-info" id="attrbtn1" disabled value="출근하기">
+								<input id="gowork" class="form-control" type="text" value="${time[0].att_start }"readonly> <br>
 							</div>
 							<div id="checkendwork">
-							<input type="button" id="attrbtn2" disabled value="퇴근하기">
-							<input id="exitwork" type="text" value="${time[0].att_end}" readonly>
+								<input type="button" class="btn btn-info" id="attrbtn2" disabled value="퇴근하기">
+								<input id="exitwork" class="form-control" type="text" value="${time[0].att_end}" readonly>
 							</div>
 						</div>
 						<div class="attendance_timer" style="float:left">
 								<span id="nowTimes"></span>
+						</div>
+						<div style="float:right; font-size:15px; font-weight:bold;">
+							<span>기본 근무 시간</span>
+							<c:forEach var="name" items="${workday}">
+								<p>${name.attset_day }요일 : ${name.attset_start } ~ ${name.attset_end }</p>
+							</c:forEach>
 						</div>
 					</div>
 					<div id="calendar"></div>
@@ -117,8 +119,6 @@ $(document).ready(function(){
 	$(document).ready(function(){
 		var gowork = $("#gowork").val();
 		var exitwork = $("#exitwork").val();
-		console.log(gowork);
-		console.log(exitwork);
 		if(gowork == ''){
 			$("#attrbtn1").attr("disabled", false);
 			$("#attrbtn2").attr("disabled", false);
@@ -161,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	 						var time = item.cal_time;
 	 						var startdate = start +'T'+time;
 	 						var title = item.cal_title;
-	 						console.log(startdate);
 	 						events.push({
 	 							title: title,
 	 							start: startdate
@@ -186,9 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					$.each(data,function(index, att){
 					var gowork = att.att_start;
 					var attid = att.att_id;
-					console.log(gowork);
-					console.log(attid);
-					$("#checkgowork").append('<input type="hidden" id="att_id" value="'+attid+'"> <input type="button" id="attrbtn1" disabled="true" value="출근하기"> <input id="gowork" type="text" value="'+gowork+'"readonly> <br> <br>');
+					$("#checkgowork").append('<input type="hidden" id="att_id" value="'+attid+'"> <input type="button" class="btn btn-info" id="attrbtn1" disabled="true" value="출근하기"> <input id="gowork" class="form-control" type="text" value="'+gowork+'"readonly> <br>');
 					});
 					alert("출근 처리 되었습니다.");
 					calendar.refetchEvents();
@@ -213,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				var gowork = att.att_start;
 				var attid = att.att_id;
 				var endwork = att.att_end;
-				$("#checkendwork").append('<input type="button" id="attrbtn2" disabled="true" value="퇴근하기"> <input id="exitwork" type="text" value="'+endwork+'"readonly>');
+				$("#checkendwork").append('<input type="button" class="btn btn-info" id="attrbtn2" disabled="true" value="퇴근하기"> <input id="exitwork" class="form-control" type="text" value="'+endwork+'"readonly>');
 				});
 					alert("퇴근 처리 되었습니다.");
 					calendar.refetchEvents();

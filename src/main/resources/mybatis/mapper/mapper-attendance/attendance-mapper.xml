@@ -106,13 +106,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 			  ATTD_ID
 			, ATTSET_DAY
-			, ATTSET_START
-			, ATTSET_END
+			, TO_CHAR(ATTSET_START, 'HH24:MI:SS') as ATTSET_START
+			, TO_CHAR(ATTSET_END, 'HH24:MI:SS') as ATTSET_END
 			, CORP_ID
 			, ATTD_CATEGORY
 			, ATTSET_YN
 		 FROM ATTENDANCESET
 	
+	</select>
+	
+	<update id="atdOnOff" >
+	 UPDATE ATTDANCEBASIC
+			SET ATTDB_YN = #{atdyn}
+			  , ATTDB_OE = #{atyn}
+			WHERE CORP_ID = 'COR001'
+	</update>
+	
+	<update id="timedaySet">
+		UPDATE ATTENDANCESET
+		   SET ATTSET_START = TO_DATE(#{start}, 'HH24:MI:SS')
+		     , ATTSET_END = TO_DATE(#{end}, 'HH24:MI:SS')
+		     , ATTSET_YN = #{yn}
+		 WHERE ATTD_ID = #{setid}
+	</update>
+	
+	<select id="worktimelist" resultType="com.egg.tfox.entity.attendance.AttendanceSet">
+	SELECT ATTSET_DAY
+     	 , TO_CHAR(ATTSET_START, 'HH24:MI:SS') AS ATTSET_START
+         , TO_CHAR(ATTSET_END, 'HH24:MI:SS') AS ATTSET_END
+      FROM ATTENDANCESET
+	 WHERE ATTSET_YN = 'Y'
 	</select>
 </mapper>
 

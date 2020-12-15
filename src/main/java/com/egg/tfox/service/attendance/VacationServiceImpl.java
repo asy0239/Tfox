@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.egg.tfox.entity.attendance.PagingVO;
 import com.egg.tfox.entity.attendance.Vacation;
+import com.egg.tfox.entity.attendance.VacationMycalendar;
 import com.egg.tfox.entity.attendance.VacationRequest;
 import com.egg.tfox.entity.attendance.VacationSet;
 import com.egg.tfox.repository.attendance.VacationDao;
@@ -120,6 +121,11 @@ public class VacationServiceImpl implements VacationService {
 	@Override
 	public void vacCateDelete(String name) {
 		vacationDao.vacCateDelete(name);
+	}
+
+	@Override
+	public List<VacationMycalendar> myVacCalendar(String id) {
+		return vacationDao.myVacCalendar(id);
 	}
 
 	
