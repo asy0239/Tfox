@@ -32,7 +32,9 @@ values (#{pro_id},#{pro_name},#{st_id},
 
 
 <insert id="pFiles" parameterType="pFiles">
-   insert into files (file_id, file_type ,file_originname, file_changename, file_date ,file_size) values(
+
+	insert into files (file_id, file_type ,file_originname, file_changename, file_date ,file_size) values(
+
             #{file_id}  ,#{file_type} , #{file_originName}, #{file_changeName} ,sysdate ,#{file_size}
 )
 </insert>
@@ -49,13 +51,29 @@ Insert into STOCK (ST_ID,ST_PRICE,ST_COMPANY,ST_FACTORY,ST_DATE,ST_ORIGN) values
  (#{st_id},#{st_price}, #{st_company}, #{st_factory} , to_date(#{st_date},'RR/MM/DD'), #{st_orign})
 
 </insert>
+<select id="list" resultType="product" >
+
+select * from product order by pro_id  desc
 
 
+</select>
 
 
+<select id="find" resultType="pFiles" parameterType="String">
+select
+* from files f
+right outer join product_file pf on pf.file_id = f.file_id
+right outer join product p on p.pro_id = pf.pro_id
+where p.pro_id  = #{menu.pro_id}
+</select>
 
 
+<select id="listD" resultType="product" parameterType="String">
 
+select*from product where pro_id = #{pro_id}
+
+
+</select>
 
 
 

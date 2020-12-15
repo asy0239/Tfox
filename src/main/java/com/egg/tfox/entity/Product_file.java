@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Product_file {
-	
-	
+
 	   private String file_id;
 	   private String file_type;
 	   private String file_originName;
