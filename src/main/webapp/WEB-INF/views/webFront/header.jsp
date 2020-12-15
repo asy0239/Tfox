@@ -106,7 +106,7 @@
 		<div class="header_top_wrap">
 			<div class="header_top_left">
 				<ul class="header_top_leftbar">
-					<li><a href="center">CENTER</a></li>
+					<li><a href="${pageContext.request.contextPath }/webFront/center">CENTER</a></li>
 					<li><a href="">REVIEW</a></li>
 				</ul>
 			</div>
@@ -123,7 +123,7 @@
 			<c:if test="${ !empty sessionScope.loginUser }">
 				<ul class="header_top_rightbar">
 					<li><a href=""><c:out value="${ sessionScope.loginUser.user_name }"/> 님</a></li>
-					<li><a href="${pageContext.request.contextPath }/webFront/logout">LOGOUT</a></li>
+					<li><a href="logout">LOGOUT</a></li>
 					<li><a href="">MY PAGE</a></li>
 					<li><a href="">ORDER</a></li>
 					<li><a href="${pageContext.request.contextPath }/webFront/cart"><img src="${pageContext.request.contextPath }/resources/img/webFront/bb.PNG" alt="장바구니"/></a></li>
@@ -135,7 +135,7 @@
 		<!-- 로고 이미지  -->
 		<div class="header_mid">
 			<div class="mid_img">
-				<a>
+				<a href="main" >
 					<img src="${pageContext.request.contextPath }/resources/img/webFront/webLogo.png"/>
 				</a>
 			</div>
@@ -204,7 +204,6 @@
 					<li class="menu1"><input type="text"/></li>					
 					<li class="menu1">
 						<div>
-							<a><img src="" alt="검색이미지"/></a>
 						</div>
 					</li>
 				</ul>

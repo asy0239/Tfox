@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 	.hood-item-wrap{
 		width: 1200px;
@@ -31,7 +32,7 @@
 		height: 700px;
 	}
 	.item_info_head{
-		margin-top: 50px;
+		margin-top: 60px;
 		margin-left: 30px;
 		width: 540px;
 		border-bottom: 1px solid;
@@ -57,7 +58,13 @@
 		margin-left: 30px;
 	}
 	.itemDe{
+		margin-top: 35px;
 		margin-left: 30px;
+	}
+	
+	#proCL{
+		width: 150px;
+		height: 35px;
 	}
 	input[type=radio]{
    		display:none; 
@@ -86,93 +93,145 @@
 	}
 	
 	
-	.itemDe_menu a img {
+	#proDel {
 		width: 30px;
 		height: 30px;
 	}
-	#item_buy{
-		width: 350px;
-		height: 60px;
-	}
 	
-	#item_jang{
-		width: 50px;
-		height: 60px;
+	
+	#probtn{
+		backgroung: white;
+		
 	}
+ 	#a td:nth-child(1){ width: 200px;}
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/webFront/header.jsp"%>
 	<div class="hood-item-wrap">
 		<div class="hood_item_img">
-			<a><img src="${pageContext.request.contextPath }/resources/img/webFront/item1.PNG"/></a>
+			<a><img src="/tfox/webFront/fileList?pro_id=${pro_id }"/></a>
 		</div>
 		<div class="hood_item_info">
-			<form>
 				<div class="item_info_head">
-
-				<%-- 	<c:out value="${product.pro_name }" /><br> --%>
-					<span>Size : S M L</span>
+					<h3><c:out value="${pro_name }" /></h3> 
+					<span>Size : <c:forEach var="ps" items="${ proSize }">
+									<c:out value="${ps.pro_size}, " />
+								</c:forEach>
+					</span>
 				</div>
 				<div class="item_info_mid">
-					<span id="item_yoyag">블라블라블라블라블라</span>
+					<span id="item_yoyag"><c:out value="${pro_summary }" /></span>
 					
 					<table class="itemI" cellpadding="20px">
 						<tr>
 							<td>판매가</td>
-							<td>23000</td>
+							<td><c:out value="${pro_price }" /></td>
 						</tr>
 						<tr>
 							<td>색상</td>
 							<td>
-								<select>
-									<option>색상 선택</option>
-									<option>블랙</option>
-									<option>그레이</option>
-									<option>네이비</option>
+								<select id="proCL">
+									<c:forEach var="c" items="${ proColor }">
+										<option><c:out value="${c.pro_color}색 " /></option>
+								    </c:forEach>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<td>사이즈</td>
 							<td>
-								<input class="item_size" id="itemS1" type="radio" name="itemSDate" value="s">
-								<label class="item_size"for="itemS1">S</label>
-								<input class="item_size" id="itemS2" type="radio" name="itemSDate" value="m">
-								<label class="item_size"for="itemS2">M</label>
-								<input class="item_size" id="itemS3" type="radio" name="itemSDate" value="l">
-								<label class="item_size"for="itemS3">L</label>
+								<c:forEach var="ps" items="${ proSize}">
+								<input class="item_size" id="<c:out value='${ps.pro_size}'/>" name="size" type="radio" value="<c:out value='${ps.pro_size}'/>">
+								<label class="item_size"for="<c:out value='${ps.pro_size}'/>"><c:out value="${ps.pro_size}" /></label>
+						
+								</c:forEach>
+								
 							</td>
-						</tr>
-						<tr>
-							<td>배송정보</td>
-							<td><div>실시간 재고</div></td>
 						</tr>
 					</table>
 				</div>
+			<form name='cart.add' method="get" action="cart.add">
 				<!-- 주문항목  -->
 				<div class="itemDe">
-					<table>
-						<tr>
-							<td>
-								<div class="itemDe_menu">
-									<span>마운틴 후드티S, 블랙</span> <a><img id="" src="${pageContext.request.contextPath }/resources/img/webFront/3.PNG"/></a> 	
-									<br><input type="text" value="1"/> 
-									<a><img id="" src="${pageContext.request.contextPath }/resources/img/webFront/2.PNG"/></a>
-									<a><img id="" src="${pageContext.request.contextPath }/resources/img/webFront/1.PNG"/></a>								
-								</div>
-							</td>
-						</tr>
+					<table id="tbe">
+						<tbody id ="a">
+							<!-- 주문할 목록 추가  -->
+						
+						</tbody>
 					</table>
 				</div>
 				<div class="item_button">
 					<button id="item_buy">BUY NOW</button>
-					<button id="item_jang">장바구니</button>
+					<button id="item_jang" type="submit">장바구니</button>
 				</div>
+				
+				<input type="hidden" value="<c:out value='${pro_name }'/>" name="name"/>
+				<input type="hidden" value="<c:out value='${pro_price }'/>" name="price"/>
+				
 			</form>
 			
 		</div>
 	</div>
+		<script>
+		$(function(){
+			$(document).on("click","#decreaseQuantity",function(e){
+			e.preventDefault();
+			var stat = $('#numberUpDown').val();
+			var num = parseInt(stat,10);
+			num--;
+			if(num<=0){
+			alert('더이상 줄일수 없습니다.');
+			num =1;
+			}
+			var Snum = String(num);
+			$('#numberUpDown').val(Snum);
+			});
+			
+			$(document).on("click","#increaseQuantity",function(e){
+			e.preventDefault();
+			var stat = $('#numberUpDown').val();
+			var num = parseInt(stat,10);
+			num++;
 
+			if(num>20){
+			alert('더이상 늘릴수 없습니다.');
+			num=20;
+			}
+			var Snum = String(num);
+			$('#numberUpDown').val(Snum);
+			});
+			});
+
+	</script>
+	<script>
+		jQuery('#proCL').off().on('click', function() {
+			var color = jQuery('#proCL option:selected').val();
+			console.log(color);
+	
+				 $("input:radio[name=size]").off().on('click',function(){
+						var size = $("input:radio[name=size]:checked").val()
+						console.log(size);
+						  $('#a').append("<tr><td>&nbsp;"
+								  			+ "<c:out value='${pro_name }' /> "
+						  					+ size + ", "+ color +   
+						  					"&nbsp;</td> <td>"+
+						  					"<input id='numberUpDown' name='pro_ea' value='1'></input>"+
+						  					"<a href='#' id='increaseQuantity'>올림</a>"+
+						  					"<a href='#' id='decreaseQuantity'>내림</a>"+
+						  					"&nbsp;</td> <td>"+
+						  					"<button type='button' id='probtn'>"+
+						  					"<img id='proDel' src='${pageContext.request.contextPath }/resources/img/webFront/3.PNG'/>"
+						  					+"</button>"+
+						  					"<input type='hidden' name='size' value='"+size+"'/>"+
+						  					"<input type='hidden' name='color' value='"+color+"'/>"+
+						  					"</td>"
+						  				+"</tr>" ); 
+						
+
+					  });
+		});
+	</script>
+	
 </body>
 </html>

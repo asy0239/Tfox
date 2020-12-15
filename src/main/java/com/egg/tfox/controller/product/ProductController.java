@@ -105,7 +105,6 @@ public class ProductController {
 	               // String saveFileName = origName;
 	                System.out.println("saveFileName : " + saveFileName);
 	                String file_size = String.valueOf( mfile.getSize());
-	                System.out.println(mfile.getSize());
 	                
 	                String file_seq = sqlSession.selectOne("product.product_file_seq");
 	                

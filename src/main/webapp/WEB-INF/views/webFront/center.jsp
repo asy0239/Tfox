@@ -21,6 +21,15 @@ table, tr, td, th{
 		margin-top: 10px;
 		
 	}
+#QnaADD{
+	margin-top: 100px;
+	margin-right:50px;
+	width: 150px;
+	height: 50px;
+	color: white;
+	float: right;
+	background-color: black;
+}
 </style>
 </head>
 <body>
@@ -53,7 +62,7 @@ table, tr, td, th{
 			</table>
 		</div>
 		<div>
-			<button type="button"
+			<button type="button" id="QnaADD"
 				onclick="location.href='${pageContext.request.contextPath }/webFront/QnaInsert'">글쓰기</button>
 		</div>
 

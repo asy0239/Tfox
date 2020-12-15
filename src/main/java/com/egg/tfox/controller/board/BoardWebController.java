@@ -1,12 +1,16 @@
 package com.egg.tfox.controller.board;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.egg.tfox.service.board.BoardService;
 import com.egg.tfox.service.board.QnaService;
+import com.egg.tfox.vo.board.CartVO;
+import com.egg.tfox.vo.board.GesiType;
+import com.egg.tfox.vo.board.GesiVO;
+import com.egg.tfox.vo.board.PageInfo;
 import com.egg.tfox.vo.board.ProductVO;
+import com.egg.tfox.vo.board.QnaListVO;
 import com.egg.tfox.vo.board.QnaType;
 
 @Controller
@@ -29,8 +38,13 @@ public class BoardWebController {
 	private BoardService boardService;
 	
 	@GetMapping("/webFront/header")
-	public String header() {
-		return "webFront/header";
+	public String header(Model model) {
+		
+		/*
+		 * List<GesiType> gesipanList; gesipanList = boardService.gesipanList();
+		 * System.out.println(gesipanList); model.addAttribute("pan", gesipanList);
+		 */
+		 return "webFront/header";
 	}
 
 	@GetMapping("/webFront/slide")
@@ -55,16 +69,29 @@ public class BoardWebController {
 	}
 	
 	@GetMapping("/webFront/fileList")
-	public void fileList(
-			HttpServletResponse response,
-			@RequestParam String pro_id) {
+	public ResponseEntity<ByteArrayResource> fileList(@RequestParam String pro_id, HttpServletRequest request) throws IOException {
+		
+	
+		 String filePath = request.getSession().getServletContext().getRealPath("/resources/img/product");
+		 
+		/* System.out.println(filePath); */
+		
+		
+		ResponseEntity<ByteArrayResource> entity = boardService.fileList(pro_id, filePath);
+	
+		System.out.println(entity);
+		
+		return entity;
 		
 	}
 	
+
 	@GetMapping("/webFront/detail")
 	public String productDetail(
 			@RequestParam String pro_name,
 			@RequestParam String pro_id,
+			@RequestParam String pro_price,
+			@RequestParam String pro_summary,			
 			Model model) {
 		
 		System.out.println(pro_name);
@@ -73,15 +100,19 @@ public class BoardWebController {
 		Map<String, Object> productInfo = new HashMap<>();
 		productInfo.put("pro_id", pro_id);
 		productInfo.put("pro_name", pro_name);
+		productInfo.put("pro_price", pro_price);
+		productInfo.put("pro_summary", pro_summary);
 		
-		System.out.println(productInfo);
+		List<ProductVO> proSize; proSize = boardService.proSize(productInfo);
+		List<ProductVO> proColor; proColor = boardService.proColor(productInfo);
 		
-		List<ProductVO> productOne;
-		productOne = boardService.productOne(productInfo);
+		model.addAttribute("pro_name", pro_name);
+		model.addAttribute("pro_id", pro_id);
+		model.addAttribute("pro_price", pro_price);
+		model.addAttribute("pro_summary", pro_summary);
 		
-		System.out.println("P : "+ productOne);
-		
-		model.addAttribute("product", productOne);
+		model.addAttribute("proSize", proSize);
+		model.addAttribute("proColor", proColor);
 		
 		
 		/*
@@ -98,7 +129,30 @@ public class BoardWebController {
 	
 	
 	@GetMapping("/webFront/center")
-	public String center() {
+	public String center(
+			  @RequestParam(value="nowPage", required=false)String nowPage, 
+			  @RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+				HttpServletRequest req, Model model, PageInfo pi) {
+		String gesi_code = "GS001";
+		int total = qnaService.countQna(gesi_code);
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "10";
+		}
+		
+		pi = new PageInfo(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		List<QnaListVO> gesiWebList = qnaService.selectQnaList(gesi_code, pi);
+		
+		model.addAttribute("qnaList", gesiWebList);
+		model.addAttribute("paging", pi);
+		System.out.println(gesiWebList);
+		
 		return "webFront/center";
 	}
 	
@@ -114,27 +168,73 @@ public class BoardWebController {
 		return "webFront/QnaInsert";
 	}
 	
-	@RequestMapping (value="/webFront/qna.add", method = RequestMethod.GET)
+	
+	@RequestMapping (value="webFront/qna.add", method = RequestMethod.GET)
 	public String qnaadd(
 							Model model,
 							@RequestParam String user_name,
 							@RequestParam String gesi_title,
 							@RequestParam String qnatype,
-							@RequestParam String user_id
+							@RequestParam String user_id,
+							@RequestParam String gesi_content
 							) {
+		Map<String, Object> qnaAdd = new HashMap<>();
+		qnaAdd.put("user_name", user_name);
+		qnaAdd.put("gesi_title", gesi_title);
+		qnaAdd.put("qnatype", qnatype);
+		qnaAdd.put("user_id", user_id);
+		qnaAdd.put("gesi_content", gesi_content);
+		qnaAdd.put("gesi_code", "GS001");
 		
-		System.out.println();
+		int addnum = qnaService.qnaAdd(qnaAdd);
+		
+		if(addnum > 0) {
+			List<GesiVO> lately;
+			lately = qnaService.lately(qnaAdd);
+			 System.out.println(lately);
+			 Map<String, Object> latelyList = new HashMap<>();
+			 latelyList.put("gesi_code", lately.get(0).getGesi_code());
+			 latelyList.put("gesi_id", lately.get(0).getGesi_id());
+			 latelyList.put("qna_code", qnatype);
+			 
+			 int addnum2 = qnaService.qnaAdd2(latelyList);
+
+			 
+		}
 		
 		return "webFront/center";
 	}
-	/*
-	 * @GetMapping("/webFront/productDetail") public String hoodItem(){ return
-	 * "webFront/productDetail"; }
-	 */
-	@GetMapping("/board/gesipan")
-	public String gesipan(){
-		return "board/gesipan";
+	
+	@GetMapping("/webFront/cart.add")
+	public String cartAdd(
+							@RequestParam String name,
+							@RequestParam String price,
+							@RequestParam List size,
+							@RequestParam List color,
+							@RequestParam String pro_ea, Model model){
+		
+		System.out.println(color.size());
+		List<CartVO> cart;
+		for(int i=0; i<color.size(); i++) {
+//			cart.add(i,  );
+		}
+		Map<String, Object> cartInfo = new HashMap<>();
+		cartInfo.put("pro_name", name);
+		cartInfo.put("pro_price", price);
+		cartInfo.put("pro_size", size);
+		cartInfo.put("pro_ea", pro_ea);
+		
+		
+		System.out.println(cartInfo);
+		return "/webFront/main";
 	}
+	
+	@GetMapping("/webFront/QnaDetail")
+	public String qnaDetail() {
+		
+		return "webFront/QnaDetail";
+	}
+	
 	
 	
 }

@@ -34,17 +34,18 @@
 		 <c:forEach var="proL" items="${productList }"> 
 		 <div class="thumb-list" align="center">
 				<div>
-					<a href="${pageContext.request.contextPath }/webFront/detail?pro_name=${proL.pro_name}&pro_id=${proL.pro_id }">
-						<img src="/fileList?pro_id=${proL.pro_id }"
+					<a href="${pageContext.request.contextPath }/webFront/detail?pro_name=${proL.pro_name}
+											&pro_id=${proL.pro_id }&pro_price=${proL.pro_price}&pro_summary=${proL.pro_summary}">
+						<img src="/tfox/webFront/fileList?pro_id=${proL.pro_id }"
 										width="350px" height="400px">
-					</a>
+					</a> 
 				</div>
 				<p>
 				 <c:out value="${ proL.pro_name }"/><br> 
 				 <c:out value="${proL.pro_price }"/>
 				</p>
-			</div>
-			</c:forEach> 
+		</div>
+		</c:forEach> 
 	</div>
 </body>
 </html>

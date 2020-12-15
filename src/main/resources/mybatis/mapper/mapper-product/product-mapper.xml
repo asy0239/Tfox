@@ -32,7 +32,9 @@ values (#{pro_id},#{pro_name},#{st_id},
 
 
 <insert id="pFiles" parameterType="pFiles">
+
 	insert into files (file_id, file_type ,file_originname, file_changename, file_date ,file_size) values(
+
             #{file_id}  ,#{file_type} , #{file_originName}, #{file_changeName} ,sysdate ,#{file_size}
 )
 </insert>

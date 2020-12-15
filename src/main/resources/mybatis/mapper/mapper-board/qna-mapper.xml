@@ -96,6 +96,94 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, QNA_NAME
 		FROM QNATYPE
 	</select>
-		
 	
+	<insert id="qadd" parameterType="map">
+		INSERT INTO GESI(
+			GESI_ID
+		  , GESI_TITLE
+		  , GESI_CONTENT
+		  , GESI_DATE
+		  , GESI_STATUS
+		  , GESI_ANSDATE
+		  , GESI_ANSCONTENT
+		  , USER_ID
+		  , GESI_CODE
+		) 
+		VALUES(
+			'G'||TRIM(TO_CHAR(SEQ_QNCID.NEXTVAL,'00000'))
+			,#{gesi_title}
+			,#{gesi_content}
+			, SYSDATE
+			,'N'
+			, NULL,NULL
+			,#{user_id}
+			,#{gesi_code}) 
+	</insert>
+	
+	<select id="lately" resultType="com.egg.tfox.vo.board.GesiVO" parameterType="map">
+		SELECT 	  GESI_ID
+		  , GESI_TITLE
+		  , GESI_CONTENT
+		  , GESI_DATE
+		  , GESI_STATUS
+		  , GESI_ANSDATE
+		  , GESI_ANSCONTENT
+		  , USER_ID
+		  , GESI_CODE 
+		FROM (
+    			SELECT  GESI_ID
+		  		, GESI_TITLE
+		  		, GESI_CONTENT
+		  		, GESI_DATE
+		  		, GESI_STATUS
+		  		, GESI_ANSDATE
+		  		, GESI_ANSCONTENT
+		  		, USER_ID
+		  		, GESI_CODE  
+          	FROM GESI 
+          WHERE USER_ID = #{user_id}
+          ORDER BY GESI_DATE DESC) E
+        <![CDATA[WHERE ROWNUM <= 1]]>
+        
+	</select> 
+	
+	<insert id="add2" parameterType="map">
+		INSERT INTO QNA(
+			QNA_CODE
+		  , GESI_CODE
+		  , GESI_ID
+		) VALUES(#{qna_code},#{gesi_code},#{gesi_id})
+	</insert>
+	
+	<select id="detail" resultType="com.egg.tfox.vo.board.QnaListVO" parameterType="string" >
+		SELECT    
+							  G.GESI_ID
+     	 	   				, G.GESI_TITLE
+      		   				,G.GESI_CONTENT
+      	       				,G.GESI_DATE
+      		   				,G.GESI_STATUS
+      		   				,G.GESI_ANSDATE
+      		   				,G.GESI_ANSCONTENT
+               				,G.USER_ID
+      		   				,U.USER_NAME
+      		   				,G.GESI_CODE
+      		   				,T.GESI_NAME 
+               				,QT.QNA_NAME
+      					FROM GESI G
+      					JOIN GESITYPE T ON T.GESI_CODE = G.GESI_CODE
+        				JOIN USER_TABLE U ON U.USER_ID = G.USER_ID
+        				JOIN QNA Q ON Q.GESI_ID = G.GESI_ID
+        				JOIN QNATYPE QT ON QT. QNA_CODE = Q.QNA_CODE
+       					WHERE G.GESI_ID = #{gesi_id}
+	</select>
+	
+	<delete id="delQna" parameterType="string">
+		 DELETE FROM QNA 
+		 	WHERE GESI_ID = #{gesi_id}
+	</delete>
+	
+	<delete id="gesiDel" parameterType="string">
+		 DELETE FROM GESI 
+		 	 WHERE GESI_ID = #{gesi_id} 
+	</delete>
 </mapper>

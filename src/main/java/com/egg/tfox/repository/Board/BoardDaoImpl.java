@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.egg.tfox.vo.board.FilesVO;
+import com.egg.tfox.vo.board.GesiType;
 import com.egg.tfox.vo.board.GesiVO;
 import com.egg.tfox.vo.board.PageInfo;
 import com.egg.tfox.vo.board.ProductVO;
@@ -59,10 +61,29 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<ProductVO> productOne(Map<String, Object> productInfo) {
+	public List<ProductVO> proSize(Map<String, Object> productInfo) {
 		// TODO Auto-generated method stub
-		return sql.selectList("board.productOne", productInfo);
+		return sql.selectList("board.proSize", productInfo);
 	}
+
+	@Override
+	public FilesVO imgFind(String pro_id) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("board.find", pro_id);
+	}
+
+	@Override
+	public List<ProductVO> proColor(Map<String, Object> productInfo) {
+		// TODO Auto-generated method stub
+		return sql.selectList("board.proColor", productInfo);
+	}
+
+	@Override
+	public List<GesiType> gesipanList() {
+		// TODO Auto-generated method stub
+		return sql.selectList("board.gesipanList");
+	}
+
 
 
 
