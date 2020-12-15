@@ -1,22 +1,18 @@
 package com.egg.tfox.vo.approval;
 
-import java.sql.Clob;
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// 결재 승인 페이지 사용자 정보
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class ManageTempVo {
-	private String temp_id;
-	private String temp_title;
-	private String temp_content;
-	private Date temp_date;
+public class ApprovalDetailEmpVo {
 	private String emp_id;
+	private String emp_name;
+	private String emp_sign;
 	
 }

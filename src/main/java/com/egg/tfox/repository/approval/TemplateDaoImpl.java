@@ -47,4 +47,18 @@ public class TemplateDaoImpl implements TemplateDao{
 	}
 
 
+	@Override
+	public ManageTempVo manageDetail(String temp_id) {
+		String temp = "TMP"+temp_id;
+		ManageTempVo tempVo = sqlSession.selectOne("template.manageDetail", temp);
+		return tempVo;
+	}
+
+
+	@Override
+	public void updateTemplate(HashMap<String, String> templateMap) {
+		sqlSession.update("template.updateTemplate",templateMap);
+	}
+
+
 }

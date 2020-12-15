@@ -6,14 +6,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="signEdit">
 	<update id="signUpdate" parameterType="map">
-		update employee set test_sign = #{signUrl}
+		update employee set emp_sign = #{signUrl}
 		where emp_id = #{emp_id}
 	</update>
 	
 	<resultMap type="HashMap" id="signMap">
 
 		<result property="emp_id" column="emp_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result property="test_sign" column="test_sign" jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="emp_sign" column="emp_sign" jdbcType="CLOB" javaType="java.lang.String" />
 
 	</resultMap>
 	

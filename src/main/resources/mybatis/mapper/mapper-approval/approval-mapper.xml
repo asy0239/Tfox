@@ -178,22 +178,6 @@ from (select
 	and send_emp.dept_id = dept.dept_id
 	</select>
 	
-<!-- 	<insert id="insertDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
-		insert into approval_doc
-		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.nextval,'000000')),
-		        #{emp_id}, #{app_title}, #{app_excu_id}, sysdate,
-		        #{app_content}, #{app_status}, null , #{temp_id})
-	</insert>
-	
-	<insert id="insertRefDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
-		insert into approval_reference
-		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')),#{ref_emp_id}, 'AR'||TRIM(TO_CHAR(SEQ_APPID.nextval,'000000')))		
-	</insert>
-	<insert id="insertState" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
-		insert into approval_statement
-		values ('AS'||TRIM(TO_CHAR(SEQ_APSTID.nextval,'000000')),'AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')), #{approval_emp_id},#{apporder_code},null, null)
-	</insert>
--->
 	<select id="selectTempId" resultType="string" parameterType="string">
 		select temp_id from template where temp_title = #{temp_title}
 	</select>
@@ -217,29 +201,67 @@ from (select
 		order by pos_id desc
 	</select>
 	
-	
- 	<insert id="insertTotalDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
-		insert all
-		into approval_doc
+	<insert id="approval.docInsert" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+		insert into approval_doc
 		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.nextval,'000000')),
-		        #{emp_id}, #{app_title}, #{app_excu_id}, sysdate,
-		        #{app_content}, #{app_status}, null, #{temp_id})
-		<foreach collection="ref_emp_id" item="ref" index="index">
-		into approval_reference
-		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')),
-		        #{ref}, 
-		        'AR'||TRIM(TO_CHAR(SEQ_APREFID.nextval+#{index},'000000')))
-		</foreach>
-		<foreach collection="approval_emp_id" item="appr" index="index">
-		into approval_statement
-		values ('AS'||TRIM(TO_CHAR(SEQ_APSTID.nextval+#{index},'000000')),
-				'AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')),
-				 #{appr}, #{index}+1, null , '결재중')
-		</foreach>
-		select * from dual
-		
+			#{emp_id}, #{app_title}, #{app_excu_id}, sysdate,
+			#{app_content}, #{app_status}, null, #{temp_id}
+		)
 	</insert>
 	
+	<insert id="approval.refInsert" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+		insert all
+		<foreach collection="ref_emp_id" item="ref" index="index">
+		into approval_reference
+			values (#{app_id}, #{ref} 
+			        ,'AR'||TRIM(TO_CHAR(SEQ_APREFID.nextval+#{index},'000000')))
+		</foreach>
+		select * from dual
+	</insert>
+	
+	<insert id="approval.stInsert" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+		insert all
+		<foreach collection="approval_emp_id" item="appr" index="index">
+		into approval_statement
+			values ('AS'||TRIM(TO_CHAR(SEQ_APSTID.nextval+#{index},'000000')),
+					#{app_id}, #{appr}, #{index}+1, null , '결재중')
+		</foreach>
+		select * from dual
+	</insert>
+	
+	<select id="approval.selectDoc_id" resultType="string" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+		select max(app_id) from approval_doc
+		where emp_id = #{emp_id}
+	</select>
+	
+
+	<select id="sendDocListPaging" resultType="com.egg.tfox.vo.approval.ApprovalSendDocVo" parameterType="string">
+		select * from (select
+		    app_doc.app_id send_app_id,
+		    temp.temp_title temp_name,
+		    app_doc.emp_id send_emp_id,
+		    app_doc.app_title send_app_title,
+		    app_doc.app_date send_app_date,
+		    app_doc.app_content send_app_content,
+		    app_doc.app_status send_app_status,
+		    app_doc.app_checktime send_app_checkTime,
+		    app_st.appstatment_id st_id,
+		    app_st.emp_id st_emp_id,
+		    emp.emp_name st_emp_name,
+		    dept.dept_name st_emp_dept_name,
+		    app_st.apporder_code st_order_code,
+		    app_st.apporder_check st_order_checkTime,
+		    app_st.apporder_apply st_apply,
+		    row_number() over (order by app_doc.app_date) num
+		from approval_doc app_doc , approval_statement app_st , employee emp , department dept, template temp
+		where app_doc.emp_id = #{emp_id}
+		and app_st.emp_id = emp.emp_id
+		and app_doc.app_id = app_st.app_id
+		and dept.dept_id = emp.dept_id
+		and app_doc.temp_id = temp.temp_id
+		order by send_app_date desc)
+		where num between 0 and 5
+	</select>
 	<select id="sendDocList" resultType="com.egg.tfox.vo.approval.ApprovalSendDocVo" parameterType="string">
 		select
 		    app_doc.app_id send_app_id,
@@ -284,11 +306,166 @@ from (select
 		    app_st.apporder_check st_order_checkTime,
 		    app_st.apporder_apply st_apply
 		from approval_doc app_doc , approval_statement app_st , employee emp , department dept, template temp
-		where app_doc.emp_id = 'E000003'
+		where app_doc.emp_id = #{emp_id}
 		and app_st.emp_id = emp.emp_id
 		and app_doc.app_id = app_st.app_id
 		and dept.dept_id = emp.dept_id
 		and app_doc.temp_id = temp.temp_id
 		order by send_app_date desc)
 	</select>
+	
+	<select id="approval.selectGetMyDoc" resultType="com.egg.tfox.vo.approval.ApprovalGetMyDoc" parameterType="string">
+		select
+		    send_app_id,
+		    send_emp_id,
+		    send_emp_name,
+		    send_dept_name,
+		    send_excu_id,
+		    send_app_date,
+		    send_app_content,
+		    send_app_status,
+		    send_app_checktime,
+		    send_temp_id,
+		    send_temp_title,
+		    st.appstatment_id,
+		    st.apporder_code,
+		    st.apporder_check,
+		    st.apporder_apply
+		from (select 
+		    app_doc.app_id send_app_id,
+		    app_doc.emp_id send_emp_id,
+		    emp.emp_name send_emp_name,
+		    dept.dept_name send_dept_name,
+		    app_doc.app_title send_app_title,
+		    app_doc.app_excu_id send_excu_id,
+		    app_doc.app_date send_app_date,
+		    app_doc.app_content send_app_content,
+		    app_doc.app_status send_app_status,
+		    app_doc.app_checktime send_app_checktime,
+		    temp.temp_id send_temp_id,
+		    temp.temp_title send_temp_title
+		from approval_doc app_doc , employee emp , template temp , department dept
+		where app_doc.emp_id = emp.emp_id
+		and temp.temp_id = app_doc.temp_id
+		and dept.dept_id = emp.dept_id) send_emp_doc, approval_statement st
+		where send_emp_doc.send_app_id = st.app_id
+		and st.emp_id = #{emp_id}
+	</select>
+	<select id="approval.selectGetDetail" resultType="com.egg.tfox.vo.approval.ApprovalGetMyDoc" parameterType="map">
+		select
+		    send_app_id,
+		    send_emp_id,
+		    send_emp_name,
+		    send_dept_name,
+		    send_app_title,
+		    send_excu_id,
+		    send_app_date,
+		    send_app_content,
+		    send_app_status,
+		    send_app_checktime,
+		    send_temp_id,
+		    send_temp_title,
+		    st.appstatment_id,
+		    st.apporder_code,
+		    st.apporder_check,
+		    st.apporder_apply
+		from (select 
+		    app_doc.app_id send_app_id,
+		    app_doc.emp_id send_emp_id,
+		    emp.emp_name send_emp_name,
+		    dept.dept_name send_dept_name,
+		    app_doc.app_title send_app_title,
+		    app_doc.app_excu_id send_excu_id,
+		    app_doc.app_date send_app_date,
+		    app_doc.app_content send_app_content,
+		    app_doc.app_status send_app_status,
+		    app_doc.app_checktime send_app_checktime,
+		    temp.temp_id send_temp_id,
+		    temp.temp_title send_temp_title
+		from approval_doc app_doc , employee emp , template temp , department dept
+		where app_doc.emp_id = emp.emp_id
+		and temp.temp_id = app_doc.temp_id
+		and dept.dept_id = emp.dept_id) send_emp_doc, approval_statement st
+		where send_emp_doc.send_app_id = st.app_id
+		and st.emp_id = #{emp_id}
+		and send_app_id = #{doc_id}
+	</select>
+	
+	<select id="approval.selectGetDetailRef" resultType="com.egg.tfox.vo.approval.ApprovalDetailRef" parameterType="map">
+		select 
+		    app_id,
+		    addref_id,
+		    emp_name    
+		from approval_reference app_ref , employee emp 
+		where app_ref.emp_id = emp.emp_id 
+		and app_id = #{doc_id}
+			
+	</select>
+	
+	<select id="approval.selectGetDetailExcu" resultType="com.egg.tfox.vo.approval.ApprovalExcu" parameterType="string">
+		select 
+		    emp_id,
+		    emp_name
+		from employee
+		where emp_id = #{excuId}
+	</select>
+	
+	<select id="approval.selectSign" resultType="com.egg.tfox.vo.approval.ApprovalDetailEmpVo" parameterType="string">
+		select emp_id, emp_name, emp_sign from employee
+		where emp_id= #{emp_id}
+	</select>
+	
+	<update id="updateCheckApply" parameterType="map">
+		update approval_statement set apporder_apply = '승인', apporder_check = sysdate
+		where appstatment_id = #{app_st_id}
+	</update>
 </mapper>
+
+	
+	
+<!--  	<insert id="insertTotalDoc" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+		insert all
+		into approval_doc
+		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.nextval,'000000')),
+		        #{emp_id}, #{app_title}, #{app_excu_id}, sysdate,
+		        #{app_content}, #{app_status}, null, #{temp_id})
+		<foreach collection="ref_emp_id" item="ref" index="index">
+		into approval_reference
+		values ('AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')),
+		        #{ref}, 
+		        'AR'||TRIM(TO_CHAR(SEQ_APREFID.nextval+#{index},'000000')))
+		</foreach>
+		<foreach collection="approval_emp_id" item="appr" index="index">
+		into approval_statement
+		values ('AS'||TRIM(TO_CHAR(SEQ_APSTID.nextval+#{index},'000000')),
+				'AP'||TRIM(TO_CHAR(SEQ_APPID.currval,'000000')),
+				 #{appr}, #{index}+1, null , '결재중')
+		</foreach>
+		select * from dual
+		
+	</insert> -->
+	<!-- 	<select id="sendDocList" resultType="com.egg.tfox.vo.approval.ApprovalSendDocVo" parameterType="string">
+		select
+		    app_doc.app_id send_app_id,
+		    app_doc.emp_id send_emp_id,
+		    temp.temp_title temp_title,
+		    app_doc.app_title send_app_title,
+		    app_doc.app_date send_app_date,
+		    app_doc.app_content send_app_content,
+		    app_doc.app_status send_app_status,
+		    app_doc.app_checktime send_app_checkTime,
+		    app_st.appstatment_id st_id,
+		    app_st.emp_id st_emp_id,
+		    emp.emp_name st_emp_name,
+		    dept.dept_name st_emp_dept_name,
+		    app_st.apporder_code st_order_code,
+		    app_st.apporder_check st_order_checkTime,
+		    app_st.apporder_apply st_apply
+		from approval_doc app_doc , approval_statement app_st , employee emp , department dept, template temp
+		where app_doc.emp_id = #{emp_id}
+		and app_st.emp_id = emp.emp_id
+		and app_doc.app_id = app_st.app_id
+		and dept.dept_id = emp.dept_id
+		and app_doc.temp_id = temp.temp_id
+		order by send_app_date desc
+	</select> -->

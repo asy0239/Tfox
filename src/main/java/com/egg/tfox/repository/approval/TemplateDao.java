@@ -11,4 +11,6 @@ public interface TemplateDao {
 	void insertTemplate(HashMap<String, String> templateMap);
 	String getTempContent(String tempName);
 	List<ManageTempVo> allSelectTemp(String emp_id);
+	ManageTempVo manageDetail(String temp_id);
+	void updateTemplate(HashMap<String, String> templateMap);
 }

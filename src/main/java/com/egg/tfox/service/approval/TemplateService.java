@@ -13,4 +13,8 @@ public interface TemplateService {
 	String getTempContent(String tempName);
 
 	List<ManageTempVo> allSelectTemp(String string);
+
+	ManageTempVo manageDetail(String temp_id);
+
+	void updateTemplate(String editorContent, String tempTitle, String emp_id, String temp_id);
 }

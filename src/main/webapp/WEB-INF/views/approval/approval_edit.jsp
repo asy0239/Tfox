@@ -58,6 +58,7 @@
 							</c:forEach>
 						</select>
 					</div>
+					* 선택값이 없으면 문서관리에서 먼저 양식을 추가해주세요.
 						<table id="doc_table">
 							<tr>
 								<th id="table_th">제목</th>
@@ -114,12 +115,13 @@
 					</div>
 						<input type="hidden" id="hd" name="htmlcontent"> 
 						<input type="hidden" id="hd2" name="doc_type"> 
-						<input type="submit" id="submit" value="기안">
 						<input type="hidden" id="soosinHidden" name="soosin_empId">
 						<input type="hidden" id="playerHidden" name="player_empId">
 						<input type="hidden" id="finalAppHidden" name="final_empId">
 						<input type="hidden" id="tempName" name="tempName">
-				</div>
+						<input type="hidden" id="tempContent" name="temp_content">
+						<input type="submit" id="submit" value="기안">
+ 				</div>
 				</form>
 			</article>
 		</section>
@@ -201,7 +203,6 @@
 		     label.empty();
 		     label.append(select);
 		     hidden2.val(select);
-		     console.log("아쟉이 안됨?");
 			$.ajax({
 				type:"POST",
 				url:"${pageContext.request.contextPath}/approval/readTemp",
@@ -209,6 +210,7 @@
 				dataType:"json",
 				success:function(data){
 					editor.setHtml(data.tempContent);
+					$("#tempContent").val(data.tempContent);
 					console.log(data);
 					console.log("뭐야");
 				}
@@ -237,6 +239,8 @@
 			 $("#my_modal3").show();
 			 console.log("모달3");
 			 selectId = $(e).attr("id");
+
+			 
 		 };
 		 
 		 function closeModal1(){
@@ -248,7 +252,14 @@
 		 };
  
 		 function closeModal3(){
-			 $("#my_modal3").hide();
+			 $("#my_modal3").hide();			
+			 var test = $(".finalApp").val();
+			 var temp = test.split(" ").join("");
+			 var list = temp.split(">");
+			 console.log(list);
+			 for(var i = 0; i < list.length; i++){
+				 $(".signArea").append("들어가냐??");			 
+			 }
 			 
 		 };
 		 

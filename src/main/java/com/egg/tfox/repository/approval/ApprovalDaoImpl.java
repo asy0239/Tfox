@@ -14,6 +14,10 @@ import org.springframework.stereotype.Repository;
 import com.egg.tfox.entity.Approval;
 import com.egg.tfox.entity.Employee;
 import com.egg.tfox.entity.approval.TemplateEntity;
+import com.egg.tfox.vo.approval.ApprovalDetailEmpVo;
+import com.egg.tfox.vo.approval.ApprovalDetailRef;
+import com.egg.tfox.vo.approval.ApprovalExcu;
+import com.egg.tfox.vo.approval.ApprovalGetMyDoc;
 import com.egg.tfox.vo.approval.ApprovalMainDocCountVo;
 import com.egg.tfox.vo.approval.ApprovalMainNoCheckVo;
 import com.egg.tfox.vo.approval.ApprovalMainRefVo;
@@ -88,5 +92,42 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	public int sendDocListCount(String emp_id) {
 		int count = sqlSession.selectOne("approval.sendDocListCount",emp_id);
 		return count;
+	}
+
+	@Override
+	public List<ApprovalGetMyDoc> getMyDoc(String emp_id) {
+		List<ApprovalGetMyDoc> getMyDocList = sqlSession.selectList("approval.selectGetMyDoc",emp_id);
+		return getMyDocList;
+	}
+
+	@Override
+	public HashMap<String, Object> getDocDetail(HashMap<String, String> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		ApprovalGetMyDoc docDetail = sqlSession.selectOne("approval.selectGetDetail", map);
+		List<ApprovalDetailRef> docDetailRef = sqlSession.selectList("approval.selectGetDetailRef", map);
+		
+		String excu_id_temp = docDetail.getSend_excu_id();
+		
+		String[] excuIdList = excu_id_temp.split(",");
+		List<ApprovalExcu> docDetailExcu = new ArrayList<ApprovalExcu>();
+		for(String excuId : excuIdList) {
+			ApprovalExcu temp = sqlSession.selectOne("approval.selectGetDetailExcu", excuId);
+			docDetailExcu.add(temp);
+		}
+		resultMap.put("docDetail", docDetail);
+		resultMap.put("docDetailRef", docDetailRef);
+		resultMap.put("docExcu", docDetailExcu);
+		return resultMap;
+	}
+
+	@Override
+	public ApprovalDetailEmpVo getDetailSign(String emp_id) {
+		ApprovalDetailEmpVo signVo = sqlSession.selectOne("approval.selectSign", emp_id);
+		return signVo;
+	}
+
+	@Override
+	public void updateApplyDoc(HashMap<String, String> map) {
+		sqlSession.update("approval.updateCheckApply", map);
 	}
 }

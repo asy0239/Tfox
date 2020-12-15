@@ -56,7 +56,7 @@
 				    		  choiceValue += items[i].employeeName;	
 				    		  choiceValueId += items[i].value;
 				    	  } else {
-				    		  choiceValue += ", ";
+				    		  choiceValue += " > ";
 				    		  choiceValueId += ", ";
 					    	  choiceValue += items[i].employeeName;		
 					    	  choiceValueId += items[i].value;
@@ -66,8 +66,8 @@
 			    	  var finalAppId = choiceValueId;
 			    	  $(".finalApp").attr('value' , finalApp);
 			    	  $("#finalAppHidden").attr('value', finalAppId);
-			    	  console.log("결재자 : " + finalApp);
 			    	  $("#signTd1").children("#txt").attr('value', finalApp);
+
 					  choiceValue = "";
 					  choiceValueId = "";
 					  

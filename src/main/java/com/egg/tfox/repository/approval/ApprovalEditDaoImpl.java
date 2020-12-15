@@ -36,7 +36,13 @@ public class ApprovalEditDaoImpl implements ApprovalEditDao{
 		appDoc.setTemp_id(temp_id);
 		appDoc.setEmp_id(emp_id);
 		log.info("doc : " + appDoc);
-		sqlSession.insert("approval.insertTotalDoc",appDoc);
+//		sqlSession.insert("approval.insertTotalDoc",appDoc);
+		sqlSession.insert("approval.docInsert",appDoc);
+		String doc_id = sqlSession.selectOne("approval.selectDoc_id", appDoc);
+		appDoc.setApp_id(doc_id);
+		log.info("appDoc : " + appDoc);
+		sqlSession.insert("approval.refInsert", appDoc);
+		sqlSession.insert("approval.stInsert", appDoc);
 		
 	}
 	
