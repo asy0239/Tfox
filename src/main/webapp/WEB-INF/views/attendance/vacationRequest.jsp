@@ -5,7 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>휴가 신청</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
 <style>
 .VacationRequest_top span {
 	position: relative;
@@ -14,16 +17,12 @@
 	font-size: 25px;
 	font-weight: bold;
 }
-      table {
-        width: 100%;
-        border-top: 1px solid #444444;
-        border-collapse: collapse;
-      }
-      th, td {
-        border-bottom: 1px solid #444444;
-        padding: 10px;
-        text-align: center;
-      }
+    
+tbody td{
+	font-weight: bold;
+	font-size:20px;
+
+}
     </style>
 </head>
 <body>
@@ -42,7 +41,7 @@
 					<hr>
 					<div class="subtitle">
 					<form method="post" action="vacationInsert" onsubmit="return call();">
-						<table>
+						<table class="table">
 							<tbody>
 								<tr>
 									<td>신청자</td>

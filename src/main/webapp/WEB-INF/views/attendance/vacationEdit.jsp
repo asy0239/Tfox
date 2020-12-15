@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 메인</title>
- 	
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
 <style>
 
 .VacationEdit_top span {
@@ -23,23 +25,14 @@
 	font-size: 15px;
 	font-weight: bold;
 }
+
 #top {
 	width: 100%;
 	height: 100px;
 	border: 1px solid black;
 }
 
-table {
-	width: 500px;
-	heigth: 500px;
-}
 
-table, tr, td {
-	border-collapse: collapse;
-	border: 1px solid black;
-	text-align: center;
-	margin: auto;
-}
 
 #top>span {
 	font-size: 40px;
@@ -67,7 +60,7 @@ font {
 			<article>
 				<div class="conWrap">
 				<div class="VacationEdit_top">
-					<span>근태관리 > 휴가신청</span>
+					<span>근태관리 > 휴가설정</span>
 				</div>
 				<hr>
 					<div class="cont_box">
@@ -91,7 +84,7 @@ font {
 									</li>
 									<li>
 										<p class="bt_left" style="padding-bottom: 0;">
-											<button type="button" onclick="setVacationUseFlag()">저장</button>
+											<button type="button" class="btn btn-primary" onclick="setVacationUseFlag()">저장</button>
 										</p>
 									</li>
 								</ul>
@@ -103,46 +96,26 @@ font {
 											<span>휴가 생성 조건</span>
 									</div>
 									<ul class="mgb_10">
-										<li>- 설정한 휴가 생성 기준으로 매년 1월 1일 또는
-											사용자 입사일(입사일 기준)에 휴가가 자동 생성됩니다.</li>
+									
+										<li>- 설정한 휴가 생성 기준으로 매년 1월 1일에 휴가가 자동 생성됩니다.</li>
 										<li>- 조직에 속하지 않거나 입사일이 없는 사용자는 휴가가 생성되지
 											않습니다.</li>
 										<li>- 사용하던 휴가 생성 기준을 변경 적용하는 경우, 기존 휴가
 											데이터는 초기화됩니다. (기존 휴가 생성분 삭제 및 새 기준에 맞추어 재생성)</li>
-										<li>- 적용 전 입력한 휴가 생성 조건에 따라 생성될 전직원 생성
-											예정휴가를 다운로드받아보실 수 있습니다.</li>
 									</ul>
 								</div>
 								<br> <br>
 
-								<div>
-									<label> <input type="radio" name="create_type" value="A" checked /> 회계연도 기준</label>
-									<label> <input name="create_type" type="radio" value="J" /> 입사일 기준</label>
-								</div>
 								
 								<form id="vacationDayset" method="post" action="vacationDayset">
 								<table class="vacDate">
 									<caption>휴가 생성 조건 목록으로 휴가 일수 설정으로 구성되어
 										있습니다.</caption>
-									<colgroup>
-										<col width="80">
-										<col>
-									</colgroup>
 									<tbody>
 										<tr>
 											<th scope="row">휴가 일수</th>
 											<td style="padding: 0;">
-												<table>
-													<col>
-													<col>
-													<col>
-													<col>
-													<col>
-													<col>
-													<col>
-													<col>
-													<col>
-													<col>
+												<table class="table">
 													<tbody>
 														<tr>
 															<td>N(입사연도)</td>
@@ -159,7 +132,7 @@ font {
 														<tr>
 														<c:forEach var="day" items="${vcsday }" end="9">
 															<td><input type="hidden" name="year_id" value="${day.year_id }"><label><input type="text" value="${day.year_day }"
-																	name="vc_date"> 일</label></td>
+																	name="vc_date" size="7"> 일</label></td>
 														</c:forEach>
 														</tr>
 														<tr>
@@ -177,7 +150,7 @@ font {
 														<tr>
 														<c:forEach var="day" items="${vcsday }" begin="10" end="19">
 															<td><input type="hidden" name="year_id" value="${day.year_id }"><label><input type="text" value="${day.year_day }"
-																	name="vc_date"> 일</label></td>
+																	name="vc_date" size="7"> 일</label></td>
 														</c:forEach>
 														</tr>
 														<tr class="row-count-2">
@@ -195,7 +168,7 @@ font {
 														<tr class="row-count-2">
 														<c:forEach var="day" items="${vcsday }" begin="20" end="29">
 															<td><input type="hidden" name="year_id" value="${day.year_id }"><label><input type="text" value="${day.year_day }"
-																	name="vc_date"> 일</label></td>
+																	name="vc_date" size="7"> 일</label></td>
 														</c:forEach>
 														</tr>
 													</tbody>
@@ -205,20 +178,20 @@ font {
 							
 									</tbody>
 								</table>
-								<div class="vacdaysetbtn">
-									<input type="submit" value="저장">
+								<div class="vacdaysetbtn" style="padding-bottom:50px;">
+									<input class="btn btn-success" style="float:right;" type="submit" value="저장">
 								</div>
 								</form>
 
-
+								
 								<div class="vacCate">
 									<div class="sub_title_top">
 										<span>휴가 종류</span>
 									</div>
-									<button id="addVacCate">추가</button>
+									<button class="btn btn-info" style="float:right;" id="addVacCate">추가</button>
 								</div>
 								<form id="vacCateSet" method="post" action="vacCateSet">
-								<table class="tablevactype" id="vcTypeTable">
+								<table class="table" id="vcTypeTable">
 									<caption>휴가 종류 목록으로 휴가명, 사용 여부, 차감 여부로 구성되어 있습니다.</caption>
 									<colgroup>
 										<col width="20%">
@@ -230,7 +203,7 @@ font {
 											<th scope="row">휴가명</th>
 											<th scope="row" class="C">사용 여부</th>
 											<th scope="row" class="C">연차 차감 여부</th>
-											<th scope="row" class="C">삭제하게</th>
+											<th scope="row" class="C">삭제하기</th>
 										</tr>
 									</thead>
 									<tbody id="vacCategory">
@@ -257,7 +230,7 @@ font {
 									</tbody>
 								</table>
 								<div class="catButton">
-									<input type="submit" value="저장">
+									<input class="btn btn-success" style="float:right;" type="submit" value="저장">
 								</div>
 								</form>
 							</div>
@@ -314,9 +287,9 @@ font {
 						yearN = 'selected';
 						yearY = '';
 					}
-					
 					$("#vacCategory").append('<tr> <td><input type="hidden" name="vactypeName" value="'+cate.vactype_name +'">'+cate.vactype_name +'</td> <td> <select name="vactypeYN"> <option value="Y" '+vactypeY+'>사용</option> <option value="N" '+vactypeN+'>사용 안 함</option> </select> </td> <td> <select name="yearYN"> <option value="O" '+yearY+'>차감</option> <option value="X" '+yearN+'>차감 안 함</option> </select> </td> <td> <input type="button" class="deleteCat" value="삭제하기" /> </td> </tr>')
 				});
+				alert("삭제되었습니다");
 			},
 			error:function(){
 				alert("삭제되지 않았습니다")
@@ -336,9 +309,9 @@ $("#addVacCate").on("click", function(){
 
 
 $(document).ready(function(){
-	var test = "${onOff}"
-	console.log(test[36]);
-	if (test[36] == 'Y'){
+	var test = "${onOff[0].vac_yn}"
+	console.log(test);
+	if (test == 'Y'){
 		$('#vac_config').show();
 	}else{
 		$('#vac_config').hide();
@@ -359,13 +332,6 @@ function setVacationUseFlag(){
 	}
 }
 
-/*  function saveVacCategory(){
-	$.ajax({
-		type:GET,
-		dataType:"json",
-		url:"${pageContext.request.contextPath}/appendance/vacationEdit",
-		data:{i:[{"휴가종류":"포상휴가"}]}
-	});
-}  */
+
 </script>
 </html>

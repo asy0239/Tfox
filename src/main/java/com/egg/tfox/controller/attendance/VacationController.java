@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.egg.tfox.entity.Employee;
 import com.egg.tfox.entity.attendance.PagingVO;
 import com.egg.tfox.entity.attendance.Vacation;
+import com.egg.tfox.entity.attendance.VacationMycalendar;
 import com.egg.tfox.entity.attendance.VacationRequest;
 import com.egg.tfox.entity.attendance.VacationSet;
 import com.egg.tfox.service.attendance.VacationService;
@@ -96,17 +97,18 @@ public class VacationController {
 		int total = vacationService.countBoard(map);
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "5";
+			cntPerPage = "15";
 		} else if (nowPage == null) {
 			nowPage = "1";
 		} else if (cntPerPage == null) { 
-			cntPerPage = "5";
+			cntPerPage = "15";
 		}
 		
 		pi = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		List<Vacation> list = vacationService.selectList(map, pi);
 		
 		model.addAttribute("vaclist", list);
+		model.addAttribute("search", map);
 		model.addAttribute("paging", pi);
 	
 		return "/attendance/vacationRecong";
@@ -180,9 +182,22 @@ public class VacationController {
 	@PostMapping("attendance/vacationDeleteCat")
 	@ResponseBody
 	public List<VacationSet> vacCateDelete(@RequestParam String name ) {
-		System.out.println(name);
 		vacationService.vacCateDelete(name);
 		List<VacationSet> vct = vacationService.vacCate();
 		return vct;
+	}
+	
+	@GetMapping("/attendance/vacationMycalendar")
+	public String vacMyPage() {
+		return "/attendance/vacationMycalendar";
+	}
+	
+	@PostMapping("/attendance/vacationView")
+	@ResponseBody
+	public List<VacationMycalendar> vacationMyCal(HttpServletRequest request){
+		String id =((Employee) request.getSession().getAttribute("loginEmp")).getEMP_ID();
+		List<VacationMycalendar> list = vacationService.myVacCalendar(id);
+		System.out.println(list);
+		return list;
 	}
 }

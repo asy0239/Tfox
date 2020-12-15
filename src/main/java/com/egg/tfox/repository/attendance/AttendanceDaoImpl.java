@@ -1,6 +1,8 @@
 package com.egg.tfox.repository.attendance;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,31 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	@Override
 	public List<AttendanceSet> attdSetlist() {
 		return sqlSession.selectList("attendance.attdSetlist");
+	}
+
+	@Override
+	public void atdOnOff(Map<String, Object> map) {
+		sqlSession.update("attendance.atdOnOff",map);
+	}
+
+	@Override
+	public void timedaySet(List<String> list, List<String> start_time, List<String> endtime) {
+		Map<String, Object> map = new HashMap<>();
+		
+		for(int i =0; i<list.size(); i++) {
+			map.put("yn", list.get(i));
+			map.put("setid", "AD00"+i);
+			map.put("start",start_time.get(i));
+			map.put("end", endtime.get(i));
+			sqlSession.update("attendance.timedaySet",map);
+			map.clear();
+		}
+		
+	}
+
+	@Override
+	public List<AttendanceSet> attdWorkTimelist() {
+		return sqlSession.selectList("attendance.worktimelist");
 	} 
 	
 	

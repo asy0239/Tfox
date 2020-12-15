@@ -5,18 +5,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>휴가 승인</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
 <style>
 table {
 	width: 100%;
-	border-top: 1px solid #444444;
+	padding-top:200px;
 	border-collapse: collapse;
 }
 
 th, td {
-	border-bottom: 1px solid #444444;
+	
 	padding: 10px;
-	text-align: center;
+	text-align: left;
+}
+.maintesttop span {
+	position: relative;
+	bottom: 8px;
+	margin-left: 30px;
+	font-size: 25px;
+	font-weight: bold;
 }
 </style>
 </head>
@@ -30,11 +40,12 @@ th, td {
 				<!-- 내용작성을 이곳에서~ -->
 
 				<div class="conWrap">
-					<h2>내 휴가 자세히보기</h2>
-					<hr>
+					<div class="maintesttop">
+					<span>근태관리 > 내 휴가 현황</span>
+				</div>
 					<div class="subtitle">
 						<c:forEach var="vaclist" items="${vaclist }">
-							<table>
+							<table class="table">
 								<tbody>
 									<tr>
 										<td>신청자</td>

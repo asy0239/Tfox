@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.egg.tfox.entity.attendance.PagingVO;
 import com.egg.tfox.entity.attendance.Vacation;
+import com.egg.tfox.entity.attendance.VacationMycalendar;
 import com.egg.tfox.entity.attendance.VacationRequest;
 import com.egg.tfox.entity.attendance.VacationSet;
 
@@ -50,6 +51,8 @@ public interface VacationService {
 	public void vacCateSet(List<String> vactypeName, List<String> vactypeYN, List<String> yearYN);
 
 	public void vacCateDelete(String name);
+
+	public List<VacationMycalendar> myVacCalendar(String id);
 
 
 

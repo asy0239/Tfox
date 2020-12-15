@@ -5,18 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>휴가 현황</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
 <style>
-table {
-	width: 100%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
+
+.table{
+	font-size:20px;
+	font-weight:bold;
+
 }
 
-th, td {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: center;
+.maintesttop span {
+	position: relative;
+	bottom: 8px;
+	margin-left: 30px;
+	font-size: 25px;
+	font-weight: bold;
 }
 </style>
 </head>
@@ -30,11 +36,12 @@ th, td {
 				<!-- 내용작성을 이곳에서~ -->
 
 				<div class="conWrap">
-					<h2>휴가 신청 확인</h2>
-					<hr>
+				<div class="maintesttop">
+					<span>근태관리 > 휴가승인</span>
+				</div>
 					<div class="subtitle">
 						<c:forEach var="vaclist" items="${vaclist }">
-							<table>
+							<table class="table">
 								<tbody>
 									<tr>
 										<td>신청자</td>
@@ -68,15 +75,15 @@ th, td {
 									<c:when test="${vaclist.vacapl_status eq '승인대기중'}">
 										<form name="vacationY" method="post" action="vacationY">
 											<input type="hidden" name="Y" value="${vaclist.vacapl_id }">
-											<button>승인하기</button>
+											<button class="btn btn-info">승인하기</button>
 										</form>
 										<form name="vacationN" method="post" action="vacationN">
 											<input type="hidden" name="N" value="${vaclist.vacapl_id }">
-											<button>반려하기</button>
+											<button class="btn btn-info">반려하기</button>
 										</form>
 									</c:when>
 							<c:otherwise>
-									<button name="back" onclick="cancle()">확인</button>
+									<button class="btn btn-info" name="back" onclick="cancle()">확인</button>
 							</c:otherwise>
 							</c:choose>
 						</c:forEach>

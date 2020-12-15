@@ -1,6 +1,7 @@
 package com.egg.tfox.repository.attendance;
 
 import java.util.List;
+import java.util.Map;
 
 import com.egg.tfox.entity.attendance.AttendanceEdit;
 import com.egg.tfox.entity.attendance.AttendanceMain;
@@ -22,5 +23,11 @@ public interface AttendanceDao {
 	List<AttendanceEdit> attdYNlist();
 
 	List<AttendanceSet> attdSetlist();
+
+	void atdOnOff(Map<String, Object> map);
+
+	void timedaySet(List<String> list, List<String> start_time, List<String> endtime);
+
+	List<AttendanceSet> attdWorkTimelist();
 
 }

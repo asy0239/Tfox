@@ -1,6 +1,9 @@
 package com.egg.tfox.controller.attendance;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +32,9 @@ public class AttendanceController {
 	public String appendance(HttpServletRequest request, Model model) {
 		String id =((Employee) request.getSession().getAttribute("loginEmp")).getEMP_ID();
 		List<AttendanceMain> list = attendanceService.worktime(id);
+		List<AttendanceSet> day = attendanceService.attdWorkTimelist();
 		model.addAttribute("time", list);
+		model.addAttribute("workday", day);
 		return "/attendance/attendance";
 	}
 	
@@ -69,6 +74,36 @@ public class AttendanceController {
 		String id =((Employee) request.getSession().getAttribute("loginEmp")).getEMP_ID();
 		List<Calendar> list = attendanceService.calenList(id);
 		return list;
+	}
+	
+	@PostMapping("/attendance/atdOnOff")
+	public String atdOnOff(@RequestParam String att_timeYN, @RequestParam String att_52YN) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("atdyn", att_timeYN);
+		map.put("atyn", att_52YN);
+		attendanceService.atdOnOff(map);
+		return "redirect:/attendance/attendanceEdit";
+	}
+	
+	@PostMapping("/attendance/timedaySet")
+	public String timedaySet(@RequestParam List<String> start_time, @RequestParam List<String> endtime,
+			@RequestParam String attset_mon, @RequestParam String attset_tue,
+			@RequestParam String attset_wed, @RequestParam String attset_thr,
+			@RequestParam String attset_fri, @RequestParam String attset_sat,
+			@RequestParam String attset_sun) {
+		
+		List<String> list = new ArrayList<>();
+		list.add(attset_mon);
+		list.add(attset_tue);
+		list.add(attset_wed);
+		list.add(attset_thr);
+		list.add(attset_fri);
+		list.add(attset_sat);
+		list.add(attset_sun);
+		attendanceService.timedaySet(list, start_time, endtime);
+	
+		
+		return "redirect:/attendance/attendanceEdit";
 	}
 	
 }
