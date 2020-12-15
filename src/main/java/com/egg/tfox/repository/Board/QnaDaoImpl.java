@@ -42,5 +42,69 @@ public class QnaDaoImpl implements QnaDao {
 		// TODO Auto-generated method stub
 		return sql.selectList("qna.type");
 	}
+
+	@Override
+	public int qnaAdd(Map<String, Object> qnaAdd) {
+		// TODO Auto-generated method stub
+		return sql.insert("qna.qadd", qnaAdd);
+	}
+
+	@Override
+	public List<GesiVO> lately(Map<String, Object> qnaAdd) {
+		// TODO Auto-generated method stub
+		return sql.selectList("qna.lately", qnaAdd);
+	}
+
+	@Override
+	public int qnaAdd2(Map<String, Object> latelyList) {
+		// TODO Auto-generated method stub
+		return sql.insert("qna.add2", latelyList);
+	}
+
+	@Override
+	public List<QnaListVO> detailList(String gesi_id) {
+		
+		return sql.selectList("qna.detail", gesi_id);
+	}
+
+	@Override
+	public int countDelQna(List<String> gesi_id) {
+		int count =0;
+		
+		for(int i = 0; i < gesi_id.size(); i++) {
+			int count2 = sql.delete("qna.delQna", gesi_id.get(i));
+			
+			if (count2 == 1 ) {
+				
+				count +=1;
+			}
+		}
+		
+		if(count == gesi_id.size()) {
+			count = 1;
+		}
+		
+		return count;
+	}
+
+	@Override
+	public int gesiDel(List<String> gesi_id) {
+int count =0;
+		
+		for(int i = 0; i < gesi_id.size(); i++) {
+			int count2 = sql.delete("qna.delQna", gesi_id.get(i));
+			
+			if (count2 == 1 ) {
+				
+				count +=1;
+			}
+		}
+		
+		if(count == gesi_id.size()) {
+			count = 1;
+		}
+		
+		return count;
+	}
 	
 }

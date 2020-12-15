@@ -166,26 +166,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		AND PRO_LEVEL = 1
 	</select>
 	
-	<select id="productOne" resultType="com.egg.tfox.vo.board.ProductVO" parameterType="map">
+	<select id="proSize" resultType="com.egg.tfox.vo.board.ProductVO" parameterType="map">
 			SELECT 
-            	    PRO_ID
-				  , PRO_NAME
-				  , ST_ID
-				  , PRO_PRICE
-				  , PRO_BIGCATE
-				  , PRO_SMALLCATE
-                  , PRO_SUMMARY
-				  , PRO_DETAIL
-				  , PRO_CONPRICE
-				  , PRO_SIZE
-                  , PRO_COLOR
-				  , PRO_EA
-     			  , PRO_STATUS
-				  , PRO_LEVEL
+            	 DISTINCT PRO_SIZE
     		FROM PRODUCT
     		WHERE PRO_STATUS = 'Y'
-    		AND PRO_LEVEL = 1
-    		AND PRO_ID = #{pro_id}
+    		AND PRO_NAME = #{pro_name}
+    		ORDER BY PRO_SIZE DESC
+	</select>
+	
+	<select id="proColor" resultType="com.egg.tfox.vo.board.ProductVO" parameterType="map">
+			SELECT 
+            	 DISTINCT PRO_COLOR
+    		FROM PRODUCT
+    		WHERE PRO_STATUS = 'Y'
+    		AND PRO_NAME = #{pro_name}
+            ORDER BY PRO_COLOR
+	</select>
+	
+	<select id="find" resultType="com.egg.tfox.vo.board.FilesVO" parameterType="string">
+		select 
+    		f.file_id,
+    		f.file_type,
+   			f.file_originName,
+    		f.file_changeName,
+    		f.file_date,
+    		f.file_size,
+    		pf.pro_id
+		from files f
+		join product_file pf on pf.file_id = f.file_id
+		where pf.pro_id = #{pro_id}
+
+	</select>
+	
+	<select id="gesipanList" resultType="com.egg.tfox.vo.board.GesiType">
+		SELECT
+     		 GESI_CODE
+    		,GESI_NAME
+    		,GESI_STATUS
+		FROM GESITYPE
+		WHERE GESI_STATUS ='Y'
 	</select>
 </mapper>
 

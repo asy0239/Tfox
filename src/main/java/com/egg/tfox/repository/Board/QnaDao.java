@@ -17,6 +17,18 @@ public interface QnaDao {
 
 	List<QnaType> select();
 
+	int qnaAdd(Map<String, Object> qnaAdd);
+
+	List<GesiVO> lately(Map<String, Object> qnaAdd);
+
+	int qnaAdd2(Map<String, Object> latelyList);
+
+	List<QnaListVO> detailList(String gesi_id);
+
+	int countDelQna(List<String> gesi_id);
+
+	int gesiDel(List<String> gesi_id);
+
 
 
 

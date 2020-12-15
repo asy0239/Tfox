@@ -20,7 +20,15 @@
   		border-collapse: separate;
   		border-spacing: 0 10px;
 	}
-	
+	#QnaADD{
+	margin-top: 100px;
+	margin-right:50px;
+	width: 150px;
+	height: 50px;
+	color: white;
+	float: right;
+	background-color: black;
+}
 </style>
 <body>
 	<div>
@@ -56,13 +64,12 @@
 				</tr>
 			</table>
 			<div align="center">
-					<button type="submit">문의하기</button>
+					<button type="submit" id="QnaADD">문의하기</button>
 			</div>	
 			<input type="hidden" name="user_id"
 						value="<c:out value="${ sessionScope.loginUser.user_id }"/>"/>
 						
-			<input type="hidden" name="gesi_content"
-						value="editor.get"/>
+			<input  type="hidden" id="h" name="gesi_content"  >
 						
 		</form>
 		</div>
@@ -86,15 +93,12 @@
             
         }); 
         
- /*        $(#)
-      	  var template = $("#mydiv").html();
-      	  var opt = $(".editor_opt[name=doc_label]:checked").val();
-      	  var hidden = $("#hd");
-      	  var hidden2 = $("#hd2");
-      	  hidden.val(template);
-      	  hidden2.val(opt);
-      	  
-        }); */
+        $("#QnaADD").on('click',function(){
+			var test = editor.getMarkdown();
+			var hidden = $("#h");
+			hidden.val(test);
+					
+		});
     </script>
 	</div>
 </body>

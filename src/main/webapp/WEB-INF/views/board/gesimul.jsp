@@ -102,6 +102,15 @@ input[class=br]:radio+label {
 	background: #F2A71A;
 	color: white;
 }
+#deleteGesi{
+	float: right;
+	margin-right: 20px;
+	width: 50px;
+	height: 30px;
+	background-color: black;
+	color: white;
+
+}
 </style>
 </head>
 <body>
@@ -152,18 +161,12 @@ input[class=br]:radio+label {
 								</tr>
 								<tr>
 									<td>답변상태</td>
-									<td><input type="radio" value="전체" style="margin:10px">전체 
-									<input
-										type="radio" value="답변 전">답변 전 <input type="radio"
-										value="답변 완료">답변 완료</td>
+									<td>
+										<input type="radio" value="전체" style="margin:10px" name="f">전체 
+										<input type="radio" value="N" name="f">답변 전 
+										<input type="radio"value="Y" name="f">답변 완료
+									</td>
 								</tr>
-								<tr>
-									<td>댓글여부</td>
-									<td><input type="radio" value="전체" style="margin:10px">전체 <input
-										type="radio" value="있음">있음 <input type="radio"
-										value="없음">없음</td>
-								</tr>
-
 
 							</table>
 							<div class="gesibtn" align="center">
@@ -176,13 +179,11 @@ input[class=br]:radio+label {
 					<!-- 게시물 검색목록 -->
 					<div class="gesimulList">
 						<span>전체 게시물 목록</span>
+						<form form name='deleteGesi' method="get" action="deleteGesi">
 						<table id="t2" align="center">
 							<tr>
-								<th colspan="7" align="center" class="gesiListBtn">
-									<button></button>
-									<button></button>
-									<button></button>
-									<button></button>
+								<th  height="35px;" colspan="7" align="center" class="gesiListBtn">
+									<button id="deleteGesi" type="submit">삭제 X</button>
 								</th>
 							</tr>
 							<tr class="listName">
@@ -196,18 +197,21 @@ input[class=br]:radio+label {
 							</tr>
 							<c:forEach var="ql" items="${ gesiList}" varStatus="status">
 								<c:url value='/gesi.web?gesi_code=${ql.gesi_code}' var="gesiWebURl"/> 
+								<c:url value='/gesi.web2?gesi_id=${ql.gesi_id}&gesi_code=${ql.gesi_code }' var="gesiWebURl2"/> 
 								<tr class="listResult">
 									<!-- 이부분에 함수 넣어서 출력해야됨   -->
-									<td><c:out value="<input type='checkbox'/>" escapeXml="false"/></td>
+									<td><input type="checkbox" name="gesi_id"
+												value="<c:out value="${ql.gesi_id }"/>"/></td>
 									<td><c:out value="${ql.rn}" /></td>
 									<td><c:out value="<a href='${gesiWebURl }' onclick='window.open(this.href)'  target=_blank>${ql.gesi_name }<a/>" escapeXml="false"/></td>
-									<td><c:out value="${ql.gesi_title}" /></td>
+									<td><c:out value="<a href='${gesiWebURl2 }' onclick='window.open(this.href)'  target=_blank>${ql.gesi_title }<a/>" escapeXml="false"/></td>
 									<td><c:out value="${ql.gesi_date}" /></td>
 									<td><c:out value="${ql.user_name }" /></td>
 									<td><c:out value="${ql.gesi_status}" /></td>
 								</tr>
 							</c:forEach>
 						</table>
+						</form>
 						<!-- 페이징 처리 -->
 						<div class="paging-area" align="center">
 							<c:if test="${paging.startPage != 1 }">
@@ -236,8 +240,12 @@ input[class=br]:radio+label {
 		</section>
 	</div>
 <script>
-	
-
+	$("#btSubmit").on('click',function(){
+	var test = editor.getMarkdown();
+	var hidden = $("#h");
+	hidden.val(test);
+			
+	});
 </script>
 	
 
