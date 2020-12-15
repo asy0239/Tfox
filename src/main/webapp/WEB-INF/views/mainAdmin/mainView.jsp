@@ -176,7 +176,9 @@
 					</div>
 					<div id="ss"></div>
 					<div id="but">
-						<div class="t" id="graph"></div>
+						<div class="t" id="graph">
+						<img src="resources/img/login/grap.png" width="100%" height="100%">
+						</div>
 						<div class="t" id="e">
 						
 						</div>
