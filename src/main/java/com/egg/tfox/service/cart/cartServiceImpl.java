@@ -22,11 +22,11 @@ public class cartServiceImpl implements cartService {
 	@Autowired
 	private cartDao cartDao;
 
-	//@Override
-	//public List<CartVo> cartInfo() {
-		
-	//	return cartDao.cartInfo();
-	//}
+//	@Override
+//	public List<CartVo> cartInfo() {
+//		
+//		return cartDao.cartInfo();
+//	}
 
 	
 	 @Override public List<User> getInfo(String userId) {
@@ -34,15 +34,25 @@ public class cartServiceImpl implements cartService {
 		 }
 	 
 	
-	 @Override public List<proVo> proInfo(String userId) {
+	 @Override public List<CartVo> cartInfo(String userId) {
 	  
-	 return cartDao.proInfo(userId); }
-	 
-	
-	 @Override public List<orderdetailVo> orderInfo(String userId) {
-	 
-	 return cartDao.orderInfo(userId);
+	 return cartDao.cartInfo(userId); 
 	 }
+
+
+	@Override
+	public int sumMoney(String userId) {
+		return cartDao.sumMoney(userId);
+	}
+
+
+	@Override
+	public int countCart(String userId, int pro_id) {
+		return 0;
+	}
+
+
+
 	 
 
 }

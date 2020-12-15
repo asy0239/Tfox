@@ -11,85 +11,30 @@
 <meta charset="UTF-8">
 <title>주문/결제</title>
 <style>
-
-#wrap { 
-	width:1500px;
-	background:white;
-	margin:0 auto;
-	padding:0 auto;
-}
-.btn {
-		width: 100px;
-    	height: 30px;
-    	font-size: large;
-    	border-radius: 10px/10px;
-    	background: white;
-    	font-weight: bold;
-	}
-
-	.header{
-		width:1200px;
-	}
-	.header_top_wrap{
-		width: 1200px;
-		height: 45px;
-		margin:0 auto;
-		border-bottom: 1px solid;
-		border-bottom-color: #a0a0a0;
-	}
-	.header_top_left{
-		width: 50%;
-		height: 45px;
-		float: left;
-	}
-	.header_top_right{
-		width:50%;
-		height: 45px;
-		float: right;
-	}
-	.header_top_rightbar{
-		margin-left: 150px;
-	}
-	.header_top_leftbar li{
-		list-style-type: none;
-		float: left; 
-		margin-right: 20px;
-	}
-
-	.header_top_rightbar li{
-		list-style-type: none;
-		float: left;
-		margin-left: 20px;
-	} 
-	
-	.header_mid{
-		width: 1200px;
-		margin:0 auto;
-	}
-	.mid_img{
-		margin:0 auto;
-		width: 340px;
-		height: 340px;
-	}
 	#cart {
 		margin-top:1 auto;
 		border-bottom:1px solid lightgray;
 	}
+	#cartPro {
+		width:1000px;
+		height:500px;
+		margin:0 auto;
+
+	}
+	
 	#item-table {
 		width:1000px;
 		margin:0 auto;
 		margin-bottom: 80px;
 		border-top:1px solid black;
-		border-bottom:1px solid black;
-		
+		border-bottom:1px solid black;		
 		
 	}
 	
-
  	#itemArea {
         font-size: small;
 		width:1000px;
-		height:30px;
+		height:50px;
  }
  
  #proinfo {
@@ -99,7 +44,31 @@
 		border-top:1px solid black;
 		border-bottom:1px solid black;
 }
- 
+#sum {
+	    width: 200px;
+    	height: 48px;
+    	border-width: 0 0 2px 0;
+    	border-color: white;
+    	padding: 11px 70px 11px 0;
+    	color: #blue;
+    	font-size:large;
+    	outline: 0;
+    	border-radius: 0;
+    	box-sizing: border-box;
+}
+
+#order {
+    min-width: 190px;
+    height: 55px;
+    padding: 0 20px 0 20px;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid black;
+    background: black;
+    cursor: pointer;
+    font-weight: bold;
+    float:right;
+}
  #infoSelect {
  	border-bottom:1px solid lightgray;
  	margin-bottom:20px;
@@ -180,8 +149,6 @@
     	padding:100px;
 	}
 
- 
-
 </style>
 </head>
 <body>
@@ -189,54 +156,60 @@
 <div id="wrap">
 <%@ include file="/WEB-INF/views/webFront/header.jsp"%>
 <h2 align="center" id="cart">C A R T</h2>
-<div class="proInfo">
+
 <h2>주문/결제</h2>
+<div id="cartPro">
 <div id="item-table">
 <!-- 상품정보 테이블 -->
 		<c:if test="${ !empty sessionScope.loginUser }">
-		<c:choose>
-		<c:when test="list.count == 0">
-			장바구니가 비어 있습니다.
-		</c:when>
-		<c:otherwise>
-	<form name="proInfo" method="get" action="proInfo" name="form">
-	<table id="proT1">
-		
+	<form name="proInfo" method="post" action="confirm" name="form">
+	<table id="proT1">	
 		<tr id="itemArea">
-			<th><input type="checkbox" id="allCheck" name="allCheck" checked></th>
+			<th><input type=hidden></th>
+			<th><input type="checkbox" id="allCheck" ></th>
 			<th width="600px">상품정보</th>
 			<th width="50px">수량</th>
 			<th width="120px">상품금액</th>
-			<th width="120px">배송비</th>
-			
+			<th width="120px">합계금액</th>		
+			<th width="120px">배송비</th>		
 		</tr>
-		<c:set var="sum" value="0"/>
-		<c:forEach var="proVo"  items="${proInfo}">
+		
+		<c:forEach var="CartVo"  items="${cartInfo}">
 		<!-- 상품정보 데이터 -->
 		<tr id="proInfo" align="center">
-			<input type="hidden" "<c:out value='${proVo.pro_id }'/>">
-			<td><input type="checkbox" id="proCheck"  name="proCheck" value="${proVo.pro_price}"></td>
-			<td><c:out value="${proVo.pro_name}"/>
-			<a>+</a>
-				<c:out value="${proVo.pro_color}"/>
+			<%-- <td name="item_name"><c:out value="${CartVo.pro_name}"/>
 				<a>+</a>
-				<c:out value="${proVo.pro_size}"/>
+				<c:out value="${CartVo.pro_color}"/>
+				<a>+</a>
+				<c:out value="${CartVo.pro_size}"/>
+			</td> --%>
+			<td><input type="hidden" name="pro_id" <c:out value='${CartVo.pro_id }'/>"></td>
+			<td><input type="checkbox" id="proCheck" name="total_amount" value="${CartVo.pro_price}"></td>
+			<td><input type="text" id="product" name="item_name" value="${CartVo.pro_name}"> +
+				<input type="text" id="product" name="pro_color" value="${CartVo.pro_color}"> +
+				<input type="text" id="product" name="pro_size" value="${CartVo.pro_size}">			
 			</td>
-			<td><input type="number" width="50px" min="1" max="5" value="1"></td>
-			<td id="price"><fmt:formatNumber type="currency" pattern="###,###,###" value="${proVo.pro_price}"/>원</td>
-			<td><c:out value="2500"/></td>
+			<td><input type="number" id="proEa" width="20px" min="1" max="5" value="${CartVo.pro_ea}" name="quantity"></td>
+			<td id="price"><input type="text" name="total_amount"  value="${CartVo.pro_price}"/>원</td>	
+			
+			<td id="price" ><fmt:formatNumber type="currency" pattern="###,###,###" value="${map.sumMoney}"/>원</td>
+			<td> ${map.fee}</td>
 		</tr>
 		</c:forEach>
-		<c:set var="sum" value="${sum+(proVo.pro_price * proVo.order_ea) }"/>
 	</table>
+	<div>
+		합계 금액 <fmt:formatNumber value="${map.sum}" pattern="#,###,###" />
+	</div>
+	<div>
+		 <input type="text" value="Kakopay" name="pay_type">
+		 <button type="submit" id="order" name="pay_type" value="KakaoPay" >주문하기</button>
+	</div>
 	</form>
-		<div class="proTotal">
- 			<div class="sum">
- 		총 합계 : <fmt:formatNumber  type="currency" pattern="###,###,###" value="${sum}" />원
- 		</div>
- 			</div>
-	</c:otherwise>
-</c:choose>
+
+</c:if>
+
+</div>
+</div>
 </div>
 <!-- 주문자 정보 -->
 <h2>주문자 정보</h2>
@@ -337,7 +310,7 @@
 	</table>
 	</form>
 </div>
-</c:if>
+
 <div id="pay" align="center">
 	<label>카카오 페이</label>
 	<span><input type="submit" value="결제하기" class="btn"></span>
@@ -352,16 +325,6 @@ $("#Ni").on("click", function(){
     $("#getInfo").css("display","none");
     $("#newInfo").css("display","block");
 
-});
-$('#proCheck').click(function(){	
-	var sum = 0;
-	$('#proCheck').each(function() {
-	if($(this).is(":checked")==true) {
-		var proCheck = parseInt($(this).parents('tr').find('input[name=proCheck]').val());
-		sum = sum + proCheck;
-	}	
-	});
-	console.log(sum);
 });
 
 //주소 API
@@ -406,7 +369,6 @@ function execPostCode() {
 		}
 	
 </script>
-</body>
 </html>
 
 

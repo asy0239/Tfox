@@ -22,19 +22,19 @@ private SqlSession sqlSession;
 
 //@Override
 //public List<CartVo> cartInfo() {
-	//List<CartVo> test = sqlSession.selectList("cart.CartInfo");
-	//System.out.println("뜨냐 : " + test);
-	//return sqlSession.selectList("cart.CartInfo");
+//	List<CartVo> test = sqlSession.selectList("cart.CartInfo");
+//	System.out.println("뜨냐 : " + test);
+//	return sqlSession.selectList("cart.CartInfo");
 //}
 
 
 
 
  @Override 
- public List<proVo> proInfo(String userId) {
+ public List<CartVo> cartInfo(String userId) {
  
-	 List<proVo> proInfo = sqlSession.selectList("cart.proInfo", userId);
-	 return proInfo; 
+	 List<CartVo> cartInfo = sqlSession.selectList("cart.cartInfo", userId);
+	 return cartInfo; 
 }
   
  @Override public List<User> getInfo(String userId) {
@@ -42,10 +42,20 @@ private SqlSession sqlSession;
  return sqlSession.selectList("cart.getInfo" , userId); 
  }
   
- @Override public List<orderdetailVo> orderInfo(String userId) {
-  
- return sqlSession.selectList("cart.orderInfo",userId); 
- }
+
+
+@Override
+public int sumMoney(String userId) {
+	return sqlSession.selectOne("cart.sumMoney", userId); 
+}
+
+@Override
+public int countCart(String userId, int pro_id) {
+	
+	return 0;
+}
+
+
  
 
 }

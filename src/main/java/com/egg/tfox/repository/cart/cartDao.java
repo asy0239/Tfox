@@ -11,9 +11,14 @@ public interface cartDao {
 	//장바구니 정보
 	//List<CartVo> cartInfo();
 	//상품정보
-	List<proVo> proInfo(String userId);
+	List<CartVo> cartInfo(String userId);
 	//장바구니 회원정보
 	List<User> getInfo(String userId);
-	//상품 주문 정보
-	List<orderdetailVo> orderInfo(String userId);
+
+	
+	//장바구니 금액 합계
+	int sumMoney(String userId);
+	 //장바구니 상품 갯수
+	int countCart(String userId, int pro_id);
+	
 }
