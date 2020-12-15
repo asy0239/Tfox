@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.egg.tfox.entity.Files" alias="files"/>
 		<typeAlias type="com.egg.tfox.entity.Product_file" alias="pFiles"/>
 		<typeAlias type="com.egg.tfox.entity.Stock" alias="stock"/>
+		<typeAlias type="com.egg.tfox.vo.ProductVo" alias="productVo"/>
 		
 		<typeAlias type="com.egg.tfox.vo.approval.ApprovalMainVo" alias="approvalMainVo"/>
 		<typeAlias type="com.egg.tfox.vo.approval.ApprovalMainNoCheckVo" alias="approvalMainNoCheckVo"/>

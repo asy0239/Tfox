@@ -5,12 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css" />
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/product/modal.css">
+
 
 <title>상품관리 메인</title>
 
@@ -20,6 +15,10 @@
 	float: left;
 }
 
+#top{
+	width: 100%;
+	height: 150px;
+}
 
 #top>span {
 	color: #5E5E5E ;
@@ -29,9 +28,27 @@
 	font-size: 25px;
 
 }
+.conWrap{
+	
+
+}
+table {
+ width: 100%;
+ border: 1px solid black;
+	border-collapse: collapse;
+}
+td , th {
+	height: 80px;
+
+	border: 1px solid black;
+}
+
 
 
 </style>
+
+
+
 </head>
 <body>
 
@@ -52,29 +69,53 @@
 				<div>
 					<table>
 						<tr>
-						    <td>검색분류</td>
-						    <td><input type="text"></td>
+						    <td>&nbsp;&nbsp;검색분류</td>
+						    <td>&nbsp;<select>
+						    <option>상품명</option>
+						    <option>상품 코드 </option>
+						    </select>&nbsp;<input type="text"></td>
 						</tr>
 						<tr>
-						    <td>상품분류</td>
-						    <td><input type="text"></td>
+						    <td>&nbsp;&nbsp;상품분류</td>
+						    <td>&nbsp;<input type="text"></td>
 						</tr>
+					
 						<tr>
-						    <td>상품등록일</td>
-						    <td>
-						    </td>
-						</tr>
-						<tr>
-						    <td>판매상태</td>
-						    <td></td>
+						    <td>&nbsp;&nbsp;판매상태</td>
+						    <td><input type="radio" >&nbsp;<label>전체</label>
+						    <input type="radio" >&nbsp;<label>판매함</label>
+						    <input type="radio" >&nbsp;<label>판매안함</label></td>
 						</tr>
 						
 					
 					</table>
 				
 				</div>
-				
+		
+					<table>
+						<tr style="width:100%;">
+							<th>상품이미지</th>
+							<th>상품명</th>
+							<th>판매가</th>
+							<th>판매상태</th>
+							<th>간략설명</th>
+							<th>상세 설명</th>	
+						</tr>
+				<c:forEach var="menu" items="${list}">
+						<tr>
+						<td><img src="download?no=${menu.pro_id}" width="100%" height="100"></td> 
+						
+						<td>&nbsp;&nbsp;<a href='detail?no=${menu.pro_id}'>${menu.pro_name}</a> </td>
+							<td>&nbsp;&nbsp;${menu.pro_price}</td>
+							<td>&nbsp;&nbsp;${menu.pro_status}</td>
+							<td>&nbsp;&nbsp;${menu.pro_summary}</td>
+							<td>&nbsp;&nbsp;${menu.pro_detail}</td>
+						
+						</tr>
+				</c:forEach>
+					</table>
 				</div>
+			
 			</article>
 		</section>
 	</div>

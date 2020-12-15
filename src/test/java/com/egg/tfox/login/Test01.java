@@ -26,7 +26,7 @@ public class Test01 {
 	@Autowired
 	DataSource ds;
 
-	 @Test
+	// @Test
 	public void test() {
 		log.info("{}", encoder);
 		log.info("{}", ds);
