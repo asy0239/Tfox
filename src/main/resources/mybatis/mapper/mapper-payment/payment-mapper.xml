@@ -11,6 +11,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	- namespace : mapper 간의 충돌을 방지 하기 위한 이름 (필수) 
  -->
 <mapper namespace="payment">
-	
+<select id="seq" resultType="int">
+	select SEQ_NO.nextval from dual
+</select>
+<select id="sequen" resultType="String">
+	select SEQ_PAYID.nextval from dual
+</select>
+<select id="user" resultType="User">
+	select user_id from user_table
+</select>
+
+<insert id="request" parameterType="com.egg.tfox.entity.Payment">
+<selectKey keyProperty="UP_id" resultType="userVo" order="BEFORE">
+  SELECT MAX(val)
+  		, user_id
+    FROM user_table
+   WHERE key = #{user_id}
+     
+</selectKey>
+INSERT INTO payment(no, pay_id, user_id, pro_id, tid,
+                    partner_order_id, partner_user_id, item_name, quantity, total_amount,
+                    time, pay_status, pay_type)
+ VALUES(
+    	#{no}
+      , 'PAY'||TRIM(TO_CHAR(SEQ_USERID.nextval,'00000'))
+      , #{user_id}
+      , #{pro_id}
+      , #{tid}
+      , #{partner_order_id}
+      , #{partner_user_id}  
+      , #{item_name}
+      , #{quantity}
+      , #{total_amount}
+      , SYSDATE
+      , #{pay_status}
+      , #{tid}
+    	)
+select  #{u.user_id}, #{c.pro_id} from user_table u, cart c
+where u.user_id = c.user_id
+</insert>
+
+<!-- 	
+<insert id="request" parameterType="com.egg.tfox.entity.Payment">
+INSERT INTO payment(no, pay_id, user_id, pro_id, tid,
+                    partner_order_id, partner_user_id, item_name, quantity, total_amount,
+                    time, pay_status, pay_type)
+    VALUES(
+    	#{no}
+      , 'PAY'||TRIM(TO_CHAR(SEQ_USERID.nextval,'00000'))
+      , #{user_id}
+      , '#{pro_id}
+      , #{tid}
+      , #{partner_order_id}
+      , #{partner_user_id}  
+      , #{item_name}
+      , #{quantity}
+      , #{total_amount}
+      , SYSDATE
+      , #{pay_status}
+      , #{tid}
+    	)
+</insert> -->
+
+<select id="get" parameterType="int" resultType="com.egg.tfox.entity.Payment">
+		select * from payment where no=#{no}
+</select>
+
+<update id="approve" parameterType="int">
+		update payment
+		set time=sysdate, pay_status='결제승인'
+		where no=#{no}
+	</update>
 
 </mapper>

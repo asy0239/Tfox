@@ -9,7 +9,7 @@
 <mapper namespace="User">
 	<insert id="userJoin" parameterType="user">
 		INSERT
-  		INTO USER_TABLE (user_id, user_name, user_loginid, user_pwd ,user_date, user_addr,user_number, user_email, phone)
+  		INTO USER_TABLE (user_id, user_name, user_loginid, user_pwd ,user_date, user_addr,user_number, user_email, user_phone)
   		VALUES(
   		 'U'||TRIM(TO_CHAR(SEQ_USERID.nextval,'000000')), 
 		 #{user_name}, 
@@ -19,7 +19,7 @@
 		 #{user_addr},
 		 #{user_number}, 
 		 #{user_email},
-		 #{phone}
+		 #{user_phone}
 		 )
 	
 	</insert>

@@ -18,7 +18,10 @@ public interface cartService {
 	//유저 기본배송지
 	List<User> getInfo(String userId);
 	//상품 정보
-	List<proVo> proInfo(String userId);
-	//상품 주문 정보
-	List<orderdetailVo> orderInfo(String userId);
+	List<CartVo> cartInfo(String userId);
+
+	
+	 int sumMoney(String userId);
+	 int countCart(String userId, int pro_id);
+	
 }

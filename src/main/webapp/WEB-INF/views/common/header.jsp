@@ -76,8 +76,7 @@ pageEncoding="UTF-8"/>
                     </div>  
                     <ul class="hideShow side ">   
                    		<li><a href="${pageContext.request.contextPath }/board/gesipan">게시판 관리</a></li>
-                        <li><a href="${pageContext.request.contextPath }/board/gesimul">게시물 관리</a></li>
-                        <li><a href="">메인 진열 관리</a></li>
+                        <li><a href="${pageContext.request.contextPath }/board/gesimul">게시물 관리</a></li>                      
                 	 </ul>
                 <li class="menu">
                     <div>
@@ -93,7 +92,7 @@ pageEncoding="UTF-8"/>
                 <li class="menu">
                     <div>
                         <img src="${pageContext.request.contextPath }/resources/img/common/G5.png" >
-                        <a href="#">재고 관리</a>
+                        <a href="#">- eggMoney(쇼핑몰)</a>
                     </div>
                     <ul class="hideShow side">
                         <li><a href="${pageContext.request.contextPath }/webFront/main">main</a></li>

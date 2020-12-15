@@ -17,19 +17,16 @@ SELECT
  WHERE USER_LOGINID = #{userId}
 </select>
 
-<select id="proInfo" resultType="cartVo" parameterType="string">
-
- SELECT 
-       P.PRO_ID
-     , P.PRO_NAME
-     , P.PRO_COLOR
-     , P.PRO_SIZE
-     , P.PRO_PRICE
-     , O.ORDER_EA
-  FROM USER_TABLE U, PAYMENT PAY, ORDERDETAIL O, PRODUCT P 
- WHERE PAY.USER_ID = U.USER_ID 
-   AND O.PAY_ID = PAY.PAY_ID
-   AND P.PRO_ID = O.PRO_ID
+<select id="cartInfo" resultType="CartVo" parameterType="string">
+select
+	   c.pro_id
+     , c.pro_name
+     , c.pro_color
+     , c.pro_size
+     , c.pro_ea
+     , c.pro_price
+  from user_table u, cart c
+ where u.user_id = c.user_id
    AND U.USER_LOGINID = #{userId}
    
 </select>
@@ -43,5 +40,23 @@ and u.user_id = pay.user_id
 AND U.USER_LOGINID = #{userId}
 </select>
 
+<insert id="order" parameterType="com.egg.tfox.vo.cart.orderdetailVo">
+INSERT INTO ORDERDETAIL(PAY_ID, PRO_ID, ORDER_EA, ORDER_DATE,  ORDER_NUM, ORDER_STATE, TOTAL_PRICE)
+VALUES(
+	 #{pay_id}
+	,#{pro_id}
+	,#{order_ea}
+	,SYSDATE
+	,#{order_num}
+	,#{order_state}
+	,#{total_price}
+)
+</insert>
+<select id="sumMoney" resultType="int">
+select nvl(sum(pro_price * pro_ea),0)
+from user_table u, cart c
+where u.user_id = c.user_id
+and U.USER_LOGINID = #{userId}
+</select> 
 	
 </mapper>
