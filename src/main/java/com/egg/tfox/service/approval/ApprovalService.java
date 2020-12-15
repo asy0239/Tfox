@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.egg.tfox.entity.Employee;
 import com.egg.tfox.entity.approval.TemplateEntity;
+import com.egg.tfox.vo.approval.ApprovalDetailEmpVo;
+import com.egg.tfox.vo.approval.ApprovalGetMyDoc;
 import com.egg.tfox.vo.approval.ApprovalMainNoCheckVo;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
 import com.egg.tfox.vo.approval.ApprovalSendDocVo;
@@ -25,5 +27,13 @@ public interface ApprovalService {
 
 	HashMap<String, String> selectSign(String emp_ID);
 
-	HashMap<String, List<ApprovalSendDocVo>> sendDocListGet(String emp_id);
+	HashMap<String, Object> sendDocListGet(String emp_id);
+
+	List<ApprovalGetMyDoc> getMyDoc(String emp_id);
+
+	HashMap<String, Object> getDetail(HashMap<String, String> inputMap);
+
+	ApprovalDetailEmpVo getDetailSign(String emp_id);
+
+	void applyDoc(HashMap<String, String> map);
 }

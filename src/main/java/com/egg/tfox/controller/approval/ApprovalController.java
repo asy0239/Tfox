@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,14 +23,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.tags.HtmlEscapeTag;
 
 import com.egg.tfox.entity.Employee;
 import com.egg.tfox.entity.approval.TemplateEntity;
 import com.egg.tfox.service.approval.ApprovalEditService;
 import com.egg.tfox.service.approval.ApprovalService;
 import com.egg.tfox.service.approval.TemplateService;
+import com.egg.tfox.vo.approval.ApprovalDetailEmpVo;
 import com.egg.tfox.vo.approval.ApprovalEditDocVo;
 import com.egg.tfox.vo.approval.ApprovalEditEmpVo;
+import com.egg.tfox.vo.approval.ApprovalGetMyDoc;
 import com.egg.tfox.vo.approval.ApprovalMainNoCheckVo;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
 import com.egg.tfox.vo.approval.ApprovalSendDocVo;
@@ -75,37 +79,37 @@ public class ApprovalController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userName = authentication.getName();	
 		String app_title = request.getParameter("inputTitle");
-		String app_content = request.getParameter("htmlcontent");
+//		String app_content = request.getParameter("htmlcontent");
+		String temp_content = request.getParameter("temp_content");
 		String temp_name = request.getParameter("tempName");
 		String soosin_empId = request.getParameter("soosin_empId");
 		String player_empId = request.getParameter("player_empId");
 		String final_empId = request.getParameter("final_empId");
-		
+		System.out.println("temp_content : " + temp_content);
 		String[] ref_split = soosin_empId.split(",");
 		List<String> refEmpList = new ArrayList<String>();
 		for(int i = 0; i < ref_split.length; i++) {
 			refEmpList.add(ref_split[i].trim());
-		} // 여기 손봐라
+		}
 		String[] final_split = final_empId.split(",");
 		List<String> approvalEmpList = new ArrayList<String>();
 		for(int i = 0; i < final_split.length; i++) {
 			approvalEmpList.add(final_split[i].trim());
 		}
 		
-		log.info("tempName : " + temp_name);
 		ApprovalEditDocVo appDoc = ApprovalEditDocVo.builder()
 		// app_doc
 		.app_title(app_title)
 		.emp_name(userName)
 		.app_excu_id(player_empId)
-		.app_content(app_content)
+		.app_content(temp_content)
 		.app_status("전송")
 		.temp_name(temp_name)
 		// app_ref
 		.ref_emp_id(refEmpList)
 		// app_stats
 		.approval_emp_id(approvalEmpList).build();
-		
+		log.info("여기맞지??"+appDoc.toString());
 		approvalEditService.insertAppDoc(appDoc);
 		
 		
@@ -192,24 +196,62 @@ public class ApprovalController {
 		HttpSession session = request.getSession();
 		Employee emp = (Employee) session.getAttribute("loginEmp");
 		String emp_id = emp.getEMP_ID();
-		HashMap<String, List<ApprovalSendDocVo>> sendDocList = approvalService.sendDocListGet(emp_id); 
-		log.info(sendDocList.toString());
+		HashMap<String, Object> sendDocList = approvalService.sendDocListGet(emp_id); 
 		model.addAttribute("sendDocList",sendDocList.get("sendTotalDocList"));
-		model.addAttribute("sendDocListSize" , sendDocList.get("sendTotalDocList").size());
+		model.addAttribute("sendContainsDocCount" , sendDocList.get("sendContainsDocCount"));
 		model.addAttribute("sendNoDocList", sendDocList.get("sendNoDocList"));
 		model.addAttribute("sendIngDocList", sendDocList.get("sendIngDocList"));
 		return "/approval/approval_send";
 	}
 	
 	@GetMapping("/approval/approval_get")
-	public String approvalGet() {
+	public String approvalGet(Model model , HttpServletRequest request) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userName = authentication.getName();
+		HttpSession session = request.getSession();
+		Employee emp = (Employee) session.getAttribute("loginEmp");
+		String emp_id = emp.getEMP_ID();
+		List<ApprovalGetMyDoc> list = approvalService.getMyDoc(emp_id);
+		List<ApprovalGetMyDoc> ingList = new ArrayList<ApprovalGetMyDoc>();
+		List<ApprovalGetMyDoc> applyList = new ArrayList<ApprovalGetMyDoc>();
+		List<ApprovalGetMyDoc> nopList = new ArrayList<ApprovalGetMyDoc>();
+		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getApporder_apply().equals("결재중")) {
+				ingList.add(list.get(i));
+			} else if (list.get(i).getApporder_apply().equals("승인")) {
+				applyList.add(list.get(i));
+			} else {
+				nopList.add(list.get(i));
+			}
+		}
+	
+		model.addAttribute("noCheckList",list);
+		model.addAttribute("ingList",ingList);
+		model.addAttribute("applyList",applyList);
+		model.addAttribute("nopList",nopList);
 		return "/approval/approval_get";
 	}
 	
-	@GetMapping("/approval/approval_get_detail")
-	public String approvalGetDetail() {
+	@PostMapping("/approval/approval_get_detail")
+	public String approvalGetDetail(HttpServletRequest request , Model model) {
+		HttpSession session = request.getSession();
+		Employee emp = (Employee) session.getAttribute("loginEmp");
+		String emp_id = emp.getEMP_ID();
+		HashMap<String, String> inputMap = new HashMap<String, String>();
+		log.info(request.getParameter("doc_id"));
+		String doc_id = request.getParameter("doc_id");
+		inputMap.put("doc_id", doc_id);
+		inputMap.put("emp_id", emp_id);
+		HashMap<String, Object> getDetail = approvalService.getDetail(inputMap);
+		ApprovalDetailEmpVo signVo = approvalService.getDetailSign(emp_id);
+		model.addAttribute("getDetail", getDetail.get("docDetail"));
+		model.addAttribute("getDetailRef", getDetail.get("docDetailRef"));
+		model.addAttribute("getExcu", getDetail.get("docExcu"));
+		model.addAttribute("signVo", signVo);
 		return "/approval/approval_get_detail";
 	}
+	
 	
 	@GetMapping("/approval/approval_temporary")
 	public String approvalTemporary() {
@@ -252,9 +294,23 @@ public class ApprovalController {
 		HttpSession session = request.getSession();
 		Employee emp = (Employee) session.getAttribute("loginEmp");
 		String emp_id = emp.getEMP_ID();
-		log.info(editorContent);
+		log.info("양식 추가 : " + tempTitle);
+		
 		templateService.insertTemplate(editorContent, tempTitle, emp_id);
-		return "/approval/approval_manage";
+		return "redirect:approval_manage";
+	}
+	
+	@PostMapping("/approval/updateTemplate")
+	public String templateUpdate(HttpServletRequest request,
+			@RequestParam String tempTitle,
+			@RequestParam String editorContent,
+			@RequestParam String temp_id) {
+		HttpSession session = request.getSession();
+		Employee emp = (Employee) session.getAttribute("loginEmp");
+		String emp_id = emp.getEMP_ID();
+		
+		templateService.updateTemplate(editorContent, tempTitle, emp_id, temp_id);
+		return "redirect:approval_manage";
 	}
 	
 	// 결재 작성 시 양식 선택시 양식 불러오는 컨트롤러
@@ -268,4 +324,23 @@ public class ApprovalController {
 		map.put("tempContent", tempContent);
 		return map;
 	}	
+	
+	@PostMapping("/approval/getTemplate")
+	public String templateDetail(HttpServletRequest request, Model model) {
+			String temp_id = (String) request.getParameter("temp_id");
+			ManageTempVo tempVo = templateService.manageDetail(temp_id);
+			model.addAttribute("template", tempVo);
+		return "/approval/approval_manageDetail";
+	}
+	
+	@PostMapping("/approval/applyDoc")
+	public String applyDoc(HttpServletRequest request, Model model) {
+		String app_st_id = request.getParameter("app_st_id");
+		String app_id = request.getParameter("app_id");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("app_st_id", app_st_id);
+		map.put("app_id", app_id);
+		approvalService.applyDoc(map);
+		return "redirect:approval_get";
+	}
 }

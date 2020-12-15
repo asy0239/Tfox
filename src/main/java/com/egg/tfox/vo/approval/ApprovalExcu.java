@@ -1,22 +1,15 @@
 package com.egg.tfox.vo.approval;
 
-import java.sql.Clob;
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class ManageTempVo {
-	private String temp_id;
-	private String temp_title;
-	private String temp_content;
-	private Date temp_date;
+public class ApprovalExcu {
 	private String emp_id;
-	
+	private String emp_name;
 }

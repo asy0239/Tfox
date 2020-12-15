@@ -38,7 +38,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    temp_date,
 		    emp_id
 		from template
+		where emp_id = #{emp_id}
 		
  	</select>
+ 	
+ 	<select id="manageDetail" resultType="com.egg.tfox.vo.approval.ManageTempVo"  parameterType="string">
+ 		select temp_id , temp_title , temp_content \
+ 		
+ 		from template
+ 		where temp_id = #{temp}
+ 	</select>
+ 	
+ 	<update id="updateTemplate" parameterType="map">
+ 		update template set temp_content = #{content} , temp_date = sysdate where temp_id = #{temp_id}
+ 	</update>
+ 	
+ 	
  </mapper>
  

@@ -35,12 +35,12 @@
 						<button id="approval_btn" onclick="edit();">결재 작성 버튼</button>
 					</div>
 					<div id="sign_input">
-					<c:if test="${empty sign.test_sign}">
+					<c:if test="${empty sign.emp_sign}">
 						<p id="signNull">사인을 입력해주세요</p>
 						<img id="signImg" src="" style="display:none">
 					</c:if>
-					<c:if test="${not empty sign.test_sign }">
-						<img id="signImg" src="${sign.test_sign }" style="display:block; width:140px; height: 100px">				
+					<c:if test="${not empty sign.emp_sign }">
+						<img id="signImg" src="${sign.emp_sign }" style="display:block; width:140px; height: 100px">				
 					</c:if>
 					
 					</div>

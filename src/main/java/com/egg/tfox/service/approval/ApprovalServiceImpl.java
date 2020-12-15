@@ -2,14 +2,18 @@ package com.egg.tfox.service.approval;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.egg.tfox.entity.Employee;
 import com.egg.tfox.entity.approval.TemplateEntity;
 import com.egg.tfox.repository.approval.ApprovalDao;
+import com.egg.tfox.vo.approval.ApprovalDetailEmpVo;
+import com.egg.tfox.vo.approval.ApprovalGetMyDoc;
 import com.egg.tfox.vo.approval.ApprovalMainNoCheckVo;
 import com.egg.tfox.vo.approval.ApprovalMainRefVo;
 import com.egg.tfox.vo.approval.ApprovalMainVo;
@@ -73,27 +77,53 @@ public class ApprovalServiceImpl implements ApprovalService{
 	}
 
 	@Override
-	public HashMap<String, List<ApprovalSendDocVo>> sendDocListGet(String emp_id) {
+	public HashMap<String, Object> sendDocListGet(String emp_id) {
 		List<ApprovalSendDocVo> sendTotalDocList = approvalDao.sendDocListGet(emp_id);
 		List<ApprovalSendDocVo> sendIngDocList = new ArrayList<ApprovalSendDocVo>();
 		List<ApprovalSendDocVo> sendNoDocList = new ArrayList<ApprovalSendDocVo>();
 		List<ApprovalSendDocVo> sendOkDocList = new ArrayList<ApprovalSendDocVo>();
+		List<ApprovalSendDocVo> containsDocList = new ArrayList<ApprovalSendDocVo>();
+		
 		for(ApprovalSendDocVo list : sendTotalDocList) {
-			if(list.getSt_apply() == "결재중") {
+			if(list.getSt_apply().equals("결재중")) {
 				sendIngDocList.add(list);
-			} else if (list.getSt_apply() == "반려") {
+			} else if (list.getSt_apply().equals("반려")) {
 				sendNoDocList.add(list);
 			} else {
 				sendOkDocList.add(list);
 			}
 		}
-		/* int count = approvalDao.sendDocListCount(emp_id); */
-		HashMap<String, List<ApprovalSendDocVo>> map = new HashMap<String, List<ApprovalSendDocVo>>();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("sendTotalDocList", sendTotalDocList);
 		map.put("sendIngDocList", sendIngDocList);
 		map.put("sendNoDocList", sendNoDocList);
 		map.put("sendOkDocList", sendOkDocList);
+		map.put("sendContainsDocCount", sendTotalDocList);
 		return map;
+	}
+
+	@Override
+	public List<ApprovalGetMyDoc> getMyDoc(String emp_id) {
+		List<ApprovalGetMyDoc> getMyDocList = approvalDao.getMyDoc(emp_id);
+		return getMyDocList;
+	}
+
+	@Override
+	public HashMap<String, Object> getDetail(HashMap<String, String> map) {
+		HashMap<String, Object> getDetailDoc = approvalDao.getDocDetail(map);
+		return getDetailDoc;
+	}
+
+	@Override
+	public ApprovalDetailEmpVo getDetailSign(String emp_id) {
+		ApprovalDetailEmpVo signVo = approvalDao.getDetailSign(emp_id);
+		return signVo;
+	}
+
+	@Override
+	public void applyDoc(HashMap<String, String> map) {
+		approvalDao.updateApplyDoc(map);
 	}
 
 }

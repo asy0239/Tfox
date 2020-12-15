@@ -11,6 +11,13 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/approval/card_hover.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/approval/approval_manage.css">
 
+<style type="text/css">
+	.del {
+		width:30px;
+		height:25px;
+		cursor:pointer;
+	}
+</style>
 <title>전자결재 문서관리</title>
 </head>
 <body>
@@ -66,23 +73,31 @@
 							</c:forEach>
 						</c:forEach>
 				</div>
+				<form id="target" action="getTemplate" method="POST">
 					<table id="manage_table">
-						<caption style="text-align: left; font-size: 20px;">모든 사용자의 문서양식입니다.</caption>
+						<caption style="text-align: left; font-size: 20px;">사용자의 문서양식입니다.</caption>
 						<tr>
 							<th>번호</th>
 							<th>문서 제목</th>
 							<th>수정 날짜</th>
+							<th>관리</th>
 						</tr>
 						<c:forEach var="userTempList" items="${allTempList}">
 							<tr>
 								<td>${userTempList.temp_id }</td>
 								<td>${userTempList.temp_title }</td>
 								<td>${userTempList.temp_date }</td>
+								<td><!-- <input type="button" class="del" value="수정"> -->
+									<img class="del" src="${pageContext.request.contextPath }/resources/img/approval/edit.svg">
+								</td>
 							</tr>
 						</c:forEach>
 					</table>
+					<input type="hidden" id="tempId" name="temp_id">
+				</form>
 				</div>
 			</article>
+			
 		</section>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -90,6 +105,16 @@
 		function editTemplate() {
 			location.href = "approval_edit_template";
 		}
+		
+		$(".del").click(function(){
+			var btn = $(this);
+			var tempId = btn.parent().parent().children().eq(0).text(); 
+			var tempHidden = $("#tempId");
+			tempHidden.val("");
+			tempHidden.attr("value",tempId);
+			console.log(tempId);
+			$("#target").submit();
+		});	
 	</script>
 </body>
 </html>
