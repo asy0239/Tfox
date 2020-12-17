@@ -257,8 +257,13 @@
 			 var temp = test.split(" ").join("");
 			 var list = temp.split(">");
 			 console.log(list);
+			 
+			 $(".signArea").html('');
 			 for(var i = 0; i < list.length; i++){
-				 $(".signArea").append("들어가냐??");			 
+				 $(".signArea").append('<table id="approvalArea" style="margin-inline: auto; width: 130px; border: 1px solid black; border-collapse: collapse; text-align: center;"> <tr style="height: 30;"> <th style="background-color: rgb(221, 221, 221); font-size: 12px; font-weight: bold; border: 1px solid black; border-collapse: collapse; text-align: center; color: black;">결재자 : <span id="signName'+i+'"></span></th> </tr> <tr style="height: 100;"> <td id="signTd1" style="border: 1px solid black;"><img id="signImg"></td> </tr> </table>');
+				 $('#signName'+i).append(list[i]);
+				 console.log(list[i])
+				 
 			 }
 			 
 		 };

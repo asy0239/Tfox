@@ -209,7 +209,7 @@ from (select
 		)
 	</insert>
 	
-	<insert id="approval.refInsert" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
+<!-- 	<insert id="approval.refInsert" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">
 		insert all
 		<foreach collection="ref_emp_id" item="ref" index="index">
 		into approval_reference
@@ -227,6 +227,17 @@ from (select
 					#{app_id}, #{appr}, #{index}+1, null , '결재중')
 		</foreach>
 		select * from dual
+	</insert> -->
+	<insert id="approval.refInsert" parameterType="com.egg.tfox.vo.approval.ApprovalEditRefVo">
+		insert into approval_reference
+			values (#{app_id}, #{ref_id} 
+			        ,'AR'||TRIM(TO_CHAR(SEQ_APREFID.nextval,'000000')))
+	</insert>
+	
+	<insert id="approval.stInsert" parameterType="com.egg.tfox.vo.approval.ApprovalEditStVo">
+		insert into approval_statement
+			values ('AS'||TRIM(TO_CHAR(SEQ_APSTID.nextval,'000000')),
+					#{app_id}, #{appr}, #{approderCode}, null , '결재중')
 	</insert>
 	
 	<select id="approval.selectDoc_id" resultType="string" parameterType="com.egg.tfox.vo.approval.ApprovalEditDocVo">

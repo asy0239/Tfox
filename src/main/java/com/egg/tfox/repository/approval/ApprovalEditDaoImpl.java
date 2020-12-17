@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.egg.tfox.vo.approval.ApprovalEditDocVo;
 import com.egg.tfox.vo.approval.ApprovalEditEmpVo;
+import com.egg.tfox.vo.approval.ApprovalEditRefVo;
+import com.egg.tfox.vo.approval.ApprovalEditStVo;
 import com.egg.tfox.vo.approval.ApprovalEmpPos;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +43,20 @@ public class ApprovalEditDaoImpl implements ApprovalEditDao{
 		String doc_id = sqlSession.selectOne("approval.selectDoc_id", appDoc);
 		appDoc.setApp_id(doc_id);
 		log.info("appDoc : " + appDoc);
-		sqlSession.insert("approval.refInsert", appDoc);
-		sqlSession.insert("approval.stInsert", appDoc);
+		for(int i = 0; i < appDoc.getRef_emp_id().size(); i++) {
+			ApprovalEditRefVo refDoc = new ApprovalEditRefVo();
+			refDoc.setApp_id(appDoc.getApp_id());
+			refDoc.setRef_id(appDoc.getRef_emp_id().get(i));
+									
+			sqlSession.insert("approval.refInsert", refDoc);			
+		}
+		for(int i = 0; i < appDoc.getApproval_emp_id().size(); i++) {
+			ApprovalEditStVo stDoc = new ApprovalEditStVo();
+			stDoc.setApp_id(appDoc.getApp_id());
+			stDoc.setAppr(appDoc.getApproval_emp_id().get(i));
+			stDoc.setApproderCode(""+(i+1));
+			sqlSession.insert("approval.stInsert", stDoc);
+		}
 		
 	}
 	
