@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="manageDetail" resultType="com.egg.tfox.vo.approval.ManageTempVo"  parameterType="string">
- 		select temp_id , temp_title , temp_content \
+ 		select temp_id , temp_title , temp_content
  		
  		from template
  		where temp_id = #{temp}
