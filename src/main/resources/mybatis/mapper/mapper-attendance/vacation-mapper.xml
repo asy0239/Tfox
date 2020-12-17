@@ -302,6 +302,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	FROM VACAPPLY V
 	JOIN VACTYPE VC ON (V.VACTYPE_ID = VC.VACTYPE_ID)
  	WHERE EMP_ID = #{id}
+ 	  AND VACAPL_STATUS = '승인'
 	</select>
 </mapper>
 
