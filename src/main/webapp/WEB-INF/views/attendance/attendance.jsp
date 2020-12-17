@@ -228,7 +228,11 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(realTimer, 1000);
 });
 
+function addzero(num) {
+	if(num < 10) { num = "0" + num; }
+		return num;
 
+}
 // 시간을 출력
 function realTimer() {
 	const nowDate = new Date();
@@ -239,14 +243,10 @@ function realTimer() {
 	const min = nowDate.getMinutes();
 	const sec = nowDate.getSeconds();
 	document.getElementById("nowTimes").innerHTML = 
-              year + "-" + addzero(month) + "-" + addzero(date) + "&nbsp;<br>" + hour + ":" + addzero(min) + ":" + addzero(sec);
+              year + "-" + addzero(month) + "-" + addzero(date) + "&nbsp;<br>" + addzero(hour) + ":" + addzero(min) + ":" + addzero(sec);
 }
     // 1자리수의 숫자인 경우 앞에 0을 붙여준다.
-function addzero(num) {
-	if(num < 10) { num = "0" + num; }
-		return num;
 
-}
     
 
 
